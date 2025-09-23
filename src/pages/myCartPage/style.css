@@ -14,7 +14,7 @@ body {
   background-color: #1a181b;
 }
 
-.my-purchases-page {
+.my-cart-page {
   padding: 2rem;
   font-family: 'Clash Display', sans-serif;
   background-color: #1a181b;
@@ -22,7 +22,7 @@ body {
   color: white;
 }
 
-.purchases-grid {
+.coupons-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
@@ -30,7 +30,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .purchases-grid {
+  .coupons-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }

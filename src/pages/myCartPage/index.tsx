@@ -3,23 +3,22 @@ import CurrentLocation from '../../components/currentLocation';
 import Header from '../../components/header';
 import './style.css';
 import { products } from '../../data/data';
-import EventCard from '../../components/eventCard';
+import ProductCard from '../../components/productCard';
 
-const MyPurchasesPage = () => {
+const MyCartPage = () => {
   return (
-    <div className="my-purchases-page">
+    <div className="my-cart-page">
       <Header />
       <CurrentLocation city="Cali, Colombia" />
-      <ColoredText text="Mi Carrito " color="#FF0099" />
-      <div className="purchases-grid">
+      <ColoredText text="Mi Carrito " color="#99CB36" />
+      <div className="coupons-grid">
         {products.map((product, index) => (
-          <EventCard
+          <ProductCard
             key={index}
-            description={product.description}
             title={product.title}
+            description={product.description}
             image={product.image}
-            type={product.type}
-            date={product.date}
+            price={product.price}
           />
         ))}
       </div>
@@ -27,4 +26,4 @@ const MyPurchasesPage = () => {
   );
 };
 
-export default MyPurchasesPage;
+export default MyCartPage;

@@ -29,10 +29,23 @@ const EventForm = () => {
   const { addEvent } = useEvent();
   const [formData, setFormData] = useState<EventFormData>(defaultFormData);
 
+  const [tagsOpen, setTagsOpen] = useState(false);
+
+  const toggleTags = () => setTagsOpen((open) => !open);
+
+  const handleTagsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedTags = Array.from(e.target.selectedOptions, (opt) => opt.value);
+    setFormData((prev) => ({ ...prev, tags: selectedTags }));
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
+
+    // No actualizar tags aquí para evitar conflicto
+    if (name === 'tags') return;
+
     setFormData((prev) => ({
       ...prev,
       [name]:
@@ -41,12 +54,7 @@ const EventForm = () => {
         name === 'availableSeats' ||
         name === 'expectedAttendance'
           ? Number(value)
-          : name === 'tags'
-            ? Array.from(
-                (e.target as HTMLSelectElement).selectedOptions,
-                (opt) => (opt as HTMLOptionElement).value,
-              )
-            : value,
+          : value,
     }));
   };
 
@@ -84,7 +92,12 @@ const EventForm = () => {
         <EventFields formData={formData} onChange={handleChange} />
       </div>
       <EventStats formData={formData} onChange={handleChange} />
-      <EventTags tags={formData.tags} onChange={handleChange} />
+      <EventTags
+        tags={formData.tags}
+        onChange={handleTagsChange}
+        open={tagsOpen}
+        toggleOpen={toggleTags}
+      />
       <button type="submit">Publicar Evento</button>
     </form>
   );

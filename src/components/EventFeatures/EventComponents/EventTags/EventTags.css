@@ -1,38 +1,57 @@
 .event-form__tags {
   width: 100%;
-  max-width: 460px;
-  margin-top: 20px;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.event-form__tags select {
-  width: 100%;
-  min-height: 48px;
-  padding: 12px 14px;
-  font-size: 1rem;
-  border: 1.3px solid #e0e2ec;
-  border-radius: 9px;
-  background: #f8f9fc;
-  outline: none;
-  box-shadow: inset 0 0 6px rgb(171 179 215 / 0.12);
-  cursor: pointer;
-  transition: border-color 0.25s ease;
-}
-
-.event-form__tags select:focus {
-  border-color: #7f83ff;
-  box-shadow: 0 0 7px rgba(127, 131, 255, 0.45);
-}
-
-.event-form__tags option {
-  padding: 8px;
+.selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 14px;
+  min-height: 44px;
+  background: #f0f1fa;
+  border: 1.5px solid #d1d5fa;
+  border-radius: 10px;
   font-size: 0.95rem;
-  font-weight: 500;
+  color: #5051a7;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+.selected-tags:focus {
+  border-color: #7a7fe6;
+  box-shadow: 0 0 10px #7a7fe6aa;
+}
+
+.placeholder {
+  color: #9999b2;
+  font-style: italic;
+}
+
+.tag-chip {
+  background: #7a7fe6;
+  color: white;
+  border-radius: 40px;
+  padding: 5px 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.multi-select {
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1.5px solid #d1d5fa;
+  background: white;
+  padding: 10px 14px;
+  outline: none;
   cursor: pointer;
 }
 
-/* Para que el select múltiple tenga scroll si hay muchas opciones */
-.event-form__tags select[multiple] {
-  height: auto;
-  max-height: 90px;
-  overflow-y: auto;
+.multi-select:focus {
+  border-color: #7a7fe6;
+  box-shadow: 0 0 8px #7a7fe6aa;
 }

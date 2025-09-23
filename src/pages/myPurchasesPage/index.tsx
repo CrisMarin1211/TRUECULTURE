@@ -1,3 +1,4 @@
+import { CurrentLocation } from '../../components/currentLocation';
 import Header from '../../components/header';
 import './style.css';
 
@@ -6,6 +7,7 @@ const MyPurchasesPage = () => {
     <>
       <div className="my-purchases-page">
         <Header />
+        <CurrentLocation />
       </div>
     </>
   );

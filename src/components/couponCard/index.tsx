@@ -4,6 +4,7 @@ type CouponCardProps = {
   title: string;
   description: string;
   value: string;
+  code: string;
 };
 
 const CouponCard = ({ title, description, value, code }: CouponCardProps) => {

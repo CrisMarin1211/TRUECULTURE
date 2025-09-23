@@ -11,7 +11,7 @@ const MyPurchasesPage = () => {
       <Header />
       <CurrentLocation city="Cali, Colombia" />
       <ColoredText text="Mi Carrito " color="#FF0099" />
-      <div className="coupons-grid">
+      <div className="purchases-grid">
         {products.map((product, index) => (
           <EventCard
             key={index}

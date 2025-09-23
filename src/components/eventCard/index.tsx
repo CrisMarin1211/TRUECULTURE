@@ -4,6 +4,7 @@ type EventCardProps = {
   image: string;
   title: string;
   date: string;
+  description: string;
 };
 
 const EventCard = ({ image, title, date, description, type }: EventCardProps) => {

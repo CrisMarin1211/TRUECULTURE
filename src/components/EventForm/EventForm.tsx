@@ -7,8 +7,9 @@ import { useEvent } from '../../context/EventContext';
 const EventForm = () => {
   const { addEvent } = useEvent();
 
-  const [formData, setFormData] = useState<Omit<EventItem, 'id'>>({
+  const [formData, setFormData] = useState<Omit<EventItem, 'id'> & { imageFile?: File | null }>({
     image: '',
+    imageFile: null,
     name: '',
     date: '',
     location: '',
@@ -38,13 +39,35 @@ const EventForm = () => {
     }));
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFormData((prev) => ({
+        ...prev,
+        imageFile: e.target.files![0],
+        image: '', // limpiamos URL si se sube archivo
+      }));
+    }
+  };
+
+  const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      image: e.target.value,
+      imageFile: null,
+    }));
+  };
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
+    // 🔑 aquí decides qué enviar al backend:
+    // - formData.image (si es URL)
+    // - formData.imageFile (si es archivo local)
     addEvent(formData);
 
     setFormData({
       image: '',
+      imageFile: null,
       name: '',
       date: '',
       location: '',
@@ -61,13 +84,26 @@ const EventForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <input type="file" accept="image/*" onChange={handleFileChange} />
+
       <input
         type="text"
         name="image"
         placeholder="Imagen (URL)"
         value={formData.image}
-        onChange={handleChange}
+        onChange={handleUrlChange}
       />
+
+      <div>
+        {formData.imageFile ? (
+          <img src={URL.createObjectURL(formData.imageFile)} alt="preview" width={200} />
+        ) : formData.image ? (
+          <img src={formData.image} alt="preview" width={200} />
+        ) : (
+          <p>No hay imagen seleccionada</p>
+        )}
+      </div>
+
       <input
         type="text"
         name="name"

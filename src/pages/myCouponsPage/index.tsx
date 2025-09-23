@@ -18,6 +18,7 @@ const MyCouponsPage = () => {
             title={coupon.title}
             description={coupon.description}
             value={coupon.value}
+            code={coupon.code}
           />
         ))}
       </div>

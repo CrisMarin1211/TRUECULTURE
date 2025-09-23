@@ -1,6 +1,6 @@
 import { EventProvider } from '../../../context/EventContext';
 import EventForm from '../../../components/EventFeatures/EventComponents/Form/EventForm';
-import EventList from '../../../components/EventFeatures/EventList/EventList';
+import EventList from '../../../components/EventFeatures/EventComponents/EventList/EventList';
 import Seats from '../../../components/EventFeatures/EventComponents/SeatsCard/Seats';
 import SideBarAdmins from '../../../components/SideBar admins/SideBarAdmins';
 

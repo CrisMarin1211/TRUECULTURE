@@ -16,6 +16,7 @@ const EventCard = ({ image, title, date, description, type }: EventCardProps) =>
       <div className="event-info">
         <p className="event-date">{description}</p>
         <h3 className="event-title">{title}</h3>
+        <p className="event-date">{type}</p>
         <p className="event-date">{date}</p>
       </div>
 

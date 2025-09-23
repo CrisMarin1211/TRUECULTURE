@@ -15,9 +15,11 @@ const MyPurchasesPage = () => {
         {products.map((product, index) => (
           <EventCard
             key={index}
-            title={coupon.title}
-            image="https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/396e9/MainBefore.jpg"
-            date="12 de Diciembre, 2023"
+            description={product.description}
+            title={product.title}
+            image={product.image}
+            type={product.type}
+            date={product.date}
           />
         ))}
       </div>

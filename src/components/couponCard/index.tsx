@@ -13,6 +13,7 @@ const CouponCard = ({ title, description, value, code }: CouponCardProps) => {
       <div className="coupon-info">
         <h3 className="coupon-title">{title}</h3>
         <p className="coupon-description">{description}</p>
+        <span className="coupon-value">{code}</span>
         <span className="coupon-value">{value}</span>
       </div>
       <button className="redeem-btn">Redimir Cupon</button>

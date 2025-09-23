@@ -1,10 +1,13 @@
 import { EventProvider } from '../../../context/EventContext';
 import EventForm from '../../../components/EventFeatures/EventForm/EventForm';
 import EventList from '../../../components/EventFeatures/EventList/EventList';
+import Seats from '../../../components/EventFeatures/SeatsCard/Seats';
+import SideBarAdmins from '../../../components/SideBar admins/SideBarAdmins';
 
 const EventsPage = () => {
   return (
     <EventProvider>
+      <SideBarAdmins />
       <div style={{ padding: 20 }}>
         <h1>Eventos</h1>
 
@@ -15,6 +18,7 @@ const EventsPage = () => {
 
         {/* Lista de eventos */}
         <EventList />
+        <Seats />
       </div>
     </EventProvider>
   );

@@ -1,6 +1,7 @@
 export interface EventItem {
   id: string;
   image: string;
+  imageFile?: File | null;
   name: string;
   date: string;
   time: string;

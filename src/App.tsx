@@ -1,10 +1,15 @@
 import './App.css';
-import CreateEvents from './pages/Administrador/CreatEvents/CreatEvents';
+
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes';
 
 function App() {
   return (
     <>
-      <CreateEvents />
+      =======
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>{' '}
     </>
   );
 }

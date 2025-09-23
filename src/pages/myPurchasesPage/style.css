@@ -22,7 +22,7 @@ body {
   color: white;
 }
 
-.coupons-grid {
+.purchases-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
@@ -30,7 +30,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .coupons-grid {
+  .purchases-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }

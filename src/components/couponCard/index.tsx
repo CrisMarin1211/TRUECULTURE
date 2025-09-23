@@ -6,7 +6,7 @@ type CouponCardProps = {
   value: string;
 };
 
-const CouponCard = ({ title, description, value }: CouponCardProps) => {
+const CouponCard = ({ title, description, value, code }: CouponCardProps) => {
   return (
     <div className="coupon-card">
       <div className="coupon-info">

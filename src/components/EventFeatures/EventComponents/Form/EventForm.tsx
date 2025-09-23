@@ -78,20 +78,35 @@ const EventForm = () => {
   return (
     <form className="event-form" onSubmit={handleSubmit}>
       <div className="event-form__main">
-        <div className="event-form__image">
-          <EventImage imageFile={formData.imageFile} image={formData.image} name={formData.name} />
-          <input type="file" accept="image/*" onChange={handleFileChange} />
-          <input
-            type="text"
-            name="image"
-            placeholder="Imagen (URL)"
-            value={formData.image}
+        <div className="event-form__left">
+          <div className="event-form__image-name">{formData.name}</div>
+          <div className="event-form__image">
+            <EventImage
+              imageFile={formData.imageFile}
+              image={formData.image}
+              name={formData.name}
+            />
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+            <input
+              type="text"
+              name="image"
+              placeholder="Imagen (URL)"
+              value={formData.image}
+              onChange={handleChange}
+            />
+          </div>
+          <textarea
+            name="description"
+            placeholder="Descripción"
+            value={formData.description}
             onChange={handleChange}
+            className="event-form__description"
           />
         </div>
         <EventFields formData={formData} onChange={handleChange} />
       </div>
       <EventStats formData={formData} onChange={handleChange} />
+
       <EventTags
         tags={formData.tags}
         onChange={handleTagsChange}

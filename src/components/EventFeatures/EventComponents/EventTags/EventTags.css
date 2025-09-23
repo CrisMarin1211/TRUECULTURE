@@ -1,6 +1,5 @@
 .event-form__tags {
-  width: 100%;
-  max-width: 480px;
+  width: 270px;
   display: flex;
   flex-direction: column;
   gap: 8px;

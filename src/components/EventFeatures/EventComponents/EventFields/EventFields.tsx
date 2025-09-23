@@ -24,12 +24,6 @@ const EventFields: React.FC<EventFieldsProps> = ({ formData, onChange }) => (
       value={formData.location}
       onChange={onChange}
     />
-    <textarea
-      name="description"
-      placeholder="Descripción"
-      value={formData.description}
-      onChange={onChange}
-    />
   </div>
 );
 

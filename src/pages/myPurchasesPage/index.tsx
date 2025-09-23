@@ -1,6 +1,7 @@
 import { CurrentLocation } from '../../components/currentLocation';
 import Header from '../../components/header';
 import ColoredText from '../../components/coloredText';
+import { coupons } from '../../data/data';
 import './style.css';
 
 const MyPurchasesPage = () => {

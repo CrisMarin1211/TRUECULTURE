@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-left">
-        <img src="/icons/burger-icon.png" alt="Menu" className="icon menu-icon" />
+        <img src="/icons/menu.png" alt="Menu" className="icon menu-icon" />
       </div>
 
       <div className="header-center">
@@ -12,7 +12,7 @@ const Header = () => {
       </div>
 
       <div className="header-right">
-        <img src="/icons/card-icon.png" alt="Carrito" className="icon cart-icon" />
+        <img src="/icons/cart.png" alt="Carrito" className="icon cart-icon" />
         <div className="avatar-container">
           <img src="/images/home3.png" alt="Usuario" className="avatar" />
         </div>

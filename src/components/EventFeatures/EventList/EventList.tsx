@@ -1,5 +1,5 @@
 import { useEvent } from '../../../context/EventContext';
-import EventCard from '../EventCard/EventCard';
+import EventCard from '../EventComponents/EventCard/EventCard';
 
 const EventList = () => {
   const { events } = useEvent();

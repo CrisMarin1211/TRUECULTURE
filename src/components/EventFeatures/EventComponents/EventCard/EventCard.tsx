@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Button, CardActions } from '@mui/material';
-import type { EventItem } from '../../../types/EventType';
+import type { EventItem } from '../../../../types/EventType';
 
 interface EventCardProps {
   event: EventItem;

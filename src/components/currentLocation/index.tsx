@@ -4,7 +4,7 @@ type CurrentLocationProps = {
   city?: string;
 };
 
-export const CurrentLocation = ({ city = 'Cali, Colombia' }: CurrentLocationProps) => {
+const CurrentLocation = ({ city = 'Cali, Colombia' }: CurrentLocationProps) => {
   return (
     <div className="current-location">
       <div className="location-grid">
@@ -16,3 +16,5 @@ export const CurrentLocation = ({ city = 'Cali, Colombia' }: CurrentLocationProp
     </div>
   );
 };
+
+export default CurrentLocation;

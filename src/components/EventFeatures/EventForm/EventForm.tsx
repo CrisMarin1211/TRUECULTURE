@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import type { EventItem } from '../../types/EventType';
-
-import { useEvent } from '../../context/EventContext';
+import type { EventItem } from '../../../types/EventType';
+import { useEvent } from '../../../context/EventContext';
 
 const EventForm = () => {
   const { addEvent } = useEvent();

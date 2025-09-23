@@ -1,10 +1,10 @@
-import EventForm from './components/EventForm/EventForm';
 import './App.css';
+import CreateEvents from './pages/Administrador/CreatEvents/CreatEvents';
 
 function App() {
   return (
     <>
-      <EventForm />
+      <CreateEvents />
     </>
   );
 }

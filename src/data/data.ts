@@ -19,7 +19,7 @@ export const products = [
   {
     title: '¡Ay que solo estoy!',
     description: 'La linterna',
-    image: '',
+    image: '/images/product1.png',
     price: '$60.000',
     type: 'Ticket',
     date: '26/06/2025',

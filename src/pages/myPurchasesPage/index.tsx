@@ -12,7 +12,7 @@ const MyPurchasesPage = () => {
       <CurrentLocation city="Cali, Colombia" />
       <ColoredText text="Mi Carrito " color="#FF0099" />
       <div className="coupons-grid">
-        {coupons.map((coupon, index) => (
+        {products.map((product, index) => (
           <EventCard
             key={index}
             title={coupon.title}

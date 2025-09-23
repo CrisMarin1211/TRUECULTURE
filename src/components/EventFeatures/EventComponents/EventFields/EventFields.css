@@ -1,0 +1,39 @@
+.event-form__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 16px;
+}
+
+.event-form__fields input,
+.event-form__fields textarea {
+  background: #fafaff;
+  border: 1.5px solid #e9e9ef;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 1.05rem;
+  color: #353945;
+  outline: none;
+  box-shadow: 0 2px 5px rgb(150 160 190 / 0.03);
+  transition: border-color 0.3s ease;
+}
+
+.event-form__fields input:focus,
+.event-form__fields textarea:focus {
+  border-color: #7f84ff;
+  box-shadow: 0 0 8px 3px rgb(127 132 255 / 0.3);
+}
+
+.event-form__fields textarea {
+  grid-column: 1 / 3;
+  font-family: inherit;
+  min-height: 60px;
+  resize: vertical;
+  line-height: 1.35;
+}
+
+/* Adaptación responsive */
+@media (max-width: 900px) {
+  .event-form__fields {
+    grid-template-columns: 1fr;
+  }
+}

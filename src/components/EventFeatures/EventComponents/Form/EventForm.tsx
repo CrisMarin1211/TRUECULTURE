@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useEvent } from '../../../../context/EventContext';
 import EventImage from '../EventImage';
-import EventFields from '../EventFields';
+import EventFields from '../EventFields/EventFields';
 import EventStats from '../Stats/EventStats';
 import EventTags from '../EventTags';
 import type { EventItem } from '../../../../types/EventType';

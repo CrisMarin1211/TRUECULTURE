@@ -1,5 +1,5 @@
 import ColoredText from '../../components/coloredText';
-import { CurrentLocation } from '../../components/currentLocation';
+import CurrentLocation from '../../components/currentLocation';
 import Header from '../../components/header';
 import './style.css';
 import { products } from '../../data/data';

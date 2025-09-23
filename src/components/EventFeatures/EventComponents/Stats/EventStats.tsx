@@ -1,4 +1,6 @@
-import type { EventItem } from '../../../types/EventType';
+import type { EventItem } from '../../../../types/EventType';
+import './EventStats.css';
+
 type EventStatsProps = {
   formData: Pick<
     EventItem,

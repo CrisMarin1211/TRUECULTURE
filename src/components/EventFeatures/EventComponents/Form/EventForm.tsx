@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { useEvent } from '../../../../context/EventContext';
 import EventImage from '../EventImage';
 import EventFields from '../EventFields';
-import EventStats from '../EventStats';
+import EventStats from '../Stats/EventStats';
 import EventTags from '../EventTags';
 import type { EventItem } from '../../../../types/EventType';
+import './EvenForm.css';
 
 type EventFormData = Omit<EventItem, 'id'>;
 

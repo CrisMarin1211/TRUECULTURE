@@ -1,30 +1,27 @@
+import ColoredText from '../../components/coloredText';
 import { CurrentLocation } from '../../components/currentLocation';
 import Header from '../../components/header';
-import ColoredText from '../../components/coloredText';
-import { coupons } from '../../data/data';
-import CouponCard from '../../components/couponCard';
 import './style.css';
+import { coupons } from '../../data/data';
+import EventCard from '../../components/eventCard';
 
 const MyPurchasesPage = () => {
   return (
-    <>
-      <div className="my-purchases-page">
-        <Header />
-        <CurrentLocation />
-        <ColoredText text="Mis cupones" color="#FF0099" />
-        <div className="coupons-grid">
-          {coupons.map((coupon, index) => (
-            <CouponCard
-              key={index}
-              title={coupon.title}
-              description={coupon.description}
-              value={coupon.value}
-              code={coupon.code}
-            />
-          ))}
-        </div>
+    <div className="my-purchases-page">
+      <Header />
+      <CurrentLocation city="Cali, Colombia" />
+      <ColoredText text="Mi Carrito " color="#FF0099" />
+      <div className="coupons-grid">
+        {coupons.map((coupon, index) => (
+          <EventCard
+            key={index}
+            title={coupon.title}
+            image="https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/396e9/MainBefore.jpg"
+            date="12 de Diciembre, 2023"
+          />
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 

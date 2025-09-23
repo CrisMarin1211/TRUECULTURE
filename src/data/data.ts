@@ -14,3 +14,14 @@ export const coupons = [
   { title: 'Cupón 3', description: 'Oferta especial', value: '$10', code: 'XWD05' },
   { title: 'Cupón 4', description: 'Válido este mes', value: '5%', code: 'EVE47' },
 ];
+
+export const products = [
+  {
+    title: '¡Ay que solo estoy!',
+    description: 'La linterna',
+    image: '',
+    price: '$60.000',
+    type: 'Ticket',
+    date: '26/06/2025',
+  },
+];

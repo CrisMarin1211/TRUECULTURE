@@ -6,7 +6,7 @@ type EventCardProps = {
   date: string;
 };
 
-const EventCard = ({ image, title, date }: EventCardProps) => {
+const EventCard = ({ image, title, date, description, type }: EventCardProps) => {
   return (
     <div className="event-card">
       <div className="event-image">

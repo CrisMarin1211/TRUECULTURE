@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useEvent } from '../../../context/EventContext';
-import EventImage from './EventImage';
-import EventFields from './EventFields';
-import EventStats from './EventStats';
-import EventTags from './EventTags';
-import type { EventItem } from '../../../types/EventType';
+import { useEvent } from '../../../../context/EventContext';
+import EventImage from '../EventImage';
+import EventFields from '../EventFields';
+import EventStats from '../EventStats';
+import EventTags from '../EventTags';
+import type { EventItem } from '../../../../types/EventType';
 
 type EventFormData = Omit<EventItem, 'id'>;
 

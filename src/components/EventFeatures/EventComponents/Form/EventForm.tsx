@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useEvent } from '../../../../context/EventContext';
-import EventImage from '../EventImage';
+import EventImage from '../EventImage/EventImage';
 import EventFields from '../EventFields/EventFields';
 import EventStats from '../Stats/EventStats';
 import EventTags from '../EventTags';

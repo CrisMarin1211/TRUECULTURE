@@ -1,0 +1,14 @@
+.event-form__image img {
+  width: 218px;
+  height: 140px;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
+  border: 1.5px solid #e9e9ef;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Opcional: efecto hover */
+.event-form__image img:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}

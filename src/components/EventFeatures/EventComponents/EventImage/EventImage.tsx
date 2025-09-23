@@ -1,5 +1,6 @@
 import { useMemo, useEffect } from 'react';
-import type { EventItem } from '../../../types/EventType';
+import type { EventItem } from '../../../../types/EventType';
+import './EventImage.css';
 
 type EventImageProps = {
   imageFile?: EventItem['imageFile'];

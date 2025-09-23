@@ -2,7 +2,7 @@ import ColoredText from '../../components/coloredText';
 import { CurrentLocation } from '../../components/currentLocation';
 import Header from '../../components/header';
 import './style.css';
-import { coupons } from '../../data/data';
+import { products } from '../../data/data';
 import EventCard from '../../components/eventCard';
 
 const MyPurchasesPage = () => {

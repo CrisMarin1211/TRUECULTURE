@@ -1,0 +1,8 @@
+.event-tags-container {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.event-tags-container .MuiFormControl-root {
+  min-width: 200px;
+}

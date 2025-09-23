@@ -3,7 +3,7 @@ import { useEvent } from '../../../../context/EventContext';
 import EventImage from '../EventImage/EventImage';
 import EventFields from '../EventFields/EventFields';
 import EventStats from '../Stats/EventStats';
-import EventTags from '../EventTags';
+import EventTags from '../EventTags/EventTags';
 import type { EventItem } from '../../../../types/EventType';
 import './EvenForm.css';
 

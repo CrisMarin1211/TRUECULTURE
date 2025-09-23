@@ -1,7 +1,7 @@
 import { EventProvider } from '../../../context/EventContext';
 import EventForm from '../../../components/EventFeatures/EventComponents/Form/EventForm';
 import EventList from '../../../components/EventFeatures/EventList/EventList';
-import Seats from '../../../components/EventFeatures/SeatsCard/Seats';
+import Seats from '../../../components/EventFeatures/EventComponents/SeatsCard/Seats';
 import SideBarAdmins from '../../../components/SideBar admins/SideBarAdmins';
 
 const EventsPage = () => {

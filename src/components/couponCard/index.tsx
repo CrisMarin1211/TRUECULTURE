@@ -6,7 +6,7 @@ type CouponCardProps = {
   value: string;
 };
 
-export const CouponCard = ({ title, description, value }: CouponCardProps) => {
+const CouponCard = ({ title, description, value }: CouponCardProps) => {
   return (
     <div className="coupon-card">
       <div className="coupon-info">
@@ -18,3 +18,5 @@ export const CouponCard = ({ title, description, value }: CouponCardProps) => {
     </div>
   );
 };
+
+export default CouponCard;

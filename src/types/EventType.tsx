@@ -13,6 +13,7 @@ export interface EventItem {
   popularity: 'Alta' | 'Media' | 'Baja';
   tags: string[];
   expectedAttendance: number;
+  isDraft?: boolean;
 }
 
 export interface EventProviderProps {
@@ -25,4 +26,5 @@ export interface EventContextType {
   updateSeats: (id: string, seatsTaken: number) => void;
   editEvent: (id: string, updates: Partial<EventItem>) => void;
   removeEvent: (id: string) => void;
+  saveEvent: (event: Omit<EventItem, 'id'>) => void;
 }

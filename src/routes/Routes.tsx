@@ -1,13 +1,13 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 // Importa tus componentes de pantalla aquí
-import Dashboard from '../pages/Administrador/Dashboard';
-import EventsPage from '../pages/Administrador/EventsPage';
-import TicketsPage from '../pages/Administrador/TicketPage';
-import ProductsPage from '../pages/Administrador/ProductsPage';
-import ReviewsPage from '../pages/Administrador/ReviewsPage';
-import ReportsPage from '../pages/Administrador/ReportPage';
-import Config from '../pages/Administrador/Config';
+import Dashboard from '../pages/AdminPages/Dashboard';
+import EventsPage from '../pages/AdminPages/EventsPage';
+import TicketsPage from '../pages/AdminPages/TicketPage';
+import ProductsPage from '../pages/AdminPages/ProductsPage';
+import ReviewsPage from '../pages/AdminPages/ReviewsPage';
+import ReportsPage from '../pages/AdminPages/ReportPage';
+import Config from '../pages/AdminPages/Config';
 
 const AppRoutes = () => {
   return (

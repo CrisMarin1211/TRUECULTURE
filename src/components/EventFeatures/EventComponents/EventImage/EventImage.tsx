@@ -26,9 +26,9 @@ const EventImage: React.FC<EventImageProps> = ({ imageFile, image, name }) => {
       <img
         src={image}
         alt={name}
-        width={218}
-        height={140}
-        style={{ borderRadius: 14, objectFit: 'cover' }}
+        width={313}
+        height={183}
+        style={{ borderRadius: 12, objectFit: 'cover' }}
       />
     );
   return null;

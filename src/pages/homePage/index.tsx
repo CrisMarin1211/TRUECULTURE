@@ -1,7 +1,10 @@
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './style.css';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+  const goToSignUp = () => navigate('/signup');
+
   return (
     <div className="home-page">
       <header className="header">
@@ -10,7 +13,7 @@ const HomePage = () => {
           <Link to="/" className="admin-link">
             Administrador
           </Link>
-          <button className="signup-btn">SignUp</button>
+          <button onClick={goToSignUp}>Sign Up</button>
         </div>
       </header>
 

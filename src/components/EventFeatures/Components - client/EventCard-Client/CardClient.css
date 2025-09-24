@@ -1,0 +1,91 @@
+.card-client {
+  width: 485px;
+  height: 310px;
+  border-radius: 16px;
+  border: 1px solid #4F4F4F;
+  background: #232323;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-client__image {
+  width: 100%;
+  height: 156px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-client__content {
+  background: #232323;
+  padding: 24px 24px 16px 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.card-client__info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-client__title {
+  color: white;
+  font-size: 14.57px;
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 700;
+  line-height: 21.86px;
+}
+
+.card-client__subtitle {
+  color: white;
+  font-size: 35.52px;
+  font-family: 'Clash Display', sans-serif;
+  font-weight: 700;
+  line-height: 31.88px;
+  margin-top: 4px;
+}
+
+.card-client__details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+.card-client__date {
+  color: white;
+  font-size: 14.57px;
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 900;
+  line-height: 21.86px;
+}
+
+.card-client__price {
+  color: white;
+  font-size: 14.57px;
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 500;
+  line-height: 21.86px;
+}
+
+.card-client__button {
+  background: #99CB36;
+  border-radius: 999px;
+  padding: 8px 16px;
+  color: white;
+  font-size: 13px;
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 500;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  margin-left: 32px; /* separa el botón del contenido izquierdo */
+}

@@ -16,7 +16,6 @@ const EventFields: React.FC<EventFieldsProps> = ({ formData, onChange }) => (
       onChange={onChange}
     />
     <input type="date" name="date" value={formData.date} onChange={onChange} />
-    <input type="time" name="time" value={formData.time} onChange={onChange} />
     <input
       type="text"
       name="location"
@@ -24,6 +23,7 @@ const EventFields: React.FC<EventFieldsProps> = ({ formData, onChange }) => (
       value={formData.location}
       onChange={onChange}
     />
+    <input type="time" name="time" value={formData.time} onChange={onChange} />
   </div>
 );
 

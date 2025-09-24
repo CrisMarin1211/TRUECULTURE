@@ -3,7 +3,7 @@ import CurrentLocation from '../../components/currentLocation';
 import Header from '../../components/header';
 import './style.css';
 import { products } from '../../data/data';
-import EventCard from '../../components/eventCard';
+import EventCard from '../../components/EventFeatures/eventComponents - client/eventCard';
 
 const MyPurchasesPage = () => {
   return (

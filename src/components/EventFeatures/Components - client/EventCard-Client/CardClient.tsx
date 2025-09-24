@@ -1,4 +1,4 @@
-const EventCardClient = () => {
+const CardClient = () => {
   return (
     <>
       <div>
@@ -23,4 +23,4 @@ const EventCardClient = () => {
   );
 };
 
-export default EventCardClient;
+export default CardClient;

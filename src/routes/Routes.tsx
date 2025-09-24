@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-// Importa tus componentes de pantalla aquí
 import Dashboard from '../pages/AdminPages/Dashboard';
 import EventsPage from '../pages/AdminPages/EventsPage';
 import TicketsPage from '../pages/AdminPages/TicketPage';
@@ -20,7 +19,6 @@ const AppRoutes = () => {
       <Route path="/reviews" element={<ReviewsPage />} />
       <Route path="/reports" element={<ReportsPage />} />
       <Route path="/config" element={<Config />} />
-      {/* Ruta para 404 - página no encontrada */}
       <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
     </Routes>
   );

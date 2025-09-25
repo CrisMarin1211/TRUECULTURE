@@ -1,4 +1,4 @@
-import CardClient from '../../../components/EventFeatures/Components - client/Event/ProductCard-Client/CardClient';
+import CardClient from '../../../components/UiAtoms/ProductCard-Client/CardClient';
 import type { EventItem } from '../../../types/EventType';
 
 const DashboardClient = () => {

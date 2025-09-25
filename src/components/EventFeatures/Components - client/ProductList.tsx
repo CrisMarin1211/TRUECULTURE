@@ -1,21 +1,21 @@
 import React from 'react';
-import { useProduct } from '../../../context/ProductEvent';
+import { useEvent } from '../../../context/EventContext';
 import CardClient from '../../UiAtoms/ProductCard-Client/CardClient';
-import type { ProductItem } from '../../../types/ProductType';
+import type { EventItem } from '../../../types/EventType';
 
-const TAGS: ProductItem['tags'][] = ['Afiches', 'Pines', 'Cultural', 'Moda', 'Gastronomía'];
+const TAGS: EventItem['tags'][] = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
 
 const ProductList: React.FC = () => {
-  const { products = [] } = useProduct();
+  const { events = [] } = useEvent();
 
   return (
     <div>
       {TAGS.map((tag) => {
-        const filtered = products.filter((p) => p.tags === tag);
+        const filtered = events.filter((p) => p.tags === tag);
         if (filtered.length === 0) return null;
 
         return (
-          <section key={tag}>
+          <section key={tag} style={{ marginBottom: 24 }}>
             <h2>{tag}</h2>
             <div>
               {filtered.map((item) => (

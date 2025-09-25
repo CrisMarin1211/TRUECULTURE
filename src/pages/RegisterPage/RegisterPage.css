@@ -1,0 +1,49 @@
+.register-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #1A181B;
+  position: relative;
+}
+
+.header-register {
+  width: 100%;
+  padding: 1.8rem 1.8rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  align-content: flex-start;
+  flex-direction: column;
+}
+
+.logocompleto {
+  width: 289px;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+}
+
+.phrase-register {
+  color: #8692A6;
+  font-family: Satoshi;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 32.717px;
+}
+
+.logofucsia {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  width: auto;
+  height: 250px;
+  flex-shrink: 0;
+  z-index: 1;
+  pointer-events: none;
+
+}

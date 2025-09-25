@@ -1,0 +1,14 @@
+.colored-text {
+  text-align: center;
+  font-size: 3.5rem;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.colored-text.pink {
+  color: #ff0099;
+}
+
+.colored-text.green {
+  color: #99cb36;
+}

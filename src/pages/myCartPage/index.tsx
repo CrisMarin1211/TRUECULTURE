@@ -19,8 +19,8 @@ const MyCartPage = () => {
             key={index}
             title={product.title}
             description={product.description}
-            image="https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/396e9/MainBefore.jpg"
-            price="$19.99"
+            image={product.image}
+            price={product.price}
           />
         ))}
       </div>

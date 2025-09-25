@@ -29,6 +29,12 @@ body {
   margin-top: 2rem;
 }
 
+.checkout-wrapper {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media (max-width: 768px) {
   .coupons-grid {
     grid-template-columns: 1fr;

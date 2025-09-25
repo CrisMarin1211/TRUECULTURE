@@ -14,7 +14,7 @@ const MyCartPage = () => {
       <ColoredText text="Mi Carrito " color="#99CB36" />
 
       <div className="coupons-grid">
-        {products.map((coupon, index) => (
+        {products.map((product, index) => (
           <ProductCard
             key={index}
             title={coupon.title}

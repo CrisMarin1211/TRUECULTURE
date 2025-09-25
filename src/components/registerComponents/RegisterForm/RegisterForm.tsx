@@ -3,6 +3,7 @@ import InputField from '../../UiAtoms/InputField/InputField';
 import Button from '../../UiAtoms/Button/Button';
 import GoogleIcon from '../../../assets/Marca/icon-google.png';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
   const [name, setName] = useState('');
@@ -10,19 +11,18 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [agree, setAgree] = useState(false);
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (!agree) {
-  //     alert('Debes aceptar los términos y condiciones');
-  //     return;
-  //   }
-  //   console.log('Registro con:', { name, email, password, agree });
-  // };
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!agree) {
       alert('Debes aceptar los términos y condiciones');
+      return;
+    }
+
+    if (!name.trim() || !email.trim() || !password.trim()) {
+      alert('Por favor completa todos los campos obligatorios');
       return;
     }
 
@@ -30,8 +30,10 @@ const RegisterForm = () => {
     localStorage.setItem('user', JSON.stringify(userData));
 
     console.log('Usuario registrado:', userData);
-  };
+    alert('Registro exitoso');
 
+    navigate('/DashboardClient');
+  };
   return (
     <form className="register-form" onSubmit={handleSubmit}>
       <InputField

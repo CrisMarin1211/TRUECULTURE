@@ -10,13 +10,26 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [agree, setAgree] = useState(false);
 
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!agree) {
+  //     alert('Debes aceptar los términos y condiciones');
+  //     return;
+  //   }
+  //   console.log('Registro con:', { name, email, password, agree });
+  // };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!agree) {
       alert('Debes aceptar los términos y condiciones');
       return;
     }
-    console.log('Registro con:', { name, email, password, agree });
+
+    const userData = { name, email, password };
+    localStorage.setItem('user', JSON.stringify(userData));
+
+    console.log('Usuario registrado:', userData);
   };
 
   return (

@@ -1,6 +1,6 @@
 import './LoginForm.css';
-import InputField from '../InputField/InputField';
-import Button from '../Button/Button';
+import InputField from '../../UiAtoms/InputField/InputField';
+import Button from '../../UiAtoms/Button/Button';
 import GoogleIcon from '../../../assets/Marca/icon-google.png';
 import { useState } from 'react';
 

@@ -5,6 +5,7 @@ import MyCartPage from '../pages/myCartPage';
 import MyCouponsPage from '../pages/myCouponsPage';
 import DashboardClient from '../pages/ClientsPages/DashboardCliente/DashboardClient';
 import ProfilePage from '../pages/profilePage';
+import LoginPage from '../pages/LoginPage/LoginPage';
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <Route path="/my-coupons" element={<MyCouponsPage />} />
         <Route path="/DashboardClient" element={<DashboardClient />} />
         <Route path="/my-profile" element={<ProfilePage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </>
   );

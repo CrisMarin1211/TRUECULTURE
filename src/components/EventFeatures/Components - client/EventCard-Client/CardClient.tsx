@@ -9,17 +9,17 @@ import Typography from '@mui/material/Typography';
 import './CardClient.css';
 
 interface ClientCardProps {
-  item: ProductItem | EventItem;
+  event: ProductItem | EventItem;
 }
 
-const CardClient: React.FC<ClientCardProps> = ({ item }) => {
+const CardClient: React.FC<ClientCardProps> = ({ event }) => {
   return (
     <Card className="card-client">
       <CardMedia
         className="card-client__image"
         component="img"
-        image={item.image}
-        alt={item.name}
+        image={event.image}
+        alt={event.name}
       />
       <CardContent
         className="card-client__content"
@@ -35,24 +35,24 @@ const CardClient: React.FC<ClientCardProps> = ({ item }) => {
           style={{ display: 'flex', flexDirection: 'column', gap: 8 }}
         >
           <Typography className="card-client__title" variant="caption" component="div">
-            {item.location}
+            {event.location}
           </Typography>
           <Typography className="card-client__subtitle" variant="h5" component="div">
-            {item.name}
+            {event.name}
           </Typography>
           <div className="card-client__details" style={{ marginTop: 12 }}>
-            {'date' in item && item.date && (
+            {'date' in event && event.date && (
               <Typography
                 className="card-client__date"
                 variant="body2"
                 component="span"
                 sx={{ fontWeight: 900, marginRight: 2 }}
               >
-                {item.date}
+                {event.date}
               </Typography>
             )}
             <Typography className="card-client__price" variant="body2" component="span">
-              ${item.price}
+              ${event.price}
             </Typography>
           </div>
         </div>

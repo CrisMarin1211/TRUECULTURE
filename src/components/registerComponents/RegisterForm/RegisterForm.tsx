@@ -45,7 +45,6 @@ const RegisterForm = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      {/* Checkbox de términos */}
       <div className="terms">
         <input
           type="checkbox"
@@ -58,24 +57,20 @@ const RegisterForm = () => {
         </label>
       </div>
 
-      {/* Botón Crear Cuenta */}
       <div className="register-btn-wrapper">
         <Button label="Crear cuenta" type="submit" />
       </div>
 
-      {/* Texto link login */}
       <p className="login-text">
         ¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a>
       </p>
 
-      {/* Divider */}
       <div className="divider">
         <span className="line"></span>
         <span className="or">Or</span>
         <span className="line"></span>
       </div>
 
-      {/* Botón Google */}
       <button type="button" className="google-btn">
         <img src={GoogleIcon} alt="Google" className="google-icon" />
         Regístrate con Google

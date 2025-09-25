@@ -6,9 +6,10 @@ type EventCardProps = {
   date: string;
   description: string;
   type: string;
+  onViewQR: () => void;
 };
 
-const EventCard = ({ image, title, date, description, type }: EventCardProps) => {
+const EventCard = ({ image, title, date, description, type, onViewQR }: EventCardProps) => {
   return (
     <div className="event-card">
       <div className="event-image">
@@ -23,7 +24,7 @@ const EventCard = ({ image, title, date, description, type }: EventCardProps) =>
       </div>
 
       <div className="event-footer">
-        <button className="view-qr-btn">
+        <button className="view-qr-btn" onClick={onViewQR}>
           Ver QR <span className="arrow">→</span>
         </button>
       </div>

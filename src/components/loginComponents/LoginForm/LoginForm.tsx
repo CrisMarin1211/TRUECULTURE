@@ -3,6 +3,7 @@ import InputField from '../../UiAtoms/InputField/InputField';
 import Button from '../../UiAtoms/Button/Button';
 import GoogleIcon from '../../../assets/Marca/icon-google.png';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -12,6 +13,8 @@ const LoginForm = () => {
   //   e.preventDefault();
   //   console.log('Login con:', { email, password });
   // };
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,6 +37,8 @@ const LoginForm = () => {
       console.log('Credenciales incorrectas');
       alert('Email o contraseña incorrectos');
     }
+
+    navigate('/DashboardClient');
   };
 
   return (

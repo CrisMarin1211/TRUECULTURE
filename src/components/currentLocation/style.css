@@ -1,0 +1,42 @@
+.current-location {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 1.8rem;
+  margin: 20px 0;
+  color: white;
+  font-family: sans-serif;
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: auto 20px;
+  grid-template-rows: auto auto;
+  gap: 0.2rem 0.5rem;
+  align-items: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.first-row {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.second-row {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.arrow {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 0.8rem;
+  align-self: center;
+}
+
+.empty {
+  grid-column: 2;
+  grid-row: 2;
+}

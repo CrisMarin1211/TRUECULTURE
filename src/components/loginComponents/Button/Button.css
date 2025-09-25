@@ -1,0 +1,21 @@
+.btn {
+  width: auto;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 100px;
+  background: #E50075;
+  cursor: pointer;
+  color: #FFF;
+  text-align: center;
+  font-family: Satoshi;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #af005a;
+}

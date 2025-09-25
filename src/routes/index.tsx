@@ -6,6 +6,7 @@ import MyCouponsPage from '../pages/myCouponsPage';
 import DashboardClient from '../pages/ClientsPages/DashboardCliente/DashboardClient';
 import ProfilePage from '../pages/profilePage';
 import LoginPage from '../pages/LoginPage/LoginPage';
+import RegisterPage from '../pages/RegisterPage/RegisterPage';
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AppRoutes = () => {
         <Route path="/DashboardClient" element={<DashboardClient />} />
         <Route path="/my-profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<RegisterPage />} />
       </Routes>
     </>
   );

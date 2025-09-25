@@ -11,8 +11,18 @@ export const coupons = [
     value: '20%',
     code: 'BSC24',
   },
-  { title: 'Cupón 3', description: 'Oferta especial', value: '$10', code: 'XWD05' },
-  { title: 'Cupón 4', description: 'Válido este mes', value: '5%', code: 'EVE47' },
+  {
+    title: 'Cupón 3',
+    description: 'Oferta especial',
+    value: '$10',
+    code: 'XWD05',
+  },
+  {
+    title: 'Cupón 4',
+    description: 'Válido este mes',
+    value: '5%',
+    code: 'EVE47',
+  },
 ];
 
 export const products = [
@@ -23,5 +33,10 @@ export const products = [
     price: '$60.000',
     type: 'Ticket',
     date: '26/06/2025',
+    location: 'Teatro Municipal',
+    name: 'Juan Pérez',
+    time: '8:00 PM',
+    barcodeImage: '/images/barcode.png',
+    barcodeCode: 'ABC123456',
   },
 ];

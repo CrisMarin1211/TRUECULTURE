@@ -11,7 +11,7 @@ export interface ProductItem {
   totalStock: number;
   availableStock: number;
   popularity: 'Alta demanda' | 'Media demanda' | 'Baja demanda';
-  tags: string[];
+  tags: 'Afiches' | 'Pines' | 'Cultural' | 'Moda' | 'Gastronomía';
   UnitsSaled: number;
   isDraft?: boolean;
 }

@@ -11,7 +11,7 @@ export interface EventItem {
   totalSeats: number;
   availableSeats: number;
   popularity: 'Alta' | 'Media' | 'Baja';
-  tags: string[];
+  tags: 'Musica' | 'Cultural' | 'Familiar' | 'Diversion' | 'Gastronomia';
   expectedAttendance: number;
   isDraft?: boolean;
 }

@@ -5,7 +5,7 @@ const EventList = () => {
   const { events } = useEvent();
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+    <div>
       {events.map((event) => (
         <EventCard key={event.id} event={event} />
       ))}

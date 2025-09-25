@@ -38,7 +38,7 @@ const LoginForm = () => {
       <Button label="Iniciar Sesión" type="submit" />
 
       <p className="signup-text">
-        Don’t have an account? <a href="/register">Crear cuenta</a>
+        Don’t have an account? <a href="/signup">Crear cuenta</a>
       </p>
 
       <div className="divider">

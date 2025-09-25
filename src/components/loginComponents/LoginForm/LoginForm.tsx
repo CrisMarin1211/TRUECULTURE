@@ -8,9 +8,32 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   console.log('Login con:', { email, password });
+  // };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login con:', { email, password });
+
+    const storedUser = localStorage.getItem('user');
+    if (!storedUser) {
+      alert('No hay usuarios registrados. Regístrate primero.');
+      return;
+    }
+
+    const { email: storedEmail, password: storedPassword } = JSON.parse(storedUser);
+
+    console.log('Usuario guardado:', { storedEmail, storedPassword });
+    console.log('Usuario intentando loguearse:', { email, password });
+
+    if (email === storedEmail && password === storedPassword) {
+      console.log('Inicio de sesión exitoso');
+      alert('Inicio de sesión exitoso');
+    } else {
+      console.log('Credenciales incorrectas');
+      alert('Email o contraseña incorrectos');
+    }
   };
 
   return (

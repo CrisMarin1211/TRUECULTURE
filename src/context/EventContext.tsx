@@ -3,8 +3,6 @@ import type { EventItem, EventProviderProps, EventContextType } from '../types/E
 
 export const EventContext = createContext<EventContextType | undefined>(undefined);
 
-// eslint-disable-next-line react-refresh/only-export-components
-
 export const EventProvider = ({ children }: EventProviderProps) => {
   const [events, setEvents] = useState<EventItem[]>([]);
 

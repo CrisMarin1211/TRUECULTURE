@@ -1,19 +1,19 @@
 import React, { useContext } from 'react';
-import { useProduct } from '../../../context/ProductEvent';
+import { useEvent } from '../../../context/EventContext';
 import CardClient from '../../UiAtoms/ProductCard-Client/CardClient';
-import type { ProductItem } from '../../../types/ProductType';
 import { CityContext } from '../../../context/CityContex';
+import type { EventItem } from '../../../types/EventType';
 
-const TAGS: ProductItem['tags'][] = ['Afiches', 'Pines', 'Cultural', 'Moda', 'Gastronomía'];
+const TAGS: EventItem['tags'][] = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
 
-const ProductList: React.FC = () => {
-  const { products = [] } = useProduct();
+const EventList: React.FC = () => {
+  const { events = [] } = useEvent();
   const { city } = useContext(CityContext);
 
   return (
     <div>
       {TAGS.map((tag) => {
-        const filtered = products.filter((p) => p.tags === tag && p.city === city);
+        const filtered = events.filter((p) => p.tags === tag && p.city === city);
         if (filtered.length === 0) return null;
 
         return (
@@ -31,4 +31,4 @@ const ProductList: React.FC = () => {
   );
 };
 
-export default ProductList;
+export default EventList;

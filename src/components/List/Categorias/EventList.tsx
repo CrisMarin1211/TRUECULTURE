@@ -1,33 +1,30 @@
 import React, { useContext } from 'react';
-import { useEvent } from '../../../context/EventContext';
+import { useEvent } from '../../../context/EventContext'; // usa hook si existe
 import CardClient from '../../UiAtoms/ProductCard-Client/CardClient';
 import { CityContext } from '../../../context/CityContex';
 import type { EventItem } from '../../../types/EventType';
 
-const TAGS: EventItem['tags'][] = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
+interface EventListProps {
+  tag: EventItem['tags'];
+}
 
-const EventList: React.FC = () => {
-  const { events = [] } = useEvent();
+const EventList: React.FC<EventListProps> = ({ tag }) => {
+  const { events = [] } = useEvent(); // si tu hook retorna un objeto con events
   const { city } = useContext(CityContext);
 
-  return (
-    <div>
-      {TAGS.map((tag) => {
-        const filtered = events.filter((p) => p.tags === tag && p.city === city);
-        if (filtered.length === 0) return null;
+  const filtered: EventItem[] = events.filter((e: EventItem) => e.tags === tag && e.city === city);
 
-        return (
-          <section key={tag}>
-            <h2>{tag}</h2>
-            <div>
-              {filtered.map((item) => (
-                <CardClient key={item.id} item={item} />
-              ))}
-            </div>
-          </section>
-        );
-      })}
-    </div>
+  if (!filtered.length) return null;
+
+  return (
+    <section>
+      <h2>{tag}</h2>
+      <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto' }}>
+        {filtered.map((item: EventItem) => (
+          <CardClient key={item.id} item={item} /> // usa la prop 'item'
+        ))}
+      </div>
+    </section>
   );
 };
 

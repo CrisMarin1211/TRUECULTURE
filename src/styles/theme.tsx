@@ -42,17 +42,17 @@ const theme = createTheme({
   },
 
   typography: {
-    fontFamily: "'Satoshi', 'ClashDisplay-Bold',sans-serif",
+    fontFamily: "'Satoshi', 'ClashDisplay-Bold', sans-serif",
 
     h1: {
-      fontFamily: "'Satoshi-Black',sans-serif",
+      fontFamily: "'Satoshi-Black', sans-serif",
       fontSize: '64px',
       fontWeight: 900,
       lineHeight: '24px',
       wordWrap: 'break-word',
     },
     h2: {
-      fontFamily: "'Satoshi-Black',sans-serif",
+      fontFamily: "'Satoshi-Black', sans-serif",
       fontSize: '40px',
       fontWeight: 900,
       lineHeight: '24px',
@@ -60,7 +60,7 @@ const theme = createTheme({
       wordWrap: 'break-word',
     },
     h3: {
-      fontFamily: "'Satoshi-Black',sans-serif",
+      fontFamily: "'Satoshi-Black', sans-serif",
       fontSize: '30.72px',
       fontWeight: 900,
       lineHeight: '24px',
@@ -68,14 +68,14 @@ const theme = createTheme({
       wordWrap: 'break-word',
     },
     h4: {
-      fontFamily: "'Satoshi-Black',sans-serif",
+      fontFamily: "'Satoshi-Black', sans-serif",
       fontSize: '49.61px',
       fontWeight: 900,
       color: '#FFFFFF',
       wordWrap: 'break-word',
     },
     h5: {
-      fontFamily2: "'ClashDisplay-Bold',sans-serif",
+      fontFamily: "'ClashDisplay-Bold', sans-serif",
       fontSize: '44.1px',
       fontWeight: 700,
       lineHeight: '39.57px',
@@ -83,7 +83,7 @@ const theme = createTheme({
       wordWrap: 'break-word',
     },
     h6: {
-      fontFamily2: "'ClashDisplay-Bold',sans-serif",
+      fontFamily: "'ClashDisplay-Bold', sans-serif",
       fontSize: '35.52px',
       fontWeight: 700,
       lineHeight: '31.88px',
@@ -92,7 +92,7 @@ const theme = createTheme({
     },
 
     subtitle1: {
-      fontFamily: "'Satoshi-Medium',sans-serif",
+      fontFamily: "'Satoshi-Medium', sans-serif",
       fontSize: '14.57px',
       fontWeight: 700,
       lineHeight: '21.86px',
@@ -100,7 +100,7 @@ const theme = createTheme({
       wordWrap: 'break-word',
     },
     subtitle2: {
-      fontFamily: "'Satoshi-Bold', 'ClashDisplay-Regular',sans-serif",
+      fontFamily: "'Satoshi-Bold', 'ClashDisplay-Regular', sans-serif",
       fontSize: '14.57px',
       fontWeight: 900,
       lineHeight: '21.86px',
@@ -109,7 +109,7 @@ const theme = createTheme({
     },
 
     body1: {
-      fontFamily: "'Satoshi-Medium',sans-serif",
+      fontFamily: "'Satoshi-Medium', sans-serif",
       fontSize: '22.68px',
       fontWeight: 500,
       lineHeight: '39.69px',
@@ -117,7 +117,7 @@ const theme = createTheme({
       wordWrap: 'break-word',
     },
     body2: {
-      fontFamily: "'Satoshi-Medium',sans-serif",
+      fontFamily: "'Satoshi-Medium', sans-serif",
       fontSize: '16.09px',
       fontWeight: 500,
       color: '#000000',
@@ -125,7 +125,7 @@ const theme = createTheme({
     },
 
     button: {
-      fontFamily: "'Satoshi-Medium',sans-serif",
+      fontFamily: "'Satoshi-Medium', sans-serif",
       fontSize: '13px',
       fontWeight: 500,
       lineHeight: '20px',
@@ -134,14 +134,14 @@ const theme = createTheme({
       wordWrap: 'break-word',
     },
     caption: {
-      fontFamily: "'Satoshi-Medium',sans-serif",
+      fontFamily: "'Satoshi-Medium', sans-serif",
       fontSize: '17.01px',
       fontWeight: 500,
       color: '#747688',
       wordWrap: 'break-word',
     },
     overline: {
-      fontFamily: "'Satoshi-Medium',sans-serif",
+      fontFamily: "'Satoshi-Medium', sans-serif",
       fontSize: '25.86px',
       fontWeight: 500,
       lineHeight: '38.79px',

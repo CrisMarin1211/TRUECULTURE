@@ -1,29 +1,19 @@
 import Header from '../../../components/header';
-import CardClient from '../../../components/UiAtoms/ProductCard-Client/CardClient';
-import type { EventItem } from '../../../types/EventType';
+import FeaturesEventList from '../../../components/List/Features/FeaturesEventList';
+import EventList from '../../../components/List/Categorias/EventList';
 
-const DashboardClient = () => {
-  const eventoEjemplo: EventItem = {
-    id: '1',
-    image: '/ruta/imagen.jpg',
-    imageFile: null,
-    name: 'Clase de salsa',
-    date: 'Agosto 26',
-    time: '20:00',
-    location: 'Salón Principal',
-    price: 10,
-    description: 'blablabañ',
-    totalSeats: 100,
-    availableSeats: 80,
-    popularity: 'Alta',
-    tags: 'Diversion',
-    expectedAttendance: 90,
-  };
+const TAGS = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
 
+const DashboardClient: React.FC = () => {
   return (
     <>
       <Header />
-      <CardClient item={eventoEjemplo} />
+      <div>
+        <FeaturesEventList />
+      </div>
+      {TAGS.map((tag) => (
+        <EventList key={tag} tag={tag as any} />
+      ))}
     </>
   );
 };

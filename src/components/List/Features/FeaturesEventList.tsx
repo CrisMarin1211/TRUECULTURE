@@ -9,28 +9,33 @@ const MAX_CARDS = 5;
 const FeaturesEventList: React.FC = () => {
   const { events = [] } = useEvent();
   const { city } = useContext(CityContext);
-  const [randomEvents, setRandomEvents] = useState<EventItem[]>([]);
+  const [featuredEvents, setFeaturedEvents] = useState<EventItem[]>([]);
 
   useEffect(() => {
+    // Filtramos por ciudad y popularidad
     const filtered = events.filter(
       (event: EventItem) => event.city === city && event.popularity === 'Alta',
     );
 
-    const shuffled = filtered.sort(() => 0.5 - Math.random());
-
+    // Mezclamos y tomamos los primeros MAX_CARDS
+    const shuffled = [...filtered].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, MAX_CARDS);
 
-    setRandomEvents(selected);
+    setFeaturedEvents(selected);
   }, [city, events]);
 
-  if (randomEvents.length === 0) {
-    return <p>No hay eventos destacados en {city}.</p>;
+  if (featuredEvents.length === 0) {
+    return (
+      <p style={{ textAlign: 'center', marginTop: '2rem', color: 'white' }}>
+        No hay eventos destacados en {city}.
+      </p>
+    );
   }
 
   return (
-    <div>
-      {randomEvents.map((item) => (
-        <FeaturesClient key={item.id} item={item} />
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
+      {featuredEvents.map((event) => (
+        <FeaturesClient key={event.id} item={event} />
       ))}
     </div>
   );

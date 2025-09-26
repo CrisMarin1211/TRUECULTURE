@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, type ReactNode } from 'react';
 
-type City = 'Cali' | 'Bogota';
+export type City = 'Cali, Colombia' | 'Bogotá, Colombia';
 
 type CityContextType = {
   city: City;
@@ -8,7 +8,7 @@ type CityContextType = {
 };
 
 export const CityContext = createContext<CityContextType>({
-  city: 'Cali',
+  city: 'Cali, Colombia',
   setCity: () => {},
 });
 
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const CityProvider = ({ children }: Props) => {
-  const [city, setCityState] = useState<City>('Cali');
+  const [city, setCityState] = useState<City>('Cali, Colombia');
 
   useEffect(() => {
     const storedCity = localStorage.getItem('city') as City | null;

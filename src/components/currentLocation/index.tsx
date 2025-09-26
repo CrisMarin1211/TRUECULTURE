@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import theme from '../../styles/theme';
+import { useContext } from 'react';
+import { CityContext } from '../../context/CityContex';
+import type { City } from '../../context/CityContex';
 
-const CITIES = ['Cali, Colombia', 'Bogotá, Colombia'] as const;
-type City = (typeof CITIES)[number];
+const CITIES: City[] = ['Cali, Colombia', 'Bogotá, Colombia'];
 
 const CurrentLocationContainer = styled('div')({
   display: 'flex',
@@ -17,7 +19,6 @@ const CurrentLocationContainer = styled('div')({
 
 const LocationGrid = styled('div')({
   display: 'grid',
-
   gridTemplateRows: 'auto auto',
   gap: '0.2rem 0.5rem',
   alignItems: 'center',
@@ -27,7 +28,7 @@ const LocationGrid = styled('div')({
 const FirstRow = styled('div')({
   gridColumn: 1,
   gridRow: 1,
-  fontFamily: theme.typography.subtitle1.fontFamily, // usa tu theme
+  fontFamily: theme.typography.subtitle1.fontFamily,
   fontWeight: 400,
   fontSize: '16px',
   color: theme.palette.grayMedium.main,
@@ -77,19 +78,11 @@ const DropdownOption = styled('div')({
 });
 
 const CurrentLocation = () => {
-  const [city, setCity] = useState<City>('Cali, Colombia');
+  const { city, setCity } = useContext(CityContext);
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const storedCity = localStorage.getItem('city') as City | null;
-    if (storedCity && CITIES.includes(storedCity)) {
-      setCity(storedCity);
-    }
-  }, []);
 
   const handleChangeCity = (newCity: City) => {
     setCity(newCity);
-    localStorage.setItem('city', newCity);
     setIsOpen(false);
   };
 
@@ -99,7 +92,7 @@ const CurrentLocation = () => {
         <FirstRow>Current Location</FirstRow>
         <Arrow>▼</Arrow>
         <SecondRow>{city}</SecondRow>
-        <Empty></Empty>
+        <Empty />
       </LocationGrid>
 
       {isOpen && (

@@ -6,12 +6,13 @@ export interface EventItem {
   date: string;
   time: string;
   location: string;
+  city: 'Cali, Colombia' | 'Bogotá, Colombia';
   description: string;
   price: number;
   totalSeats: number;
   availableSeats: number;
   popularity: 'Alta' | 'Media' | 'Baja';
-  tags: string[];
+  tags: 'Musica' | 'Cultural' | 'Familiar' | 'Diversion' | 'Gastronomia';
   expectedAttendance: number;
   isDraft?: boolean;
 }

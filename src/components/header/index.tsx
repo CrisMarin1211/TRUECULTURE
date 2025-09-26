@@ -53,9 +53,9 @@ const Header = () => {
       {/* Sidebar como modal */}
       {isSidebarOpen && (
         <>
-          <Overlay onClick={toggleSidebar} /> {/* cierra al hacer click afuera */}
+          <Overlay onClick={toggleSidebar} />
           <SidebarContainer>
-            <SideBar toggleSidebar={toggleSidebar} /> {/* pasamos la función */}
+            <SideBar toggleSidebar={toggleSidebar} />
           </SidebarContainer>
         </>
       )}

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { useEvent } from '../../context/EventContext';
-import CardClient from '../UiAtoms/ProductCard-Client/CardClient';
-import { CityContext } from '../../context/CityContex';
-import type { EventItem } from '../../types/EventType';
+import { useEvent } from '../../../context/EventContext';
+import CardClient from '../../UiAtoms/ProductCard-Client/CardClient';
+import { CityContext } from '../../../context/CityContex';
+import type { EventItem } from '../../../types/EventType';
 
 const TAGS: EventItem['tags'][] = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
 

@@ -1,12 +1,12 @@
-import type { ProductItem } from '../../../types/ProductType';
-import type { EventItem } from '../../../types/EventType';
+import type { ProductItem } from '../../types/ProductType';
+import type { EventItem } from '../../types/EventType';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import theme from '../../../styles/theme';
+import theme from '../../styles/theme';
 import Arror from '../../../../public/icons/Arror.svg';
 
 interface ClientCardProps {

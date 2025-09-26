@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { useProduct } from '../../context/ProductEvent';
-import CardClient from '../UiAtoms/ProductCard-Client/CardClient';
-import type { ProductItem } from '../../types/ProductType';
-import { CityContext } from '../../context/CityContex';
+import { useProduct } from '../../../context/ProductEvent';
+import CardClient from '../../UiAtoms/ProductCard-Client/CardClient';
+import type { ProductItem } from '../../../types/ProductType';
+import { CityContext } from '../../../context/CityContex';
 
 const TAGS: ProductItem['tags'][] = ['Afiches', 'Pines', 'Cultural', 'Moda', 'Gastronomía'];
 
-const ProductList: React.FC = () => {
+const FeaturesProductList: React.FC = () => {
   const { products = [] } = useProduct();
   const { city } = useContext(CityContext);
 
@@ -31,4 +31,4 @@ const ProductList: React.FC = () => {
   );
 };
 
-export default ProductList;
+export default FeaturesProductList;

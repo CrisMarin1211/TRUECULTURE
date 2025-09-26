@@ -4,27 +4,33 @@ import AvatarLetter from '../AvatarLetter/LetterAvatars';
 import SideBar from '../UiAtoms/SideBar/SideBar';
 import { styled } from '@mui/material/styles';
 import CurrentLocation from '../currentLocation/index';
+import theme from '../../styles/theme';
 
 const Overlay = styled('div')({
   position: 'fixed',
   top: 0,
   left: 0,
-  width: '100vw',
-  height: '100vh',
-  backgroundColor: 'rgba(0,0,0,0.4)',
+  width: '100%',
+  height: '100%',
+  backgroundColor: theme.palette.black70.main,
   zIndex: 1000,
 });
 
 const SidebarContainer = styled('div')({
   position: 'fixed',
-  height: 'auto',
+  height: '100%',
+  backgroundColor: theme.palette.background.default,
   zIndex: 1001,
+  paddingLeft: '1rem',
+  display: 'flex',
 });
 
 const HeaderContainer = styled('header')({
   display: 'flex',
   alignItems: 'center',
-  padding: '16px',
+  justifyContent: 'space-between',
+  width: '100%',
+  padding: '32px',
   position: 'relative',
 });
 
@@ -39,7 +45,7 @@ const CurrentLocationWrapper = styled('div')({
   top: '100%',
   right: 0,
   marginTop: '8px',
-  zIndex: 1002,
+  zIndex: 100,
 });
 
 const Header = () => {
@@ -50,7 +56,7 @@ const Header = () => {
   return (
     <>
       <HeaderContainer>
-        <div className="header-left">
+        <div>
           <img
             src="/icons/menu.png"
             alt="Menu"
@@ -60,7 +66,7 @@ const Header = () => {
           />
         </div>
 
-        <div className="header-center">
+        <div>
           <img src="/images/full-logo.png" alt="Logo" className="logo" />
         </div>
 

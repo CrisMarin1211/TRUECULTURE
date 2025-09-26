@@ -18,12 +18,15 @@ interface SideBarProps {
 
 const StyledList = styled(List)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
-  height: '100vh',
   width: 260,
+  height: '95%',
   borderRadius: 16,
   border: `1px solid ${theme.palette.grayMedium.main}`,
   paddingTop: 80,
-  position: 'relative',
+  position: 'fixed',
+  top: '50%',
+  left: '10%',
+  transform: 'translate(-50%, -50%)',
 }));
 
 const StyledListItem = styled(ListItem)({

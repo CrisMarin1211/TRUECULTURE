@@ -1,3 +1,4 @@
+import Header from '../../../components/header';
 import CardClient from '../../../components/UiAtoms/ProductCard-Client/CardClient';
 import type { EventItem } from '../../../types/EventType';
 
@@ -15,11 +16,16 @@ const DashboardClient = () => {
     totalSeats: 100,
     availableSeats: 80,
     popularity: 'Alta',
-    tags: ['baile', 'salsa'],
+    tags: 'Diversion',
     expectedAttendance: 90,
   };
 
-  return <CardClient item={eventoEjemplo} />;
+  return (
+    <>
+      <Header />
+      <CardClient item={eventoEjemplo} />
+    </>
+  );
 };
 
 export default DashboardClient;

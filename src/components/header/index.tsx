@@ -1,4 +1,5 @@
 import './style.css';
+import AvatarLetter from '../AvatarLetter/LetterAvatars';
 
 const Header = () => {
   return (
@@ -13,9 +14,7 @@ const Header = () => {
 
       <div className="header-right">
         <img src="/icons/cart.png" alt="Carrito" className="icon cart-icon" />
-        <div className="avatar-container">
-          <img src="/images/avatar.png" alt="Usuario" className="avatar" />
-        </div>
+        <AvatarLetter />
       </div>
     </header>
   );

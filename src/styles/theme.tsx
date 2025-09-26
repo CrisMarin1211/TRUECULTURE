@@ -42,7 +42,7 @@ const theme = createTheme({
   },
 
   typography: {
-    fontFamily: "'Satoshi-Regular', 'ClashDisplay-Regular',sans-serif",
+    fontFamily: "'Satoshi', 'ClashDisplay-Bold',sans-serif",
 
     h1: {
       fontFamily: "'Satoshi-Black',sans-serif",

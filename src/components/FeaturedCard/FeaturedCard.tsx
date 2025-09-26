@@ -56,18 +56,17 @@ const StyledButton = styled(Button)({
   backgroundColor: theme.palette.green.main,
 });
 
-const CardClient: React.FC<ClientCardProps> = ({ item }) => {
+const FeaturesClient: React.FC<ClientCardProps> = ({ item }) => {
   return (
     <StyledCard>
       <StyledImg src={item.image} alt={item.name} />
       <StyledCardContent>
         <Info>
-          <Typography variant="subtitle1">{item.location}</Typography>
           <Typography variant="h6">{item.name}</Typography>
-          {'date' in item && item.date && <Typography variant="subtitle2">{item.date}</Typography>}
         </Info>
 
         <Footer>
+          <Typography variant="subtitle1">{item.location}</Typography>
           <Typography variant="body2" sx={{ color: theme.palette.white.main }}>
             ${item.price}
           </Typography>
@@ -83,4 +82,4 @@ const CardClient: React.FC<ClientCardProps> = ({ item }) => {
   );
 };
 
-export default CardClient;
+export default FeaturesClient;

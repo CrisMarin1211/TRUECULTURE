@@ -1,3 +1,5 @@
+import theme from '../styles/theme';
+
 export function stringToColor(string: string) {
   let hash = 0;
   let i;
@@ -21,16 +23,19 @@ export function stringAvatar(name: string) {
 
   let initials = '';
   if (words.length === 1) {
-    // Solo nombre → primeras 2 letras
     initials = words[0].substring(0, 2).toUpperCase();
   } else if (words.length >= 2) {
-    // Nombre y apellido → inicial de cada uno
     initials = `${words[0][0]}${words[1][0]}`.toUpperCase();
   }
 
   return {
     sx: {
-      bgcolor: stringToColor(name),
+      bgcolor: theme.palette.grayMedium.main,
+      color: theme.palette.black70.main,
+      fontSize: '20px',
+      fontWeight: 600,
+      width: 48,
+      height: 48,
     },
     children: initials,
   };

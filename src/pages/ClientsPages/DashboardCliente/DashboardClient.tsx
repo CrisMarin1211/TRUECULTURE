@@ -1,5 +1,8 @@
-import CardClient from '../../../components/EventFeatures/Components - client/EventCard-Client/CardClient';
-import type { EventItem } from '../../../types/EventType';
+import Header from '../../../components/header';
+import FeaturesEventList from '../../../components/List/Features/FeaturesEventList';
+import EventList from '../../../components/List/Categorias/EventList';
+
+const TAGS = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
 
 const DashboardClient: React.FC = () => {
   return (
@@ -14,5 +17,4 @@ const DashboardClient: React.FC = () => {
     </>
   );
 };
-
 export default DashboardClient;

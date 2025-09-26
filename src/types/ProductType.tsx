@@ -6,6 +6,7 @@ export interface ProductItem {
   Stock: number;
   Status: 'Activo' | 'No activo';
   location: string;
+  city: 'Cali' | 'Bogotá';
   description: string;
   price: number;
   totalStock: number;

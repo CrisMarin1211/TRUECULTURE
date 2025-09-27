@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
+import { Navigation, EffectCoverflow } from 'swiper/modules';
 import type { ProductItem } from '../../../types/ProductType';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -39,13 +39,13 @@ const FeaturedProducttList: React.FC = () => {
 
   return (
     <Swiper
-      modules={[Navigation, Pagination, EffectCoverflow]}
+      modules={[Navigation, EffectCoverflow]}
       effect="coverflow"
       grabCursor={true}
       centeredSlides={true}
       slidesPerView="auto"
       navigation
-      pagination={{ clickable: true }}
+      initialSlide={3}
       coverflowEffect={{
         rotate: 0, // sin rotación lateral
         stretch: 0, // separación horizontal
@@ -54,7 +54,7 @@ const FeaturedProducttList: React.FC = () => {
         scale: 0.85, // escala de las tarjetas laterales
         slideShadows: false, // quita sombras si no quieres
       }}
-      style={{ padding: '2rem', width: '100%' }}
+      style={{ padding: '5rem', width: '100%' }}
     >
       {featuredProducts.map((product) => (
         <SwiperSlide

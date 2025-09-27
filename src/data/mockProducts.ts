@@ -1,4 +1,6 @@
-export const mockProducts = [
+import type { ProductItem } from '../types/ProductType';
+
+export const mockProducts: ProductItem[] = [
   {
     id: '1',
     image: '/images/product1.jpg',

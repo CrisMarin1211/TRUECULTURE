@@ -1,4 +1,6 @@
-export const mockEvents = [
+import type { EventItem } from '../types/EventType';
+
+export const mockEvents: EventItem[] = [
   {
     id: '1',
     image: '/images/event1.jpg',

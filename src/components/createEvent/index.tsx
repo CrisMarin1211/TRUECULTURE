@@ -224,4 +224,4 @@ const CreateEvent: React.FC = () => {
   );
 };
 
-export default CreateProduct;
+export default CreateEvent;

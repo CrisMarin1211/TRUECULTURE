@@ -38,4 +38,13 @@ body {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
+  .checkout-wrapper {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .checkout-wrapper > * {
+    width: 100%;
+  }
 }

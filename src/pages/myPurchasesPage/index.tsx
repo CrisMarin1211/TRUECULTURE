@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import ColoredText from '../../components/coloredText';
 import Header from '../../components/header';
 import './style.css';
 import { products } from '../../data/data';
 import EventCard from '../../components/eventCard';
-import PurchaseDetailModal from '../../components/purchaseDetailModal';
+
+const PurchaseDetailModal = lazy(() => import('../../components/purchaseDetailModal'));
 
 const MyPurchasesPage = () => {
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
@@ -29,18 +30,9 @@ const MyPurchasesPage = () => {
       </div>
 
       {selectedProduct && (
-        <PurchaseDetailModal
-          image={selectedProduct.image}
-          title={selectedProduct.title}
-          text={selectedProduct.description}
-          location={selectedProduct.location}
-          date={selectedProduct.date}
-          name={selectedProduct.name}
-          time={selectedProduct.time}
-          barcodeImage={selectedProduct.barcodeImage}
-          barcodeCode={selectedProduct.barcodeCode}
-          onClose={() => setSelectedProduct(null)}
-        />
+        <Suspense fallback={<div style={{ color: 'white' }}>Cargando detalle...</div>}>
+          <PurchaseDetailModal {...selectedProduct} onClose={() => setSelectedProduct(null)} />
+        </Suspense>
       )}
     </div>
   );

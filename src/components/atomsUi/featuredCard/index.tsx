@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import theme from '../../../styles/theme';
-import arrow from '../../../../public/icons/arrow.svg';
 
 interface FeaturedCardProps {
   item: ProductItem | EventItem;
@@ -108,7 +107,7 @@ const FeaturedCard: React.FC<FeaturedCardProps> = ({ item }) => {
       <Footer>
         <StyledButton
           variant="contained"
-          endIcon={<img src={arrow} alt="icon" style={{ marginLeft: 8 }} />}
+          endIcon={<img src="/icons/arrow.svg" alt="icon" style={{ marginLeft: 8 }} />}
         >
           Ver detalles
         </StyledButton>

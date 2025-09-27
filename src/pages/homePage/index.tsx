@@ -13,7 +13,9 @@ const HomePage = () => {
           <Link to="/" className="admin-link">
             Administrador
           </Link>
-          <button onClick={goToSignUp}>Sign Up</button>
+          <button onClick={goToSignUp} className="signup-btn">
+            Sign Up
+          </button>
         </div>
       </header>
 

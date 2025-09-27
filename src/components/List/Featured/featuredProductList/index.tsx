@@ -5,7 +5,9 @@ import type { ProductItem } from '../../../../types/ProductType';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { useProduct } from '../../../../context/ProductEvent';
+import './FeaturedEventList.css';
+
+import { useProduct } from '../../../../context/productEvent';
 import FeaturedCard from '../../../atomsUi/featuredCard';
 import { CityContext } from '../../../../context/cityContex';
 

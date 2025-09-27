@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { useProduct } from '../../../../context/ProductEvent';
+import { useProduct } from '../../../../context/productEvent';
 import CardClient from '../../../atomsUi/productCard-Client';
 import type { ProductItem } from '../../../../types/productType';
-import { CityContext } from '../../../../context/CityContex';
+import { CityContext } from '../../../../context/cityContex';
 
 const TAGS: ProductItem['tags'][] = ['Afiches', 'Pines', 'Cultural', 'Moda', 'Gastronomía'];
 

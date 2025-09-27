@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import theme from '../../../styles/theme';
 import { useContext } from 'react';
-import { CityContext } from '../../../context/CityContex';
-import type { City } from '../../../context/CityContex';
+import { CityContext } from '../../../context/cityContex';
+import type { City } from '../../../context/cityContex';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 const CITIES: City[] = ['Cali, Colombia', 'Bogotá, Colombia'];
 

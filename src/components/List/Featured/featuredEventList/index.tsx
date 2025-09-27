@@ -50,11 +50,11 @@ const FeaturedEventList: React.FC = () => {
         stretch: 0,
         depth: 200,
         modifier: 1,
-        scale: 0.5, // las slides laterales se ven pequeñas
+        scale: 0.9, // las slides laterales se ven pequeñas
         slideShadows: false,
       }}
-      initialSlide={0} // empieza con la primera centrada
-      style={{ width: '80%' }}
+      initialSlide={3} // empieza con la primera centrada
+      style={{ width: '63%' }}
     >
       {featuredEvents.map((event) => (
         <SwiperSlide

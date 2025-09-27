@@ -65,7 +65,7 @@ const CreateEvent: React.FC = () => {
 
   const handleSave = () => {
     const stored = localStorage.getItem('events');
-    let events: Product[] = stored ? JSON.parse(stored) : [];
+    let events: Event[] = stored ? JSON.parse(stored) : [];
 
     if (id) {
       events = events.map((p) => (p.id === id ? event : p));

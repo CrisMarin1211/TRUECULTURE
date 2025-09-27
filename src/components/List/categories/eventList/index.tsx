@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useEvent } from '../../../../context/EventContext';
-import CardClient from '../../../UiAtoms/ProductCard-Client/CardClient';
+import CardClient from '../../../UiAtoms/productCard-Client';
 import { CityContext } from '../../../../context/CityContex';
 import type { EventItem } from '../../../../types/EventType';
 

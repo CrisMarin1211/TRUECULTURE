@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 import './style.css';
 
 import { useEvent } from '../../../../context/EventContext';
-import FeaturedCard from '../../../UiAtoms/FeaturedCard/FeaturedCard';
+import FeaturedCard from '../../../UiAtoms/featuredCard';
 import { CityContext } from '../../../../context/CityContex';
 import type { EventItem } from '../../../../types/EventType';
 

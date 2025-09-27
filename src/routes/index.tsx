@@ -7,7 +7,7 @@ import DashboardClient from '../pages/ClientsPages/DashboardCliente/DashboardCli
 import ProfilePage from '../pages/profilePage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
-import CreateProductPage from '../pages/AdminPages/products/createPage';
+import CreateProductPage from '../pages/adminPages/productsPages/createPage';
 
 const AppRoutes = () => {
   return (

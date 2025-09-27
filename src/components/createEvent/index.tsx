@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
 
-type Product = {
+type Event = {
   id: string;
   image: string;
   imageFile: File | null;

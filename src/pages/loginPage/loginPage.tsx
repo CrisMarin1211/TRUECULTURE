@@ -1,4 +1,4 @@
-import './style.css';
+import './loginPage.css';
 import LoginForm from '../../components/loginComponents/LoginForm/LoginForm';
 import LogoCompleto from '../../assets/Marca/Logocompleto.png';
 import Logoazul from '../../assets/Marca/logoazul.png';

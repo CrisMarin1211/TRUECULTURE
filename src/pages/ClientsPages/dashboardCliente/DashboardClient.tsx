@@ -1,6 +1,6 @@
 import Header from '../../../components/header';
 import FeaturesEventList from '../../../components/List/Featured/featuredEventList/index';
-import EventList from '../../../components/List/categories/EventList/EventList';
+import EventList from '../../../components/List/categories/eventList/EventList';
 
 const TAGS = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
 
@@ -17,5 +17,4 @@ const DashboardClient: React.FC = () => {
     </>
   );
 };
-
 export default DashboardClient;

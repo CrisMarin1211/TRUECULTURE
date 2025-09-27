@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';
+import './createPage.css';
 import CreateProduct from '../../../../components/createProduct';
 
 const CreateProductPage: React.FC = () => {

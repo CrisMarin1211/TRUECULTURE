@@ -3,12 +3,13 @@ import HomePage from '../pages/homePage';
 import MyPurchasesPage from '../pages/myPurchasesPage';
 import MyCartPage from '../pages/myCartPage';
 import MyCouponsPage from '../pages/myCouponsPage';
-import DashboardClient from '../pages/ClientsPages/dashboardCliente';
+import DashboardClient from '../pages/ClientsPages/DashboardCliente/DashboardClient';
 import ProfilePage from '../pages/profilePage';
-import LoginPage from '../pages/loginPage';
-import RegisterPage from '../pages/registerPage';
-import CreateProductPage from '../pages/adminPages/productsPages/createPage';
-import ListProductPage from '../pages/adminPages/productsPages/listPage';
+import LoginPage from '../pages/LoginPage/loginPage';
+import RegisterPage from '../pages/RegisterPage/registerPage';
+import CreateProductPage from '../pages/AdminPages/productsPages/createPage/createPage';
+import ListProductPage from '../pages/AdminPages/productsPages/listPage/listPage';
+import MarketplaceHome from '../pages/MarketplaceHome/MarketplaceHome';
 
 const AppRoutes = () => {
   return (
@@ -24,6 +25,7 @@ const AppRoutes = () => {
         <Route path="/signup" element={<RegisterPage />} />
         <Route path="/create-product" element={<CreateProductPage />} />
         <Route path="/list-products" element={<ListProductPage />} />
+        <Route path="/Marketplacehome" element={<MarketplaceHome />} />
       </Routes>
     </>
   );

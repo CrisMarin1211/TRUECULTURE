@@ -1,6 +1,6 @@
 import './style.css';
-import InputField from '../../UiAtoms/inputField';
-import Button from '../../UiAtoms/button';
+import InputField from '../../atomsUi/inputField';
+import Button from '../../atomsUi/button';
 import GoogleIcon from '../../../assets/Marca/icon-google.png';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';

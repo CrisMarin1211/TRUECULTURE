@@ -56,15 +56,15 @@ const ListProductPage: React.FC = () => {
             <div className="status-bubbles">
               <div className="status-item">
                 <span className="bubble active"></span>
-                <span className="status-label">Activos</span>
+                <span>Activos</span>
               </div>
               <div className="status-item">
                 <span className="bubble paused"></span>
-                <span className="status-label">Pausados</span>
+                <span>Pausados</span>
               </div>
               <div className="status-item">
                 <span className="bubble out"></span>
-                <span className="status-label">Agotados</span>
+                <span>Agotados</span>
               </div>
             </div>
           </div>

@@ -38,38 +38,37 @@ const FeaturedEventList: React.FC = () => {
   }
 
   return (
-   <Swiper
-  modules={[Navigation, EffectCoverflow]}
-  effect="coverflow"
-  grabCursor={true}
-  centeredSlides={true}
-  slidesPerView="auto"       // auto permite que las laterales sean más pequeñas o invisibles
-  navigation
-  coverflowEffect={{
-    rotate: 0,
-    stretch: 0,
-    depth: 200,
-    modifier: 1,
-    scale: 0.5,               // las slides laterales se ven pequeñas
-    slideShadows: false,
-  }}
-  initialSlide={0}            // empieza con la primera centrada
-  style={{ width: '80%' }}
->
-  {featuredEvents.map((event) => (
-    <SwiperSlide
-      key={event.id}
-      style={{
-        width: '385px',
-        height: '450px',
-        transition: 'transform 0.3s', // animación suave
+    <Swiper
+      modules={[Navigation, EffectCoverflow]}
+      effect="coverflow"
+      grabCursor={true}
+      centeredSlides={true}
+      slidesPerView="auto" // auto permite que las laterales sean más pequeñas o invisibles
+      navigation
+      coverflowEffect={{
+        rotate: 0,
+        stretch: 0,
+        depth: 200,
+        modifier: 1,
+        scale: 0.5, // las slides laterales se ven pequeñas
+        slideShadows: false,
       }}
+      initialSlide={0} // empieza con la primera centrada
+      style={{ width: '80%' }}
     >
-      <FeaturedCard item={event} />
-    </SwiperSlide>
-  ))}
-</Swiper>
-
+      {featuredEvents.map((event) => (
+        <SwiperSlide
+          key={event.id}
+          style={{
+            width: '385px',
+            height: '450px',
+            transition: 'transform 0.3s', // animación suave
+          }}
+        >
+          <FeaturedCard item={event} />
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 };
 

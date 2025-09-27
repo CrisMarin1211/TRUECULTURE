@@ -10,7 +10,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import theme from '../../../styles/theme';
-import x from '../../../../public/icons/X.svg';
+import x from '../../../../public/icons/x.svg';
 
 interface SideBarProps {
   toggleSidebar: () => void;

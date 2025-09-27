@@ -1,6 +1,6 @@
 import Header from '../../../components/header';
 import FeaturedEventList from '../../../components/list/featured/featuredEventList';
-import EventList from '../../../components/list/categories/EventList';
+import EventList from '../../../components/list/categories/eventList';
 
 const TAGS = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
 

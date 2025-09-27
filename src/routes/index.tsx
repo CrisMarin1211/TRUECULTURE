@@ -9,6 +9,7 @@ import LoginPage from '../pages/LoginPage/loginPage';
 import RegisterPage from '../pages/RegisterPage/registerPage';
 import CreateProductPage from '../pages/AdminPages/productsPages/createPage/createPage';
 import ListProductPage from '../pages/AdminPages/productsPages/listPage/listPage';
+import MarketplaceHome from '../pages/MarketplaceHome/MarketplaceHome';
 
 const AppRoutes = () => {
   return (
@@ -24,6 +25,7 @@ const AppRoutes = () => {
         <Route path="/signup" element={<RegisterPage />} />
         <Route path="/create-product" element={<CreateProductPage />} />
         <Route path="/list-products" element={<ListProductPage />} />
+        <Route path="/Marketplacehome" element={<MarketplaceHome />} />
       </Routes>
     </>
   );

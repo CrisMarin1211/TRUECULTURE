@@ -1,4 +1,4 @@
-import type { EventItem } from '../types/eventType';
+import type { EventItem } from '../types/EventType';
 
 export const mockEvents: EventItem[] = [
   {

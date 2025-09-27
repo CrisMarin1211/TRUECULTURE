@@ -19,9 +19,7 @@
 }
 
 .product-img {
-  width: 100%;
-  max-width: 220px;
-  height: auto;
+  width: 95%;
   border-radius: 0.8rem;
   object-fit: cover;
 }
@@ -74,4 +72,24 @@
 
 .product-bottom .product-info-item {
   text-align: center;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-view {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 1.5rem;
+  background-color: #99cb36;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.btn-view:hover {
+  opacity: 0.9;
 }

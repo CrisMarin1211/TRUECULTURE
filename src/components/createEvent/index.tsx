@@ -48,13 +48,13 @@ const CreateEvent: React.FC = () => {
     if (stored) {
       const events: Event[] = JSON.parse(stored);
       const found = events.find((p) => p.id === id);
-      if (found) setProduct(found);
+      if (found) setEvent(found);
     }
   }, [id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setProduct((prev) => ({
+    setEvent((prev) => ({
       ...prev,
       [name]:
         name === 'price' || name.toLowerCase().includes('stock') || name === 'UnitsSaled'

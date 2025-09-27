@@ -20,7 +20,7 @@ const AdminProductCard = ({
   status,
 }: AdminProductCardProps) => {
   return (
-    <div className="card product-card">
+    <div className="product-card admin">
       <div className="product-img-wrapper">
         <img src={image} alt={name} className="product-img" />
       </div>
@@ -53,6 +53,10 @@ const AdminProductCard = ({
           <span className="label">Estado</span>
           <span className="value">{status}</span>
         </div>
+      </div>
+
+      <div className="product-footer">
+        <button className="btn-view">Ver</button>
       </div>
     </div>
   );

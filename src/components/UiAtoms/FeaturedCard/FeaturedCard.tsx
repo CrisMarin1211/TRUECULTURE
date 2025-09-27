@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import theme from '../../../styles/theme';
-import Arror from '../../../../public/icons/Arror.svg';
+import Arror from '../../../../public/icons/arrow.svg';
 
 interface FeaturedCardProps {
   item: ProductItem | EventItem;

@@ -9,7 +9,7 @@ import './style.css';
 import { useEvent } from '../../../../context/EventContext';
 import FeaturedCard from '../../../atomsUi/featuredCard';
 import { CityContext } from '../../../../context/CityContex';
-import type { EventItem } from '../../../../types/EventType';
+import type { EventItem } from '../../../../types/eventType';
 
 const MAX_CARDS = 5;
 

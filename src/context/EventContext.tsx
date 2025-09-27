@@ -1,5 +1,5 @@
 import { useContext, useState, createContext } from 'react';
-import type { EventItem, EventProviderProps, EventContextType } from '../types/EventType';
+import type { EventItem, EventProviderProps, EventContextType } from '../types/eventType';
 import { mockEvents } from '../data/mockEvents';
 
 export const EventContext = createContext<EventContextType | undefined>(undefined);

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, EffectCoverflow } from 'swiper/modules';
-import type { ProductItem } from '../../../../types/ProductType';
+import type { ProductItem } from '../../../../types/productType';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';

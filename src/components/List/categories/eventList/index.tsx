@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useEvent } from '../../../../context/EventContext';
 import CardClient from '../../../atomsUi/productCard-Client';
 import { CityContext } from '../../../../context/CityContex';
-import type { EventItem } from '../../../../types/EventType';
+import type { EventItem } from '../../../../types/eventType';
 
 interface EventListProps {
   tag: EventItem['tags'];

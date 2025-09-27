@@ -1,4 +1,4 @@
-const mockProducts = [
+export const mockProducts = [
   {
     id: '1',
     image: '/images/product1.jpg',

@@ -24,7 +24,7 @@ type Event = {
 const CreateEvent: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [event, setProduct] = useState<Event>({
+  const [event, setEvent] = useState<Event>({
     id: crypto.randomUUID(),
     image: '',
     imageFile: null,

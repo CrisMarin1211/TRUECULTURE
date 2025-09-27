@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, EffectCoverflow } from 'swiper/modules';
-import type { ProductItem } from '../../../../types/productType';
+import type { ProductItem } from '../../../../types/ProductType';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import './FeaturedEventList.css';
+import './style.css';
 
-import { useProduct } from '../../../../context/productEvent';
+import { useProduct } from '../../../../context/ProductEvent';
 import FeaturedCard from '../../../atomsUi/featuredCard';
 import { CityContext } from '../../../../context/cityContex';
 

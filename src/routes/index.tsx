@@ -3,10 +3,10 @@ import HomePage from '../pages/homePage';
 import MyPurchasesPage from '../pages/myPurchasesPage';
 import MyCartPage from '../pages/myCartPage';
 import MyCouponsPage from '../pages/myCouponsPage';
-import DashboardClient from '../pages/ClientsPages/DashboardCliente/DashboardClient';
+import DashboardClient from '../pages/ClientsPages/dashboardCliente';
 import ProfilePage from '../pages/profilePage';
-import LoginPage from '../pages/LoginPage/LoginPage';
-import RegisterPage from '../pages/RegisterPage/RegisterPage';
+import LoginPage from '../pages/loginPage';
+import RegisterPage from '../pages/registerPage';
 import CreateProductPage from '../pages/adminPages/productsPages/createPage';
 import ListProductPage from '../pages/adminPages/productsPages/listPage';
 

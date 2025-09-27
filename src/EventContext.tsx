@@ -2,6 +2,8 @@ import { useContext, useState, createContext } from 'react';
 import type { EventItem, EventProviderProps, EventContextType } from '../types/eventType';
 import { mockEvents } from '../data/mockEvents';
 
+///tomar cambios
+
 export const EventContext = createContext<EventContextType | undefined>(undefined);
 
 export const EventProvider = ({ children }: EventProviderProps) => {

@@ -57,7 +57,7 @@ const AdminProductCard = ({
 
       <div className="product-footer">
         <button className="btn-view">
-          <img src="/icons/view.png" alt="Ver" className="btn-icon" />
+          <img src="/icons/eye.png" alt="Ver" className="btn-icon" />
           Ver
         </button>
       </div>

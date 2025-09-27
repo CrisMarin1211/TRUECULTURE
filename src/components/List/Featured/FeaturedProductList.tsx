@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
+import type { ProductItem } from '../../../types/ProductType';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './FeaturedEventList.css';
 
 import { useProduct } from '../../../context/ProductEvent';
-import FeaturesClient from '../../FeaturedCard/FeaturedCard';
+import FeaturedCard from '../../UiAtoms/FeaturedCard/FeaturedCard';
 import { CityContext } from '../../../context/CityContex';
-import type { ProductItem } from '../../../types/ProductType';
 
 const MAX_CARDS = 5;
 
@@ -32,7 +32,7 @@ const FeaturedProducttList: React.FC = () => {
   if (featuredProducts.length === 0) {
     return (
       <p style={{ textAlign: 'center', marginTop: '2rem', color: 'white' }}>
-        No hay eventos destacados en {city}.
+        No hay productos destacados en {city}.
       </p>
     );
   }
@@ -61,7 +61,7 @@ const FeaturedProducttList: React.FC = () => {
           key={product.id}
           style={{ width: '385px', height: '450px' }} // 👈 asegura que respete el tamaño de tu card
         >
-          <FeaturesClient item={product} />
+          <FeaturedCard item={product} />
         </SwiperSlide>
       ))}
     </Swiper>

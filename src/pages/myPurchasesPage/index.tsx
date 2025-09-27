@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import ColoredText from '../../components/coloredText';
-import CurrentLocation from '../../components/currentLocation';
 import Header from '../../components/header';
 import './style.css';
 import { products } from '../../data/data';
@@ -13,7 +12,6 @@ const MyPurchasesPage = () => {
   return (
     <div className="my-purchases-page">
       <Header />
-      <CurrentLocation city="Cali, Colombia" />
       <ColoredText text="Mi Carrito " color="#FF0099" />
 
       <div className="purchases-grid">

@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 import './FeaturedEventList.css';
 
 import { useEvent } from '../../../context/EventContext';
-import FeaturesClient from '../../FeaturedCard/FeaturedCard';
+import FeaturedCard from '../../UiAtoms/FeaturedCard/FeaturedCard';
 import { CityContext } from '../../../context/CityContex';
 import type { EventItem } from '../../../types/EventType';
 
@@ -47,10 +47,10 @@ const FeaturedEventList: React.FC = () => {
       navigation
       pagination={{ clickable: true }}
       coverflowEffect={{
-        rotate: 0, // sin rotación lateral
-        stretch: 0, // separación horizontal
+        rotate: 0,
+        stretch: 100, // separación horizontal
         depth: 200, // profundidad (perspectiva)
-        modifier: 1, // intensidad del efecto
+        modifier: 3, // intensidad del efecto
         scale: 0.85, // escala de las tarjetas laterales
         slideShadows: false, // quita sombras si no quieres
       }}
@@ -61,7 +61,7 @@ const FeaturedEventList: React.FC = () => {
           key={event.id}
           style={{ width: '385px', height: '450px' }} // 👈 asegura que respete el tamaño de tu card
         >
-          <FeaturesClient item={event} />
+          <FeaturedCard item={event} />
         </SwiperSlide>
       ))}
     </Swiper>

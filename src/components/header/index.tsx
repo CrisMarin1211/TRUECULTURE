@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
-import AvatarLetter from '../AvatarLetter/LetterAvatars';
+import AvatarLetter from '../UiAtoms/AvatarLetter/LetterAvatars';
 import SideBar from '../UiAtoms/SideBar/SideBar';
-import CurrentLocation from '../currentLocation/index';
+import CurrentLocation from '../UiAtoms/currentLocation/index';
 import theme from '../../styles/theme';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';

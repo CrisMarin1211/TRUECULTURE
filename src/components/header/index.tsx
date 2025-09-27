@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
-import AvatarLetter from '../UiAtoms/AvatarLetter/LetterAvatars';
+import AvatarLetter from '../AvatarLetter/LetterAvatars';
 import SideBar from '../UiAtoms/SideBar/SideBar';
-import CurrentLocation from '../UiAtoms/currentLocation/index';
+import CurrentLocation from '../currentLocation/index';
 import theme from '../../styles/theme';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
@@ -62,12 +62,27 @@ const Header = () => {
               transform: 'translateX(-50%)',
             }}
           >
-            <img src="/images/full-logo.png" alt="Logo" className="logo" />
+            <Box
+              component="img"
+              src="/images/full-logo.png"
+              alt="Logo desktop"
+              sx={{ display: { xs: 'none', md: 'block' }, height: 60 }}
+            />
+
+            <Box
+              component="img"
+              src="/images/logo.png"
+              alt="Logo móvil"
+              sx={{ display: { xs: 'block', md: 'none' }, height: 50 }}
+            />
           </Box>
 
           <Stack direction="row" spacing={2} alignItems="center" justifyItems="center">
             <ShoppingCartOutlinedIcon sx={{ cursor: 'pointer', width: 36, height: 36 }} />
-            <AvatarLetter />
+
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <AvatarLetter />
+            </Box>
           </Stack>
         </Stack>
 

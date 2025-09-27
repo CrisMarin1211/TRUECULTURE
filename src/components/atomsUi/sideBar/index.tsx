@@ -10,7 +10,6 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import theme from '../../../styles/theme';
-import x from '../../../../public/icons/x.svg';
 
 interface SideBarProps {
   toggleSidebar: () => void;
@@ -67,7 +66,7 @@ const CloseButton = styled('img')({
 const SideBar = ({ toggleSidebar }: SideBarProps) => {
   return (
     <StyledList>
-      <CloseButton src={x} alt="Cerrar menú" onClick={toggleSidebar} />
+      <CloseButton src="/icons/x.svg" alt="Cerrar menú" onClick={toggleSidebar} />
 
       <StyledListItem disablePadding>
         <StyledListItemButton>

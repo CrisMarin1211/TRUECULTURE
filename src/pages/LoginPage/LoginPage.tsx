@@ -1,5 +1,5 @@
 import './LoginPage.css';
-import LoginForm from '../../components/loginComponents/LoginForm/LoginForm';
+import LoginForm from '../../components/loginComponents/loginForm';
 import LogoCompleto from '../../assets/Marca/Logocompleto.png';
 import Logoazul from '../../assets/Marca/logoazul.png';
 

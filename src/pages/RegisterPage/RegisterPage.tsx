@@ -1,5 +1,5 @@
 import './RegisterPage.css';
-import RegisterForm from '../../components/registerComponents/RegisterForm/RegisterForm';
+import RegisterForm from '../../components/registerComponents/registerForm';
 import LogoCompleto from '../../assets/Marca/Logocompleto.png';
 import LogoFucsia from '../../assets/Marca/LogoFucsia.png';
 

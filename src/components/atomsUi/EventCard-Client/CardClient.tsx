@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import theme from '../../../styles/theme';
-import Arror from '../../../../public/icons/ArrowUpRight.svg';
+import Arror from '../../../../public/icons/arrow.svg';
 
 interface ClientCardProps {
   item: ProductItem | EventItem;

@@ -87,7 +87,7 @@ const StyledButton = styled(Button)({
   backgroundColor: theme.palette.green.main,
 });
 
-const FeaturesClient: React.FC<FeaturedCardProps> = ({ item }) => {
+const FeaturedCard: React.FC<FeaturedCardProps> = ({ item }) => {
   return (
     <StyledCard>
       <Overlay />
@@ -117,4 +117,4 @@ const FeaturesClient: React.FC<FeaturedCardProps> = ({ item }) => {
   );
 };
 
-export default FeaturesClient;
+export default FeaturedCard;

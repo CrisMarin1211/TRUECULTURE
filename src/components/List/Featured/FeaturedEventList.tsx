@@ -13,7 +13,7 @@ import type { EventItem } from '../../../types/EventType';
 
 const MAX_CARDS = 5;
 
-const FeaturesEventList: React.FC = () => {
+const FeaturedEventList: React.FC = () => {
   const { events = [] } = useEvent();
   const { city } = useContext(CityContext);
   const [featuredEvents, setFeaturedEvents] = useState<EventItem[]>([]);
@@ -68,4 +68,4 @@ const FeaturesEventList: React.FC = () => {
   );
 };
 
-export default FeaturesEventList;
+export default FeaturedEventList;

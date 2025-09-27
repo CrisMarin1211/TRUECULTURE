@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, EffectCoverflow } from 'swiper/modules';
-import type { ProductItem } from '../../../types/ProductType';
+import type { ProductItem } from '../../../../types/ProductType';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './FeaturedEventList.css';
 
-import { useProduct } from '../../../context/ProductEvent';
-import FeaturedCard from '../../UiAtoms/FeaturedCard/FeaturedCard';
-import { CityContext } from '../../../context/CityContex';
+import { useProduct } from '../../../../context/ProductEvent';
+import FeaturedCard from '../../../UiAtoms/FeaturedCard/FeaturedCard';
+import { CityContext } from '../../../../context/CityContex';
 
 const MAX_CARDS = 5;
 

@@ -6,10 +6,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './FeaturedEventList.css';
 
-import { useEvent } from '../../../context/EventContext';
-import FeaturedCard from '../../UiAtoms/FeaturedCard/FeaturedCard';
-import { CityContext } from '../../../context/CityContex';
-import type { EventItem } from '../../../types/EventType';
+import { useEvent } from '../../../../context/EventContext';
+import FeaturedCard from '../../../UiAtoms/FeaturedCard/FeaturedCard';
+import { CityContext } from '../../../../context/CityContex';
+import type { EventItem } from '../../../../types/EventType';
 
 const MAX_CARDS = 5;
 

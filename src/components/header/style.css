@@ -1,16 +1,12 @@
 
 .icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 }
 
 .logo {
-  height: 50px;
-}
-
-.header-right {
-  gap: 1rem;
+  height: 60px;
 }
 
 

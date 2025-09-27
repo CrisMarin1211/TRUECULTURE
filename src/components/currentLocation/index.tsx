@@ -4,23 +4,20 @@ import theme from '../../styles/theme';
 import { useContext } from 'react';
 import { CityContext } from '../../context/CityContex';
 import type { City } from '../../context/CityContex';
-
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 const CITIES: City[] = ['Cali, Colombia', 'Bogotá, Colombia'];
 
 const CurrentLocationContainer = styled('div')({
   display: 'flex',
   justifyContent: 'flex-end',
-  paddingRight: '1.8rem',
-  margin: '30px 0',
+  marginTop: 3,
   color: theme.palette.white.main,
-  fontFamily: 'sans-serif',
   position: 'relative',
 });
 
 const LocationGrid = styled('div')({
   display: 'grid',
   gridTemplateRows: 'auto auto',
-  gap: '0.2rem 0.5rem',
   alignItems: 'center',
   cursor: 'pointer',
 });
@@ -29,8 +26,7 @@ const FirstRow = styled('div')({
   gridColumn: 1,
   gridRow: 1,
   fontFamily: theme.typography.subtitle1.fontFamily,
-  fontWeight: 400,
-  fontSize: '16px',
+  fontSize: '13px',
   color: theme.palette.grayMedium.main,
 });
 
@@ -38,28 +34,15 @@ const SecondRow = styled('div')({
   gridColumn: 1,
   gridRow: 2,
   fontFamily: theme.typography.subtitle1.fontFamily,
-  fontWeight: 600,
-  fontSize: '18px',
+  fontSize: '13px',
   color: theme.palette.white.main,
-  marginTop: '-16px',
-});
-
-const Arrow = styled('div')({
-  gridColumn: 2,
-  gridRow: 1,
-  fontSize: '0.8rem',
-  alignSelf: 'center',
-});
-
-const Empty = styled('div')({
-  gridColumn: 2,
-  gridRow: 2,
+  marginTop: '-22px',
 });
 
 const Dropdown = styled('div')({
   position: 'absolute',
   marginTop: '2rem',
-  right: '1.8rem',
+  width: '125px',
   backgroundColor: theme.palette.darkGray1.main,
   borderRadius: 8,
   overflow: 'hidden',
@@ -69,11 +52,10 @@ const Dropdown = styled('div')({
 const DropdownOption = styled('div')({
   padding: '8px 12px',
   color: theme.palette.white.main,
-  fontFamily: 'sans-serif',
-  fontSize: '0.9rem',
+  fontSize: '10px',
   borderBottom: `1px solid ${theme.palette.grayMedium.main}`,
   '&:hover': {
-    backgroundColor: theme.palette.grayMedium.main,
+    backgroundColor: theme.palette.blue.main,
   },
 });
 
@@ -87,12 +69,13 @@ const CurrentLocation = () => {
   };
 
   return (
-    <CurrentLocationContainer>
+    <CurrentLocationContainer sx={{ cursor: 'pointer' }}>
       <LocationGrid onClick={() => setIsOpen((prev) => !prev)}>
-        <FirstRow>Current Location</FirstRow>
-        <Arrow>▼</Arrow>
+        <FirstRow>
+          Current Location
+          <ArrowDropDownIcon />{' '}
+        </FirstRow>
         <SecondRow>{city}</SecondRow>
-        <Empty />
       </LocationGrid>
 
       {isOpen && (

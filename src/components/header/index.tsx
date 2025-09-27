@@ -29,23 +29,10 @@ const HeaderContainer = styled('header')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  width: '100%',
+  width: '95%',
+  height: '186px',
   padding: '32px',
   position: 'relative',
-});
-
-const HeaderRight = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '15px',
-});
-
-const CurrentLocationWrapper = styled('div')({
-  position: 'absolute',
-  top: '100%',
-  right: 0,
-  marginTop: '8px',
-  zIndex: 100,
 });
 
 const Header = () => {
@@ -70,14 +57,16 @@ const Header = () => {
           <img src="/images/full-logo.png" alt="Logo" className="logo" />
         </div>
 
-        <HeaderRight>
-          <img src="/icons/cart.png" alt="Carrito" className="icon cart-icon" />
-          <AvatarLetter />
+        <div>
+          <div>
+            <img src="/icons/cart.png" alt="Carrito" className="icon cart-icon" />
+            <AvatarLetter />
+          </div>
 
-          <CurrentLocationWrapper>
+          <div>
             <CurrentLocation />
-          </CurrentLocationWrapper>
-        </HeaderRight>
+          </div>
+        </div>
       </HeaderContainer>
 
       {isSidebarOpen && (

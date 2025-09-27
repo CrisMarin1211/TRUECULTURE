@@ -1,6 +1,6 @@
 import { useContext, useState, createContext } from 'react';
-import type { EventItem, EventProviderProps, EventContextType } from '../types/eventType';
-import { mockEvents } from '../data/mockEvents';
+import type { EventItem, EventProviderProps, EventContextType } from '../src/types/EventType';
+import { mockEvents } from '../src/data/mockEvents';
 
 ///tomar cambios
 

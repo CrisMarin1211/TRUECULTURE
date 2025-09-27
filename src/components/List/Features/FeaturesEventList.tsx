@@ -1,4 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 import { useEvent } from '../../../context/EventContext';
 import FeaturesClient from '../../FeaturedCard/FeaturedCard';
 import { CityContext } from '../../../context/CityContex';
@@ -12,12 +18,10 @@ const FeaturesEventList: React.FC = () => {
   const [featuredEvents, setFeaturedEvents] = useState<EventItem[]>([]);
 
   useEffect(() => {
-    // Filtramos por ciudad y popularidad
     const filtered = events.filter(
       (event: EventItem) => event.city === city && event.popularity === 'Alta',
     );
 
-    // Mezclamos y tomamos los primeros MAX_CARDS
     const shuffled = [...filtered].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, MAX_CARDS);
 
@@ -33,11 +37,20 @@ const FeaturesEventList: React.FC = () => {
   }
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
+    <Swiper
+      modules={[Navigation, Pagination]}
+      spaceBetween={20}
+      slidesPerView={3}
+      navigation
+      pagination={{ clickable: true }}
+      style={{ padding: '2rem', width: '100%' }}
+    >
       {featuredEvents.map((event) => (
-        <FeaturesClient key={event.id} item={event} />
+        <SwiperSlide key={event.id}>
+          <FeaturesClient item={event} />
+        </SwiperSlide>
       ))}
-    </div>
+    </Swiper>
   );
 };
 

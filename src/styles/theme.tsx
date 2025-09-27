@@ -42,111 +42,99 @@ const theme = createTheme({
   },
 
   typography: {
-    fontFamily: "'Satoshi', 'ClashDisplay-Bold', sans-serif",
+    fontFamily: "'Satoshi', sans-serif",
 
     h1: {
-      fontFamily: "'Satoshi-Black', sans-serif",
+      fontFamily: "'Satoshi', sans-serif",
       fontSize: '64px',
-      fontWeight: 900,
-      lineHeight: '24px',
-      wordWrap: 'break-word',
+      fontWeight: 900, // Black
+      lineHeight: '72px',
+      color: '#FFFFFF',
     },
     h2: {
-      fontFamily: "'Satoshi-Black', sans-serif",
+      fontFamily: "'Satoshi', sans-serif",
       fontSize: '40px',
-      fontWeight: 900,
-      lineHeight: '24px',
+      fontWeight: 900, // Black
+      lineHeight: '48px',
       color: '#FFFFFF',
-      wordWrap: 'break-word',
     },
     h3: {
-      fontFamily: "'Satoshi-Black', sans-serif",
+      fontFamily: "'Satoshi', sans-serif",
       fontSize: '30.72px',
-      fontWeight: 900,
-      lineHeight: '24px',
+      fontWeight: 900, // Black
+      lineHeight: '40px',
       color: '#FFFFFF',
-      wordWrap: 'break-word',
     },
     h4: {
-      fontFamily: "'Satoshi-Black', sans-serif",
+      fontFamily: "'Satoshi', sans-serif",
       fontSize: '49.61px',
       fontWeight: 900,
       color: '#FFFFFF',
-      wordWrap: 'break-word',
     },
     h5: {
-      fontFamily: "'ClashDisplay-Bold', sans-serif",
+      fontFamily: "'ClashDisplay', sans-serif",
       fontSize: '44.1px',
       fontWeight: 700,
-      lineHeight: '39.57px',
+      lineHeight: '40px',
       color: '#FFFFFF',
-      wordWrap: 'break-word',
     },
     h6: {
-      fontFamily: "'ClashDisplay-Bold', sans-serif",
+      fontFamily: "'ClashDisplay', sans-serif",
       fontSize: '35.52px',
       fontWeight: 700,
-      lineHeight: '31.88px',
+      lineHeight: '32px',
       color: '#FFFFFF',
-      wordWrap: 'break-word',
     },
 
     subtitle1: {
-      fontFamily: "'Satoshi-Medium', sans-serif",
+      fontFamily: "'Satoshi', sans-serif",
       fontSize: '14.57px',
-      fontWeight: 700,
+      fontWeight: 500, // Medium
       lineHeight: '21.86px',
       color: '#FFFFFF',
-      wordWrap: 'break-word',
     },
     subtitle2: {
-      fontFamily: "'Satoshi-Bold', 'ClashDisplay-Regular', sans-serif",
+      fontFamily: "'Satoshi', sans-serif",
       fontSize: '14.57px',
-      fontWeight: 900,
+      fontWeight: 700, // Bold
       lineHeight: '21.86px',
       color: '#FFFFFF',
-      wordWrap: 'break-word',
     },
 
     body1: {
-      fontFamily: "'Satoshi-Medium', sans-serif",
+      fontFamily: "'Satoshi', sans-serif",
       fontSize: '22.68px',
-      fontWeight: 500,
+      fontWeight: 500, // Medium
       lineHeight: '39.69px',
       color: '#FFFFFF',
-      wordWrap: 'break-word',
     },
     body2: {
-      fontFamily: "'Satoshi-Medium', sans-serif",
+      fontFamily: "'Satoshi', sans-serif",
       fontSize: '16.09px',
       fontWeight: 500,
       color: '#000000',
-      wordWrap: 'break-word',
     },
 
     button: {
-      fontFamily: "'Satoshi-Medium', sans-serif",
+      fontFamily: "'Satoshi', sans-serif",
       fontSize: '13px',
       fontWeight: 500,
       lineHeight: '20px',
       textTransform: 'none',
       color: '#FFFFFF',
-      wordWrap: 'break-word',
     },
     caption: {
-      fontFamily: "'Satoshi-Medium', sans-serif",
+      fontFamily: "'Satoshi', sans-serif",
       fontSize: '17.01px',
       fontWeight: 500,
       color: '#747688',
-      wordWrap: 'break-word',
     },
     overline: {
-      fontFamily: "'Satoshi-Medium', sans-serif",
+      fontFamily: "'Satoshi', sans-serif",
       fontSize: '25.86px',
       fontWeight: 500,
       lineHeight: '38.79px',
       color: '#979797',
-      wordWrap: 'break-word',
       textTransform: 'none',
     },
   },
@@ -155,5 +143,4 @@ const theme = createTheme({
     borderRadius: 100,
   },
 });
-
 export default theme;

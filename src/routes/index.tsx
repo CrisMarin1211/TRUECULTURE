@@ -7,6 +7,7 @@ import DashboardClient from '../pages/ClientsPages/DashboardCliente/DashboardCli
 import ProfilePage from '../pages/profilePage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
+import CreateProductPage from '../pages/AdminPages/products/createPage';
 
 const AppRoutes = () => {
   return (
@@ -20,7 +21,7 @@ const AppRoutes = () => {
         <Route path="/my-profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<RegisterPage />} />
-        <Route path="/create-product" />
+        <Route path="/create-product" element={<CreateProductPage />} />
       </Routes>
     </>
   );

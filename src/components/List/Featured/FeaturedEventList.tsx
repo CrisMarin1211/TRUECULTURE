@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -39,15 +39,28 @@ const FeaturesEventList: React.FC = () => {
 
   return (
     <Swiper
-      modules={[Navigation, Pagination]}
-      spaceBetween={20}
-      slidesPerView={3}
+      modules={[Navigation, Pagination, EffectCoverflow]}
+      effect="coverflow"
+      grabCursor={true}
+      centeredSlides={true}
+      slidesPerView="auto"
       navigation
       pagination={{ clickable: true }}
+      coverflowEffect={{
+        rotate: 0, // sin rotación lateral
+        stretch: 0, // separación horizontal
+        depth: 200, // profundidad (perspectiva)
+        modifier: 1, // intensidad del efecto
+        scale: 0.85, // escala de las tarjetas laterales
+        slideShadows: false, // quita sombras si no quieres
+      }}
       style={{ padding: '2rem', width: '100%' }}
     >
       {featuredEvents.map((event) => (
-        <SwiperSlide key={event.id}>
+        <SwiperSlide
+          key={event.id}
+          style={{ width: '385px', height: '450px' }} // 👈 asegura que respete el tamaño de tu card
+        >
           <FeaturesClient item={event} />
         </SwiperSlide>
       ))}

@@ -1,0 +1,14 @@
+.swiper-button-next,
+.swiper-button-prev {
+  color: white; /* cambia el color de las flechas */
+}
+
+.swiper-pagination-bullet {
+  background: gray;
+  opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active {
+  background: #00ff99; /* verde como tu theme */
+  opacity: 1;
+}

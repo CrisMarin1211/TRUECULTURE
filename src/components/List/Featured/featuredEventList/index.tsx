@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
+import { Navigation, EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './style.css';
 
-import { useEvent } from '../../../../context/eventContext';
+import { useEvent } from '../../../../context/EventContext';
 import FeaturedCard from '../../../atomsUi/featuredCard';
 import { CityContext } from '../../../../context/cityContex';
-import type { EventItem } from '../../../../types/eventType';
+import type { EventItem } from '../../../../types/EventType';
 
 const MAX_CARDS = 5;
 

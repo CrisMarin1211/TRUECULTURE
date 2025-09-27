@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useEvent } from '../../../context/EventContext'; // usa hook si existe
+import { useEvent } from '../../../context/EventContext';
 import CardClient from '../../UiAtoms/ProductCard-Client/CardClient';
 import { CityContext } from '../../../context/CityContex';
 import type { EventItem } from '../../../types/EventType';
@@ -9,7 +9,7 @@ interface EventListProps {
 }
 
 const EventList: React.FC<EventListProps> = ({ tag }) => {
-  const { events = [] } = useEvent(); // si tu hook retorna un objeto con events
+  const { events = [] } = useEvent();
   const { city } = useContext(CityContext);
 
   const filtered: EventItem[] = events.filter((e: EventItem) => e.tags === tag && e.city === city);
@@ -21,7 +21,7 @@ const EventList: React.FC<EventListProps> = ({ tag }) => {
       <h2>{tag}</h2>
       <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto' }}>
         {filtered.map((item: EventItem) => (
-          <CardClient key={item.id} item={item} /> // usa la prop 'item'
+          <CardClient key={item.id} item={item} />
         ))}
       </div>
     </section>

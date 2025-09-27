@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
-import AvatarLetter from '../AvatarLetter/LetterAvatars';
+import AvatarLetter from '../UiAtoms/AvatarLetter/LetterAvatars';
 import SideBar from '../UiAtoms/SideBar/SideBar';
 import CurrentLocation from '../UiAtoms/currentLocation';
 import theme from '../../styles/theme';

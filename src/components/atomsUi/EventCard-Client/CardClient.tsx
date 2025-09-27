@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import theme from '../../../styles/theme';
-import Arror from '../../../../public/icons/ArrowUpRight.svg';
+import Arrow from '../../../../public/icons/arrow.svg';
 
 interface ClientCardProps {
   item: ProductItem | EventItem;
@@ -74,7 +74,7 @@ const CardClient: React.FC<ClientCardProps> = ({ item }) => {
           <CardActions>
             <StyledButton variant="contained">
               Ver detalles
-              <img src={Arror} alt="icon" style={{ marginLeft: 8 }} />
+              <img src={Arrow} alt="icon" style={{ marginLeft: 8 }} />
             </StyledButton>{' '}
           </CardActions>
         </Footer>

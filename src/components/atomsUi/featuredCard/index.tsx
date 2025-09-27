@@ -1,5 +1,5 @@
-import type { ProductItem } from '../../../types/productType';
-import type { EventItem } from '../../../types/eventType';
+import type { ProductItem } from '../../../types/ProductType';
+import type { EventItem } from '../../../types/EventType';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';

@@ -1,5 +1,5 @@
 import { useContext, useState, createContext } from 'react';
-import type { ProductItem, ProductProviderProps, ProductContextType } from '../types/productType';
+import type { ProductItem, ProductProviderProps, ProductContextType } from '../types/ProductType';
 import { mockProducts } from '../data/mockProducts';
 
 export const ProductContext = createContext<ProductContextType | undefined>(undefined);

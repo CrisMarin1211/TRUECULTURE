@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 import './style.css';
 
 import { useProduct } from '../../../../context/ProductEvent';
-import FeaturedCard from '../../../atomsUi/featuredCard';
+import FeaturedCard from '../../../atomsUi/featuredCard/index';
 import { CityContext } from '../../../../context/cityContex';
 
 const MAX_CARDS = 5;

@@ -1,42 +1,106 @@
-import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
+import AvatarLetter from '../AvatarLetter/LetterAvatars';
+import SideBar from '../UiAtoms/SideBar/SideBar';
+import CurrentLocation from '../currentLocation/index';
+import theme from '../../styles/theme';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { Box } from '@mui/material';
 import './style.css';
 
-const HomePage = () => {
-  const navigate = useNavigate();
-  const goToSignUp = () => navigate('/signup');
+const Overlay = styled('div')({
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  backgroundColor: theme.palette.black70.main,
+  zIndex: 1000,
+});
+
+const SidebarContainer = styled('div')({
+  position: 'fixed',
+  height: '100%',
+  backgroundColor: theme.palette.background.default,
+  zIndex: 1001,
+  paddingLeft: '1rem',
+  display: 'flex',
+});
+
+const HeaderContainer = styled('header')({
+  width: '100%',
+  padding: '32px',
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+});
+
+const Header = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   return (
-    <div className="home-page">
-      <header className="header">
-        <img src="/images/logo.png" alt="Logo" className="logo" />
-        <div className="header-right">
-          <Link to="/" className="admin-link">
-            Administrador
-          </Link>
-          <button onClick={goToSignUp} className="signup-btn">
-            Sign Up
-          </button>
-        </div>
-      </header>
+    <>
+      <HeaderContainer>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ width: '100%', position: 'relative', height: '100px' }}
+        >
+          <MenuOutlinedIcon
+            onClick={toggleSidebar}
+            sx={{ cursor: 'pointer', width: 36, height: 36, marginTop: '-5px' }}
+          />
 
-      <div className="footer-content">
-        <div className="footer-left">
-          <span className="brand-name">TrueCulture</span>
-          <span className="headline">Vive experiencias únicas</span>
-          <span className="subtext">
-            Gana logros, reseña eventos y apoya a emprendedores locales
-          </span>
-          <button className="start-btn">Comenzar</button>
-        </div>
+          <Box
+            sx={{
+              position: 'absolute',
+              left: '50%',
+              transform: 'translateX(-50%)',
+            }}
+          >
+            <Box
+              component="img"
+              src="/images/full-logo.png"
+              alt="Logo desktop"
+              sx={{ display: { xs: 'none', md: 'block' }, height: 60 }}
+            />
 
-        <div className="footer-right">
-          <img src="/images/home1.png" alt="img1" className="footer-img" />
-          <img src="/images/home2.png" alt="img2" className="footer-img" />
-          <img src="/images/home3.png" alt="img3" className="footer-img" />
-        </div>
-      </div>
-    </div>
+            <Box
+              component="img"
+              src="/images/logo.png"
+              alt="Logo móvil"
+              sx={{ display: { xs: 'block', md: 'none' }, height: 50 }}
+            />
+          </Box>
+
+          <Stack direction="row" spacing={2} alignItems="center" justifyItems="center">
+            <ShoppingCartOutlinedIcon sx={{ cursor: 'pointer', width: 36, height: 36 }} />
+
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <AvatarLetter />
+            </Box>
+          </Stack>
+        </Stack>
+
+        <Stack direction="row" justifyContent="flex-end" sx={{ width: '100%' }}>
+          <CurrentLocation />
+        </Stack>
+      </HeaderContainer>
+
+      {isSidebarOpen && (
+        <>
+          <Overlay onClick={toggleSidebar} />
+          <SidebarContainer>
+            <SideBar toggleSidebar={toggleSidebar} />
+          </SidebarContainer>
+        </>
+      )}
+    </>
   );
 };
 
-export default HomePage;
+export default Header;

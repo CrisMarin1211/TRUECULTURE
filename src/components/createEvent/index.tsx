@@ -46,7 +46,7 @@ const CreateEvent: React.FC = () => {
   useEffect(() => {
     const stored = localStorage.getItem('events');
     if (stored) {
-      const events: Product[] = JSON.parse(stored);
+      const events: Event[] = JSON.parse(stored);
       const found = events.find((p) => p.id === id);
       if (found) setProduct(found);
     }

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import './style.css';
+import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
 import AvatarLetter from '../AvatarLetter/LetterAvatars';
 import SideBar from '../UiAtoms/SideBar/SideBar';
-import { styled } from '@mui/material/styles';
 import CurrentLocation from '../currentLocation/index';
 import theme from '../../styles/theme';
 
@@ -35,9 +35,14 @@ const HeaderContainer = styled('header')({
   position: 'relative',
 });
 
+const HeaderRight = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-end',
+});
+
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   return (
@@ -57,16 +62,13 @@ const Header = () => {
           <img src="/images/full-logo.png" alt="Logo" className="logo" />
         </div>
 
-        <div>
-          <div>
+        <HeaderRight>
+          <Stack direction="row" spacing={2} alignItems="center">
             <img src="/icons/cart.png" alt="Carrito" className="icon cart-icon" />
             <AvatarLetter />
-          </div>
-
-          <div>
-            <CurrentLocation />
-          </div>
-        </div>
+          </Stack>
+          <CurrentLocation />
+        </HeaderRight>
       </HeaderContainer>
 
       {isSidebarOpen && (

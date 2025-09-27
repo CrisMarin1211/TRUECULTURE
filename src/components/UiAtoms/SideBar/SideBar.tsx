@@ -35,7 +35,7 @@ const StyledListItem = styled(ListItem)({
 
 const StyledListItemButton = styled(ListItemButton)({
   color: theme.palette.white.main,
-  transition: 'all 0.3s ease',
+  transition: 'all 0.1s ease',
   '&:hover': {
     backgroundColor: theme.palette.pink.main,
     transform: 'translateX(3px)',

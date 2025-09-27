@@ -33,7 +33,6 @@ export function stringAvatar(name: string) {
       bgcolor: theme.palette.grayMedium.main,
       color: theme.palette.black70.main,
       fontSize: '20px',
-      fontWeight: 600,
       width: 48,
       height: 48,
     },

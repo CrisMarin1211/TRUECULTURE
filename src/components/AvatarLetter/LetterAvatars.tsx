@@ -14,7 +14,7 @@ const AvatarLetter = () => {
     }
   }, []);
 
-  if (!userName) return null; // Si no hay usuario, no se muestra nada
+  if (!userName) return null;
 
   return (
     <Stack direction="row" spacing={2}>

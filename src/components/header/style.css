@@ -1,7 +1,12 @@
 
-.icon {
-  width: 20px;
-  height: 20px;
+.menu-icon{
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+.cart-icon{
+  width: 26px;
+  height: 26px;
   cursor: pointer;
 }
 

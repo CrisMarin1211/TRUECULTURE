@@ -5,6 +5,10 @@ import AvatarLetter from '../AvatarLetter/LetterAvatars';
 import SideBar from '../UiAtoms/SideBar/SideBar';
 import CurrentLocation from '../currentLocation/index';
 import theme from '../../styles/theme';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { Box } from '@mui/material';
+import './style.css';
 
 const Overlay = styled('div')({
   position: 'fixed',
@@ -26,19 +30,11 @@ const SidebarContainer = styled('div')({
 });
 
 const HeaderContainer = styled('header')({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  width: '95%',
-  height: '186px',
+  width: '100%',
   padding: '32px',
   position: 'relative',
-});
-
-const HeaderRight = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'flex-end',
 });
 
 const Header = () => {
@@ -48,27 +44,36 @@ const Header = () => {
   return (
     <>
       <HeaderContainer>
-        <div>
-          <img
-            src="/icons/menu.png"
-            alt="Menu"
-            className="icon menu-icon"
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ width: '100%', position: 'relative', height: '100px' }}
+        >
+          <MenuOutlinedIcon
             onClick={toggleSidebar}
-            style={{ cursor: 'pointer' }}
+            sx={{ cursor: 'pointer', width: 36, height: 36, marginTop: '-5px' }}
           />
-        </div>
 
-        <div>
-          <img src="/images/full-logo.png" alt="Logo" className="logo" />
-        </div>
+          <Box
+            sx={{
+              position: 'absolute',
+              left: '50%',
+              transform: 'translateX(-50%)',
+            }}
+          >
+            <img src="/images/full-logo.png" alt="Logo" className="logo" />
+          </Box>
 
-        <HeaderRight>
-          <Stack direction="row" spacing={2} alignItems="center">
-            <img src="/icons/cart.png" alt="Carrito" className="icon cart-icon" />
+          <Stack direction="row" spacing={2} alignItems="center" justifyItems="center">
+            <ShoppingCartOutlinedIcon sx={{ cursor: 'pointer', width: 36, height: 36 }} />
             <AvatarLetter />
           </Stack>
+        </Stack>
+
+        <Stack direction="row" justifyContent="flex-end" sx={{ width: '100%' }}>
           <CurrentLocation />
-        </HeaderRight>
+        </Stack>
       </HeaderContainer>
 
       {isSidebarOpen && (

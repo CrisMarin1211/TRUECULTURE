@@ -43,7 +43,7 @@ const Dropdown = styled('div')({
   position: 'absolute',
   marginTop: '2rem',
   width: '125px',
-  backgroundColor: theme.palette.darkGray1.main,
+  backgroundColor: theme.palette.background.default,
   borderRadius: 8,
   overflow: 'hidden',
   zIndex: 100,

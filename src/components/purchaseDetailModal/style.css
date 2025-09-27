@@ -13,6 +13,7 @@
 
 .modal-container {
   display: flex;
+  flex-direction: row;
   width: 800px;
   max-width: 95%;
   border-radius: 1.5rem;
@@ -116,4 +117,32 @@
 
 .download-btn:hover {
   background: #84b22f;
+}
+
+@media (max-width: 768px) {
+  .modal-container {
+    flex-direction: column;
+    width: 95%;
+    height: auto;
+  }
+
+  .modal-left {
+    width: 100%;
+    height: auto;
+  }
+
+  .modal-left img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .modal-right {
+    padding: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .modal-info {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }

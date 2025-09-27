@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 import AdminProductCard from '../../../../components/adminProductCard';
+import { useNavigate } from 'react-router-dom';
 
 type Product = {
   id: string;
@@ -15,6 +16,8 @@ type Product = {
 
 const ListProductPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedProducts = localStorage.getItem('products');
@@ -34,7 +37,9 @@ const ListProductPage: React.FC = () => {
           </div>
           <div className="row row-2">
             <div className="actions-left">
-              <button className="btn-pink">Nuevo Producto</button>
+              <button className="btn-pink" onClick={() => navigate('/create-product')}>
+                Nuevo Producto
+              </button>
               <button className="btn-outline">Visión General</button>
             </div>
             <select className="filter-select">

@@ -5,8 +5,10 @@ import MyCartPage from '../pages/myCartPage';
 import MyCouponsPage from '../pages/myCouponsPage';
 import DashboardClient from '../pages/ClientsPages/DashboardCliente/DashboardClient';
 import ProfilePage from '../pages/profilePage';
-import LoginPage from '../pages/LoginPage/LoginPage';
-import RegisterPage from '../pages/RegisterPage/RegisterPage';
+import LoginPage from '../pages/LoginPage/loginPage';
+import RegisterPage from '../pages/RegisterPage/registerPage';
+import CreateProductPage from '../pages/AdminPages/productsPages/createPage/createPage';
+import ListProductPage from '../pages/AdminPages/productsPages/listPage/listPage';
 
 const AppRoutes = () => {
   return (
@@ -20,6 +22,8 @@ const AppRoutes = () => {
         <Route path="/my-profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<RegisterPage />} />
+        <Route path="/create-product" element={<CreateProductPage />} />
+        <Route path="/list-products" element={<ListProductPage />} />
       </Routes>
     </>
   );

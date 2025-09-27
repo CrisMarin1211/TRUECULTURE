@@ -1,10 +1,11 @@
 import { useContext, useState, createContext } from 'react';
 import type { ProductItem, ProductProviderProps, ProductContextType } from '../types/ProductType';
+import { mockProducts } from '../data/mockProducts';
 
 export const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
 export const ProductProvider = ({ children }: ProductProviderProps) => {
-  const [products, setProducts] = useState<ProductItem[]>([]);
+  const [products, setProducts] = useState<ProductItem[]>(mockProducts);
 
   const addProduct: ProductContextType['addProduct'] = (product) => {
     const newProduct: ProductItem = { id: crypto.randomUUID(), ...product };

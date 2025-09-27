@@ -1,0 +1,53 @@
+html,
+body {
+  font-family: 'Clash Display', sans-serif;
+}
+
+.page-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  height: 100vh;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  gap: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  grid-column: span 2;
+  background-color: #232323;
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin: 0.5rem 0;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.sidebar li:hover {
+  color: #fff;
+}
+
+.main-content {
+  grid-column: span 10;
+  overflow: auto;
+  border-radius: 0.8rem;
+}

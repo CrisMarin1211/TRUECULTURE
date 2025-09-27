@@ -1,10 +1,14 @@
 import { useState } from 'react';
-import './style.css';
-import AvatarLetter from '../AvatarLetter/LetterAvatars';
-import SideBar from '../UiAtoms/SideBar/SideBar';
 import { styled } from '@mui/material/styles';
-import CurrentLocation from '../currentLocation/index';
+import Stack from '@mui/material/Stack';
+import AvatarLetter from '../atomsUi/avatarLetter';
+import SideBar from '../atomsUi/sideBar';
+import CurrentLocation from '../atomsUi/currentLocation';
 import theme from '../../styles/theme';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { Box } from '@mui/material';
+import './style.css';
 
 const Overlay = styled('div')({
   position: 'fixed',
@@ -26,58 +30,65 @@ const SidebarContainer = styled('div')({
 });
 
 const HeaderContainer = styled('header')({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
   width: '100%',
   padding: '32px',
   position: 'relative',
-});
-
-const HeaderRight = styled('div')({
   display: 'flex',
-  alignItems: 'center',
-  gap: '15px',
-});
-
-const CurrentLocationWrapper = styled('div')({
-  position: 'absolute',
-  top: '100%',
-  right: 0,
-  marginTop: '8px',
-  zIndex: 100,
+  flexDirection: 'column',
 });
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   return (
     <>
       <HeaderContainer>
-        <div>
-          <img
-            src="/icons/menu.png"
-            alt="Menu"
-            className="icon menu-icon"
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ width: '100%', position: 'relative', height: '100px' }}
+        >
+          <MenuOutlinedIcon
             onClick={toggleSidebar}
-            style={{ cursor: 'pointer' }}
+            sx={{ cursor: 'pointer', width: 36, height: 36, marginTop: '-5px' }}
           />
-        </div>
 
-        <div>
-          <img src="/images/full-logo.png" alt="Logo" className="logo" />
-        </div>
+          <Box
+            sx={{
+              position: 'absolute',
+              left: '50%',
+              transform: 'translateX(-50%)',
+            }}
+          >
+            <Box
+              component="img"
+              src="/images/full-logo.png"
+              alt="Logo desktop"
+              sx={{ display: { xs: 'none', md: 'block' }, height: 60 }}
+            />
 
-        <HeaderRight>
-          <img src="/icons/cart.png" alt="Carrito" className="icon cart-icon" />
-          <AvatarLetter />
+            <Box
+              component="img"
+              src="/images/logo.png"
+              alt="Logo móvil"
+              sx={{ display: { xs: 'block', md: 'none' }, height: 50 }}
+            />
+          </Box>
 
-          <CurrentLocationWrapper>
-            <CurrentLocation />
-          </CurrentLocationWrapper>
-        </HeaderRight>
+          <Stack direction="row" spacing={2} alignItems="center" justifyItems="center">
+            <ShoppingCartOutlinedIcon sx={{ cursor: 'pointer', width: 36, height: 36 }} />
+
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <AvatarLetter />
+            </Box>
+          </Stack>
+        </Stack>
+
+        <Stack direction="row" justifyContent="flex-end" sx={{ width: '100%' }}>
+          <CurrentLocation />
+        </Stack>
       </HeaderContainer>
 
       {isSidebarOpen && (

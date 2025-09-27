@@ -1,6 +1,6 @@
 import './RegisterForm.css';
-import InputField from '../../UiAtoms/InputField/InputField';
-import Button from '../../UiAtoms/Button/Button';
+import InputField from '../../atomsUi/inputField/inputField';
+import Button from '../../atomsUi/button/button';
 import GoogleIcon from '../../../assets/Marca/icon-google.png';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';

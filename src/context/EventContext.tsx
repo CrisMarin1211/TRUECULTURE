@@ -1,10 +1,13 @@
 import { useContext, useState, createContext } from 'react';
 import type { EventItem, EventProviderProps, EventContextType } from '../types/EventType';
+import { mockEvents } from '../data/mockEvents';
+
+///tomar cambios
 
 export const EventContext = createContext<EventContextType | undefined>(undefined);
 
 export const EventProvider = ({ children }: EventProviderProps) => {
-  const [events, setEvents] = useState<EventItem[]>([]);
+  const [events, setEvents] = useState<EventItem[]>(mockEvents);
 
   const addEvent: EventContextType['addEvent'] = (event) => {
     const newEvent: EventItem = { id: crypto.randomUUID(), ...event };

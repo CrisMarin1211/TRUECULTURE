@@ -1,5 +1,5 @@
 import Header from '../../../components/header';
-import FeaturesEventList from '../../../components/List/Features/FeaturesEventList';
+import FeaturesEventList from '../../../components/List/Featured/FeaturedEventList';
 import EventList from '../../../components/List/Categorias/EventList';
 
 const TAGS = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];

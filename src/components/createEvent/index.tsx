@@ -80,7 +80,7 @@ const CreateEvent: React.FC = () => {
   const handleDelete = () => {
     const stored = localStorage.getItem('events');
     if (!stored) return;
-    const events: Product[] = JSON.parse(stored);
+    const events: Event[] = JSON.parse(stored);
     const filtered = events.filter((p) => p.id !== event.id);
     localStorage.setItem('events', JSON.stringify(filtered));
     navigate('/create-event');

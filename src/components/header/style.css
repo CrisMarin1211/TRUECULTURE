@@ -1,10 +1,9 @@
-
-.menu-icon{
+.menu-icon {
   width: 24px;
   height: 24px;
   cursor: pointer;
 }
-.cart-icon{
+.cart-icon {
   width: 26px;
   height: 26px;
   cursor: pointer;
@@ -13,7 +12,6 @@
 .logo {
   height: 60px;
 }
-
 
 @media (max-width: 768px) {
   .avatar-container {

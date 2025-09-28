@@ -1,7 +1,18 @@
-export interface User {
+export interface AppUser {
   id: string;
-  name: string;
   email: string;
+  name?: string;
+}
+
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+export interface SignupCredentials {
+  email: string;
+  password: string;
+  name: string;
 }
 
 export interface AuthProviderProps {
@@ -9,8 +20,9 @@ export interface AuthProviderProps {
 }
 
 export interface AuthContextType {
-  user: User | null;
-  login: (userData: Omit<User, 'id'> & { id?: string }) => void;
-  signup: (userData: Omit<User, 'id'>) => void;
-  logout: () => void;
+  user: AppUser | null;
+  login: (credentials: LoginCredentials) => Promise<void>;
+  signup: (credentials: SignupCredentials) => Promise<void>;
+  logout: () => Promise<void>;
+  loginWithGoogle: () => Promise<void>;
 }

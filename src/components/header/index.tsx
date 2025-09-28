@@ -9,6 +9,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import { Box } from '@mui/material';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 
 const Overlay = styled('div')({
   position: 'fixed',
@@ -31,7 +32,6 @@ const SidebarContainer = styled('div')({
 
 const HeaderContainer = styled('header')({
   width: '100%',
-  padding: '32px',
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
@@ -40,6 +40,7 @@ const HeaderContainer = styled('header')({
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -78,9 +79,15 @@ const Header = () => {
           </Box>
 
           <Stack direction="row" spacing={2} alignItems="center" justifyItems="center">
-            <ShoppingCartOutlinedIcon sx={{ cursor: 'pointer', width: 36, height: 36 }} />
+            <ShoppingCartOutlinedIcon
+              sx={{ cursor: 'pointer', width: 36, height: 36 }}
+              onClick={() => navigate('/my-cart')}
+            />
 
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Box
+              sx={{ display: { xs: 'none', md: 'flex' }, cursor: 'pointer' }}
+              onClick={() => navigate('/my-profile')}
+            >
               <AvatarLetter />
             </Box>
           </Stack>

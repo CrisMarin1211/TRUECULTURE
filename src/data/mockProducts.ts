@@ -39,7 +39,7 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '3',
-    image: '/images/product3.jpg',
+    image: 'https://pbs.twimg.com/media/G17PvMYWIAEqcTf?format=jpg&name=900x900',
     imageFile: null,
     name: 'Camiseta edición limitada',
     Stock: 20,

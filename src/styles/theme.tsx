@@ -67,7 +67,7 @@ const theme = createTheme({
     },
     h4: {
       fontFamily: "'Satoshi', sans-serif",
-      fontSize: '49.61px',
+      fontSize: '40px',
       fontWeight: 900,
       color: '#FFFFFF',
     },
@@ -103,14 +103,14 @@ const theme = createTheme({
 
     body1: {
       fontFamily: "'Satoshi', sans-serif",
-      fontSize: '22.68px',
+      fontSize: '16px',
       fontWeight: 500, // Medium
       lineHeight: '39.69px',
       color: '#FFFFFF',
     },
     body2: {
       fontFamily: "'Satoshi', sans-serif",
-      fontSize: '16.09px',
+      fontSize: '14px',
       fontWeight: 500,
       color: '#000000',
     },

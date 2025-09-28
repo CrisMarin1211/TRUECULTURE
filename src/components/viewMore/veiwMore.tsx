@@ -1,13 +1,27 @@
-import { Card, CardContent, CardMedia, Stack, Typography, IconButton, Box } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Stack,
+  Typography,
+  IconButton,
+  Box,
+  Button,
+} from '@mui/material';
 import LocationOnTwoToneIcon from '@mui/icons-material/LocationOnTwoTone';
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
+import CalendarMonthTwoToneIcon from '@mui/icons-material/CalendarMonthTwoTone';
 import BuyButton from './buttons/buyButton';
 import Review from './reviewComponent/review';
 import ShareButton from './buttons/shareButton';
-import CalendarMonthTwoToneIcon from '@mui/icons-material/CalendarMonthTwoTone';
+import { useState } from 'react';
 import type { ViewMoreProps } from '../../types/ViewMorType';
+import theme from '../../styles/theme';
 
 const ViewMore = ({ item, onClose }: ViewMoreProps) => {
+  const [readMore, setReadMore] = useState(false);
+  const toggleReadMore = () => setReadMore(!readMore);
+
   return (
     <Card
       sx={{
@@ -15,11 +29,12 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
         flexDirection: 'row',
         backgroundColor: '#121212',
         color: '#fff',
+        borderRadius: 0,
+        height: '80vh',
         overflow: 'hidden',
-        borderRadius: 0, // 👈 elimina el redondeado
+        position: 'relative',
       }}
     >
-      {/* Columna izquierda - Imagen */}
       <Box sx={{ position: 'relative', flex: 1 }}>
         <CardMedia
           component="img"
@@ -27,71 +42,161 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
           alt={item.name}
           sx={{ height: '100%', objectFit: 'cover' }}
         />
-        <Box sx={{ position: 'absolute', bottom: 16, left: 16 }}>
-          <ShareButton />
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: 16,
+            left: 0,
+            right: 0,
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <ShareButton item={item} />
         </Box>
       </Box>
 
-      {/* Columna derecha - Detalles */}
-      <CardContent sx={{ flex: 1, position: 'relative', p: 3 }}>
-        {/* Botón cerrar arriba a la derecha */}
-        <IconButton
-          onClick={onClose} // 👈 cerrar modal
-          sx={{ position: 'absolute', top: 16, right: 16, color: '#fff' }}
+      <Box sx={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+        <CardContent
+          sx={{
+            height: '100%',
+            overflowY: 'auto',
+            p: 3,
+            '&::-webkit-scrollbar': { display: 'none' },
+          }}
         >
-          <CloseTwoToneIcon />
-        </IconButton>
+          <IconButton
+            onClick={onClose}
+            sx={{
+              position: 'absolute',
+              top: 16,
+              right: 16,
+              color: '#fff',
+              zIndex: 5,
+              mb: 2,
+            }}
+          >
+            <CloseTwoToneIcon />
+          </IconButton>
 
-        {/* Nombre */}
-        <Typography variant="h5" fontWeight={700} gutterBottom>
-          {item.name}
-        </Typography>
+          <Typography variant="h4" sx={{ mt: 6 }} gutterBottom>
+            {item.name}
+          </Typography>
 
-        {/* Fecha y hora (solo si es un EventItem) */}
-        {'date' in item && 'time' in item && (
-          <Stack direction="row" alignItems="center" spacing={1} mb={2}>
-            <CalendarMonthTwoToneIcon sx={{ color: '#4caf50' }} />
-            <Stack>
-              <Typography fontWeight={600}>{item.date}</Typography>
-              <Typography variant="body2" color="gray">
-                {item.time}
-              </Typography>
+          {/* Fecha */}
+          {'date' in item && 'time' in item && (
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyItems="center"
+              spacing={2}
+              mb={2}
+              sx={{ mt: 3 }}
+            >
+              <Box
+                sx={{
+                  width: 50,
+                  height: 50,
+                  backgroundColor: theme.palette.darkGray1.main,
+                  borderRadius: 0.1,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <CalendarMonthTwoToneIcon sx={{ color: theme.palette.green.main }} />
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                }}
+              >
+                <Typography variant="body1" sx={{ mb: '-3px' }}>
+                  {item.date}
+                </Typography>
+                <Typography variant="body2" color="gray" sx={{ mt: 0, lineHeight: 1 }}>
+                  {item.time}
+                </Typography>
+              </Box>
             </Stack>
-          </Stack>
-        )}
+          )}
 
-        {/* Ubicación */}
-        <Stack direction="row" alignItems="center" spacing={1} mb={2}>
-          <LocationOnTwoToneIcon sx={{ color: '#4caf50' }} />
-          <Stack>
-            <Typography fontWeight={600}>{item.location}</Typography>
-            <Typography variant="body2" color="gray">
-              {item.address}
+          {/* Ubicación */}
+          <Stack direction="row" alignItems="center" spacing={2} mb={2}>
+            <Box
+              sx={{
+                width: 50,
+                height: 50,
+                backgroundColor: theme.palette.darkGray1.main,
+                borderRadius: 0.1,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <LocationOnTwoToneIcon sx={{ color: theme.palette.green.main }} />
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <Typography variant="body1" sx={{ mt: 0 }}>
+                {item.location}
+              </Typography>
+              <Typography variant="body2" color="gray" sx={{ mt: 0, lineHeight: 1 }}>
+                {item.address}
+              </Typography>
+            </Box>
+          </Stack>
+
+          {/* Descripción con leer más */}
+          <Box mb={2}>
+            <Typography fontSize={'20px'} fontWeight={900}>
+              Descripción
             </Typography>
-          </Stack>
-        </Stack>
+            <Typography variant="body2" color="white">
+              {readMore
+                ? item.description
+                : item.description.slice(0, 150) + (item.description.length > 150 ? '...' : '')}
+            </Typography>
+            {item.description.length > 150 && (
+              <Button
+                onClick={toggleReadMore}
+                sx={{ color: theme.palette.green.main, mt: 1, textTransform: 'none' }}
+              >
+                {readMore ? 'Leer menos' : 'Leer más'}
+              </Button>
+            )}
+          </Box>
 
-        {/* Descripción */}
-        <Box mb={2}>
-          <Typography variant="h6" fontWeight={600}>
-            Descripción
-          </Typography>
-          <Typography variant="body2">{item.description}</Typography>
-        </Box>
+          <Box mb={10}>
+            <Typography fontSize={'20px'} fontWeight={900}>
+              Reseñas
+            </Typography>
+            <Review />
+          </Box>
+        </CardContent>
 
-        {/* Reseñas */}
-        <Box mb={2}>
-          <Typography variant="h6" fontWeight={600}>
-            Reseñas
-          </Typography>
-          <Review />
+        <Box
+          sx={{
+            position: 'absolute',
+            height: '60%',
+            width: '100%',
+            top: 350,
+            right: 0,
+            background: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 2,
+            pointerEvents: 'none',
+          }}
+        >
+          <Box sx={{ pointerEvents: 'auto' }}>
+            <BuyButton item={item} />
+          </Box>
         </Box>
-
-        {/* Botón de compra */}
-        <Box sx={{ mt: 3 }}>
-          <BuyButton item={item} />
-        </Box>
-      </CardContent>
+      </Box>
     </Card>
   );
 };

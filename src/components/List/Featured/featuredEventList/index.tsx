@@ -49,7 +49,6 @@ const FeaturedEventList: React.FC = () => {
         centeredSlides={true}
         slidesPerView="auto"
         navigation
-        loop={true}
         coverflowEffect={{
           rotate: 0,
           stretch: 0,

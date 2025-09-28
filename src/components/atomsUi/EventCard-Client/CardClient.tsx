@@ -58,6 +58,10 @@ const StyledButton = styled(Button)({
 });
 
 const CardClient: React.FC<ClientCardProps> = ({ item }) => {
+  function onViewMore(item: EventItem | ProductItem): void {
+    throw new Error('Function not implemented.');
+  }
+
   return (
     <StyledCard>
       <StyledImg src={item.image} alt={item.name} />
@@ -75,7 +79,12 @@ const CardClient: React.FC<ClientCardProps> = ({ item }) => {
           <CardActions>
             <StyledButton variant="contained">
               Ver detalles
-              <img src={Arrow} alt="icon" style={{ marginLeft: 8 }} onClick={() => onViewMore(item)}/>
+              <img
+                src={Arrow}
+                alt="icon"
+                style={{ marginLeft: 8 }}
+                onClick={() => onViewMore(item)}
+              />
             </StyledButton>{' '}
           </CardActions>
         </Footer>

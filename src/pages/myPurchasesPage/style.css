@@ -30,6 +30,11 @@ body {
   .purchases-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
+    padding: 0 0.1rem;
+  }
+
+  .purchases-grid > * {
+    width: 100%;
   }
 }
 

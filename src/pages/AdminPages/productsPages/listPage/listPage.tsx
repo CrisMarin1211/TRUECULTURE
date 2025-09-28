@@ -77,7 +77,7 @@ const ListProductPage: React.FC = () => {
                 id={product.id}
                 image={product.image}
                 name={product.name}
-                price={$${product.price}}
+                price={`$${product.price}`}
                 stock={product.Stock}
                 other={product.popularity}
                 location={product.location}

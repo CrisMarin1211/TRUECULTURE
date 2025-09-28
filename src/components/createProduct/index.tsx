@@ -66,15 +66,13 @@ const CreateProduct: React.FC = () => {
   const handleSave = () => {
     const stored = localStorage.getItem('products');
     let products: Product[] = stored ? JSON.parse(stored) : [];
-
     if (id) {
       products = products.map((p) => (p.id === id ? product : p));
     } else {
       products.push(product);
     }
-
     localStorage.setItem('products', JSON.stringify(products));
-    navigate('/create-product');
+    navigate('/list-products');
   };
 
   const handleDelete = () => {
@@ -83,19 +81,20 @@ const CreateProduct: React.FC = () => {
     const products: Product[] = JSON.parse(stored);
     const filtered = products.filter((p) => p.id !== product.id);
     localStorage.setItem('products', JSON.stringify(filtered));
-    navigate('/create-product');
+    navigate('/list-products');
   };
 
   return (
     <div className="form-card">
-      <div className="row row-1">
-        <button className="back-btn" onClick={() => navigate('/create-product')}>
+      <div className="row-1">
+        <button className="back-btn" onClick={() => navigate('/list-products')}>
           ←
         </button>
+        <div className="spacer" />
       </div>
 
-      <div className="row row-2">
-        <h4>Detalles del Producto</h4>
+      <div className="row-2">
+        <h4 className="title">Detalles del Producto</h4>
         <div className="actions">
           <button className="btn save-btn" onClick={handleSave}>
             Guardar
@@ -106,121 +105,181 @@ const CreateProduct: React.FC = () => {
         </div>
       </div>
 
-      <div className="row row-3">
+      <div className="row-3">
         <div className="col image-col">
+          <label className="input-label" htmlFor="image">
+            Imagen (URL)
+          </label>
           <input
+            id="image"
             type="text"
             name="image"
-            placeholder="URL de la imagen"
             value={product.image}
             onChange={handleChange}
           />
         </div>
+
         <div className="col details-col">
           <div className="grid-2">
-            <input
-              type="text"
-              name="name"
-              placeholder="Nombre del Producto"
-              value={product.name}
-              onChange={handleChange}
-            />
-            <input
-              type="number"
-              name="Stock"
-              placeholder="Stock"
-              value={product.Stock}
-              onChange={handleChange}
-            />
+            <div>
+              <label className="input-label" htmlFor="name">
+                Nombre del Producto
+              </label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                value={product.name}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label className="input-label" htmlFor="stock">
+                Stock
+              </label>
+              <input
+                id="stock"
+                type="number"
+                name="Stock"
+                value={product.Stock}
+                onChange={handleChange}
+              />
+            </div>
           </div>
+
           <div className="grid-2">
-            <input
-              type="text"
-              name="location"
-              placeholder="Lugar"
-              value={product.location}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="Status"
-              placeholder="Estado"
-              value={product.Status}
-              onChange={handleChange}
-            />
+            <div>
+              <label className="input-label" htmlFor="location">
+                Lugar
+              </label>
+              <input
+                id="location"
+                type="text"
+                name="location"
+                value={product.location}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label className="input-label" htmlFor="status">
+                Estado
+              </label>
+              <input
+                id="status"
+                type="text"
+                name="Status"
+                value={product.Status}
+                onChange={handleChange}
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="row row-4">
+      <div className="row-4">
+        <label className="input-label" htmlFor="description">
+          Descripción del evento
+        </label>
         <textarea
+          id="description"
           name="description"
-          placeholder="Descripción del evento"
           value={product.description}
           onChange={handleChange}
         />
       </div>
 
-      <div className="row row-5 grid-4">
-        <input
-          type="number"
-          name="price"
-          placeholder="Precio"
-          value={product.price}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          name="totalStock"
-          placeholder="Stock Total"
-          value={product.totalStock}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          name="availableStock"
-          placeholder="Stock Disponible"
-          value={product.availableStock}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="popularity"
-          placeholder="Nivel de Ventas"
-          value={product.popularity}
-          onChange={handleChange}
-        />
+      <div className="row-5">
+        <div>
+          <label className="input-label" htmlFor="price">
+            Precio
+          </label>
+          <input
+            id="price"
+            type="number"
+            name="price"
+            value={product.price}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label className="input-label" htmlFor="totalStock">
+            Stock Total
+          </label>
+          <input
+            id="totalStock"
+            type="number"
+            name="totalStock"
+            value={product.totalStock}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label className="input-label" htmlFor="availableStock">
+            Stock Disponible
+          </label>
+          <input
+            id="availableStock"
+            type="number"
+            name="availableStock"
+            value={product.availableStock}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label className="input-label" htmlFor="popularity">
+            Nivel de Ventas
+          </label>
+          <input
+            id="popularity"
+            type="text"
+            name="popularity"
+            value={product.popularity}
+            onChange={handleChange}
+          />
+        </div>
       </div>
 
-      <div className="row row-6 grid-2">
-        <div className="col">
+      <div className="row-6 grid-2">
+        <div>
           <div className="grid-2">
-            <input
-              type="text"
-              name="tags"
-              placeholder="Tags"
-              value={product.tags}
-              onChange={handleChange}
-            />
-            <input
-              type="number"
-              name="UnitsSaled"
-              placeholder="Unidades Vendidas"
-              value={product.UnitsSaled}
-              onChange={handleChange}
-            />
+            <div>
+              <label className="input-label" htmlFor="tags">
+                Tags
+              </label>
+              <input
+                id="tags"
+                type="text"
+                name="tags"
+                value={product.tags}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label className="input-label" htmlFor="unitsSaled">
+                Unidades Vendidas
+              </label>
+              <input
+                id="unitsSaled"
+                type="number"
+                name="UnitsSaled"
+                value={product.UnitsSaled}
+                onChange={handleChange}
+              />
+            </div>
           </div>
+
           <div className="qr-box">
             <img src="/images/qr.png" alt="QR" className="qr-img" />
             <span>Escanea el código QR para pagar fácilmente</span>
           </div>
         </div>
+
         <div className="col">
           <div className="placeholder-box">Contenido futuro</div>
         </div>
       </div>
 
-      <div className="row row-7">
+      <div className="row-7">
         <button className="btn metrics-btn">Ver Métricas</button>
       </div>
     </div>

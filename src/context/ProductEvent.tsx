@@ -12,25 +12,22 @@ export const ProductContext = createContext<ProductContextType | undefined>(unde
 export const ProductProvider = ({ children }: ProductProviderProps) => {
   const [products, setProducts] = useState<ProductItem[]>([]);
 
-  // 🚀 Cargar productos al iniciar
   useEffect(() => {
     const fetchData = async () => {
       const data = await getProducts();
-      console.log('📦 Data de Supabase:', data); // 👈 mira aquí qué campos llegan
+      console.log('📦 Data de Supabase:', data);
       setProducts(data);
     };
     fetchData();
   }, []);
 
-  // ➕ Agregar producto
   const addProduct: ProductContextType['addProduct'] = async (product) => {
     const data = await addProductService(product);
     if (data) {
-      setProducts((prev) => [data[0], ...prev]); // Supabase devuelve array
+      setProducts((prev) => [data[0], ...prev]);
     }
   };
 
-  // 📉 Actualizar stock y reflejarlo en Supabase
   const updateStock: ProductContextType['updateStock'] = async (id, stockTaken) => {
     setProducts((prev) =>
       prev.map((prod) =>
@@ -45,7 +42,6 @@ export const ProductProvider = ({ children }: ProductProviderProps) => {
     }
   };
 
-  // ✏️ Editar producto
   const editProduct: ProductContextType['editProduct'] = async (id, updates) => {
     const data = await updateProduct(id, updates);
     if (data) {
@@ -53,13 +49,11 @@ export const ProductProvider = ({ children }: ProductProviderProps) => {
     }
   };
 
-  // 🗑️ Eliminar producto
   const removeProduct: ProductContextType['removeProduct'] = async (id) => {
     await deleteProduct(id);
     setProducts((prev) => prev.filter((prod) => prod.id !== id));
   };
 
-  // 💾 Guardar como borrador
   const saveProduct: ProductContextType['saveProduct'] = async (product) => {
     const draft = { ...product, isdraft: true };
     const data = await addProductService(draft);

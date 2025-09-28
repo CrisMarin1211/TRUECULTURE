@@ -10,6 +10,8 @@ import RegisterPage from '../pages/registerPage/registerPage';
 import CreateProductPage from '../pages/AdminPages/productsPages/createPage/createPage';
 import ListProductPage from '../pages/AdminPages/productsPages/listPage/listPage';
 import MarketplaceHome from '../pages/MarketplaceHome/MarketplaceHome';
+import CreateEventPage from '../pages/AdminPages/eventsPages/createPage';
+import ListEventPage from '../pages/AdminPages/eventsPages/listPage';
 
 const AppRoutes = () => {
   return (
@@ -19,12 +21,20 @@ const AppRoutes = () => {
         <Route path="/my-purchases" element={<MyPurchasesPage />} />
         <Route path="/my-cart" element={<MyCartPage />} />
         <Route path="/my-coupons" element={<MyCouponsPage />} />
-        <Route path="/DashboardClient" element={<DashboardClient />} />
         <Route path="/my-profile" element={<ProfilePage />} />
+
+        <Route path="/create-product" element={<CreateProductPage />} />
+        <Route path="/edit-product/:id" element={<CreateProductPage />} />
+        <Route path="/list-products" element={<ListProductPage />} />
+
+        <Route path="/create-event" element={<CreateEventPage />} />
+        <Route path="/edit-event/:id" element={<CreateEventPage />} />
+        <Route path="/list-events" element={<ListEventPage />} />
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<RegisterPage />} />
-        <Route path="/create-product" element={<CreateProductPage />} />
-        <Route path="/list-products" element={<ListProductPage />} />
+
+        <Route path="/DashboardClient" element={<DashboardClient />} />
         <Route path="/Marketplacehome" element={<MarketplaceHome />} />
       </Routes>
     </>

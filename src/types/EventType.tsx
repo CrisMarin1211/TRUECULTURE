@@ -6,8 +6,8 @@ export interface EventItem {
   date: string;
   time: string;
   location: string;
-  city: 'Cali, Colombia' | 'Bogotá, Colombia';
   address: string;
+  city: 'Cali, Colombia' | 'Bogotá, Colombia';
   description: string;
   price: number;
   totalSeats: number;

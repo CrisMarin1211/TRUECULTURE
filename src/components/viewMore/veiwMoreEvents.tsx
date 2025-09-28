@@ -2,17 +2,12 @@ import { Card, CardContent, CardMedia, Stack, Typography } from '@mui/material';
 import CalendarMonthTwoToneIcon from '@mui/icons-material/CalendarMonthTwoTone';
 import LocationOnTwoToneIcon from '@mui/icons-material/LocationOnTwoTone';
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
-
 import BuyButton from './buttons/buyButton';
 import Review from './reviewComponent/review';
 import ShareButton from './buttons/shareButton';
-import type { EventItem } from '../../types/EventType';
+import type { ViewMoreProps } from '../../types/ViewMorType';
 
-interface ViewMoreProps {
-  item: EventItem;
-}
-
-const ViewMore = ({ item }: ViewMoreProps) => {
+const veiwMoreEvents = ({ item }: ViewMoreProps) => {
   return (
     <Card>
       <CardContent>
@@ -26,15 +21,6 @@ const ViewMore = ({ item }: ViewMoreProps) => {
 
         <Stack>
           <Typography variant="h5">{item.name}</Typography>
-
-          {/* Fecha y hora */}
-          <Stack direction="row" alignItems="center" spacing={1}>
-            <CalendarMonthTwoToneIcon />
-            <Stack>
-              <Typography>{item.date}</Typography>
-              <Typography>{item.time}</Typography>
-            </Stack>
-          </Stack>
 
           {/* Ubicación */}
           <Stack direction="row" alignItems="center" spacing={1}>
@@ -65,4 +51,4 @@ const ViewMore = ({ item }: ViewMoreProps) => {
   );
 };
 
-export default ViewMore;
+export default veiwMoreEvents;

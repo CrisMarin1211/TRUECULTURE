@@ -6,7 +6,7 @@ export interface EventItem {
   date: string;
   time: string;
   location: string;
-  address: string;
+  address?: string;
   city: 'Cali, Colombia' | 'Bogotá, Colombia';
   description: string;
   price: number;

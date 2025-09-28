@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './listPage.css';
 import AdminProductCard from '../../../../components/adminProductCard';
 import { useNavigate } from 'react-router-dom';
+import SidebarAdmin from '../../../../components/atomsUi/sideBarAdmin';
 
 type Product = {
   id: string;
@@ -28,7 +29,7 @@ const ListProductPage: React.FC = () => {
 
   return (
     <div className="page-container">
-      <aside className="sidebar"></aside>
+      <SidebarAdmin />
       <main className="main-content">
         <div className="header-card">
           <div className="row row-1">
@@ -73,9 +74,10 @@ const ListProductPage: React.FC = () => {
             {products.map((product) => (
               <AdminProductCard
                 key={product.id}
+                id={product.id}
                 image={product.image}
                 name={product.name}
-                price={`$${product.price}`}
+                price={$${product.price}}
                 stock={product.Stock}
                 other={product.popularity}
                 location={product.location}

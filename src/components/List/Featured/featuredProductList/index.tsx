@@ -9,13 +9,16 @@ import 'swiper/css/pagination';
 import { useProduct } from '../../../../context/ProductEvent';
 import FeaturedCard from '../../../atomsUi/featuredCard/index';
 import { CityContext } from '../../../../context/cityContex';
+import { Dialog } from '@mui/material';
+import ViewMore from '../../../viewMore/veiwMore';
 
 const MAX_CARDS = 5;
 
-const FeaturedProducttList: React.FC = () => {
+const FeaturedProductList: React.FC = () => {
   const { products = [] } = useProduct();
   const { city } = useContext(CityContext);
   const [featuredProducts, setFeaturedProducts] = useState<ProductItem[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
 
   useEffect(() => {
     const filtered = products.filter(
@@ -37,35 +40,57 @@ const FeaturedProducttList: React.FC = () => {
   }
 
   return (
-    <Swiper
-      modules={[Navigation, EffectCoverflow]}
-      effect="coverflow"
-      grabCursor={true}
-      centeredSlides={true}
-      slidesPerView="auto" // auto permite que las laterales sean más pequeñas o invisibles
-      navigation
-      loop={true}
-      coverflowEffect={{
-        rotate: 0,
-        stretch: 0,
-        depth: 200,
-        modifier: 1,
-        scale: 0.9, // las slides laterales se ven pequeñas
-        slideShadows: false,
-      }}
-      initialSlide={3} // empieza con la primera centrada
-      style={{ width: '63%' }}
-    >
-      {featuredProducts.map((product) => (
-        <SwiperSlide
-          key={product.id}
-          style={{ width: '385px', height: '450px' }} // 👈 asegura que respete el tamaño de tu card
-        >
-          <FeaturedCard item={product} />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <>
+      <Swiper
+        modules={[Navigation, EffectCoverflow]}
+        effect="coverflow"
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView="auto"
+        navigation
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 200,
+          modifier: 1,
+          scale: 0.9,
+          slideShadows: false,
+        }}
+        initialSlide={3}
+        style={{ width: '63%' }}
+      >
+        {featuredProducts.map((product) => (
+          <SwiperSlide
+            key={product.id}
+            style={{
+              width: '385px',
+              height: '450px',
+              transition: 'transform 0.3s',
+            }}
+          >
+            <FeaturedCard item={product} onViewMore={() => setSelectedProduct(product)} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Modal con overlay */}
+      <Dialog
+        open={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        fullWidth
+        maxWidth="md"
+        BackdropProps={{
+          sx: {
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+          },
+        }}
+      >
+        {selectedProduct && (
+          <ViewMore item={selectedProduct} onClose={() => setSelectedProduct(null)} />
+        )}
+      </Dialog>
+    </>
   );
 };
 
-export default FeaturedProducttList;
+export default FeaturedProductList;

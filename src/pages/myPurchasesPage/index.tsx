@@ -13,7 +13,7 @@ const MyPurchasesPage = () => {
   return (
     <div className="my-purchases-page">
       <Header />
-      <ColoredText text="Mi Carrito " color="#FF0099" />
+      <ColoredText text="Mis compras " color="#FF0099" />
 
       <div className="purchases-grid">
         {products.map((product, index) => (

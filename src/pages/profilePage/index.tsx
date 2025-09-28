@@ -37,15 +37,12 @@ const ProfilePage = () => {
           <div style={{ color: 'white', padding: '1rem' }}>No hay datos de usuario guardados.</div>
         ) : (
           <>
-            {/* Columna izquierda */}
             <div className="profile-left">
               <div className="card">
                 <div className="card-header">
-                  {/* placeholder: aquí puede ir el handler para editar */}
                   <img src="/icons/edit.png" alt="edit" className="edit-icon" />
                 </div>
 
-                {/* Avatar con iniciales */}
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                   <Stack direction="row" spacing={2}>
                     <Avatar
@@ -57,13 +54,11 @@ const ProfilePage = () => {
 
                 <hr className="divider" />
 
-                {/* Nombre y correo dinámicos (SIN mostrar password) */}
                 <h2 className="profile-name">{user.name || 'Usuario'}</h2>
                 <p className="profile-email">{user.email || 'Sin correo'}</p>
               </div>
             </div>
 
-            {/* Columna derecha */}
             <div className="profile-right">
               <div className="card row-1">
                 <div className="row-1-left">
@@ -73,19 +68,22 @@ const ProfilePage = () => {
               </div>
 
               <div className="row-2">
-                <div className="card small-card">
-                  <img src="/images/image1.png" alt="card" className="card-img" />
-                  <div className="card-text">{/* Texto futuro */}</div>
+                <div className="mini-card">
+                  <img src="/images/image1.png" alt="card" className="mini-card-img" />
+                  <div className="mini-card-text">Texto futuro 1</div>
                 </div>
-                <div className="card small-card">
-                  <div className="card-text">{/* Texto futuro */}</div>
+
+                <div className="mini-card">
+                  <div className="mini-card-text">Texto futuro 2</div>
                 </div>
-                <div className="card small-card">
-                  <img src="/images/image2.png" alt="card" className="card-img" />
-                  <div className="card-text">{/* Texto futuro */}</div>
+
+                <div className="mini-card">
+                  <img src="/images/image2.png" alt="card" className="mini-card-img" />
+                  <div className="mini-card-text">Texto futuro 3</div>
                 </div>
-                <div className="card small-card">
-                  <div className="card-text">{/* Texto futuro */}</div>
+
+                <div className="mini-card">
+                  <div className="mini-card-text">Texto futuro 4</div>
                 </div>
               </div>
             </div>

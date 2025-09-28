@@ -22,7 +22,7 @@ const StyledList = styled(List)(({ theme }) => ({
   width: 260,
   height: '95%',
   borderRadius: 16,
-  border: 1px solid ${theme.palette.grayMedium.main},
+  border: `1px solid ${theme.palette.grayMedium.main}`,
   paddingTop: 80,
   position: 'fixed',
   top: '50%',

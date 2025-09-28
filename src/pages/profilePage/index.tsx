@@ -69,7 +69,7 @@ const ProfilePage = () => {
 
               <div className="row-2">
                 <div className="mini-card">
-                  <img src="/images/image1.png" alt="card" className="mini-card-img" />
+                  <img src="/images/image1.png" alt="card" className="mini-card-img image1" />
                   <div className="mini-card-text">Texto futuro 1</div>
                 </div>
 
@@ -78,7 +78,7 @@ const ProfilePage = () => {
                 </div>
 
                 <div className="mini-card">
-                  <img src="/images/image2.png" alt="card" className="mini-card-img" />
+                  <img src="/images/image2.png" alt="card" className="mini-card-img image2" />
                   <div className="mini-card-text">Texto futuro 3</div>
                 </div>
 

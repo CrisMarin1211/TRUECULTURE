@@ -13,8 +13,8 @@ body {
 }
 
 .profile-page {
+  padding: 0rem 3rem;
   color: white;
-  padding: 1.5rem;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -51,6 +51,7 @@ body {
   display: flex;
   justify-content: flex-end;
 }
+
 .edit-icon {
   width: 20px;
   height: 20px;
@@ -78,6 +79,7 @@ body {
   margin: 0.5rem 0;
   text-align: left;
 }
+
 .profile-email {
   font-size: 1rem;
   color: #cccccc;
@@ -105,24 +107,40 @@ body {
   object-fit: cover;
 }
 
-.row-2 {
+.profile-right .row-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   gap: 1rem;
-  flex: 1;
+  width: 100%;
+  align-items: stretch;
 }
 
-.small-card {
-  display: grid;
-  grid-template-columns: auto 1fr;
+.mini-card {
+  background-color: #232323;
+  border: 1px solid #4f4f4f;
+  border-radius: 0.8rem;
+  padding: 0.75rem;
+  display: flex;
   align-items: center;
   gap: 1rem;
+  width: 100%;
+  flex: none;
+  min-height: 88px;
 }
 
-.small-card .card-text {
+.mini-card-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  flex: 0 0 72px;
+}
+
+.mini-card-text {
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  line-height: 1.2;
 }
 
 @media (max-width: 768px) {

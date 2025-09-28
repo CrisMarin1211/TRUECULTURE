@@ -1,23 +1,28 @@
-import { useState } from 'react';
 import './style.css';
 
 type ProductCardProps = {
   image: string;
   title: string;
   description: string;
-  price: string;
+  price: number;
+  quantity: number;
+  onQuantityChange: (newQuantity: number) => void;
 };
 
-const ProductCard = ({ image, title, description, price }: ProductCardProps) => {
-  const [quantity, setQuantity] = useState(1);
-  const [activeButton, setActiveButton] = useState<'plus' | 'minus' | null>(null);
-
+const ProductCard = ({
+  image,
+  title,
+  description,
+  price,
+  quantity,
+  onQuantityChange,
+}: ProductCardProps) => {
   const handleMinus = () => {
-    if (quantity > 1) setQuantity(quantity - 1);
+    if (quantity > 1) onQuantityChange(quantity - 1);
   };
 
   const handlePlus = () => {
-    setQuantity(quantity + 1);
+    onQuantityChange(quantity + 1);
   };
 
   return (
@@ -34,32 +39,16 @@ const ProductCard = ({ image, title, description, price }: ProductCardProps) => 
         <p className="product-description">{description}</p>
 
         <div className="product-footer">
-          <span className="product-price">{price}</span>
+          <span className="product-price">${price}</span>
 
           <div className="product-actions">
-            <button
-              className={`circle-btn ${activeButton === 'minus' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveButton('minus');
-                handleMinus();
-              }}
-              onMouseEnter={() => setActiveButton('minus')}
-              onMouseLeave={() => setActiveButton(null)}
-            >
+            <button className="circle-btn" onClick={handleMinus}>
               -
             </button>
 
             <span className="quantity">{quantity}</span>
 
-            <button
-              className={`circle-btn ${activeButton === 'plus' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveButton('plus');
-                handlePlus();
-              }}
-              onMouseEnter={() => setActiveButton('plus')}
-              onMouseLeave={() => setActiveButton(null)}
-            >
+            <button className="circle-btn" onClick={handlePlus}>
               +
             </button>
           </div>

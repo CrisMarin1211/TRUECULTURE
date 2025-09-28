@@ -3,19 +3,19 @@ export interface ProductItem {
   image: string;
   imageFile?: File | null;
   name: string;
-  Stock: number;
-  Status: 'Activo' | 'No activo';
+  stock: number;
+  status: 'Activo' | 'No activo';
   location: string;
   address?: string;
   city: 'Cali, Colombia' | 'Bogotá, Colombia';
   description: string;
   price: number;
-  totalStock: number;
-  availableStock: number;
+  totalstock: number;
+  availablestock: number;
   popularity: 'Alta demanda' | 'Media demanda' | 'Baja demanda';
   tags: 'Afiches' | 'Pines' | 'Cultural' | 'Moda' | 'Gastronomía';
-  UnitsSaled: number;
-  isDraft?: boolean;
+  unitssaled: number;
+  isdraft?: boolean;
 }
 
 export interface ProductProviderProps {
@@ -24,9 +24,9 @@ export interface ProductProviderProps {
 
 export interface ProductContextType {
   products: ProductItem[];
-  addProduct: (Product: Omit<ProductItem, 'id'>) => void;
+  addProduct: (product: Omit<ProductItem, 'id'>) => void;
   updateStock: (id: string, stockTaken: number) => void;
   editProduct: (id: string, updates: Partial<ProductItem>) => void;
   removeProduct: (id: string) => void;
-  saveProduct: (Product: Omit<ProductItem, 'id'>) => void;
+  saveProduct: (product: Omit<ProductItem, 'id'>) => void;
 }

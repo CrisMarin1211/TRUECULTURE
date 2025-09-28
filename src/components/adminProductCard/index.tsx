@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 
 type AdminProductCardProps = {
+  id: string;
   image: string;
   name: string;
   price: string;
@@ -11,6 +13,7 @@ type AdminProductCardProps = {
 };
 
 const AdminProductCard = ({
+  id,
   image,
   name,
   price,
@@ -19,6 +22,8 @@ const AdminProductCard = ({
   location,
   status,
 }: AdminProductCardProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className="product-card admin">
       <div className="product-img-wrapper">
@@ -56,9 +61,8 @@ const AdminProductCard = ({
       </div>
 
       <div className="product-footer">
-        <button className="btn-view">
-          <img src="/icons/eye.png" alt="Ver" className="btn-icon" />
-          Ver
+        <button className="btn-view" onClick={() => navigate(/edit-product/${id})}>
+          Editar
         </button>
       </div>
     </div>

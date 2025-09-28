@@ -45,6 +45,7 @@ const FeaturedEventList: React.FC = () => {
       centeredSlides={true}
       slidesPerView="auto" // auto permite que las laterales sean más pequeñas o invisibles
       navigation
+      loop={true}
       coverflowEffect={{
         rotate: 0,
         stretch: 0,

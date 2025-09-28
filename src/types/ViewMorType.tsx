@@ -3,5 +3,5 @@ import type { EventItem } from './EventType';
 
 export interface ViewMoreProps {
   item: ProductItem | EventItem;
-  onClose: () => void; // ✅ Agregar esta prop
+  onClose: () => void;
 }

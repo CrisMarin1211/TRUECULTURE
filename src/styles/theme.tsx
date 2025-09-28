@@ -142,5 +142,15 @@ const theme = createTheme({
   shape: {
     borderRadius: 100,
   },
+  components: {
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          borderRadius: 0,
+        },
+      },
+    },
+  },
 });
+
 export default theme;

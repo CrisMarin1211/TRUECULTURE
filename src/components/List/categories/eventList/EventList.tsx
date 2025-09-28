@@ -4,8 +4,7 @@ import CardClient from '../../../atomsUi/EventCard-Client/CardClient';
 import { CityContext } from '../../../../context/cityContex';
 import type { EventItem } from '../../../../types/EventType';
 import { Dialog } from '@mui/material';
-import theme from '../../../../styles/theme';
-import VeiwMoreEvents from '../../../viewMore/veiwMoreEvents';
+import ViewMore from '../../../viewMore/veiwMore';
 
 interface EventListProps {
   tag: EventItem['tags'];
@@ -38,22 +37,13 @@ const EventList: React.FC<EventListProps> = ({ tag }) => {
         onClose={() => setSelectedEvent(null)}
         fullWidth
         maxWidth="md"
-        PaperProps={{
-          sx: {
-            borderRadius: 4,
-            padding: 2,
-            backgroundColor: theme.palette.white.main,
-          },
-        }}
         BackdropProps={{
           sx: {
-            backgroundColor: 'rgba(0, 0, 0, 0.6)', // oscuro con opacidad
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
           },
         }}
       >
-        {selectedEvent && (
-          <VeiwMoreEvents item={selectedEvent} onClose={() => setSelectedEvent(null)} />
-        )}
+        {selectedEvent && <ViewMore item={selectedEvent} onClose={() => setSelectedEvent(null)} />}
       </Dialog>
     </section>
   );

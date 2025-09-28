@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -9,6 +10,7 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import theme from '../../../styles/theme';
 
 interface SideBarProps {
@@ -20,12 +22,16 @@ const StyledList = styled(List)(({ theme }) => ({
   width: 260,
   height: '95%',
   borderRadius: 16,
-  border: `1px solid ${theme.palette.grayMedium.main}`,
+  border: 1px solid ${theme.palette.grayMedium.main},
   paddingTop: 80,
   position: 'fixed',
   top: '50%',
-  left: '10%',
+  left: '50%',
   transform: 'translate(-50%, -50%)',
+  [theme.breakpoints.up('md')]: {
+    left: '2%',
+    transform: 'translate(0, -50%)',
+  },
 }));
 
 const StyledListItem = styled(ListItem)({
@@ -54,22 +60,31 @@ const StyledListItemText = styled(ListItemText)({
   },
 });
 
-const CloseButton = styled('img')({
+const CloseButton = styled('button')({
   position: 'absolute',
   top: 30,
   right: 10,
-  width: 24,
-  height: 24,
+  background: 'none',
+  border: 'none',
+  color: theme.palette.white.main,
+  fontSize: 20,
   cursor: 'pointer',
 });
 
 const SideBar = ({ toggleSidebar }: SideBarProps) => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    toggleSidebar();
+  };
+
   return (
     <StyledList>
-      <CloseButton src="/icons/x.svg" alt="Cerrar menú" onClick={toggleSidebar} />
+      <CloseButton onClick={toggleSidebar}>✕</CloseButton>
 
       <StyledListItem disablePadding>
-        <StyledListItemButton>
+        <StyledListItemButton onClick={() => handleNavigate('/')}>
           <StyledListItemIcon>
             <HomeIcon />
           </StyledListItemIcon>
@@ -78,7 +93,7 @@ const SideBar = ({ toggleSidebar }: SideBarProps) => {
       </StyledListItem>
 
       <StyledListItem disablePadding>
-        <StyledListItemButton>
+        <StyledListItemButton onClick={() => handleNavigate('/Marketplacehome')}>
           <StyledListItemIcon>
             <StorefrontIcon />
           </StyledListItemIcon>
@@ -87,7 +102,7 @@ const SideBar = ({ toggleSidebar }: SideBarProps) => {
       </StyledListItem>
 
       <StyledListItem disablePadding>
-        <StyledListItemButton>
+        <StyledListItemButton onClick={() => handleNavigate('/my-cart')}>
           <StyledListItemIcon>
             <ShoppingCartIcon />
           </StyledListItemIcon>
@@ -96,7 +111,7 @@ const SideBar = ({ toggleSidebar }: SideBarProps) => {
       </StyledListItem>
 
       <StyledListItem disablePadding>
-        <StyledListItemButton>
+        <StyledListItemButton onClick={() => handleNavigate('/my-purchases')}>
           <StyledListItemIcon>
             <ReceiptLongIcon />
           </StyledListItemIcon>
@@ -105,7 +120,16 @@ const SideBar = ({ toggleSidebar }: SideBarProps) => {
       </StyledListItem>
 
       <StyledListItem disablePadding>
-        <StyledListItemButton>
+        <StyledListItemButton onClick={() => handleNavigate('/my-coupons')}>
+          <StyledListItemIcon>
+            <LocalOfferIcon />
+          </StyledListItemIcon>
+          <StyledListItemText primary="Mis cupones" />
+        </StyledListItemButton>
+      </StyledListItem>
+
+      <StyledListItem disablePadding>
+        <StyledListItemButton onClick={() => handleNavigate('/my-profile')}>
           <StyledListItemIcon>
             <AccountCircleIcon />
           </StyledListItemIcon>

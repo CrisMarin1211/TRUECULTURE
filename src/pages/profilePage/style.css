@@ -147,4 +147,9 @@ body {
   .profile-content {
     grid-template-columns: 1fr;
   }
+
+  .profile-right .row-2 {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
 }

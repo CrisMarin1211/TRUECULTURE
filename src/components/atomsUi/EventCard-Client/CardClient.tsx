@@ -11,7 +11,7 @@ import Arrow from '../../../../public/icons/arrow.svg';
 
 interface ClientCardProps {
   item: ProductItem | EventItem;
-  onViewMore: (item: EventItem | ProductItem) => void;
+  onViewMore?: (item: EventItem | ProductItem) => void;
 }
 
 const StyledCard = styled(Card)({
@@ -69,18 +69,15 @@ const CardClient: React.FC<ClientCardProps> = ({ item, onViewMore }) => {
         </Info>
 
         <Footer>
-          <Typography variant="body2" sx={{ color: theme.palette.white.main }}>
-            ${item.price}
-          </Typography>
-          <CardActions>
-            <StyledButton
-              variant="contained"
-              onClick={() => onViewMore(item as EventItem | ProductItem)}
-            >
-              Ver detalles
-              <img src={Arrow} alt="icon" style={{ marginLeft: 8 }} />
-            </StyledButton>{' '}
-          </CardActions>
+          <Typography variant="body2">${item.price}</Typography>
+          {onViewMore && (
+            <CardActions>
+              <StyledButton variant="contained" onClick={() => onViewMore(item)}>
+                Ver detalles
+                <img src={Arrow} alt="icon" style={{ marginLeft: 8 }} />
+              </StyledButton>
+            </CardActions>
+          )}
         </Footer>
       </StyledCardContent>
     </StyledCard>

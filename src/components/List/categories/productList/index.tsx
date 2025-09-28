@@ -1,35 +1,32 @@
 import React, { useContext } from 'react';
 import { useProduct } from '../../../../context/ProductEvent';
 import CardClient from '../../../atomsUi/productCard-Client';
-import type { ProductItem } from '../../../../types/ProductType';
 import { CityContext } from '../../../../context/cityContex';
+import type { ProductItem } from '../../../../types/ProductType';
 
-const TAGS: ProductItem['tags'][] = ['Afiches', 'Pines', 'Cultural', 'Moda', 'Gastronomía'];
+interface ProductListProps {
+  tag: ProductItem['tags'];
+}
 
-const ProductList: React.FC = () => {
+const ProductList: React.FC<ProductListProps> = ({ tag }) => {
   const { products = [] } = useProduct();
   const { city } = useContext(CityContext);
 
-  // Filtramos primero por ciudad
-  const productsByCity = products.filter((product) => product.city === city);
+  const filtered: ProductItem[] = products.filter(
+    (e: ProductItem) => e.tags === tag && e.city === city,
+  );
+
+  if (!filtered.length) return null;
 
   return (
-    <div>
-      {TAGS.map((tag) => {
-        // Para cada tag, filtramos los productos de esa ciudad
-        const filtered = productsByCity.filter((product) => product.tags === tag);
-        if (filtered.length === 0) return null;
-
-        return (
-          <section key={tag}>
-            <h2>{tag}</h2>
-            {filtered.map((item) => (
-              <CardClient key={item.id} item={item} />
-            ))}
-          </section>
-        );
-      })}
-    </div>
+    <section>
+      <h2>{tag}</h2>
+      <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto' }}>
+        {filtered.map((item: ProductItem) => (
+          <CardClient key={item.id} item={item} />
+        ))}
+      </div>
+    </section>
   );
 };
 

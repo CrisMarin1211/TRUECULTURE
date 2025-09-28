@@ -3,7 +3,7 @@ import type { ProductItem } from '../types/ProductType';
 export const mockProducts: ProductItem[] = [
   {
     id: '1',
-    image: '/images/product1.jpg',
+    image: 'https://pbs.twimg.com/media/G15BjiaWgAMWmHM?format=jpg&name=medium',
     imageFile: null,
     name: 'Afiche Festival de Jazz',
     Stock: 50,
@@ -21,7 +21,7 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '2',
-    image: '/images/product2.jpg',
+    image: 'https://pbs.twimg.com/media/G15FRuSW0AALIb5?format=jpg&name=900x900',
     imageFile: null,
     name: 'Pin de Caña de Azúcar',
     Stock: 120,
@@ -57,7 +57,7 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '4',
-    image: '/images/product4.jpg',
+    image: 'https://pbs.twimg.com/media/G15He_nW8AAXggl?format=jpg&name=900x900',
     imageFile: null,
     name: 'Póster Arte Urbano',
     Stock: 75,
@@ -75,7 +75,7 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '5',
-    image: '/images/product5.jpg',
+    image: 'https://pbs.twimg.com/media/G15rDOOWMAAgJeC?format=jpg&name=medium',
     imageFile: null,
     name: 'Pin de Café',
     Stock: 200,
@@ -93,9 +93,9 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '6',
-    image: '/images/product6.jpg',
+    image: 'https://pbs.twimg.com/media/G15uM_rXYAAMIfu?format=jpg&name=medium',
     imageFile: null,
-    name: 'Sombrero Vueltiao Miniatura',
+    name: 'Llavero de Sombrero Vueltiao',
     Stock: 30,
     Status: 'Activo',
     location: 'Centro Histórico',
@@ -111,7 +111,7 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '7',
-    image: '/images/product7.jpg',
+    image: 'https://pbs.twimg.com/media/G15w-04XUAEicN4?format=jpg&name=900x900',
     imageFile: null,
     name: 'Gorra Urbana',
     Stock: 60,
@@ -129,7 +129,7 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '8',
-    image: '/images/product8.jpg',
+    image: 'https://pbs.twimg.com/media/G15zBMYXQAAKlgd?format=jpg&name=900x900',
     imageFile: null,
     name: 'Set de Pines Tropicales',
     Stock: 90,
@@ -147,7 +147,7 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '9',
-    image: '/images/product9.jpg',
+    image: 'https://pbs.twimg.com/media/G150YfOXIAA1TUL?format=jpg&name=900x900',
     imageFile: null,
     name: 'Afiche de Salsa',
     Stock: 10,
@@ -165,9 +165,9 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '10',
-    image: '/images/product10.jpg',
+    image: 'https://pbs.twimg.com/media/G151_0NXwAAkNfM?format=jpg&name=900x900',
     imageFile: null,
-    name: 'Mochila Artesanal',
+    name: 'Bolso Artesanal',
     Stock: 45,
     Status: 'Activo',
     location: 'Mercado de San Alejo',
@@ -183,7 +183,7 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '11',
-    image: '/images/product11.jpg',
+    image: 'https://pbs.twimg.com/media/G156n_DWoAACyKK?format=jpg&name=900x900',
     imageFile: null,
     name: 'Pin de Orquídea',
     Stock: 150,
@@ -201,7 +201,7 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '12',
-    image: '/images/product12.jpg',
+    image: 'https://pbs.twimg.com/media/G16BBFdXsAAUh_I?format=jpg&name=900x900',
     imageFile: null,
     name: 'Sudadera Urbana',
     Stock: 25,
@@ -219,7 +219,7 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '13',
-    image: '/images/product13.jpg',
+    image: 'https://pbs.twimg.com/media/G16HHvbXcAARw4r?format=jpg&name=medium',
     imageFile: null,
     name: 'Caja Degustación de Café',
     Stock: 70,
@@ -237,7 +237,7 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '14',
-    image: '/images/product14.jpg',
+    image: 'https://pbs.twimg.com/media/G16Ix7pWoAARO3w?format=jpg&name=900x900',
     imageFile: null,
     name: 'Pin Edición Especial COP16',
     Stock: 300,
@@ -255,7 +255,7 @@ export const mockProducts: ProductItem[] = [
   },
   {
     id: '15',
-    image: '/images/product15.jpg',
+    image: 'https://pbs.twimg.com/media/G16MV0kWIAAuKYD?format=jpg&name=900x900',
     imageFile: null,
     name: 'Afiche Arte Contemporáneo',
     Stock: 60,

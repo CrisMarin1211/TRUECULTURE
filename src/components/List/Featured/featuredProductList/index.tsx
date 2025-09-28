@@ -5,7 +5,7 @@ import type { ProductItem } from '../../../../types/ProductType';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import './FeaturedEventList.css';
+
 import { useProduct } from '../../../../context/ProductEvent';
 import FeaturedCard from '../../../atomsUi/featuredCard/index';
 import { CityContext } from '../../../../context/cityContex';
@@ -42,18 +42,19 @@ const FeaturedProducttList: React.FC = () => {
       effect="coverflow"
       grabCursor={true}
       centeredSlides={true}
-      slidesPerView="auto"
+      slidesPerView="auto" // auto permite que las laterales sean más pequeñas o invisibles
       navigation
-      initialSlide={3}
+      loop={true}
       coverflowEffect={{
-        rotate: 0, // sin rotación lateral
-        stretch: 0, // separación horizontal
-        depth: 200, // profundidad (perspectiva)
-        modifier: 1, // intensidad del efecto
-        scale: 0.85, // escala de las tarjetas laterales
-        slideShadows: false, // quita sombras si no quieres
+        rotate: 0,
+        stretch: 0,
+        depth: 200,
+        modifier: 1,
+        scale: 0.9, // las slides laterales se ven pequeñas
+        slideShadows: false,
       }}
-      style={{ padding: '5rem', width: '100%' }}
+      initialSlide={3} // empieza con la primera centrada
+      style={{ width: '63%' }}
     >
       {featuredProducts.map((product) => (
         <SwiperSlide

@@ -4,41 +4,33 @@ import Button from '../../atomsUi/button/button';
 import GoogleIcon from '../../../assets/Marca/icon-google.png';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   console.log('Login con:', { email, password });
-  // };
-
   const navigate = useNavigate();
+  const { login, loginWithGoogle } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const storedUser = localStorage.getItem('user');
-    if (!storedUser) {
-      alert('No hay usuarios registrados. Regístrate primero.');
-      return;
-    }
-
-    const { email: storedEmail, password: storedPassword } = JSON.parse(storedUser);
-
-    console.log('Usuario guardado:', { storedEmail, storedPassword });
-    console.log('Usuario intentando loguearse:', { email, password });
-
-    if (email === storedEmail && password === storedPassword) {
-      console.log('Inicio de sesión exitoso');
+    try {
+      await login({ email, password });
       alert('Inicio de sesión exitoso');
-    } else {
-      console.log('Credenciales incorrectas');
+      navigate('/DashboardClient');
+    } catch (error: any) {
+      console.error('Error en login:', error.message);
       alert('Email o contraseña incorrectos');
     }
+  };
 
-    navigate('/DashboardClient');
+  const handleGoogleLogin = async () => {
+    try {
+      await loginWithGoogle();
+    } catch (error: any) {
+      console.error('Error en login con Google:', error.message);
+      alert('No se pudo iniciar sesión con Google');
+    }
   };
 
   return (
@@ -75,9 +67,9 @@ const LoginForm = () => {
         <span className="line"></span>
       </div>
 
-      <button type="button" className="google-btn">
+      <button type="button" className="google-btn" onClick={handleGoogleLogin}>
         <img src={GoogleIcon} alt="Google" className="google-icon" />
-        Regístrate con Google
+        Inicia sesión con Google
       </button>
     </form>
   );

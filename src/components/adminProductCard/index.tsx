@@ -61,7 +61,7 @@ const AdminProductCard = ({
       </div>
 
       <div className="product-footer">
-        <button className="btn-view" onClick={() => navigate(/edit-product/${id})}>
+        <button className="btn-view" onClick={() => navigate(`/edit-product/${id}`)}>
           Editar
         </button>
       </div>

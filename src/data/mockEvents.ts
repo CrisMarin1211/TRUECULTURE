@@ -3,7 +3,7 @@ import type { EventItem } from '../types/EventType';
 export const mockEvents: EventItem[] = [
   {
     id: '1',
-    image: '/images/event1.jpg',
+    image: 'https://pbs.twimg.com/media/G16_inqWcAAKobn?format=jpg&name=900x900',
     imageFile: null,
     name: 'Concierto de Salsa',
     date: '2025-10-15',
@@ -21,7 +21,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '2',
-    image: '/images/event2.jpg',
+    image: 'https://pbs.twimg.com/media/G17BAZVWkAAGfu4?format=jpg&name=900x900',
     imageFile: null,
     name: 'Feria del Libro',
     date: '2025-11-01',
@@ -39,7 +39,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '3',
-    image: '/images/event3.jpg',
+    image: 'https://pbs.twimg.com/media/G17M2kfXkAAdvrT?format=jpg&name=900x900',
     imageFile: null,
     name: 'Festival Gastronómico',
     date: '2025-11-20',

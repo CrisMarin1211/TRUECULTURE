@@ -10,6 +10,9 @@ import { useEvent } from '../../../../context/EventContext';
 import FeaturedCard from '../../../atomsUi/featuredCard';
 import { CityContext } from '../../../../context/cityContex';
 import type { EventItem } from '../../../../types/EventType';
+import { Dialog } from '@mui/material';
+import theme from '../../../../styles/theme';
+import VeiwMoreEvents from '../../../viewMore/veiwMoreEvents';
 
 const MAX_CARDS = 5;
 
@@ -17,6 +20,7 @@ const FeaturedEventList: React.FC = () => {
   const { events = [] } = useEvent();
   const { city } = useContext(CityContext);
   const [featuredEvents, setFeaturedEvents] = useState<EventItem[]>([]);
+  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
 
   useEffect(() => {
     const filtered = events.filter(
@@ -38,38 +42,65 @@ const FeaturedEventList: React.FC = () => {
   }
 
   return (
-    <Swiper
-      modules={[Navigation, EffectCoverflow]}
-      effect="coverflow"
-      grabCursor={true}
-      centeredSlides={true}
-      slidesPerView="auto" // auto permite que las laterales sean más pequeñas o invisibles
-      navigation
-      loop={true}
-      coverflowEffect={{
-        rotate: 0,
-        stretch: 0,
-        depth: 200,
-        modifier: 1,
-        scale: 0.9, // las slides laterales se ven pequeñas
-        slideShadows: false,
-      }}
-      initialSlide={3} // empieza con la primera centrada
-      style={{ width: '63%' }}
-    >
-      {featuredEvents.map((event) => (
-        <SwiperSlide
-          key={event.id}
-          style={{
-            width: '385px',
-            height: '450px',
-            transition: 'transform 0.3s', // animación suave
-          }}
-        >
-          <FeaturedCard item={event} />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <>
+      <Swiper
+        modules={[Navigation, EffectCoverflow]}
+        effect="coverflow"
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView="auto"
+        navigation
+        loop={true}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 200,
+          modifier: 1,
+          scale: 0.9,
+          slideShadows: false,
+        }}
+        initialSlide={3}
+        style={{ width: '63%' }}
+      >
+        {featuredEvents.map((event) => (
+          <SwiperSlide
+            key={event.id}
+            style={{
+              width: '385px',
+              height: '450px',
+              transition: 'transform 0.3s',
+            }}
+          >
+            <FeaturedCard item={event} onViewMore={() => setSelectedEvent(event)} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Modal con overlay */}
+      <Dialog
+        open={!!selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+        fullWidth
+        maxWidth="md"
+        PaperProps={{
+          sx: {
+            borderRadius: 4,
+            padding: 2,
+            backgroundColor: theme.palette.white.main,
+          },
+        }}
+        BackdropProps={{
+          sx: {
+            backgroundColor: 'rgba(0,0,0,0.6)',
+            backdropFilter: 'blur(4px)',
+          },
+        }}
+      >
+        {selectedEvent && (
+          <VeiwMoreEvents item={selectedEvent} onClose={() => setSelectedEvent(null)} />
+        )}
+      </Dialog>
+    </>
   );
 };
 

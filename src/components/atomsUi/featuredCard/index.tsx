@@ -9,6 +9,7 @@ import theme from '../../../styles/theme';
 
 interface FeaturedCardProps {
   item: ProductItem | EventItem;
+  onViewMore?: (item: EventItem | ProductItem) => void;
 }
 
 const StyledCard = styled(Card)({
@@ -86,7 +87,7 @@ const StyledButton = styled(Button)({
   backgroundColor: theme.palette.green.main,
 });
 
-const FeaturedCard: React.FC<FeaturedCardProps> = ({ item }) => {
+const FeaturedCard: React.FC<FeaturedCardProps> = ({ item, onViewMore }) => {
   return (
     <StyledCard>
       <Overlay />
@@ -107,6 +108,7 @@ const FeaturedCard: React.FC<FeaturedCardProps> = ({ item }) => {
       <Footer>
         <StyledButton
           variant="contained"
+          onClick={() => onViewMore?.(item)} // 👈 Safe call
           endIcon={<img src="/icons/arrow.svg" alt="icon" style={{ marginLeft: 8 }} />}
         >
           Ver detalles

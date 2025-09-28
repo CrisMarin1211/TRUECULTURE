@@ -1,5 +1,4 @@
 import { Card, CardContent, CardMedia, Stack, Typography } from '@mui/material';
-import CalendarMonthTwoToneIcon from '@mui/icons-material/CalendarMonthTwoTone';
 import LocationOnTwoToneIcon from '@mui/icons-material/LocationOnTwoTone';
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 import BuyButton from './buttons/buyButton';
@@ -7,7 +6,7 @@ import Review from './reviewComponent/review';
 import ShareButton from './buttons/shareButton';
 import type { ViewMoreProps } from '../../types/ViewMorType';
 
-const veiwMoreEvents = ({ item }: ViewMoreProps) => {
+const VeiwMoreEvents = ({ item }: ViewMoreProps) => {
   return (
     <Card>
       <CardContent>
@@ -51,4 +50,4 @@ const veiwMoreEvents = ({ item }: ViewMoreProps) => {
   );
 };
 
-export default veiwMoreEvents;
+export default VeiwMoreEvents;

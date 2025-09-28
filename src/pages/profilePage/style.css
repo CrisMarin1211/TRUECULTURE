@@ -143,6 +143,15 @@ body {
   line-height: 1.2;
 }
 
+.mini-card-img.image1,
+.mini-card-img.image2 {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  background-color: #232323;
+}
+
 @media (max-width: 768px) {
   .profile-content {
     grid-template-columns: 1fr;
@@ -158,13 +167,6 @@ body {
     padding: 0.5rem;
     min-height: 70px;
     gap: 0.5rem;
-  }
-
-  .mini-card-img.image1,
-  .mini-card-img.image2 {
-    width: 36px;
-    height: 36px;
-    flex: 0 0 auto;
   }
 
   .mini-card-text {

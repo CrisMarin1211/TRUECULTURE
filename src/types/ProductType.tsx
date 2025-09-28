@@ -6,7 +6,7 @@ export interface ProductItem {
   Stock: number;
   Status: 'Activo' | 'No activo';
   location: string;
-  address: string;
+  address?: string;
   city: 'Cali, Colombia' | 'Bogotá, Colombia';
   description: string;
   price: number;

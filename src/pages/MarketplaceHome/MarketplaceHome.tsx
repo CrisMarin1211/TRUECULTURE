@@ -1,26 +1,14 @@
-// import MarketplaceContainer from '../../components/marketplacesComponents/MarketplaceContainer/MarketplaceContainer';
-// const MarketplaceHome = () => {
-//   return (
-//     <div className="marketplace-page">
-//       <MarketplaceContainer />
-//     </div>
-//   );
-// };
-
-// export default MarketplaceHome;
-
-import Header from '../../components/header/index';
-import FeaturesProductList from '../../components/List/Featured/featuredProductList/index';
-import ProductList from '../../components/List/categories/productList/index';
-
-const TAGS = ['Afiches', 'Pines', 'Cultural', 'Moda', 'Gastronomía'];
+import Header from '../../components/header';
+import FeaturedProductList from '../../components/List/Featured/featuredProductList/index';
+import ProductList from '../../components/List/categories/productList';
+const TAGS = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
 
 const MarketplaceHome: React.FC = () => {
   return (
     <>
       <Header />
       <div>
-        <FeaturesProductList />
+        <FeaturedProductList />
       </div>
       {TAGS.map((tag) => (
         <ProductList key={tag} tag={tag as any} />

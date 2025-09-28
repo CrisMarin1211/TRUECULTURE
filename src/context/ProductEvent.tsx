@@ -1,36 +1,71 @@
-import { useContext, useState, createContext } from 'react';
+import { useContext, useState, useEffect, createContext } from 'react';
 import type { ProductItem, ProductProviderProps, ProductContextType } from '../types/ProductType';
-import { mockProducts } from '../data/mockProducts';
+import {
+  getProducts,
+  addProduct as addProductService,
+  updateProduct,
+  deleteProduct,
+} from '../services/products';
 
 export const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
 export const ProductProvider = ({ children }: ProductProviderProps) => {
-  const [products, setProducts] = useState<ProductItem[]>(mockProducts);
+  const [products, setProducts] = useState<ProductItem[]>([]);
 
-  const addProduct: ProductContextType['addProduct'] = (product) => {
-    const newProduct: ProductItem = { id: crypto.randomUUID(), ...product };
-    setProducts((prev) => [newProduct, ...prev]);
+  // 🚀 Cargar productos al iniciar
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getProducts();
+      console.log('📦 Data de Supabase:', data); // 👈 mira aquí qué campos llegan
+      setProducts(data);
+    };
+    fetchData();
+  }, []);
+
+  // ➕ Agregar producto
+  const addProduct: ProductContextType['addProduct'] = async (product) => {
+    const data = await addProductService(product);
+    if (data) {
+      setProducts((prev) => [data[0], ...prev]); // Supabase devuelve array
+    }
   };
 
-  const updateStock: ProductContextType['updateStock'] = (id, stockTaken) => {
+  // 📉 Actualizar stock y reflejarlo en Supabase
+  const updateStock: ProductContextType['updateStock'] = async (id, stockTaken) => {
     setProducts((prev) =>
       prev.map((prod) =>
-        prod.id === id ? { ...prod, availableStock: prod.availableStock - stockTaken } : prod,
+        prod.id === id ? { ...prod, availablestock: prod.availablestock - stockTaken } : prod,
       ),
     );
+
+    const current = products.find((p) => p.id === id);
+    if (current) {
+      const newAvailable = current.availablestock - stockTaken;
+      await updateProduct(id, { availablestock: newAvailable });
+    }
   };
 
-  const editProduct: ProductContextType['editProduct'] = (id, updates) => {
-    setProducts((prev) => prev.map((prod) => (prod.id === id ? { ...prod, ...updates } : prod)));
+  // ✏️ Editar producto
+  const editProduct: ProductContextType['editProduct'] = async (id, updates) => {
+    const data = await updateProduct(id, updates);
+    if (data) {
+      setProducts((prev) => prev.map((prod) => (prod.id === id ? { ...prod, ...updates } : prod)));
+    }
   };
 
-  const removeProduct: ProductContextType['removeProduct'] = (id) => {
+  // 🗑️ Eliminar producto
+  const removeProduct: ProductContextType['removeProduct'] = async (id) => {
+    await deleteProduct(id);
     setProducts((prev) => prev.filter((prod) => prod.id !== id));
   };
 
-  const saveProduct: ProductContextType['saveProduct'] = (product) => {
-    const newProduct: ProductItem = { id: crypto.randomUUID(), ...product, isDraft: true };
-    setProducts((prev) => [newProduct, ...prev]);
+  // 💾 Guardar como borrador
+  const saveProduct: ProductContextType['saveProduct'] = async (product) => {
+    const draft = { ...product, isdraft: true };
+    const data = await addProductService(draft);
+    if (data) {
+      setProducts((prev) => [data[0], ...prev]);
+    }
   };
 
   return (

@@ -84,7 +84,7 @@ const SideBar = ({ toggleSidebar }: SideBarProps) => {
       <CloseButton onClick={toggleSidebar}>✕</CloseButton>
 
       <StyledListItem disablePadding>
-        <StyledListItemButton onClick={() => handleNavigate('/')}>
+        <StyledListItemButton onClick={() => handleNavigate('/DashboardClient')}>
           <StyledListItemIcon>
             <HomeIcon />
           </StyledListItemIcon>

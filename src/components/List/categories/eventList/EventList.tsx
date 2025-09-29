@@ -3,7 +3,7 @@ import { useEvent } from '../../../../context/EventContext';
 import CardClient from '../../../atomsUi/EventCard-Client/CardClient';
 import { CityContext } from '../../../../context/cityContex';
 import type { EventItem } from '../../../../types/EventType';
-import { Dialog, Typography } from '@mui/material';
+import { Dialog, Typography, Box } from '@mui/material';
 import ViewMore from '../../../viewMore/veiwMore';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,9 +22,43 @@ const EventList: React.FC<EventListProps> = ({ tag }) => {
   if (!filtered.length) return null;
 
   return (
-    <section>
-      <h2>{tag}</h2>
-      <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto' }}>
+    <section style={{ marginBottom: '2rem' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '1rem',
+          width: '100%',
+          maxWidth: '1200px',
+          marginX: 2,
+        }}
+      >
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: 900,
+            fontSize: '30px',
+            fontFamily: "'Satoshi', sans-serif",
+          }}
+        >
+          {tag}
+        </Typography>
+
+        <Typography
+          variant="body2"
+          sx={{
+            cursor: 'pointer',
+            color: 'primary.main',
+            fontWeight: 600,
+          }}
+          onClick={() => navigate(`/categories/${city}/${tag}`)}
+        >
+          Ver más
+        </Typography>
+      </Box>
+
+      <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', padding: '0 1rem' }}>
         {filtered.map((item: EventItem) => (
           <CardClient
             key={item.id}
@@ -33,15 +67,6 @@ const EventList: React.FC<EventListProps> = ({ tag }) => {
           />
         ))}
       </div>
-
-      {/* 👇 Typography con navigate */}
-      <Typography
-        variant="body2"
-        sx={{ cursor: 'pointer', marginTop: 1, color: 'primary.main' }}
-        onClick={() => navigate(`/categories/${city}/${tag}`)}
-      >
-        Ver más
-      </Typography>
 
       <Dialog
         open={!!selectedEvent}

@@ -1,7 +1,7 @@
 .product-card {
   display: flex;
   gap: 1rem;
-  width: 90%;
+  width: 100%;
   max-width: 100%;
   height: 130px;
   box-sizing: border-box;

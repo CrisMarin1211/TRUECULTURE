@@ -36,33 +36,34 @@ const MyCartPage = () => {
   const total = Math.max(subtotal - discount, 0);
 
   return (
-    <div className="my-cart-page">
+    <>
       <Header />
-      <ColoredText text="Mi Carrito" color="#99CB36" />
+      <div className="my-cart-page">
+        <ColoredText text="Mi Carrito" color="#99CB36" />
 
-      <div className="coupons-grid">
-        {products.map((product, index) => (
-          <ProductCard
-            key={index}
-            title={product.title}
-            description={product.description}
-            image={product.image}
-            price={product.price}
-            quantity={quantities[index]}
-            onQuantityChange={(q) => handleQuantityChange(index, q)}
+        <div className="coupons-grid">
+          {products.map((product, index) => (
+            <ProductCard
+              key={index}
+              title={product.title}
+              image={product.image}
+              price={product.price}
+              quantity={quantities[index]}
+              onQuantityChange={(q) => handleQuantityChange(index, q)}
+            />
+          ))}
+        </div>
+
+        <div className="checkout-wrapper">
+          <CheckoutSummary
+            subtotal={subtotal}
+            discount={discount}
+            total={total}
+            onApplyCoupon={setAppliedCoupon}
           />
-        ))}
+        </div>
       </div>
-
-      <div className="checkout-wrapper">
-        <CheckoutSummary
-          subtotal={subtotal}
-          discount={discount}
-          total={total}
-          onApplyCoupon={setAppliedCoupon}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 

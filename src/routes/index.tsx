@@ -3,15 +3,16 @@ import HomePage from '../pages/homePage';
 import MyPurchasesPage from '../pages/myPurchasesPage';
 import MyCartPage from '../pages/myCartPage';
 import MyCouponsPage from '../pages/myCouponsPage';
-import DashboardClient from '../pages/ClientsPages/dashboardCliente/DashboardClient';
+import DashboardClient from '../pages/ClientsPages/DashboardCliente/DashboardClient';
 import ProfilePage from '../pages/profilePage';
-import LoginPage from '../pages/loginPage/loginPage';
-import RegisterPage from '../pages/registerPage/registerPage';
+import LoginPage from '../pages/LoginPage/loginPage';
+import RegisterPage from '../pages/RegisterPage/registerPage';
 import CreateProductPage from '../pages/AdminPages/productsPages/createPage/createPage';
 import ListProductPage from '../pages/AdminPages/productsPages/listPage/listPage';
 import MarketplaceHome from '../pages/MarketplaceHome/MarketplaceHome';
 import CreateEventPage from '../pages/AdminPages/eventsPages/createPage';
 import ListEventPage from '../pages/AdminPages/eventsPages/listPage';
+import Categories from '../pages/ClientsPages/categoriesPage/categories';
 
 const AppRoutes = () => {
   return (
@@ -36,6 +37,7 @@ const AppRoutes = () => {
 
         <Route path="/DashboardClient" element={<DashboardClient />} />
         <Route path="/Marketplacehome" element={<MarketplaceHome />} />
+        <Route path="/categories/:city/:tag" element={<Categories />} />
       </Routes>
     </>
   );

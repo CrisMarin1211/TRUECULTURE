@@ -13,6 +13,9 @@ import type { EventItem } from '../../../../types/EventType';
 import { Dialog } from '@mui/material';
 import ViewMore from '../../../viewMore/veiwMore';
 
+import ArrowForwardTwoToneIcon from '@mui/icons-material/ArrowForwardTwoTone';
+import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
+
 const MAX_CARDS = 5;
 
 const FeaturedEventList: React.FC = () => {
@@ -41,14 +44,17 @@ const FeaturedEventList: React.FC = () => {
   }
 
   return (
-    <>
+    <div style={{ position: 'relative' }}>
       <Swiper
         modules={[Navigation, EffectCoverflow]}
         effect="coverflow"
         grabCursor={true}
         centeredSlides={true}
         slidesPerView={3}
-        navigation
+        navigation={{
+          nextEl: '.custom-next',
+          prevEl: '.custom-prev',
+        }}
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
@@ -74,7 +80,13 @@ const FeaturedEventList: React.FC = () => {
         ))}
       </Swiper>
 
-      {/* Modal con overlay */}
+      <div className="custom-prev">
+        <ArrowBackTwoToneIcon fontSize="medium" />
+      </div>
+      <div className="custom-next">
+        <ArrowForwardTwoToneIcon fontSize="medium" />
+      </div>
+
       <Dialog
         open={!!selectedEvent}
         onClose={() => setSelectedEvent(null)}
@@ -88,7 +100,7 @@ const FeaturedEventList: React.FC = () => {
       >
         {selectedEvent && <ViewMore item={selectedEvent} onClose={() => setSelectedEvent(null)} />}
       </Dialog>
-    </>
+    </div>
   );
 };
 

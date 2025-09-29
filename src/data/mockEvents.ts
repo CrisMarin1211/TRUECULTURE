@@ -57,7 +57,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '4',
-    image: '/images/event4.jpg',
+    image: 'https://pbs.twimg.com/media/G191ogRWgAAhsZ7?format=jpg&name=900x900',
     imageFile: null,
     name: 'Teatro Infantil: El Mago',
     date: '2025-10-28',
@@ -75,7 +75,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '5',
-    image: '/images/event5.jpg',
+    image: 'https://pbs.twimg.com/media/G192n8XXIAEQLMu?format=jpg&name=900x900',
     imageFile: null,
     name: 'Cine al Parque',
     date: '2025-10-30',
@@ -93,7 +93,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '6',
-    image: '/images/event6.jpg',
+    image: 'https://pbs.twimg.com/media/G193khuX0AA0yya?format=jpg&name=900x900',
     imageFile: null,
     name: 'Noche de Comedia',
     date: '2025-12-05',
@@ -111,7 +111,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '7',
-    image: '/images/event7.jpg',
+    image: 'https://pbs.twimg.com/media/G194p9xWkAAK7Un?format=jpg&name=900x900',
     imageFile: null,
     name: 'Concierto Rock Alternativo',
     date: '2025-11-22',
@@ -129,7 +129,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '8',
-    image: '/images/event8.jpg',
+    image: 'https://pbs.twimg.com/media/G197aymWEAAK376?format=jpg&name=900x900',
     imageFile: null,
     name: 'Exposición de Arte Contemporáneo',
     date: '2025-11-10',
@@ -147,7 +147,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '9',
-    image: '/images/event9.jpg',
+    image: 'https://pbs.twimg.com/media/G19-MHdWAAACTvq?format=jpg&name=900x900',
     imageFile: null,
     name: 'Carrera 10K',
     date: '2025-12-01',
@@ -165,7 +165,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '10',
-    image: '/images/event10.jpg',
+    image: 'https://pbs.twimg.com/media/G1-ADFAWYAANnt1?format=jpg&name=900x900',
     imageFile: null,
     name: 'Festival de Comida Rápida',
     date: '2025-12-12',
@@ -183,7 +183,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '11',
-    image: '/images/event11.jpg',
+    image: 'https://pbs.twimg.com/media/G1-A3G2XYAAJDP1?format=jpg&name=900x900',
     imageFile: null,
     name: 'Festival de Jazz',
     date: '2025-11-15',
@@ -201,7 +201,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '12',
-    image: '/images/event12.jpg',
+    image: 'https://pbs.twimg.com/media/G1-C5FNXgAAqShK?format=jpg&name=900x900',
     imageFile: null,
     name: 'Picnic Familiar',
     date: '2025-10-27',
@@ -219,7 +219,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '13',
-    image: '/images/event13.jpg',
+    image: 'https://pbs.twimg.com/media/G1-DIY7WkAAWQMX?format=jpg&name=900x900',
     imageFile: null,
     name: 'Noche Electrónica',
     date: '2025-12-18',
@@ -237,7 +237,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '14',
-    image: '/images/event14.jpg',
+    image: 'https://pbs.twimg.com/media/G1-IYjkWwAAW3NN?format=jpg&name=900x900',
     imageFile: null,
     name: 'Festival de Cerveza Artesanal',
     date: '2025-11-29',
@@ -255,7 +255,7 @@ export const mockEvents: EventItem[] = [
   },
   {
     id: '15',
-    image: '/images/event15.jpg',
+    image: 'https://pbs.twimg.com/media/G1-NZyQWYAA4YZN?format=jpg&name=medium',
     imageFile: null,
     name: 'Taller de Fotografía',
     date: '2025-11-05',

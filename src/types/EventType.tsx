@@ -1,7 +1,7 @@
 export interface EventItem {
   id: string;
   image: string;
-  imageFile?: File | null;
+  imagefile?: File | null;
   name: string;
   date: string;
   time: string;
@@ -10,12 +10,12 @@ export interface EventItem {
   city: 'Cali, Colombia' | 'Bogotá, Colombia';
   description: string;
   price: number;
-  totalSeats: number;
-  availableSeats: number;
+  totalseats: number;
+  availableseats: number;
   popularity: 'Alta' | 'Media' | 'Baja';
   tags: 'Musica' | 'Cultural' | 'Familiar' | 'Diversion' | 'Gastronomia';
-  expectedAttendance: number;
-  isDraft?: boolean;
+  expectedattendance: number;
+  isdraft?: boolean;
 }
 
 export interface EventProviderProps {

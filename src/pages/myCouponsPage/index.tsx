@@ -1,5 +1,4 @@
 import ColoredText from '../../components/coloredText';
-
 import Header from '../../components/header';
 import CouponCard from '../../components/couponCard';
 import './style.css';
@@ -16,7 +15,6 @@ const MyCouponsPage = () => {
             key={index}
             title={coupon.title}
             description={coupon.description}
-            value={coupon.value}
             code={coupon.code}
           />
         ))}

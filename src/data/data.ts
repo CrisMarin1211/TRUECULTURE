@@ -32,28 +32,24 @@ export const coupons = [
     title: 'Cupón 15%',
     description: 'Aplica para tu próxima compra',
     type: 'percent',
-    value: 15,
     code: 'MAV15',
   },
   {
     title: 'Cupón 20%',
     description: 'Descuento en productos seleccionados',
     type: 'percent',
-    value: 20,
     code: 'BSC24',
   },
   {
     title: 'Cupón $10.000',
     description: 'Oferta especial',
     type: 'fixed',
-    value: 10000,
     code: 'XWD05',
   },
   {
     title: 'Cupón 5%',
     description: 'Válido este mes',
     type: 'percent',
-    value: 5,
     code: 'EVE47',
   },
 ];

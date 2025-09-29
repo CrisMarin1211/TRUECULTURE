@@ -3,20 +3,12 @@ import './style.css';
 type ProductCardProps = {
   image: string;
   title: string;
-  description: string;
   price: number;
   quantity: number;
   onQuantityChange: (newQuantity: number) => void;
 };
 
-const ProductCard = ({
-  image,
-  title,
-  description,
-  price,
-  quantity,
-  onQuantityChange,
-}: ProductCardProps) => {
+const ProductCard = ({ image, title, price, quantity, onQuantityChange }: ProductCardProps) => {
   const handleMinus = () => {
     if (quantity > 1) onQuantityChange(quantity - 1);
   };
@@ -35,8 +27,6 @@ const ProductCard = ({
         <div className="product-header">
           <h3 className="product-title">{title}</h3>
         </div>
-
-        <p className="product-description">{description}</p>
 
         <div className="product-footer">
           <span className="product-price">${price}</span>

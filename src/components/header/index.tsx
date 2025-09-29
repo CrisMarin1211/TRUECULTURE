@@ -35,6 +35,7 @@ const HeaderContainer = styled('header')({
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
+  padding: 2,
 });
 
 const Header = () => {
@@ -49,7 +50,7 @@ const Header = () => {
           direction="row"
           alignItems="center"
           justifyContent="space-between"
-          sx={{ width: '100%', position: 'relative', height: '100px' }}
+          sx={{ width: '100%', position: 'relative', height: '100px', padding: 3 }}
         >
           <MenuOutlinedIcon
             onClick={toggleSidebar}
@@ -93,7 +94,7 @@ const Header = () => {
           </Stack>
         </Stack>
 
-        <Stack direction="row" justifyContent="flex-end" sx={{ width: '100%' }}>
+        <Stack direction="row" justifyContent="flex-end" sx={{ width: '100%', paddingInline: 3 }}>
           <CurrentLocation />
         </Stack>
       </HeaderContainer>

@@ -11,19 +11,21 @@ import './index.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { AuthProvider } from './context/AuthContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <CityProvider>
-        <EventProvider>
-          <ProductProvider>
-            {' '}
-            <App />
-          </ProductProvider>
-        </EventProvider>
-      </CityProvider>
+      <AuthProvider>
+        <CityProvider>
+          <EventProvider>
+            <ProductProvider>
+              <App />
+            </ProductProvider>
+          </EventProvider>
+        </CityProvider>
+      </AuthProvider>
     </ThemeProvider>
   </StrictMode>,
 );

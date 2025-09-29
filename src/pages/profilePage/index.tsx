@@ -3,30 +3,37 @@ import Header from '../../components/header';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { stringAvatar } from '../../utils/avatarHelper';
+import { supabase } from '../../lib/supabaseClient';
 import './style.css';
 
 type StoredUser = {
   name?: string;
   email?: string;
-  password?: string;
 };
 
 const ProfilePage = () => {
   const [user, setUser] = useState<StoredUser | null>(null);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      try {
-        const parsed: StoredUser = JSON.parse(storedUser);
-        setUser(parsed);
-      } catch (err) {
-        console.error('Error parsing user from localStorage', err);
-        setUser(null);
+    const fetchUser = async () => {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+      if (error) {
+        console.error('Error fetching user', error);
+        return;
       }
-    } else {
-      setUser(null);
-    }
+
+      if (user) {
+        setUser({
+          name: user.user_metadata.full_name || '',
+          email: user.email || '',
+        });
+      }
+    };
+
+    fetchUser();
   }, []);
 
   return (
@@ -34,7 +41,9 @@ const ProfilePage = () => {
       <Header />
       <div className="profile-content">
         {!user ? (
-          <div style={{ color: 'white', padding: '1rem' }}>No hay datos de usuario guardados.</div>
+          <div style={{ color: 'white', padding: '1rem' }}>
+            No hay datos de usuario disponibles.
+          </div>
         ) : (
           <>
             <div className="profile-left">
@@ -42,7 +51,6 @@ const ProfilePage = () => {
                 <div className="card-header">
                   <img src="/icons/edit.png" alt="edit" className="edit-icon" />
                 </div>
-
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                   <Stack direction="row" spacing={2}>
                     <Avatar
@@ -51,9 +59,7 @@ const ProfilePage = () => {
                     />
                   </Stack>
                 </div>
-
                 <hr className="divider" />
-
                 <h2 className="profile-name">{user.name || 'Usuario'}</h2>
                 <p className="profile-email">{user.email || 'Sin correo'}</p>
               </div>

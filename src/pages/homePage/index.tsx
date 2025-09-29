@@ -1,16 +1,81 @@
+import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './style.css';
 
 const HomePage = () => {
   const navigate = useNavigate();
+
   const goToSignUp = () => navigate('/signup');
+  const goToLogin = () => navigate('/login');
+
+  const slides = [
+    {
+      image: '/images/background-home.png',
+      headline: (
+        <>
+          Vive
+          <br /> experiencias
+          <br /> únicas
+        </>
+      ),
+      subtext: (
+        <>
+          Gana logros, reseña eventos y apoya a
+          <br /> emprendedores locales.
+        </>
+      ),
+    },
+    {
+      image: '/images/background-home-tambor.png',
+      headline: (
+        <>
+          Explora
+          <br /> Cultura
+        </>
+      ),
+      subtext: (
+        <>
+          Música, gastronomía, ferias,
+          <br /> artes y mucho más.
+        </>
+      ),
+    },
+    {
+      image: '/images/background-home-mujeres.png',
+      headline: (
+        <>
+          Compra
+          <br /> fácil y seguro
+        </>
+      ),
+      subtext: (
+        <>
+          Gana logros, reseñas, eventos y apoya a
+          <br /> emprendedores locales
+        </>
+      ),
+    },
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setCurrent((c) => (c + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, [slides.length]);
+
+  const backgroundStyle = {
+    backgroundImage: `url(${slides[current].image})`,
+  };
 
   return (
-    <div className="home-page">
+    <div className="home-page" style={backgroundStyle}>
       <header className="header">
         <img src="/images/logo.png" alt="Logo" className="logo" />
         <div className="header-right">
-          <Link to="/" className="admin-link">
+          <Link to="/login" className="admin-link">
             Administrador
           </Link>
           <button onClick={goToSignUp} className="signup-btn">
@@ -22,11 +87,11 @@ const HomePage = () => {
       <div className="footer-content">
         <div className="footer-left">
           <span className="brand-name">TrueCulture</span>
-          <span className="headline">Vive experiencias únicas</span>
-          <span className="subtext">
-            Gana logros, reseña eventos y apoya a emprendedores locales
-          </span>
-          <button className="start-btn">Comenzar</button>
+          <span className="headline">{slides[current].headline}</span>
+          <span className="subtext">{slides[current].subtext}</span>
+          <button onClick={goToLogin} className="start-btn">
+            Comenzar
+          </button>
         </div>
 
         <div className="footer-right">

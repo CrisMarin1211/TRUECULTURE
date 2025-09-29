@@ -15,7 +15,7 @@ interface ClientCardProps {
 }
 
 const StyledCard = styled(Card)({
-  width: '485px',
+  width: '385px',
   height: '330px',
   position: 'relative',
   backgroundColor: theme.palette.darkGray1.main,
@@ -28,22 +28,30 @@ const StyledCard = styled(Card)({
 
 const StyledImg = styled('img')({
   width: '100%',
-  height: '260px',
+  height: '180px',
   objectFit: 'cover',
+  flexShrink: 0,
 });
 
 const StyledCardContent = styled(CardContent)({
   flex: 1,
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'space-between',
+  padding: '12px 16px',
 });
 
 const Info = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   gap: 4,
+  overflow: 'hidden',
 });
-
+const Title = styled(Typography)({
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+});
 const Footer = styled('div')({
   display: 'flex',
   justifyContent: 'space-between',
@@ -64,12 +72,18 @@ const CardClient: React.FC<ClientCardProps> = ({ item, onViewMore }) => {
       <StyledCardContent>
         <Info>
           <Typography variant="subtitle1">{item.location}</Typography>
-          <Typography variant="h6">{item.name}</Typography>
-          {'date' in item && item.date && <Typography variant="subtitle2">{item.date}</Typography>}
+          <Title variant="h6">{item.name}</Title>
+          {'date' in item && item.date && (
+            <Typography variant="subtitle2" fontWeight={900}>
+              {item.date}
+            </Typography>
+          )}
         </Info>
 
         <Footer>
-          <Typography variant="body2">${item.price}</Typography>
+          <Typography variant="body2" color="white" fontWeight={400}>
+            ${item.price}
+          </Typography>
           {onViewMore && (
             <CardActions>
               <StyledButton variant="contained" onClick={() => onViewMore(item)}>

@@ -24,7 +24,7 @@ export const EventProvider = ({ children }: EventProviderProps) => {
   const addEvent: EventContextType['addEvent'] = async (event) => {
     const data = await addEventService(event);
     if (data && data.length > 0) {
-      setEvents((prev) => [data[0], ...prev]); // data[0] ya trae id de Supabase
+      setEvents((prev) => [data[0], ...prev]);
     }
   };
 
@@ -42,7 +42,6 @@ export const EventProvider = ({ children }: EventProviderProps) => {
     }
   };
 
-  // ✏️ Editar evento
   const editEvent: EventContextType['editEvent'] = async (id, updates) => {
     const data = await updateEvent(id, updates);
     if (data && data.length > 0) {
@@ -50,18 +49,16 @@ export const EventProvider = ({ children }: EventProviderProps) => {
     }
   };
 
-  // 🗑️ Eliminar evento
   const removeEvent: EventContextType['removeEvent'] = async (id) => {
     await deleteEvent(id);
     setEvents((prev) => prev.filter((ev) => ev.id !== id));
   };
 
-  // 💾 Guardar borrador
   const saveEvent: EventContextType['saveEvent'] = async (event) => {
-    const draft = { ...event, isdraft: true }; // sin id
+    const draft = { ...event, isdraft: true };
     const data = await addEventService(draft);
     if (data && data.length > 0) {
-      setEvents((prev) => [data[0], ...prev]); // Supabase devuelve con id
+      setEvents((prev) => [data[0], ...prev]);
     }
   };
 

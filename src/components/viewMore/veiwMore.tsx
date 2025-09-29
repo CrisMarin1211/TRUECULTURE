@@ -17,11 +17,15 @@ import ShareButton from './buttons/shareButton';
 import { useState } from 'react';
 import type { ViewMoreProps } from '../../types/ViewMorType';
 import theme from '../../styles/theme';
+import { useNavigate } from 'react-router-dom';
 
 const ViewMore = ({ item, onClose }: ViewMoreProps) => {
   const [readMore, setReadMore] = useState(false);
   const toggleReadMore = () => setReadMore(!readMore);
-
+  const navigate = useNavigate();
+  const handleBuy = () => {
+    navigate('/my-cart', { state: { item } });
+  };
   return (
     <Card
       sx={{
@@ -83,7 +87,6 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
             {item.name}
           </Typography>
 
-          {/* Fecha */}
           {'date' in item && 'time' in item && (
             <Stack
               direction="row"
@@ -124,7 +127,6 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
             </Stack>
           )}
 
-          {/* Ubicación */}
           <Stack direction="row" alignItems="center" spacing={2} mb={2}>
             <Box
               sx={{
@@ -149,7 +151,6 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
             </Box>
           </Stack>
 
-          {/* Descripción con leer más */}
           <Box mb={2}>
             <Typography fontSize={'20px'} fontWeight={900}>
               Descripción
@@ -193,7 +194,7 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
           }}
         >
           <Box sx={{ pointerEvents: 'auto' }}>
-            <BuyButton item={item} />
+            <BuyButton item={item} onClick={handleBuy} />
           </Box>
         </Box>
       </Box>

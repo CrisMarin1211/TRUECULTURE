@@ -5,6 +5,7 @@ type ProductCardProps = {
   title: string;
   price: number;
   quantity: number;
+  value?: number;
   onQuantityChange: (newQuantity: number) => void;
 };
 

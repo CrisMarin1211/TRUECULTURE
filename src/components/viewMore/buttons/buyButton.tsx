@@ -6,11 +6,13 @@ import theme from '../../../styles/theme';
 
 interface BuyButtonProps {
   item: EventItem | ProductItem;
+  onClick?: () => void;
 }
 
-const BuyButton = ({ item }: BuyButtonProps) => {
+const BuyButton = ({ item, onClick }: BuyButtonProps) => {
   return (
     <Button
+      onClick={onClick}
       variant="contained"
       sx={{
         display: 'flex',

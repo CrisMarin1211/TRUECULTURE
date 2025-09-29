@@ -24,6 +24,7 @@ const HomePage = () => {
           <br /> emprendedores locales.
         </>
       ),
+      thumbs: ['/images/home1.png', '/images/home2.png', '/images/home3.png'],
     },
     {
       image: '/images/background-home-tambor.png',
@@ -39,6 +40,7 @@ const HomePage = () => {
           <br /> artes y mucho más.
         </>
       ),
+      thumbs: ['/images/home2.png', '/images/home3.png', '/images/home1.png'],
     },
     {
       image: '/images/background-home-mujeres.png',
@@ -54,17 +56,29 @@ const HomePage = () => {
           <br /> emprendedores locales
         </>
       ),
+      thumbs: ['/images/home3.png', '/images/home1.png', '/images/home2.png'],
     },
   ];
 
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
+    slides.forEach((s) => {
+      const img = new Image();
+      img.src = s.image;
+      (s.thumbs || []).forEach((t) => {
+        const tt = new Image();
+        tt.src = t;
+      });
+    });
+
     const id = setInterval(() => {
       setCurrent((c) => (c + 1) % slides.length);
-    }, 4000);
+    }, 2000);
+
     return () => clearInterval(id);
-  }, [slides.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const backgroundStyle = {
     backgroundImage: `url(${slides[current].image})`,
@@ -95,9 +109,9 @@ const HomePage = () => {
         </div>
 
         <div className="footer-right">
-          <img src="/images/home1.png" alt="img1" className="footer-img" />
-          <img src="/images/home2.png" alt="img2" className="footer-img" />
-          <img src="/images/home3.png" alt="img3" className="footer-img" />
+          {slides[current].thumbs.map((thumb, i) => (
+            <img key={i} src={thumb} alt={`thumb-${i}`} className="footer-img" />
+          ))}
         </div>
       </div>
     </div>

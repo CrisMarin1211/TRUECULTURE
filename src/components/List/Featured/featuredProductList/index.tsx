@@ -56,7 +56,7 @@ const FeaturedProductList: React.FC = () => {
           scale: 0.9,
           slideShadows: false,
         }}
-        initialSlide={3}
+        initialSlide={2}
         style={{ width: '63%' }}
       >
         {featuredProducts.map((product) => (
@@ -73,7 +73,6 @@ const FeaturedProductList: React.FC = () => {
         ))}
       </Swiper>
 
-      {/* Modal con overlay */}
       <Dialog
         open={!!selectedProduct}
         onClose={() => setSelectedProduct(null)}

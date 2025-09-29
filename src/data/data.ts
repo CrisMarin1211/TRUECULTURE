@@ -46,7 +46,7 @@ export const coupons = [
     title: 'Cupón $10.000',
     description: 'Oferta especial',
     type: 'fixed',
-    value:10,
+    value: 10,
     code: 'XWD05',
   },
   {

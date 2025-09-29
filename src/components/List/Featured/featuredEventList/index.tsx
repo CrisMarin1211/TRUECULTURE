@@ -47,18 +47,18 @@ const FeaturedEventList: React.FC = () => {
         effect="coverflow"
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView="auto"
+        slidesPerView={3}
         navigation
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
           depth: 200,
           modifier: 1,
-          scale: 0.9,
+          scale: 1,
           slideShadows: false,
         }}
-        initialSlide={3}
-        style={{ width: '63%' }}
+        initialSlide={featuredEvents.length > 0 ? Math.floor(featuredEvents.length / 2) : 0}
+        style={{ width: '80%' }}
       >
         {featuredEvents.map((event) => (
           <SwiperSlide

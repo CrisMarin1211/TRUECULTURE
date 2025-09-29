@@ -46,7 +46,7 @@ const FeaturedProductList: React.FC = () => {
         effect="coverflow"
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView="auto"
+        slidesPerView={3}
         navigation
         coverflowEffect={{
           rotate: 0,
@@ -56,7 +56,7 @@ const FeaturedProductList: React.FC = () => {
           scale: 0.9,
           slideShadows: false,
         }}
-        initialSlide={2}
+        initialSlide={featuredProducts.length > 0 ? Math.floor(featuredProducts.length / 2) : 0}
         style={{ width: '63%' }}
       >
         {featuredProducts.map((product) => (

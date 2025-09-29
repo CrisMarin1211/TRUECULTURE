@@ -5,12 +5,16 @@ import type { ProductItem } from '../../../../types/ProductType';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import './style.css';
 
 import { useProduct } from '../../../../context/ProductEvent';
 import FeaturedCard from '../../../atomsUi/featuredCard/index';
 import { CityContext } from '../../../../context/cityContex';
 import { Dialog } from '@mui/material';
 import ViewMore from '../../../viewMore/veiwMore';
+
+import ArrowForwardTwoToneIcon from '@mui/icons-material/ArrowForwardTwoTone';
+import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
 
 const MAX_CARDS = 5;
 
@@ -40,24 +44,27 @@ const FeaturedProductList: React.FC = () => {
   }
 
   return (
-    <>
+    <div style={{ position: 'relative' }}>
       <Swiper
         modules={[Navigation, EffectCoverflow]}
         effect="coverflow"
         grabCursor={true}
         centeredSlides={true}
         slidesPerView={3}
-        navigation
+        navigation={{
+          nextEl: '.custom-next',
+          prevEl: '.custom-prev',
+        }}
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
           depth: 200,
           modifier: 1,
-          scale: 0.9,
+          scale: 1,
           slideShadows: false,
         }}
         initialSlide={featuredProducts.length > 0 ? Math.floor(featuredProducts.length / 2) : 0}
-        style={{ width: '63%' }}
+        style={{ width: '80%' }}
       >
         {featuredProducts.map((product) => (
           <SwiperSlide
@@ -72,6 +79,14 @@ const FeaturedProductList: React.FC = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      {/* Botones custom para navegación */}
+      <div className="custom-prev">
+        <ArrowBackTwoToneIcon fontSize="medium" />
+      </div>
+      <div className="custom-next">
+        <ArrowForwardTwoToneIcon fontSize="medium" />
+      </div>
 
       <Dialog
         open={!!selectedProduct}
@@ -88,7 +103,7 @@ const FeaturedProductList: React.FC = () => {
           <ViewMore item={selectedProduct} onClose={() => setSelectedProduct(null)} />
         )}
       </Dialog>
-    </>
+    </div>
   );
 };
 

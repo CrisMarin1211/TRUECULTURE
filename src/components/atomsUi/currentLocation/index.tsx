@@ -72,7 +72,7 @@ const CurrentLocation = () => {
     <CurrentLocationContainer sx={{ cursor: 'pointer' }}>
       <LocationGrid onClick={() => setIsOpen((prev) => !prev)}>
         <FirstRow>
-          Current Location
+          Ubicación Actual
           <ArrowDropDownIcon />{' '}
         </FirstRow>
         <SecondRow>{city}</SecondRow>

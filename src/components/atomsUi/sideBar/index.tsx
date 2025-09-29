@@ -12,6 +12,8 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import theme from '../../../styles/theme';
+import logo from '../../../../public/images/logo.png';
+import LogOutButton from '../logOutButton/LogOutButton';
 
 interface SideBarProps {
   toggleSidebar: () => void;
@@ -81,6 +83,11 @@ const SideBar = ({ toggleSidebar }: SideBarProps) => {
 
   return (
     <StyledList>
+      <img
+        src={logo}
+        alt="Logo"
+        style={{ width: '80px', height: 'auto', margin: '0 auto 1rem auto', display: 'block' }}
+      />
       <CloseButton onClick={toggleSidebar}>✕</CloseButton>
 
       <StyledListItem disablePadding>
@@ -136,6 +143,17 @@ const SideBar = ({ toggleSidebar }: SideBarProps) => {
           <StyledListItemText primary="Perfil" />
         </StyledListItemButton>
       </StyledListItem>
+
+      <div
+        style={{
+          marginTop: '3rem',
+          display: 'flex',
+          justifyContent: 'center',
+          paddingBottom: '1rem',
+        }}
+      >
+        <LogOutButton />
+      </div>
     </StyledList>
   );
 };

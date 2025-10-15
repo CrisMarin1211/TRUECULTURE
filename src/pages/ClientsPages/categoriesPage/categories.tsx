@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEvent } from '../../../context/EventContext';
+import { useProduct } from '../../../context/ProductEvent';
 import { CityContext } from '../../../context/cityContex';
 import { useContext, useState } from 'react';
 import CardClient from '../../../components/atomsUi/EventCard-Client/CardClient';
@@ -13,16 +14,20 @@ const Categories = () => {
   const { tag } = useParams<{ tag: string }>();
   const { city } = useContext(CityContext);
   const { events = [] } = useEvent();
+  const { products = [] } = useProduct();
 
-  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<EventItem | ProductItem | null>(null);
 
-  const filtered = events.filter((e: EventItem | ProductItem) => e.city === city && e.tags === tag);
+  const combinedItems = [...events, ...products];
+
+  const filtered = combinedItems.filter(
+    (item: EventItem | ProductItem) => item.city === city && item.tags === tag,
+  );
 
   return (
     <>
       <Header />
       <section style={{ padding: '2rem 0' }}>
-        {/* Título */}
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
           <h1
             style={{
@@ -30,20 +35,14 @@ const Categories = () => {
               fontWeight: 900,
               fontSize: '40px',
               textAlign: 'center',
+              textTransform: 'capitalize',
             }}
           >
             {tag}
           </h1>
         </div>
 
-        {/* Cards */}
-        <div
-          style={{
-            margin: '2rem auto',
-            width: '90%',
-            maxWidth: '1200px',
-          }}
-        >
+        <div style={{ margin: '2rem auto', width: '90%', maxWidth: '1200px' }}>
           {filtered.length ? (
             <div
               style={{
@@ -53,34 +52,25 @@ const Categories = () => {
                 justifyContent: 'center',
               }}
             >
-              {filtered.map((item: EventItem) => (
-                <CardClient
-                  key={item.id}
-                  item={item}
-                  onViewMore={(event) => setSelectedEvent(event as EventItem)}
-                />
+              {filtered.map((item) => (
+                <CardClient key={item.id} item={item} onViewMore={(i) => setSelectedItem(i)} />
               ))}
             </div>
           ) : (
-            <p style={{ textAlign: 'center' }}>No hay eventos en esta categoría.</p>
+            <p style={{ textAlign: 'center' }}>No hay resultados en esta categoría.</p>
           )}
         </div>
 
-        {/* Modal */}
         <Dialog
-          open={!!selectedEvent}
-          onClose={() => setSelectedEvent(null)}
+          open={!!selectedItem}
+          onClose={() => setSelectedItem(null)}
           fullWidth
           maxWidth="md"
           BackdropProps={{
-            sx: {
-              backgroundColor: 'rgba(0, 0, 0, 0.6)',
-            },
+            sx: { backgroundColor: 'rgba(0, 0, 0, 0.6)' },
           }}
         >
-          {selectedEvent && (
-            <ViewMore item={selectedEvent} onClose={() => setSelectedEvent(null)} />
-          )}
+          {selectedItem && <ViewMore item={selectedItem} onClose={() => setSelectedItem(null)} />}
         </Dialog>
       </section>
     </>

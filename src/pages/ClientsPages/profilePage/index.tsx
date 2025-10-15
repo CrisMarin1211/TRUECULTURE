@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import Header from '../../components/header';
+import Header from '../../../components/header';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import { stringAvatar } from '../../utils/avatarHelper';
-import { supabase } from '../../lib/supabaseClient';
+import { stringAvatar } from '../../../utils/avatarHelper';
+import { supabase } from '../../../lib/supabaseClient';
 import './style.css';
 
 type StoredUser = {

@@ -1,11 +1,11 @@
 import { useState, lazy, Suspense } from 'react';
-import ColoredText from '../../components/coloredText';
-import Header from '../../components/header';
+import ColoredText from '../../../components/coloredText';
+import Header from '../../../components/header';
 import './style.css';
-import { products } from '../../data/data';
-import EventCard from '../../components/eventCard';
+import { products } from '../../../data/data';
+import EventCard from '../../../components/eventCard';
 
-const PurchaseDetailModal = lazy(() => import('../../components/purchaseDetailModal'));
+const PurchaseDetailModal = lazy(() => import('../../../components/purchaseDetailModal'));
 
 const MyPurchasesPage = () => {
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);

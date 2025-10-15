@@ -1,6 +1,6 @@
-import Header from '../../components/header';
-import FeaturedProductList from '../../components/List/Featured/featuredProductList/index';
-import ProductList from '../../components/List/categories/productList/index';
+import Header from '../../../components/header';
+import FeaturedProductList from '../../../components/List/Featured/featuredProductList/index';
+import ProductList from '../../../components/List/categories/productList/index';
 import { Box } from '@mui/material';
 
 const TAGS = ['Afiches', 'Pines', 'Cultural', 'Moda', 'Gastronomía'];

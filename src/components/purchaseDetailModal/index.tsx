@@ -28,12 +28,10 @@ const PurchaseDetailModal = ({
   return (
     <div className="modal-overlay">
       <div className="modal-container">
-        {/* Columna izquierda */}
         <div className="modal-left">
           <img src={image} alt={title} />
         </div>
 
-        {/* Columna derecha */}
         <div className="modal-right">
           <button className="close-btn" onClick={onClose}>
             ✕
@@ -67,6 +65,7 @@ const PurchaseDetailModal = ({
 
           <button className="download-btn">Download Ticket</button>
         </div>
+        <div>Hacer una reseña</div>
       </div>
     </div>
   );

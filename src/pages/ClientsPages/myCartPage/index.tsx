@@ -14,6 +14,7 @@ const MyCartPage = () => {
   const [cartProducts, setCartProducts] = useState<any[]>([]);
   const [quantities, setQuantities] = useState<number[]>([]);
 
+  // Cargar carrito y manejar nuevo producto
   useEffect(() => {
     const storedCart = localStorage.getItem('cart');
     let loadedProducts: any[] = [];
@@ -23,7 +24,6 @@ const MyCartPage = () => {
       const parsed = JSON.parse(storedCart);
       loadedProducts = parsed.products || [];
       loadedQuantities = parsed.quantities || [];
-
       const fixedQuantities = loadedProducts.map((_, i) => loadedQuantities[i] ?? 1);
       setCartProducts(loadedProducts);
       setQuantities(fixedQuantities);
@@ -49,16 +49,36 @@ const MyCartPage = () => {
     }
   }, [location.state]);
 
+  // Actualizar cantidades o eliminar productos
   const handleQuantityChange = (index: number, newQuantity: number) => {
-    setQuantities((prev) => {
-      const updated = prev.map((q, i) => (i === index ? newQuantity : q));
+    if (newQuantity < 1) {
+      // Eliminar producto
+      const updatedProducts = [...cartProducts];
+      const updatedQuantities = [...quantities];
+      updatedProducts.splice(index, 1);
+      updatedQuantities.splice(index, 1);
 
-      localStorage.setItem('cart', JSON.stringify({ products: cartProducts, quantities: updated }));
+      setCartProducts(updatedProducts);
+      setQuantities(updatedQuantities);
 
-      return updated;
-    });
+      localStorage.setItem(
+        'cart',
+        JSON.stringify({ products: updatedProducts, quantities: updatedQuantities }),
+      );
+      return;
+    }
+
+    // Actualizar cantidad normalmente
+    const updatedQuantities = quantities.map((q, i) => (i === index ? newQuantity : q));
+    setQuantities(updatedQuantities);
+
+    localStorage.setItem(
+      'cart',
+      JSON.stringify({ products: cartProducts, quantities: updatedQuantities }),
+    );
   };
 
+  // Guardar en localStorage cuando cambian productos o cantidades
   useEffect(() => {
     if (cartProducts.length) {
       localStorage.setItem('cart', JSON.stringify({ products: cartProducts, quantities }));

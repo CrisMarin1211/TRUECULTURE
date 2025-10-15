@@ -11,7 +11,7 @@ type ProductCardProps = {
 
 const ProductCard = ({ image, title, price, quantity, onQuantityChange }: ProductCardProps) => {
   const handleMinus = () => {
-    if (quantity > 1) onQuantityChange(quantity - 1);
+    onQuantityChange(quantity - 1);
   };
 
   const handlePlus = () => {

@@ -1,4 +1,4 @@
-import ColoredText from '../../../components/coloredText';
+import ColoredText from '../../../components/coloredText/index';
 import Header from '../../../components/header';
 import CouponCard from '../../../components/couponCard';
 import './style.css';

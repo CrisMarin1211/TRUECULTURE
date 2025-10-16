@@ -14,7 +14,6 @@ const MyCartPage = () => {
   const [cartProducts, setCartProducts] = useState<any[]>([]);
   const [quantities, setQuantities] = useState<number[]>([]);
 
-  // Cargar carrito y manejar nuevo producto
   useEffect(() => {
     const storedCart = localStorage.getItem('cart');
     let loadedProducts: any[] = [];
@@ -49,10 +48,8 @@ const MyCartPage = () => {
     }
   }, [location.state]);
 
-  // Actualizar cantidades o eliminar productos
   const handleQuantityChange = (index: number, newQuantity: number) => {
     if (newQuantity < 1) {
-      // Eliminar producto
       const updatedProducts = [...cartProducts];
       const updatedQuantities = [...quantities];
       updatedProducts.splice(index, 1);
@@ -68,7 +65,6 @@ const MyCartPage = () => {
       return;
     }
 
-    // Actualizar cantidad normalmente
     const updatedQuantities = quantities.map((q, i) => (i === index ? newQuantity : q));
     setQuantities(updatedQuantities);
 
@@ -78,7 +74,6 @@ const MyCartPage = () => {
     );
   };
 
-  // Guardar en localStorage cuando cambian productos o cantidades
   useEffect(() => {
     if (cartProducts.length) {
       localStorage.setItem('cart', JSON.stringify({ products: cartProducts, quantities }));

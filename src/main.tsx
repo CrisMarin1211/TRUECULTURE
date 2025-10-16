@@ -12,6 +12,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { AuthProvider } from './context/AuthContext.tsx';
+import { CartProvider } from './context/CartContex.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -21,7 +22,9 @@ createRoot(document.getElementById('root')!).render(
         <CityProvider>
           <ProductProvider>
             <EventProvider>
-              <App />
+              <CartProvider>
+                <App />
+              </CartProvider>
             </EventProvider>
           </ProductProvider>
         </CityProvider>

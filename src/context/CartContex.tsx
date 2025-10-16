@@ -22,7 +22,7 @@ interface CartContextType {
   updateQuantity: (id: string | number, quantity: number) => void;
   removeFromCart: (id: string | number) => void;
   clearCart: () => void;
-  finalizePurchase: () => void;
+  finalizePurchase: () => boolean;
   subtotal: number;
   discount: number;
   total: number;
@@ -81,11 +81,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem('cart');
   };
 
-  const finalizePurchase = () => {
+  const finalizePurchase = (): boolean => {
+    // <--- retorno explícito
     if (cartItems.length === 0) return false;
 
     const existingPurchases = JSON.parse(localStorage.getItem('purchases') || '[]');
-
     const newPurchases: Purchase[] = cartItems.map((item) => ({
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       title: item.title,
@@ -94,12 +94,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       type: 'Producto',
       date: new Date().toLocaleDateString('es-CO'),
     }));
-
     localStorage.setItem('purchases', JSON.stringify([...existingPurchases, ...newPurchases]));
-
     clearCart();
-
-    return true;
+    return true; // <--- Ahora retorna un booleano usable
   };
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);

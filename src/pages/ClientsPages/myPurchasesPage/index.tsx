@@ -1,14 +1,19 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import ColoredText from '../../../components/coloredText';
 import Header from '../../../components/header';
 import './style.css';
-import { products } from '../../../data/data';
 import EventCard from '../../../components/eventCard';
 
 const PurchaseDetailModal = lazy(() => import('../../../components/purchaseDetailModal'));
 
 const MyPurchasesPage = () => {
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
+  const [purchases, setPurchases] = useState<any[]>([]);
+
+  useEffect(() => {
+    const savedPurchases = JSON.parse(localStorage.getItem('purchases') || '[]');
+    setPurchases(savedPurchases);
+  }, []);
 
   return (
     <div className="my-purchases-page">
@@ -16,17 +21,21 @@ const MyPurchasesPage = () => {
       <ColoredText text="Mis compras " color="#FF0099" />
 
       <div className="purchases-grid">
-        {products.map((product, index) => (
-          <EventCard
-            key={index}
-            description={product.description}
-            title={product.title}
-            image={product.image}
-            type={product.type}
-            date={product.date}
-            onViewQR={() => setSelectedProduct(product)}
-          />
-        ))}
+        {purchases.length ? (
+          purchases.map((product, index) => (
+            <EventCard
+              key={product.id ?? index}
+              description={product.description}
+              title={product.title}
+              image={product.image}
+              type={product.type}
+              date={product.date}
+              onViewQR={() => setSelectedProduct(product)}
+            />
+          ))
+        ) : (
+          <p style={{ textAlign: 'center', color: '#777' }}>No tienes compras aún 🛒</p>
+        )}
       </div>
 
       {selectedProduct && (

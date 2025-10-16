@@ -40,7 +40,19 @@ const MyPurchasesPage = () => {
 
       {selectedProduct && (
         <Suspense fallback={<div style={{ color: 'white' }}>Cargando detalle...</div>}>
-          <PurchaseDetailModal {...selectedProduct} onClose={() => setSelectedProduct(null)} />
+          <Suspense fallback={<div>Cargando detalle...</div>}>
+            <PurchaseDetailModal
+              image={selectedProduct.image}
+              title={selectedProduct.title}
+              text={selectedProduct.description}
+              location={selectedProduct.location}
+              date={selectedProduct.date}
+              name={selectedProduct.name}
+              time={selectedProduct.time}
+              barcodeCode={selectedProduct.id}
+              onClose={() => setSelectedProduct(null)}
+            />
+          </Suspense>
         </Suspense>
       )}
     </div>

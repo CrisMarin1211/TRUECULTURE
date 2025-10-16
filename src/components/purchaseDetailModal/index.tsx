@@ -1,4 +1,6 @@
 import './style.css';
+import { useRef } from 'react';
+import html2canvas from 'html2canvas';
 
 type PurchaseDetailModalProps = {
   image: string;
@@ -8,7 +10,6 @@ type PurchaseDetailModalProps = {
   date: string;
   name: string;
   time: string;
-  barcodeImage: string;
   barcodeCode: string;
   onClose: () => void;
 };
@@ -21,24 +22,35 @@ const PurchaseDetailModal = ({
   date,
   name,
   time,
-  barcodeImage,
   barcodeCode,
   onClose,
 }: PurchaseDetailModalProps) => {
+  const barcodeUrl = `https://quickchart.io/barcode?text=${encodeURIComponent(barcodeCode)}&format=png&type=code128`;
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleDownload = async () => {
+    if (modalRef.current) {
+      const canvas = await html2canvas(modalRef.current, { useCORS: true });
+      const link = document.createElement('a');
+      link.download = 'mi-ticket.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+  };
+
   return (
     <div className="modal-overlay">
-      <div className="modal-container">
+      <div className="modal-container" ref={modalRef}>
         <div className="modal-left">
           <img src={image} alt={title} />
         </div>
-
         <div className="modal-right">
           <button className="close-btn" onClick={onClose}>
             ✕
           </button>
           <h2 className="modal-title">{title}</h2>
           <p className="modal-text">{text}</p>
-
           <div className="modal-info">
             <div>
               <span className="info-title">Location</span>
@@ -57,13 +69,13 @@ const PurchaseDetailModal = ({
               <span className="info-value">{time}</span>
             </div>
           </div>
-
           <div className="barcode-section">
-            <img src={barcodeImage} alt="barcode" />
+            <img src={barcodeUrl} alt="barcode" />
             <p className="barcode-code">{barcodeCode}</p>
           </div>
-
-          <button className="download-btn">Download Ticket</button>
+          <button className="download-btn" onClick={handleDownload}>
+            Download Ticket
+          </button>
         </div>
         <div>Hacer una reseña</div>
       </div>

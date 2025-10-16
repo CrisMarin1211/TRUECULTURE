@@ -21,7 +21,7 @@ const CheckoutSummary = () => {
   const handleCheckout = () => {
     const success = finalizePurchase();
     if (success) {
-      navigate('/mis-compras');
+      navigate('/my-purchases');
     } else {
       alert('No hay productos en el carrito');
     }

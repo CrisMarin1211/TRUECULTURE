@@ -6,6 +6,9 @@ export interface CartItem {
   image: string;
   price: number;
   quantity: number;
+  name?: string;
+  location?: string;
+  time?: string;
 }
 
 export interface Purchase {
@@ -14,6 +17,9 @@ export interface Purchase {
   image: string;
   type: string;
   date: string;
+  time: string;
+  name: string;
+  location: string;
 }
 
 interface CartContextType {
@@ -82,7 +88,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const finalizePurchase = (): boolean => {
-    // <--- retorno explícito
     if (cartItems.length === 0) return false;
 
     const existingPurchases = JSON.parse(localStorage.getItem('purchases') || '[]');
@@ -93,10 +98,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       description: `Compraste ${item.quantity} unidad${item.quantity > 1 ? 'es' : ''}.`,
       type: 'Producto',
       date: new Date().toLocaleDateString('es-CO'),
+      name: item.name ?? item.title ?? '',
+      location: item.location ?? '',
+      time: item.time ?? '',
     }));
     localStorage.setItem('purchases', JSON.stringify([...existingPurchases, ...newPurchases]));
     clearCart();
-    return true; // <--- Ahora retorna un booleano usable
+    return true;
   };
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);

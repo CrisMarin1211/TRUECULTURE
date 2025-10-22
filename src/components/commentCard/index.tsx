@@ -35,7 +35,7 @@ const CommentCard: React.FC<CommentCardProps> = ({
         <span className="comment-user">{userName}</span>
         <div className="comment-rating">
           {[1, 2, 3, 4, 5].map((i) => (
-            <FavoriteIcon key={i} className={heart-icon ${i <= rating ? 'filled' : ''}} />
+            <FavoriteIcon key={i} className={`heart-icon ${i <= rating ? 'filled' : ''}`} />
           ))}
         </div>
       </div>

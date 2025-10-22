@@ -40,6 +40,7 @@ const AppRoutes = () => {
         <Route path="/Marketplacehome" element={<MarketplaceHome />} />
         <Route path="/categories/:city/:tag" element={<Categories />} />
         <Route path="/settings" element={<ProfileAdminPage />} />
+        <Route path="/list-comments" element={<ListCommentsPage />} />
       </Routes>
     </>
   );

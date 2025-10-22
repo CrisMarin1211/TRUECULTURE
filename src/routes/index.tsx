@@ -38,6 +38,7 @@ const AppRoutes = () => {
         <Route path="/DashboardClient" element={<DashboardClient />} />
         <Route path="/Marketplacehome" element={<MarketplaceHome />} />
         <Route path="/categories/:city/:tag" element={<Categories />} />
+        <Route path="/settings" element={<ProfileAdminPage />} />
       </Routes>
     </>
   );

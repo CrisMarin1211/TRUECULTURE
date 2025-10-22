@@ -13,6 +13,7 @@ import MarketplaceHome from '../pages/ClientsPages/MarketplaceHome/MarketplaceHo
 import CreateEventPage from '../pages/AdminPages/eventsPages/createPage';
 import ListEventPage from '../pages/AdminPages/eventsPages/listPage';
 import Categories from '../pages/ClientsPages/categoriesPage/categories';
+import ProfileAdminPage from '../pages/adminPages/profilePage';
 
 const AppRoutes = () => {
   return (

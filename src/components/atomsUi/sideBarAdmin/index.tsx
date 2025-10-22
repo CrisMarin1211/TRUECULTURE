@@ -1,12 +1,22 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import EventIcon from '@mui/icons-material/Event';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import './style.css';
+import { Comment } from '@mui/icons-material';
 
 const SidebarAdmin: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [openOptions, setOpenOptions] = useState(true);
+  const [openSupport, setOpenSupport] = useState(false);
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <aside className="sidebar">
@@ -15,7 +25,10 @@ const SidebarAdmin: React.FC = () => {
       </div>
 
       <div className="sidebar-actions">
-        <button className="sidebar-action-btn" onClick={() => navigate('/create-event')}>
+        <button
+          className={`sidebar-action-btn ${isActive('/create-event') ? 'active' : ''}`}
+          onClick={() => navigate('/create-event')}
+        >
           <AddCircleIcon className="sidebar-action-icon" />
           <div className="sidebar-action-text">
             <strong>Añade un evento</strong>
@@ -23,7 +36,10 @@ const SidebarAdmin: React.FC = () => {
           </div>
         </button>
 
-        <button className="sidebar-action-btn" onClick={() => navigate('/create-product')}>
+        <button
+          className={`sidebar-action-btn ${isActive('/create-product') ? 'active' : ''}`}
+          onClick={() => navigate('/create-product')}
+        >
           <AddCircleIcon className="sidebar-action-icon" />
           <div className="sidebar-action-text">
             <strong>Añade un producto</strong>
@@ -34,18 +50,59 @@ const SidebarAdmin: React.FC = () => {
 
       <hr className="sidebar-divider" />
 
-      <h4 className="sidebar-title">Opciones</h4>
+      <div className="sidebar-section">
+        <div className="sidebar-section-header" onClick={() => setOpenOptions(!openOptions)}>
+          <h4 className="sidebar-title">Opciones</h4>
+          {openOptions ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </div>
 
-      <ul className="sidebar-menu">
-        <li onClick={() => navigate('/list-events')}>
-          <EventIcon className="sidebar-icon" />
-          <span>Manejar eventos</span>
-        </li>
-        <li onClick={() => navigate('/list-products')}>
-          <InventoryIcon className="sidebar-icon" />
-          <span>Manejar productos</span>
-        </li>
-      </ul>
+        {openOptions && (
+          <ul className="sidebar-menu">
+            <li
+              className={isActive('/list-events') ? 'active' : ''}
+              onClick={() => navigate('/list-events')}
+            >
+              <EventIcon className="sidebar-icon" />
+              <span>Manejar eventos</span>
+            </li>
+            <li
+              className={isActive('/list-products') ? 'active' : ''}
+              onClick={() => navigate('/list-products')}
+            >
+              <InventoryIcon className="sidebar-icon" />
+              <span>Manejar productos</span>
+            </li>
+            <li
+              className={isActive('/list-comments') ? 'active' : ''}
+              onClick={() => navigate('/list-comments')}
+            >
+              <Comment className="sidebar-icon" />
+              <span>Manejar reseñas</span>
+            </li>
+          </ul>
+        )}
+      </div>
+
+      <hr className="sidebar-divider" />
+
+      <div className="sidebar-section">
+        <div className="sidebar-section-header" onClick={() => setOpenSupport(!openSupport)}>
+          <h4 className="sidebar-title">Soporte</h4>
+          {openSupport ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </div>
+
+        {openSupport && (
+          <ul className="sidebar-menu">
+            <li
+              className={isActive('/settings') ? 'active' : ''}
+              onClick={() => navigate('/settings')}
+            >
+              <SettingsIcon className="sidebar-icon" />
+              <span>Configuraciones</span>
+            </li>
+          </ul>
+        )}
+      </div>
     </aside>
   );
 };

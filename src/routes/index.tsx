@@ -14,6 +14,7 @@ import CreateEventPage from '../pages/AdminPages/eventsPages/createPage';
 import ListEventPage from '../pages/AdminPages/eventsPages/listPage';
 import Categories from '../pages/ClientsPages/categoriesPage/categories';
 import ProfileAdminPage from '../pages/AdminPages/profilePage';
+import ListCommentsPage from '../pages/AdminPages/commentsPage';
 
 const AppRoutes = () => {
   return (

@@ -1,8 +1,8 @@
-import ColoredText from '../../components/coloredText';
-import Header from '../../components/header';
-import CouponCard from '../../components/couponCard';
+import ColoredText from '../../../components/coloredText/index';
+import Header from '../../../components/header';
+import CouponCard from '../../../components/couponCard';
 import './style.css';
-import { coupons } from '../../data/data';
+import { coupons } from '../../../data/data';
 
 const MyCouponsPage = () => {
   return (

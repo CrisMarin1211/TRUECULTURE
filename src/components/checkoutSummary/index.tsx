@@ -1,22 +1,29 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartContex';
 import './style.css';
-
-type Props = {
-  subtotal: number;
-  discount: number;
-  total: number;
-  onApplyCoupon: (code: string) => void;
-};
 
 const formatCurrency = (value: number) =>
   value.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
 
-const CheckoutSummary = ({ subtotal, discount, total, onApplyCoupon }: Props) => {
+const CheckoutSummary = () => {
   const [couponCode, setCouponCode] = useState('');
+  const navigate = useNavigate();
+
+  const { subtotal, discount, total, setDiscount, finalizePurchase } = useCart();
 
   const handleApply = () => {
     if (couponCode.trim() !== '') {
-      onApplyCoupon(couponCode.trim().toUpperCase());
+      setDiscount(couponCode.trim().toUpperCase() === 'DESCUENTO10' ? subtotal * 0.1 : 0);
+    }
+  };
+
+  const handleCheckout = () => {
+    const success = finalizePurchase();
+    if (success) {
+      navigate('/my-purchases');
+    } else {
+      alert('No hay productos en el carrito');
     }
   };
 
@@ -49,7 +56,9 @@ const CheckoutSummary = ({ subtotal, discount, total, onApplyCoupon }: Props) =>
         <button onClick={handleApply}>Aplicar</button>
       </div>
 
-      <button className="checkout-btn">Finalizar compra</button>
+      <button className="checkout-btn" onClick={handleCheckout}>
+        Finalizar compra
+      </button>
     </div>
   );
 };

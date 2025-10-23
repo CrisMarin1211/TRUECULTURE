@@ -1,18 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
 import HomePage from '../pages/homePage';
-import MyPurchasesPage from '../pages/myPurchasesPage';
-import MyCartPage from '../pages/myCartPage';
-import MyCouponsPage from '../pages/myCouponsPage';
+import MyPurchasesPage from '../pages/ClientsPages/myPurchasesPage';
+import MyCartPage from '../pages/ClientsPages/myCartPage';
+import MyCouponsPage from '../pages/ClientsPages/myCouponsPage';
 import DashboardClient from '../pages/ClientsPages/dashboardCliente/DashboardClient';
-import ProfilePage from '../pages/profilePage';
+import ProfilePage from '../pages/ClientsPages/profilePage';
 import LoginPage from '../pages/loginPage/loginPage';
 import RegisterPage from '../pages/registerPage/registerPage';
 import CreateProductPage from '../pages/AdminPages/productsPages/createPage/createPage';
 import ListProductPage from '../pages/AdminPages/productsPages/listPage/listPage';
-import MarketplaceHome from '../pages/MarketplaceHome/MarketplaceHome';
+import MarketplaceHome from '../pages/ClientsPages/MarketplaceHome/MarketplaceHome';
 import CreateEventPage from '../pages/AdminPages/eventsPages/createPage';
 import ListEventPage from '../pages/AdminPages/eventsPages/listPage';
 import Categories from '../pages/ClientsPages/categoriesPage/categories';
+import ProfileAdminPage from '../pages/AdminPages/profilePage';
+import ListCommentsPage from '../pages/AdminPages/commentsPage';
 
 const AppRoutes = () => {
   return (
@@ -38,6 +40,8 @@ const AppRoutes = () => {
         <Route path="/DashboardClient" element={<DashboardClient />} />
         <Route path="/Marketplacehome" element={<MarketplaceHome />} />
         <Route path="/categories/:city/:tag" element={<Categories />} />
+        <Route path="/settings" element={<ProfileAdminPage />} />
+        <Route path="/list-comments" element={<ListCommentsPage />} />
       </Routes>
     </>
   );

@@ -18,13 +18,22 @@ import { useState } from 'react';
 import type { ViewMoreProps } from '../../types/ViewMorType';
 import theme from '../../styles/theme';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartContex';
 
 const ViewMore = ({ item, onClose }: ViewMoreProps) => {
   const [readMore, setReadMore] = useState(false);
   const toggleReadMore = () => setReadMore(!readMore);
+  const { addToCart } = useCart(); // usa la función del contexto
   const navigate = useNavigate();
   const handleBuy = () => {
-    navigate('/my-cart', { state: { item } });
+    addToCart({
+      id: item.id,
+      title: item.name,
+      image: item.image,
+      price: item.price,
+      quantity: 1,
+    });
+    navigate('/my-cart');
   };
   return (
     <Card

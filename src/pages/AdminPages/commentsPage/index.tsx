@@ -1,34 +1,28 @@
+import { useEffect, useState } from 'react';
 import './style.css';
 import SidebarAdmin from '../../../components/atomsUi/sideBarAdmin';
 import CommentCard from '../../../components/commentCard';
+import { getComments } from '../../../services/comments';
+import type { CommentItem } from '../../../types/CommentType';
 
 const ListCommentsPage: React.FC = () => {
-  const comments = [
-    {
-      id: 1,
-      title: 'Concierto de Rock 2025',
-      comment: 'Excelente experiencia, la organización fue impecable y el sonido espectacular.',
-      userName: 'Pepita Perez',
-      userAvatar: '/images/eve.jpg',
-      rating: 1,
-    },
-    {
-      id: 2,
-      title: 'Camiseta edición limitada',
-      comment: 'Muy buena calidad, llegó rápido y el diseño es increíble. Volveré a comprar.',
-      userName: 'Carlos Ruiz',
-      userAvatar: '/images/user1.jpg',
-      rating: 4,
-    },
-    {
-      id: 3,
-      title: 'Festival Gastronómico',
-      comment: 'La comida deliciosa, pero la logística pudo mejorar un poco en los horarios.',
-      userName: 'Ana María',
-      userAvatar: '/images/user2.jpg',
-      rating: 3,
-    },
-  ];
+  const [comments, setComments] = useState<CommentItem[]>([]);
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      const data = await getComments();
+      setComments(data);
+    };
+    fetchComments();
+  }, []);
+
+  const filteredComments = comments.filter(
+    (c) =>
+      c.comment.toLowerCase().includes(search.toLowerCase()) ||
+      c.related_name?.toLowerCase().includes(search.toLowerCase()) ||
+      c.author.toLowerCase().includes(search.toLowerCase()),
+  );
 
   return (
     <div className="page-container">
@@ -37,27 +31,32 @@ const ListCommentsPage: React.FC = () => {
         <div className="header-card">
           <div className="row row-1">
             <h4 className="title">Gestión de Reseñas</h4>
-            <input type="text" placeholder="Buscar..." className="search-input" />
+            <input
+              type="text"
+              placeholder="Buscar..."
+              className="search-input"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
           <div className="row row-2">
             <select className="filter-select">
-              <option value="">Filtrar por estado</option>
-              <option value="Proximos">Próximos</option>
-              <option value="Pendiente">Pendientes</option>
-              <option value="Finalizados">Finalizados</option>
+              <option value="">Filtrar por tipo</option>
+              <option value="product">Productos</option>
+              <option value="event">Eventos</option>
             </select>
           </div>
         </div>
 
         <div className="comments-container">
           <div className="comments-grid">
-            {comments.map((c) => (
+            {filteredComments.map((c) => (
               <CommentCard
                 key={c.id}
-                title={c.title}
+                title={c.related_name ?? '(Sin título)'}
                 comment={c.comment}
-                userName={c.userName}
-                userAvatar={c.userAvatar}
+                userName={c.author}
+                userAvatar="/images/default-avatar.jpg"
                 rating={c.rating}
               />
             ))}

@@ -26,3 +26,18 @@ export interface AuthContextType {
   logout: () => Promise<void>;
   loginWithGoogle: () => Promise<void>;
 }
+
+export interface UserProfile {
+  id?: number;
+  auth_id?: string;
+  email: string;
+  name?: string;
+  nickname?: string;
+  organization?: string;
+  gender?: string;
+  country?: string;
+  language?: string;
+  timezone?: string;
+  created_at?: string;
+  updated_at?: string;
+}

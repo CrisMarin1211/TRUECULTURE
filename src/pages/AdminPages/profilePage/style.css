@@ -197,3 +197,41 @@ input[type='text']:focus {
     gap: 1rem;
   }
 }
+
+select {
+  width: 100%;
+  border: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.4rem;
+  font-size: 0.95rem;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select:focus {
+  outline: none;
+  border-color: #99cb36;
+  box-shadow: 0 0 4px rgba(153, 203, 54, 0.3);
+}
+
+option {
+  background-color: #232323;
+  color: #fff;
+}
+
+option:checked,
+option:hover {
+  background-color: #99cb36;
+  color: #fff;
+}

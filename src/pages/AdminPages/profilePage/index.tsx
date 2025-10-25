@@ -51,6 +51,7 @@ const ProfileAdminPage: React.FC = () => {
         country: profile.country,
         language: profile.language,
         timezone: profile.timezone,
+        organization: profile.organization,
       });
       alert('Cambios guardados correctamente');
     } catch (error) {

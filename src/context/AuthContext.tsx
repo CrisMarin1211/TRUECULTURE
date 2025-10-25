@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
+import { createUserProfile } from '../services/users';
 import type {
   AuthProviderProps,
   AuthContextType,
@@ -21,15 +22,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<AppUser | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const setUserAndPersist = (supabaseUser: SupabaseUser | null) => {
+    if (supabaseUser) {
+      const appUser = mapSupabaseUserToAppUser(supabaseUser);
+      setUser(appUser);
+      localStorage.setItem('user_id', appUser.id);
+    } else {
+      setUser(null);
+      localStorage.removeItem('user_id');
+    }
+  };
+
   useEffect(() => {
     const getSession = async () => {
       const { data, error } = await supabase.auth.getSession();
       if (error) console.error(error);
 
       if (data.session?.user) {
-        setUser(mapSupabaseUserToAppUser(data.session.user));
+        setUserAndPersist(data.session.user);
       } else {
-        setUser(null);
+        setUserAndPersist(null);
       }
 
       setLoading(false);
@@ -37,11 +49,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     getSession();
 
     const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
-        setUser(mapSupabaseUserToAppUser(session.user));
-      } else {
-        setUser(null);
-      }
+      setUserAndPersist(session?.user ?? null);
     });
 
     return () => {
@@ -55,14 +63,33 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       password,
       options: { data: { full_name: name } },
     });
+
     if (error) throw error;
-    if (data.user) setUser(mapSupabaseUserToAppUser(data.user));
+
+    if (data.user) {
+      setUserAndPersist(data.user);
+
+      try {
+        await createUserProfile({
+          auth_id: data.user.id,
+          email: data.user.email ?? email,
+          name,
+          nickname: '',
+          gender: '',
+          country: '',
+          language: '',
+          timezone: '',
+        });
+      } catch (profileError) {
+        console.error('Error al crear perfil en tabla users:', profileError);
+      }
+    }
   };
 
   const login = async ({ email, password }: LoginCredentials): Promise<void> => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) throw error;
-    if (data.user) setUser(mapSupabaseUserToAppUser(data.user));
+    if (data.user) setUserAndPersist(data.user);
   };
 
   const loginWithGoogle = async (): Promise<void> => {
@@ -73,7 +100,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const logout = async (): Promise<void> => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
-    setUser(null);
+    setUserAndPersist(null);
   };
 
   return (

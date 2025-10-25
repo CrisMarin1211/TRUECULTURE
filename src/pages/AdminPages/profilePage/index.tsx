@@ -137,42 +137,62 @@ const ProfileAdminPage: React.FC = () => {
                 </div>
               </div>
 
+              {/* Campos tipo select */}
               <div className="grid-2">
                 <div>
                   <label className="input-label">Género</label>
-                  <input
-                    type="text"
+                  <select
                     value={profile.gender || ''}
                     onChange={(e) => handleChange('gender', e.target.value)}
-                  />
+                  >
+                    <option value="">Seleccionar</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Otro">Otro</option>
+                  </select>
                 </div>
+
                 <div>
                   <label className="input-label">País</label>
-                  <input
-                    type="text"
+                  <select
                     value={profile.country || ''}
                     onChange={(e) => handleChange('country', e.target.value)}
-                  />
+                  >
+                    <option value="">Seleccionar</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="México">México</option>
+                    <option value="Argentina">Argentina</option>
+                  </select>
                 </div>
               </div>
 
               <div className="grid-2">
                 <div>
                   <label className="input-label">Idioma</label>
-                  <input
-                    type="text"
+                  <select
                     value={profile.language || ''}
                     onChange={(e) => handleChange('language', e.target.value)}
-                  />
+                  >
+                    <option value="">Seleccionar</option>
+                    <option value="Español">Español</option>
+                    <option value="Inglés">Inglés</option>
+                    <option value="Portugués">Portugués</option>
+                  </select>
                 </div>
+
                 <div>
                   <label className="input-label">Zona horaria</label>
-                  <input
-                    type="text"
+                  <select
                     value={profile.timezone || ''}
                     onChange={(e) => handleChange('timezone', e.target.value)}
-                  />
+                  >
+                    <option value="">Seleccionar</option>
+                    <option value="America/Bogota">América/Bogotá (GMT-5)</option>
+                    <option value="America/Mexico_City">América/México (GMT-6)</option>
+                    <option value="America/Argentina/Buenos_Aires">Buenos Aires (GMT-3)</option>
+                  </select>
                 </div>
+
                 <div>
                   <label className="input-label">Organización</label>
                   <input

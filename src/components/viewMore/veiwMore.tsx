@@ -23,7 +23,7 @@ import { useCart } from '../../context/CartContex';
 const ViewMore = ({ item, onClose }: ViewMoreProps) => {
   const [readMore, setReadMore] = useState(false);
   const toggleReadMore = () => setReadMore(!readMore);
-  const { addToCart } = useCart(); // usa la función del contexto
+  const { addToCart } = useCart();
   const navigate = useNavigate();
   const handleBuy = () => {
     addToCart({

@@ -24,7 +24,7 @@ const AdminEventCard = ({ event }: AdminEventCardProps) => {
         </div>
         <div className="event-info-item">
           <span className="label">Sillas habilitadas</span>
-          <span className="value">{event.availableSeats}</span>
+          <span className="value">{event.availableseats}</span>
         </div>
         <div className="event-info-item">
           <span className="label">Otro</span>
@@ -50,7 +50,7 @@ const AdminEventCard = ({ event }: AdminEventCardProps) => {
       </div>
 
       <div className="event-footer">
-        <button className="btn-view" onClick={() => navigate(`/edit-event/${event.id}`)}>
+        <button className="btn-view" onClick={() => navigate(/edit-event/${event.id})}>
           Editar
         </button>
       </div>

@@ -31,11 +31,25 @@ const ListProductPage: React.FC = () => {
     fetchProducts();
   }, []);
 
-  const filteredProducts = products.filter(
-    (p) =>
-      p.name.toLowerCase().includes(search.toLowerCase()) &&
-      (filterStatus ? p.status === filterStatus : true),
-  );
+  const getProductStatus = (p: ProductItem): 'Activo' | 'No activo' | 'Sin stock' | 'Borrador' => {
+    if (p.isdraft) return 'Borrador';
+    if (p.availablestock === 0) return 'Sin stock';
+    return p.status;
+  };
+
+  const filteredProducts = products.filter((p) => {
+    const searchLower = search.toLowerCase();
+
+    const matchesSearch =
+      p.name.toLowerCase().includes(searchLower) ||
+      p.description.toLowerCase().includes(searchLower) ||
+      (p.tags?.toLowerCase?.().includes(searchLower) ?? false);
+
+    const status = getProductStatus(p);
+    const matchesStatus = filterStatus ? status === filterStatus : true;
+
+    return matchesSearch && matchesStatus;
+  });
 
   if (loading) return <Loader />;
   if (error) return <div className="error">{error}</div>;
@@ -61,7 +75,7 @@ const ListProductPage: React.FC = () => {
               <button className="btn-pink" onClick={() => navigate('/create-product')}>
                 Nuevo Producto
               </button>
-              <button className="btn-outline">Visión General</button>
+              {/* <button className="btn-outline">Visión General</button> */}
             </div>
             <select
               className="filter-select"
@@ -69,8 +83,10 @@ const ListProductPage: React.FC = () => {
               onChange={(e) => setFilterStatus(e.target.value)}
             >
               <option value="">Filtrar por estado</option>
-              <option value="Activo">Activo</option>
-              <option value="No activo">No activo</option>
+              <option value="Activo">Activos</option>
+              <option value="No activo">No activos</option>
+              <option value="Sin stock">Sin stock</option>
+              <option value="Borrador">Borradores</option>
             </select>
           </div>
         </div>
@@ -86,6 +102,14 @@ const ListProductPage: React.FC = () => {
               <div className="status-item">
                 <span className="bubble paused"></span>
                 <span>No activos</span>
+              </div>
+              <div className="status-item">
+                <span className="bubble out"></span>
+                <span>Sin stock</span>
+              </div>
+              <div className="status-item">
+                <span className="bubble draft"></span>
+                <span>Borradores</span>
               </div>
             </div>
           </div>

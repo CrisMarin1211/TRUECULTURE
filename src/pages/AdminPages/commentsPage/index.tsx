@@ -9,6 +9,7 @@ import Loader from '../../../components/loader';
 const ListCommentsPage: React.FC = () => {
   const [comments, setComments] = useState<CommentItem[]>([]);
   const [search, setSearch] = useState('');
+  const [filterType, setFilterType] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,12 +26,22 @@ const ListCommentsPage: React.FC = () => {
     fetchComments();
   }, []);
 
-  const filteredComments = comments.filter(
-    (c) =>
-      c.comment.toLowerCase().includes(search.toLowerCase()) ||
-      c.related_name?.toLowerCase().includes(search.toLowerCase()) ||
-      c.author.toLowerCase().includes(search.toLowerCase()),
-  );
+  const filteredComments = comments.filter((c) => {
+    const searchLower = search.toLowerCase();
+
+    const comment = c.comment?.toLowerCase() ?? '';
+    const author = c.author?.toLowerCase() ?? '';
+    const relatedName = c.related_name?.toLowerCase() ?? '';
+
+    const matchesSearch =
+      comment.includes(searchLower) ||
+      author.includes(searchLower) ||
+      relatedName.includes(searchLower);
+
+    const matchesType = filterType ? c.related_type === filterType : true;
+
+    return matchesSearch && matchesType;
+  });
 
   if (loading) return <Loader />;
 
@@ -43,14 +54,22 @@ const ListCommentsPage: React.FC = () => {
             <h4 className="title">Gestión de Reseñas</h4>
             <input
               type="text"
-              placeholder="Buscar..."
+              placeholder="Buscar reseña..."
               className="search-input"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
+
           <div className="row row-2">
-            <select className="filter-select">
+            <div className="actions-left">
+              {/* <button className="btn-outline">Visión General</button> */}
+            </div>
+            <select
+              className="filter-select"
+              value={filterType}
+              onChange={(e) => setFilterType(e.target.value)}
+            >
               <option value="">Filtrar por tipo</option>
               <option value="product">Productos</option>
               <option value="event">Eventos</option>
@@ -60,16 +79,20 @@ const ListCommentsPage: React.FC = () => {
 
         <div className="comments-container">
           <div className="comments-grid">
-            {filteredComments.map((c) => (
-              <CommentCard
-                key={c.id}
-                title={c.related_name ?? '(Sin título)'}
-                comment={c.comment}
-                userName={c.author}
-                userAvatar="/images/default-avatar.jpg"
-                rating={c.rating}
-              />
-            ))}
+            {filteredComments.length > 0 ? (
+              filteredComments.map((c) => (
+                <CommentCard
+                  key={c.id}
+                  title={c.related_name ?? '(Sin título)'}
+                  comment={c.comment}
+                  userName={c.author}
+                  userAvatar="/images/default-avatar.jpg"
+                  rating={c.rating}
+                />
+              ))
+            ) : (
+              <p className="no-results">No se encontraron reseñas.</p>
+            )}
           </div>
         </div>
       </main>

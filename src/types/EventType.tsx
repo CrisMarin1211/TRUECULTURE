@@ -1,5 +1,5 @@
 export interface EventItem {
-  id: string;
+  id?: string;
   image: string;
   imagefile?: File | null;
   name: string;

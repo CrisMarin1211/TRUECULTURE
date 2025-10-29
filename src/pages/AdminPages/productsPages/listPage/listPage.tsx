@@ -3,29 +3,42 @@ import './listPage.css';
 import AdminProductCard from '../../../../components/adminProductCard';
 import { useNavigate } from 'react-router-dom';
 import SidebarAdmin from '../../../../components/atomsUi/sideBarAdmin';
-
-type Product = {
-  id: string;
-  image: string;
-  name: string;
-  price: number;
-  Stock: number;
-  popularity: string;
-  location: string;
-  Status: string;
-};
+import { getProducts } from '../../../../services/products';
+import type { ProductItem } from '../../../../types/ProductType';
+import Loader from '../../../../components/loader';
 
 const ListProductPage: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-
+  const [products, setProducts] = useState<ProductItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [search, setSearch] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedProducts = localStorage.getItem('products');
-    if (storedProducts) {
-      setProducts(JSON.parse(storedProducts));
-    }
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const data = await getProducts();
+        setProducts(data);
+      } catch (err) {
+        console.error('Error cargando productos:', err);
+        setError('Error al cargar los productos');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
   }, []);
+
+  const filteredProducts = products.filter(
+    (p) =>
+      p.name.toLowerCase().includes(search.toLowerCase()) &&
+      (filterStatus ? p.status === filterStatus : true),
+  );
+
+  if (loading) return <Loader />;
+  if (error) return <div className="error">{error}</div>;
 
   return (
     <div className="page-container">
@@ -34,8 +47,15 @@ const ListProductPage: React.FC = () => {
         <div className="header-card">
           <div className="row row-1">
             <h4 className="title">Gestión de Productos</h4>
-            <input type="text" placeholder="Search ..." className="search-input" />
+            <input
+              type="text"
+              placeholder="Buscar producto..."
+              className="search-input"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
+
           <div className="row row-2">
             <div className="actions-left">
               <button className="btn-pink" onClick={() => navigate('/create-product')}>
@@ -43,14 +63,18 @@ const ListProductPage: React.FC = () => {
               </button>
               <button className="btn-outline">Visión General</button>
             </div>
-            <select className="filter-select">
+            <select
+              className="filter-select"
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+            >
               <option value="">Filtrar por estado</option>
               <option value="Activo">Activo</option>
-              <option value="Pausado">Pausado</option>
-              <option value="Agotado">Agotado</option>
+              <option value="No activo">No activo</option>
             </select>
           </div>
         </div>
+
         <div className="products-container">
           <div className="products-header">
             <h3>Todos los Productos</h3>
@@ -61,29 +85,19 @@ const ListProductPage: React.FC = () => {
               </div>
               <div className="status-item">
                 <span className="bubble paused"></span>
-                <span>Pausados</span>
-              </div>
-              <div className="status-item">
-                <span className="bubble out"></span>
-                <span>Agotados</span>
+                <span>No activos</span>
               </div>
             </div>
           </div>
 
           <div className="products-list">
-            {products.map((product) => (
-              <AdminProductCard
-                key={product.id}
-                id={product.id}
-                image={product.image}
-                name={product.name}
-                price={`$${product.price}`}
-                stock={product.Stock}
-                other={product.popularity}
-                location={product.location}
-                status={product.Status}
-              />
-            ))}
+            {filteredProducts.length > 0 ? (
+              filteredProducts.map((product) => (
+                <AdminProductCard key={product.id} product={product} />
+              ))
+            ) : (
+              <p>No se encontraron productos.</p>
+            )}
           </div>
         </div>
       </main>

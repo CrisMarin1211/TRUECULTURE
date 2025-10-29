@@ -4,15 +4,23 @@ import SidebarAdmin from '../../../components/atomsUi/sideBarAdmin';
 import CommentCard from '../../../components/commentCard';
 import { getComments } from '../../../services/comments';
 import type { CommentItem } from '../../../types/CommentType';
+import Loader from '../../../components/loader';
 
 const ListCommentsPage: React.FC = () => {
   const [comments, setComments] = useState<CommentItem[]>([]);
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchComments = async () => {
-      const data = await getComments();
-      setComments(data);
+      try {
+        const data = await getComments();
+        setComments(data);
+      } catch (error) {
+        console.error('Error al obtener comentarios:', error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchComments();
   }, []);
@@ -23,6 +31,8 @@ const ListCommentsPage: React.FC = () => {
       c.related_name?.toLowerCase().includes(search.toLowerCase()) ||
       c.author.toLowerCase().includes(search.toLowerCase()),
   );
+
+  if (loading) return <Loader />;
 
   return (
     <div className="page-container">

@@ -162,20 +162,34 @@
   margin-bottom: 0.35rem;
 }
 
-input,
-textarea {
+.form-card input[type='text'],
+.form-card input[type='number'],
+.form-card input[type='date'],
+.form-card input[type='time'],
+.form-card textarea {
   width: 100%;
   padding: 0.56rem;
   border-radius: 0.35rem;
   border: none;
-  background: #fff;
+  background: #fff !important;
   color: #000;
   font-size: 0.95rem;
+  box-sizing: border-box;
 }
 
-input:focus,
-textarea:focus {
-  outline: 2px solid rgba(17, 119, 241, 0.12);
+.form-card input:focus,
+.form-card textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(153, 203, 54, 0.4);
+}
+
+.form-card input::placeholder,
+.form-card textarea::placeholder {
+  color: #777;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  filter: invert(0);
 }
 
 textarea {

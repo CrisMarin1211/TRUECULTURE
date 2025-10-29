@@ -1,20 +1,19 @@
 export interface ProductItem {
-  id: string;
+  id?: number;
   image: string;
-  imageFile?: File | null;
+  imagefile?: File | null;
   name: string;
-  stock: number;
-  status: 'Activo' | 'No activo';
+  price: number;
+  description: string;
   location: string;
   address?: string;
-  city: 'Cali, Colombia' | 'Bogotá, Colombia';
-  description: string;
-  price: number;
+  city?: 'Cali, Colombia' | 'Bogotá, Colombia';
   totalstock: number;
   availablestock: number;
-  popularity: 'Alta demanda' | 'Media demanda' | 'Baja demanda';
-  tags: 'Afiches' | 'Pines' | 'Cultural' | 'Moda' | 'Gastronomía';
   unitssaled: number;
+  popularity?: 'Alta demanda' | 'Media demanda' | 'Baja demanda';
+  tags?: 'Afiches' | 'Pines' | 'Cultural' | 'Moda' | 'Gastronomía';
+  status: 'Activo' | 'No activo';
   isdraft?: boolean;
 }
 
@@ -24,9 +23,9 @@ export interface ProductProviderProps {
 
 export interface ProductContextType {
   products: ProductItem[];
-  addProduct: (product: Omit<ProductItem, 'id'>) => void;
-  updateStock: (id: string, stockTaken: number) => void;
-  editProduct: (id: string, updates: Partial<ProductItem>) => void;
-  removeProduct: (id: string) => void;
-  saveProduct: (product: Omit<ProductItem, 'id'>) => void;
+  addProduct: (product: Omit<ProductItem, 'id'>) => Promise<void>;
+  editProduct: (id: number, updates: Partial<ProductItem>) => Promise<void>;
+  removeProduct: (id: number) => Promise<void>;
+  updateStock: (id: number, stockTaken: number) => Promise<void>;
+  saveProduct: (product: Omit<ProductItem, 'id'>) => Promise<void>;
 }

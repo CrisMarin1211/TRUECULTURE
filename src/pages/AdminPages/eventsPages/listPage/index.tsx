@@ -36,7 +36,7 @@ const ListEventPage: React.FC = () => {
   const getEventStatus = (event: EventItem): 'Proximos' | 'Pendiente' | 'Finalizados' => {
     if (event.isdraft) return 'Pendiente';
 
-    const eventDateTime = new Date(${event.date}T${event.time});
+    const eventDateTime = new Date(`${event.date}T${event.time}`);
     const now = new Date();
 
     return eventDateTime > now ? 'Proximos' : 'Finalizados';

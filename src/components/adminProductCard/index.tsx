@@ -46,14 +46,14 @@ const AdminProductCard = ({ product }: AdminProductCardProps) => {
         </div>
         <div className="product-info-item">
           <span className="label">Estado</span>
-          <span className={value status-${product.status.toLowerCase().replace(' ', '-')}}>
+          <span className={`value status-${product.status.toLowerCase().replace(' ', '-')}`}>
             {product.status}
           </span>
         </div>
       </div>
 
       <div className="product-footer">
-        <button className="btn-view" onClick={() => navigate(/edit-product/${product.id})}>
+        <button className="btn-view" onClick={() => navigate(`/edit-product/${product.id}`)}>
           Editar
         </button>
       </div>

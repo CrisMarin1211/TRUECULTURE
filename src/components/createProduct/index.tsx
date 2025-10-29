@@ -1,55 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
-
-type Product = {
-  id: string;
-  image: string;
-  imageFile: File | null;
-  name: string;
-  Stock: number;
-  Status: string;
-  location: string;
-  city: string;
-  description: string;
-  price: number;
-  totalStock: number;
-  availableStock: number;
-  popularity: string;
-  tags: string;
-  UnitsSaled: number;
-  isDraft: boolean;
-};
+import { addProduct, updateProduct, deleteProduct, getProducts } from '../../services/products';
+import type { ProductItem } from '../../types/ProductType';
 
 const CreateProduct: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [product, setProduct] = useState<Product>({
-    id: crypto.randomUUID(),
+
+  const [product, setProduct] = useState<ProductItem>({
     image: '',
-    imageFile: null,
+    imagefile: null,
     name: '',
-    Stock: 0,
-    Status: '',
-    location: '',
-    city: '',
     description: '',
+    location: '',
+    address: '',
+    city: undefined,
     price: 0,
-    totalStock: 0,
-    availableStock: 0,
-    popularity: '',
-    tags: '',
-    UnitsSaled: 0,
-    isDraft: false,
+    totalstock: 0,
+    availablestock: 0,
+    unitssaled: 0,
+    popularity: undefined,
+    tags: undefined,
+    status: 'Activo',
+    isdraft: false,
   });
 
   useEffect(() => {
-    const stored = localStorage.getItem('products');
-    if (stored) {
-      const products: Product[] = JSON.parse(stored);
-      const found = products.find((p) => p.id === id);
-      if (found) setProduct(found);
-    }
+    const loadProduct = async () => {
+      if (id) {
+        try {
+          const data = await getProducts();
+          const found = data.find((p) => p.id === Number(id));
+          if (found) setProduct(found);
+        } catch (err) {
+          console.error('Error al cargar producto:', err);
+        }
+      }
+    };
+    loadProduct();
   }, [id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -57,31 +46,33 @@ const CreateProduct: React.FC = () => {
     setProduct((prev) => ({
       ...prev,
       [name]:
-        name === 'price' || name.toLowerCase().includes('stock') || name === 'UnitsSaled'
+        name === 'price' || name.toLowerCase().includes('stock') || name === 'unitssaled'
           ? Number(value)
           : value,
     }));
   };
 
-  const handleSave = () => {
-    const stored = localStorage.getItem('products');
-    let products: Product[] = stored ? JSON.parse(stored) : [];
-    if (id) {
-      products = products.map((p) => (p.id === id ? product : p));
-    } else {
-      products.push(product);
+  const handleSave = async () => {
+    try {
+      if (id) {
+        await updateProduct(Number(id), product);
+      } else {
+        await addProduct(product);
+      }
+      navigate('/list-products');
+    } catch (error) {
+      console.error('Error al guardar producto:', error);
     }
-    localStorage.setItem('products', JSON.stringify(products));
-    navigate('/list-products');
   };
 
-  const handleDelete = () => {
-    const stored = localStorage.getItem('products');
-    if (!stored) return;
-    const products: Product[] = JSON.parse(stored);
-    const filtered = products.filter((p) => p.id !== product.id);
-    localStorage.setItem('products', JSON.stringify(filtered));
-    navigate('/list-products');
+  const handleDelete = async () => {
+    if (!id) return;
+    try {
+      await deleteProduct(Number(id));
+      navigate('/list-products');
+    } catch (error) {
+      console.error('Error al eliminar producto:', error);
+    }
   };
 
   return (
@@ -99,9 +90,11 @@ const CreateProduct: React.FC = () => {
           <button className="btn save-btn" onClick={handleSave}>
             Guardar
           </button>
-          <button className="btn delete-btn" onClick={handleDelete}>
-            Eliminar
-          </button>
+          {id && (
+            <button className="btn delete-btn" onClick={handleDelete}>
+              Eliminar
+            </button>
+          )}
         </div>
       </div>
 
@@ -134,14 +127,14 @@ const CreateProduct: React.FC = () => {
               />
             </div>
             <div>
-              <label className="input-label" htmlFor="stock">
-                Stock
+              <label className="input-label" htmlFor="availablestock">
+                Stock Disponible
               </label>
               <input
-                id="stock"
+                id="availablestock"
                 type="number"
-                name="Stock"
-                value={product.Stock}
+                name="availablestock"
+                value={product.availablestock}
                 onChange={handleChange}
               />
             </div>
@@ -167,8 +160,8 @@ const CreateProduct: React.FC = () => {
               <input
                 id="status"
                 type="text"
-                name="Status"
-                value={product.Status}
+                name="status"
+                value={product.status}
                 onChange={handleChange}
               />
             </div>
@@ -178,7 +171,7 @@ const CreateProduct: React.FC = () => {
 
       <div className="row-4">
         <label className="input-label" htmlFor="description">
-          Descripción del evento
+          Descripción del producto
         </label>
         <textarea
           id="description"
@@ -202,26 +195,14 @@ const CreateProduct: React.FC = () => {
           />
         </div>
         <div>
-          <label className="input-label" htmlFor="totalStock">
+          <label className="input-label" htmlFor="totalstock">
             Stock Total
           </label>
           <input
-            id="totalStock"
+            id="totalstock"
             type="number"
-            name="totalStock"
-            value={product.totalStock}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label className="input-label" htmlFor="availableStock">
-            Stock Disponible
-          </label>
-          <input
-            id="availableStock"
-            type="number"
-            name="availableStock"
-            value={product.availableStock}
+            name="totalstock"
+            value={product.totalstock}
             onChange={handleChange}
           />
         </div>
@@ -233,7 +214,7 @@ const CreateProduct: React.FC = () => {
             id="popularity"
             type="text"
             name="popularity"
-            value={product.popularity}
+            value={product.popularity ?? ''}
             onChange={handleChange}
           />
         </div>
@@ -250,19 +231,19 @@ const CreateProduct: React.FC = () => {
                 id="tags"
                 type="text"
                 name="tags"
-                value={product.tags}
+                value={product.tags ?? ''}
                 onChange={handleChange}
               />
             </div>
             <div>
-              <label className="input-label" htmlFor="unitsSaled">
+              <label className="input-label" htmlFor="unitssaled">
                 Unidades Vendidas
               </label>
               <input
-                id="unitsSaled"
+                id="unitssaled"
                 type="number"
-                name="UnitsSaled"
-                value={product.UnitsSaled}
+                name="unitssaled"
+                value={product.unitssaled}
                 onChange={handleChange}
               />
             </div>

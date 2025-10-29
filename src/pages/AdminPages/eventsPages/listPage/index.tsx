@@ -12,6 +12,7 @@ const ListEventPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
 
   const navigate = useNavigate();
 
@@ -32,9 +33,24 @@ const ListEventPage: React.FC = () => {
     fetchEvents();
   }, []);
 
-  const filteredEvents = events.filter((event) =>
-    event.name.toLowerCase().includes(search.toLowerCase()),
-  );
+  const getEventStatus = (event: EventItem): 'Proximos' | 'Pendiente' | 'Finalizados' => {
+    if (event.isdraft) return 'Pendiente';
+
+    const eventDateTime = new Date(${event.date}T${event.time});
+    const now = new Date();
+
+    return eventDateTime > now ? 'Proximos' : 'Finalizados';
+  };
+
+  const filteredEvents = events.filter((event) => {
+    const searchLower = search.toLowerCase();
+    const matchesSearch = event.name.toLowerCase().includes(searchLower);
+
+    const status = getEventStatus(event);
+    const matchesStatus = filterStatus ? status === filterStatus : true;
+
+    return matchesSearch && matchesStatus;
+  });
 
   if (loading) return <Loader />;
   if (error) return <div className="error">{error}</div>;
@@ -60,12 +76,16 @@ const ListEventPage: React.FC = () => {
               <button className="btn-pink" onClick={() => navigate('/create-event')}>
                 Nuevo Evento
               </button>
-              <button className="btn-outline">Visión General</button>
+              {/* <button className="btn-outline">Visión General</button> */}
             </div>
-            <select className="filter-select">
+            <select
+              className="filter-select"
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+            >
               <option value="">Filtrar por estado</option>
               <option value="Proximos">Próximos</option>
-              <option value="Pendiente">Pendiente</option>
+              <option value="Pendiente">Pendientes</option>
               <option value="Finalizados">Finalizados</option>
             </select>
           </div>

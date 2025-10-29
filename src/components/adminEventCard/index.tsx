@@ -50,7 +50,7 @@ const AdminEventCard = ({ event }: AdminEventCardProps) => {
       </div>
 
       <div className="event-footer">
-        <button className="btn-view" onClick={() => navigate(/edit-event/${event.id})}>
+        <button className="btn-view" onClick={() => navigate(`/edit-event/${event.id}`)}>
           Editar
         </button>
       </div>

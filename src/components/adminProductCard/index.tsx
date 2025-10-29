@@ -1,49 +1,39 @@
 import { useNavigate } from 'react-router-dom';
 import './style.css';
+import type { ProductItem } from '../../types/ProductType';
 
-type AdminProductCardProps = {
-  id: string;
-  image: string;
-  name: string;
-  price: string;
-  stock: number;
-  other: string;
-  location: string;
-  status: string;
-};
+interface AdminProductCardProps {
+  product: ProductItem;
+}
 
-const AdminProductCard = ({
-  id,
-  image,
-  name,
-  price,
-  stock,
-  other,
-  location,
-  status,
-}: AdminProductCardProps) => {
+const AdminProductCard = ({ product }: AdminProductCardProps) => {
   const navigate = useNavigate();
 
   return (
     <div className="product-card admin">
       <div className="product-img-wrapper">
-        <img src={image} alt={name} className="product-img" />
+        <img
+          src={product.image || '/placeholder.jpg'}
+          alt={product.name}
+          className="product-img"
+          onError={(e) => (e.currentTarget.src = '/placeholder.jpg')}
+        />
       </div>
 
-      <h3 className="admin-product-name">{name}</h3>
+      <h3 className="admin-product-name">{product.name}</h3>
 
       <div className="product-info-row">
         <div className="product-info-item">
           <span className="label">Precio</span>
-          <span className="value">{price}</span>
+          <span className="value">${product.price}</span>
         </div>
         <div className="product-info-item">
           <span className="label">Stock</span>
-          <span className="value">{stock}</span>
+          <span className="value">{product.totalstock}</span>
         </div>
         <div className="product-info-item">
-          <span className="label">Otro</span>
-          <span className="value">{other}</span>
+          <span className="label">Popularidad</span>
+          <span className="value">{product.popularity}</span>
         </div>
       </div>
 
@@ -51,17 +41,19 @@ const AdminProductCard = ({
 
       <div className="product-bottom">
         <div className="product-info-item">
-          <span className="label">Lugar</span>
-          <span className="value">{location}</span>
+          <span className="label">Ubicación</span>
+          <span className="value">{product.location}</span>
         </div>
         <div className="product-info-item">
           <span className="label">Estado</span>
-          <span className="value">{status}</span>
+          <span className={value status-${product.status.toLowerCase().replace(' ', '-')}}>
+            {product.status}
+          </span>
         </div>
       </div>
 
       <div className="product-footer">
-        <button className="btn-view" onClick={() => navigate(`/edit-product/${id}`)}>
+        <button className="btn-view" onClick={() => navigate(/edit-product/${product.id})}>
           Editar
         </button>
       </div>

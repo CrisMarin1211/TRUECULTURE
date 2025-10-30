@@ -28,7 +28,7 @@ const SidebarAdmin: React.FC = () => {
 
       <div className="sidebar-actions">
         <button
-          className={sidebar-action-btn ${isActive('/create-event') ? 'active' : ''}}
+          className={`sidebar-action-btn ${isActive('/create-event') ? 'active' : ''}`}
           onClick={() => navigate('/create-event')}
         >
           <AddCircleIcon className="sidebar-action-icon" />
@@ -39,7 +39,7 @@ const SidebarAdmin: React.FC = () => {
         </button>
 
         <button
-          className={sidebar-action-btn ${isActive('/create-product') ? 'active' : ''}}
+          className={`sidebar-action-btn ${isActive('/create-product') ? 'active' : ''}`}
           onClick={() => navigate('/create-product')}
         >
           <AddCircleIcon className="sidebar-action-icon" />

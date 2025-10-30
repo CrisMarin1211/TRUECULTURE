@@ -15,7 +15,7 @@ import ListEventPage from '../pages/AdminPages/eventsPages/listPage';
 import Categories from '../pages/ClientsPages/categoriesPage/categories';
 import ProfileAdminPage from '../pages/AdminPages/profilePage';
 import ListCommentsPage from '../pages/AdminPages/commentsPage';
-import CreateTicketPage from '../pages/AdminPages/ticketsPages/createPage/createPage';
+import CreateTicketPage from '../pages/AdminPages/ticketsPages/createPage';
 import ListTicketsPage from '../pages/AdminPages/ticketsPages/listPage';
 import AdminHomePage from '../pages/AdminPages/homePage';
 

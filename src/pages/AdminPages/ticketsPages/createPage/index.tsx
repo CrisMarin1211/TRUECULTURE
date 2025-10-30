@@ -1,5 +1,5 @@
 import React from 'react';
-import './createPage.css';
+import './style.css';
 import SidebarAdmin from '../../../../components/atomsUi/sideBarAdmin';
 import CreateTicket from '../../../../components/adminTicketCard';
 

@@ -81,7 +81,7 @@ const HomePage = () => {
   }, []);
 
   const backgroundStyle = {
-    backgroundImage: `url(${slides[current].image})`,
+    backgroundImage: url(${slides[current].image}),
   };
 
   return (
@@ -89,7 +89,7 @@ const HomePage = () => {
       <header className="header">
         <img src="/images/logo.png" alt="Logo" className="logo" />
         <div className="header-right">
-          <Link to="/login" className="admin-link">
+          <Link to="/login" className="admin-link" state={{ fromAdmin: true }}>
             Administrador
           </Link>
           <button onClick={goToSignUp} className="signup-btn">
@@ -110,7 +110,7 @@ const HomePage = () => {
 
         <div className="footer-right">
           {slides[current].thumbs.map((thumb, i) => (
-            <img key={i} src={thumb} alt={`thumb-${i}`} className="footer-img" />
+            <img key={i} src={thumb} alt={thumb-${i}} className="footer-img" />
           ))}
         </div>
       </div>

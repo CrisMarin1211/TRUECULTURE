@@ -6,7 +6,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 
-const LoginForm = () => {
+interface LoginFormProps {
+  fromAdmin?: boolean;
+}
+
+const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -17,7 +21,12 @@ const LoginForm = () => {
     try {
       await login({ email, password });
       alert('Inicio de sesión exitoso');
-      navigate('/DashboardClient');
+
+      if (fromAdmin) {
+        navigate('/dashboard');
+      } else {
+        navigate('/DashboardClient');
+      }
     } catch (error: any) {
       console.error('Error en login:', error.message);
       alert('Email o contraseña incorrectos');
@@ -27,6 +36,11 @@ const LoginForm = () => {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
+      if (fromAdmin) {
+        navigate('/dashboard');
+      } else {
+        navigate('/DashboardClient');
+      }
     } catch (error: any) {
       console.error('Error en login con Google:', error.message);
       alert('No se pudo iniciar sesión con Google');

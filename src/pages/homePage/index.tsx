@@ -81,7 +81,7 @@ const HomePage = () => {
   }, []);
 
   const backgroundStyle = {
-    backgroundImage: url(${slides[current].image}),
+    backgroundImage: `url(${slides[current].image})`,
   };
 
   return (
@@ -110,7 +110,7 @@ const HomePage = () => {
 
         <div className="footer-right">
           {slides[current].thumbs.map((thumb, i) => (
-            <img key={i} src={thumb} alt={thumb-${i}} className="footer-img" />
+            <img key={i} src={thumb} alt={`thumb-${i}`} className="footer-img" />
           ))}
         </div>
       </div>

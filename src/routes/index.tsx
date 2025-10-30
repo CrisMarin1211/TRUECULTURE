@@ -15,6 +15,9 @@ import ListEventPage from '../pages/AdminPages/eventsPages/listPage';
 import Categories from '../pages/ClientsPages/categoriesPage/categories';
 import ProfileAdminPage from '../pages/AdminPages/profilePage';
 import ListCommentsPage from '../pages/AdminPages/commentsPage';
+import CreateTicketPage from '../pages/AdminPages/ticketsPages/createPage/createPage';
+import ListTicketsPage from '../pages/AdminPages/ticketsPages/listPage';
+import AdminHomePage from '../pages/AdminPages/homePage';
 
 const AppRoutes = () => {
   return (
@@ -26,6 +29,8 @@ const AppRoutes = () => {
         <Route path="/my-coupons" element={<MyCouponsPage />} />
         <Route path="/my-profile" element={<ProfilePage />} />
 
+        <Route path="/dashboard" element={<AdminHomePage />} />
+
         <Route path="/create-product" element={<CreateProductPage />} />
         <Route path="/edit-product/:id" element={<CreateProductPage />} />
         <Route path="/list-products" element={<ListProductPage />} />
@@ -33,6 +38,10 @@ const AppRoutes = () => {
         <Route path="/create-event" element={<CreateEventPage />} />
         <Route path="/edit-event/:id" element={<CreateEventPage />} />
         <Route path="/list-events" element={<ListEventPage />} />
+
+        <Route path="/create-ticket" element={<CreateTicketPage />} />
+        <Route path="/edit-ticket/:id" element={<CreateTicketPage />} />
+        <Route path="/list-tickets" element={<ListTicketsPage />} />
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<RegisterPage />} />

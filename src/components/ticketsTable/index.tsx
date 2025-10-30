@@ -30,7 +30,7 @@ const TicketsTable: React.FC<TicketsTableProps> = ({ tickets }) => {
               <td>{ticket.order_number}</td>
               <td>{ticket.ticket_type}</td>
               <td>{ticket.quantity}</td>
-              <td className={status ${ticket.payment_status.toLowerCase()}}>
+              <td className={`status ${ticket.payment_status.toLowerCase()}`}>
                 {ticket.payment_status}
               </td>
             </tr>

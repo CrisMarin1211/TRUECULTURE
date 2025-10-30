@@ -24,11 +24,18 @@ export const getComments = async (): Promise<CommentItem[]> => {
 
   if (!comments || comments.length === 0) return [];
 
-  const productIds = comments.filter((c) => c.related_type === 'product').map((c) => c.related_id);
-  const eventIds = comments.filter((c) => c.related_type === 'event').map((c) => c.related_id);
+  const productIds = comments
+    .filter((c) => c.related_type === 'product')
+    .map((c) => Number(c.related_id))
+    .filter((id) => !isNaN(id));
 
-  const productNames = new Map<string, string>();
-  const eventNames = new Map<string, string>();
+  const eventIds = comments
+    .filter((c) => c.related_type === 'event')
+    .map((c) => Number(c.related_id))
+    .filter((id) => !isNaN(id));
+
+  const productNames = new Map<number, string>();
+  const eventNames = new Map<number, string>();
 
   if (productIds.length > 0) {
     const { data: products } = await supabase
@@ -44,11 +51,13 @@ export const getComments = async (): Promise<CommentItem[]> => {
     events?.forEach((e) => eventNames.set(e.id, e.name));
   }
 
-  return comments.map((c) => ({
+  const mappedComments = comments.map((c) => ({
     ...c,
     related_name:
       c.related_type === 'product'
-        ? productNames.get(String(c.related_id))
-        : eventNames.get(String(c.related_id)),
+        ? productNames.get(Number(c.related_id))
+        : eventNames.get(Number(c.related_id)),
   }));
+
+  return mappedComments;
 };

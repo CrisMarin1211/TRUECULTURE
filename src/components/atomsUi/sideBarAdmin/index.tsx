@@ -6,6 +6,8 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import './style.css';
 import { Comment } from '@mui/icons-material';
 
@@ -26,7 +28,7 @@ const SidebarAdmin: React.FC = () => {
 
       <div className="sidebar-actions">
         <button
-          className={`sidebar-action-btn ${isActive('/create-event') ? 'active' : ''}`}
+          className={sidebar-action-btn ${isActive('/create-event') ? 'active' : ''}}
           onClick={() => navigate('/create-event')}
         >
           <AddCircleIcon className="sidebar-action-icon" />
@@ -37,7 +39,7 @@ const SidebarAdmin: React.FC = () => {
         </button>
 
         <button
-          className={`sidebar-action-btn ${isActive('/create-product') ? 'active' : ''}`}
+          className={sidebar-action-btn ${isActive('/create-product') ? 'active' : ''}}
           onClick={() => navigate('/create-product')}
         >
           <AddCircleIcon className="sidebar-action-icon" />
@@ -59,25 +61,39 @@ const SidebarAdmin: React.FC = () => {
         {openOptions && (
           <ul className="sidebar-menu">
             <li
+              className={isActive('/dashboard') ? 'active' : ''}
+              onClick={() => navigate('/dashboard')}
+            >
+              <DashboardIcon className="sidebar-icon" />
+              <span>Dashboard</span>
+            </li>
+            <li
               className={isActive('/list-events') ? 'active' : ''}
               onClick={() => navigate('/list-events')}
             >
               <EventIcon className="sidebar-icon" />
-              <span>Manejar eventos</span>
+              <span>Gestionar eventos</span>
             </li>
             <li
               className={isActive('/list-products') ? 'active' : ''}
               onClick={() => navigate('/list-products')}
             >
               <InventoryIcon className="sidebar-icon" />
-              <span>Manejar productos</span>
+              <span>Gestionar productos</span>
             </li>
             <li
               className={isActive('/list-comments') ? 'active' : ''}
               onClick={() => navigate('/list-comments')}
             >
               <Comment className="sidebar-icon" />
-              <span>Manejar reseñas</span>
+              <span>Gestionar reseñas</span>
+            </li>
+            <li
+              className={isActive('/list-tickets') ? 'active' : ''}
+              onClick={() => navigate('/list-tickets')}
+            >
+              <ConfirmationNumberIcon className="sidebar-icon" />
+              <span>Gestionar reservas</span>
             </li>
           </ul>
         )}

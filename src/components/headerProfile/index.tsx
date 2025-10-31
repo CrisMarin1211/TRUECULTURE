@@ -30,7 +30,7 @@ const HeaderProfile: React.FC = () => {
     <div className="header-profile">
       <Avatar src={avatarUrl} className="profile-avatar" />
       <div className="profile-info">
-        <h2 className="profile-name">{userName}</h2>
+        <h2 className="profile-name">Bienvenida {userName}!</h2>
         <span className="profile-role">Administrador del sistema</span>
       </div>
     </div>

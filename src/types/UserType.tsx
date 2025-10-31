@@ -34,6 +34,7 @@ export interface UserProfile {
   name?: string;
   nickname?: string;
   organization?: string;
+  avatar_url?: string;
   gender?: string;
   country?: string;
   language?: string;
@@ -41,3 +42,4 @@ export interface UserProfile {
   created_at?: string;
   updated_at?: string;
 }
+s;

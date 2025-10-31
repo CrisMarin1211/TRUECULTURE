@@ -59,7 +59,7 @@ const CreateEvent: React.FC = () => {
     );
 
     if (missingFields.length > 0) {
-      alert(Por favor completa todos los campos obligatorios antes de guardar.);
+      alert('Por favor completa todos los campos obligatorios antes de guardar.');
       return;
     }
 

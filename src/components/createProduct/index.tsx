@@ -276,6 +276,18 @@ const CreateProduct: React.FC = () => {
           </select>
         </div>
         <div>
+          <label className="input-label" htmlFor="name">
+            Dirección
+          </label>
+          <input
+            id="address"
+            type="text"
+            name="address"
+            value={product.address}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
           <label className="input-label" htmlFor="isdraft">
             Borrador
           </label>

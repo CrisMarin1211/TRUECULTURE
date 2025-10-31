@@ -2,29 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addEvent, deleteEvent, getEvents, updateEvent } from '../../services/events';
-import type { EventItem } from '../../types/EventType';
+import { defaultEvent, type EventItem } from '../../types/EventType';
 
 const CreateEvent: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
   const [event, setEvent] = useState<EventItem>({
-    image: '',
-    imagefile: null,
-    name: '',
-    date: '',
-    time: '',
-    location: '',
-    address: '',
-    city: 'Cali, Colombia',
-    description: '',
-    price: 0,
-    totalseats: 0,
-    availableseats: 0,
-    popularity: 'Media',
-    tags: 'Musica',
-    expectedattendance: 0,
-    isdraft: false,
+    ...defaultEvent,
   });
 
   useEffect(() => {
@@ -38,17 +23,46 @@ const CreateEvent: React.FC = () => {
     fetchEvent();
   }, [id]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
+    const target = e.target;
+    const { name, value } = target;
+
     setEvent((prev) => ({
       ...prev,
       [name]: ['price', 'totalseats', 'availableseats', 'expectedattendance'].includes(name)
         ? Number(value)
-        : value,
+        : name === 'isdraft'
+          ? value === 'true'
+          : value,
     }));
   };
 
   const handleSave = async () => {
+    const requiredFields = [
+      'name',
+      'date',
+      'time',
+      'location',
+      'description',
+      'price',
+      'totalseats',
+      'availableseats',
+      'city',
+      'tags',
+      'popularity',
+    ];
+
+    const missingFields = requiredFields.filter(
+      (field) => event[field as keyof EventItem] === '' || event[field as keyof EventItem] === 0,
+    );
+
+    if (missingFields.length > 0) {
+      alert(Por favor completa todos los campos obligatorios antes de guardar.);
+      return;
+    }
+
     try {
       if (id) {
         await updateEvent(id, event);
@@ -57,22 +71,7 @@ const CreateEvent: React.FC = () => {
         await addEvent(event);
         alert('Evento creado correctamente');
         setEvent({
-          image: '',
-          imagefile: null,
-          name: '',
-          date: '',
-          time: '',
-          location: '',
-          address: '',
-          city: 'Cali, Colombia',
-          description: '',
-          price: 0,
-          totalseats: 0,
-          availableseats: 0,
-          popularity: 'Media',
-          tags: 'Musica',
-          expectedattendance: 0,
-          isdraft: false,
+          ...defaultEvent,
         });
       }
       navigate('/list-events');
@@ -218,53 +217,79 @@ const CreateEvent: React.FC = () => {
           <label className="input-label" htmlFor="popularity">
             Popularidad
           </label>
-          <input
+          <select
             id="popularity"
-            type="text"
             name="popularity"
             value={event.popularity}
             onChange={handleChange}
-          />
+          >
+            <option value="">Selecciona una opción</option>
+            <option value="Alta">Alta</option>
+            <option value="Media">Media</option>
+            <option value="Baja">Baja</option>
+          </select>
         </div>
       </div>
 
-      <div className="row-6 grid-2">
+      <div className="row-5">
         <div>
-          <div className="grid-2">
-            <div>
-              <label className="input-label" htmlFor="tags">
-                Tags
-              </label>
-              <input id="tags" type="text" name="tags" value={event.tags} onChange={handleChange} />
-            </div>
-            <div>
-              <label className="input-label" htmlFor="expectedattendance">
-                Asistencia Esperada
-              </label>
-              <input
-                id="expectedattendance"
-                type="number"
-                name="expectedattendance"
-                value={event.expectedattendance}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="qr-box">
-            <img src="/images/qr.png" alt="QR" className="qr-img" />
-            <span>Escanea el código QR para acceder al evento</span>
-          </div>
+          <label className="input-label" htmlFor="city">
+            Ciudad
+          </label>
+          <select id="city" name="city" value={event.city} onChange={handleChange}>
+            <option value="">Selecciona una ciudad</option>
+            <option value="Cali, Colombia">Cali, Colombia</option>
+            <option value="Bogotá, Colombia">Bogotá, Colombia</option>
+          </select>
         </div>
 
-        <div className="col">
-          <div className="placeholder-box">Contenido futuro</div>
+        <div>
+          <label className="input-label" htmlFor="tags">
+            Categoría / Tags
+          </label>
+          <select id="tags" name="tags" value={event.tags} onChange={handleChange}>
+            <option value="">Selecciona una categoría</option>
+            <option value="Musica">Música</option>
+            <option value="Cultural">Cultural</option>
+            <option value="Familiar">Familiar</option>
+            <option value="Diversion">Diversión</option>
+            <option value="Gastronomia">Gastronomía</option>
+          </select>
         </div>
+
+        <div>
+          <label className="input-label" htmlFor="expectedattendance">
+            Asistencia Esperada
+          </label>
+          <input
+            id="expectedattendance"
+            type="number"
+            name="expectedattendance"
+            value={event.expectedattendance}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label className="input-label" htmlFor="isdraft">
+            Borrador
+          </label>
+          <select id="isdraft" name="isdraft" value={String(event.isdraft)} onChange={handleChange}>
+            <option value="">Selecciona</option>
+            <option value="true">Sí</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+      </div>
+
+      {/* <div className="qr-box">
+        <img src="/images/qr.png" alt="QR" className="qr-img" />
+        <span>Escanea el código QR para acceder al evento</span>
       </div>
 
       <div className="row-7">
         <button className="btn metrics-btn">Ver Métricas</button>
-      </div>
+      </div> */}
     </div>
   );
 };

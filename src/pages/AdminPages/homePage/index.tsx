@@ -1,21 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 import SidebarAdmin from '../../../components/atomsUi/sideBarAdmin';
+import HeaderProfile from '../../../components/headerProfile';
+import StatsGrid from '../../../components/statsGrid';
+import Loader from '../../../components/loader';
 
 const AdminHomePage: React.FC = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        setLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
+
+  if (loading) return <Loader />;
+
   return (
     <div className="page-container">
       <SidebarAdmin />
       <main className="main-content">
-        <div className="home-card">
-          <h2 className="welcome-title">Bienvenido al Panel de Administración</h2>
-          <p className="welcome-text">
-            Aquí podrás gestionar los productos, eventos, reservas, reseñas y más.
-          </p>
-          <p className="coming-soon">
-            🚀 Próximamente: panel de estadísticas, reportes y accesos rápidos.
-          </p>
-        </div>
+        <HeaderProfile />
+        <StatsGrid />
       </main>
     </div>
   );

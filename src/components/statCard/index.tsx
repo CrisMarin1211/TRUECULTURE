@@ -55,7 +55,7 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, percentage, color, ch
             mb: 1,
           }}
         >
-          {percentage > 0 ? ▲ ${percentage}% : ▼ ${Math.abs(percentage)}%}
+          {percentage > 0 ? `▲ ${percentage}%` : `▼ ${Math.abs(percentage)}%`}
         </Typography>
         <div style={{ width: '100%', height: 100 }}>
           <ResponsiveContainer>

@@ -18,6 +18,25 @@ export interface EventItem {
   isdraft?: boolean;
 }
 
+export const defaultEvent: EventItem = {
+  image: '',
+  imagefile: null,
+  name: '',
+  date: '',
+  time: '',
+  location: '',
+  address: '',
+  city: 'Cali, Colombia',
+  description: '',
+  price: 0,
+  totalseats: 0,
+  availableseats: 0,
+  popularity: 'Media',
+  tags: 'Musica',
+  expectedattendance: 0,
+  isdraft: false,
+};
+
 export interface EventProviderProps {
   children: React.ReactNode;
 }

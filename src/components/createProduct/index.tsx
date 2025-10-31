@@ -2,36 +2,20 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addProduct, updateProduct, deleteProduct, getProducts } from '../../services/products';
-import type { ProductItem } from '../../types/ProductType';
+import { defaultProduct, type ProductItem } from '../../types/ProductType';
 
 const CreateProduct: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [product, setProduct] = useState<ProductItem>({
-    image: '',
-    imagefile: null,
-    name: '',
-    description: '',
-    location: '',
-    address: '',
-    city: undefined,
-    price: 0,
-    totalstock: 0,
-    availablestock: 0,
-    unitssaled: 0,
-    popularity: undefined,
-    tags: undefined,
-    status: 'Activo',
-    isdraft: false,
-  });
+  const [product, setProduct] = useState<ProductItem>({ ...defaultProduct });
 
   useEffect(() => {
     const loadProduct = async () => {
       if (id) {
         try {
           const data = await getProducts();
-          const found = data.find((p) => p.id === Number(id));
+          const found = data.find((p) => String(p.id) === id);
           if (found) setProduct(found);
         } catch (err) {
           console.error('Error al cargar producto:', err);
@@ -41,37 +25,70 @@ const CreateProduct: React.FC = () => {
     loadProduct();
   }, [id]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
     setProduct((prev) => ({
       ...prev,
-      [name]:
-        name === 'price' || name.toLowerCase().includes('stock') || name === 'unitssaled'
-          ? Number(value)
+      [name]: ['price', 'totalstock', 'availablestock', 'unitssaled'].includes(name)
+        ? Number(value)
+        : name === 'isdraft'
+          ? value === 'true'
           : value,
     }));
   };
 
   const handleSave = async () => {
+    const requiredFields = [
+      'name',
+      'price',
+      'description',
+      'location',
+      'status',
+      'totalstock',
+      'availablestock',
+      'unitssaled',
+      'city',
+      'tags',
+    ];
+
+    const missingFields = requiredFields.filter(
+      (field) => !product[field as keyof ProductItem] && product[field as keyof ProductItem] !== 0,
+    );
+
+    if (missingFields.length > 0) {
+      alert('Por favor completa todos los campos obligatorios antes de guardar.');
+      return;
+    }
+
     try {
       if (id) {
         await updateProduct(Number(id), product);
+        alert('Producto actualizado correctamente');
       } else {
         await addProduct(product);
+        alert('Producto creado correctamente');
+        setProduct({ ...defaultProduct });
       }
       navigate('/list-products');
     } catch (error) {
       console.error('Error al guardar producto:', error);
+      alert('Error guardando el producto');
     }
   };
 
   const handleDelete = async () => {
-    if (!id) return;
+    if (!id) return alert('No hay un producto para eliminar');
+    if (!confirm('¿Seguro que quieres eliminar este producto?')) return;
+
     try {
       await deleteProduct(Number(id));
+      alert('Producto eliminado');
       navigate('/list-products');
     } catch (error) {
       console.error('Error al eliminar producto:', error);
+      alert('Error eliminando el producto');
     }
   };
 
@@ -157,13 +174,11 @@ const CreateProduct: React.FC = () => {
               <label className="input-label" htmlFor="status">
                 Estado
               </label>
-              <input
-                id="status"
-                type="text"
-                name="status"
-                value={product.status}
-                onChange={handleChange}
-              />
+              <select id="status" name="status" value={product.status} onChange={handleChange}>
+                <option value="">Selecciona estado</option>
+                <option value="Activo">Activo</option>
+                <option value="No activo">No activo</option>
+              </select>
             </div>
           </div>
         </div>
@@ -208,61 +223,87 @@ const CreateProduct: React.FC = () => {
         </div>
         <div>
           <label className="input-label" htmlFor="popularity">
-            Nivel de Ventas
+            Nivel de Demanda
           </label>
-          <input
+          <select
             id="popularity"
-            type="text"
             name="popularity"
             value={product.popularity ?? ''}
             onChange={handleChange}
-          />
+          >
+            <option value="">Selecciona una opción</option>
+            <option value="Alta demanda">Alta demanda</option>
+            <option value="Media demanda">Media demanda</option>
+            <option value="Baja demanda">Baja demanda</option>
+          </select>
+        </div>
+        <div>
+          <label className="input-label" htmlFor="tags">
+            Categoría / Tags
+          </label>
+          <select id="tags" name="tags" value={product.tags ?? ''} onChange={handleChange}>
+            <option value="">Selecciona una categoría</option>
+            <option value="Afiches">Afiches</option>
+            <option value="Pines">Pines</option>
+            <option value="Cultural">Cultural</option>
+            <option value="Moda">Moda</option>
+            <option value="Gastronomía">Gastronomía</option>
+          </select>
         </div>
       </div>
 
-      <div className="row-6 grid-2">
+      <div className="row-5">
         <div>
-          <div className="grid-2">
-            <div>
-              <label className="input-label" htmlFor="tags">
-                Tags
-              </label>
-              <input
-                id="tags"
-                type="text"
-                name="tags"
-                value={product.tags ?? ''}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label className="input-label" htmlFor="unitssaled">
-                Unidades Vendidas
-              </label>
-              <input
-                id="unitssaled"
-                type="number"
-                name="unitssaled"
-                value={product.unitssaled}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
+          <label className="input-label" htmlFor="unitssaled">
+            Unidades Vendidas
+          </label>
+          <input
+            id="unitssaled"
+            type="number"
+            name="unitssaled"
+            value={product.unitssaled}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label className="input-label" htmlFor="city">
+            Ciudad
+          </label>
+          <select id="city" name="city" value={product.city ?? ''} onChange={handleChange}>
+            <option value="">Selecciona una ciudad</option>
+            <option value="Cali, Colombia">Cali, Colombia</option>
+            <option value="Bogotá, Colombia">Bogotá, Colombia</option>
+          </select>
+        </div>
+        <div>
+          <label className="input-label" htmlFor="isdraft">
+            Borrador
+          </label>
+          <select
+            id="isdraft"
+            name="isdraft"
+            value={String(product.isdraft)}
+            onChange={handleChange}
+          >
+            <option value="">Selecciona</option>
+            <option value="true">Sí</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+      </div>
 
-          <div className="qr-box">
-            <img src="/images/qr.png" alt="QR" className="qr-img" />
-            <span>Escanea el código QR para pagar fácilmente</span>
-          </div>
+      {/* <div className="row-6">
+        <div className="qr-box">
+          <img src="/images/qr.png" alt="QR" className="qr-img" />
+          <span>Escanea el código QR para pagar fácilmente</span>
         </div>
 
-        <div className="col">
-          <div className="placeholder-box">Contenido futuro</div>
-        </div>
+        <div className="placeholder-box">Contenido futuro</div>
       </div>
 
       <div className="row-7">
         <button className="btn metrics-btn">Ver Métricas</button>
-      </div>
+      </div> */}
     </div>
   );
 };

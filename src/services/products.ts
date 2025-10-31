@@ -27,3 +27,13 @@ export const deleteProduct = async (id: number): Promise<ProductItem[]> => {
   if (error) throw error;
   return data ?? [];
 };
+
+export const getTotalProducts = async (): Promise<number> => {
+  const { count, error } = await supabase
+    .from('products')
+    .select('*', { count: 'exact', head: true });
+
+  if (error) throw error;
+
+  return count || 0;
+};

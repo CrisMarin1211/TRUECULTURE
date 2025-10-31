@@ -256,7 +256,6 @@ const CreateEvent: React.FC = () => {
             <option value="Gastronomia">Gastronomía</option>
           </select>
         </div>
-
         <div>
           <label className="input-label" htmlFor="expectedattendance">
             Asistencia Esperada
@@ -269,7 +268,18 @@ const CreateEvent: React.FC = () => {
             onChange={handleChange}
           />
         </div>
-
+        <div>
+          <label className="input-label" htmlFor="name">
+            Dirección
+          </label>
+          <input
+            id="address"
+            type="text"
+            name="address"
+            value={event.address}
+            onChange={handleChange}
+          />
+        </div>
         <div>
           <label className="input-label" htmlFor="isdraft">
             Borrador

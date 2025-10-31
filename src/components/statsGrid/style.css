@@ -1,0 +1,22 @@
+.stats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.stat-col {
+  flex: 1;
+}
+
+.loading-text {
+  color: #fff;
+  text-align: center;
+  font-size: 1.1rem;
+}

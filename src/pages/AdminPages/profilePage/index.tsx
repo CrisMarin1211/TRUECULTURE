@@ -9,6 +9,8 @@ const ProfileAdminPage: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [newAvatarUrl, setNewAvatarUrl] = useState('');
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -21,7 +23,6 @@ const ProfileAdminPage: React.FC = () => {
         const profileData = await getUserProfileByEmail(user.email);
         setProfile(profileData);
       }
-
       setLoading(false);
     };
 
@@ -35,34 +36,41 @@ const ProfileAdminPage: React.FC = () => {
 
   const handleSave = async () => {
     const authId = localStorage.getItem('user_id');
-    if (!authId) {
-      alert('No se encontró el ID de usuario. Vuelve a iniciar sesión.');
-      return;
-    }
+    if (!authId || !profile) return;
 
-    if (!profile) return;
     setSaving(true);
-
     try {
-      await updateUserProfile(authId, {
-        name: profile.name,
-        nickname: profile.nickname,
-        gender: profile.gender,
-        country: profile.country,
-        language: profile.language,
-        timezone: profile.timezone,
-        organization: profile.organization,
-      });
+      await updateUserProfile(authId, profile);
       alert('Cambios guardados correctamente');
-    } catch (error) {
-      console.error(error);
+    } catch {
       alert('Error al guardar cambios');
     } finally {
       setSaving(false);
     }
   };
 
-  if (loading) {
+  const handleAvatarClick = () => {
+    setNewAvatarUrl(profile?.avatar_url || '');
+    setShowModal(true);
+  };
+
+  const handleAvatarSave = async () => {
+    if (!profile) return;
+    const authId = localStorage.getItem('user_id');
+    if (!authId) return;
+
+    const updatedProfile = { ...profile, avatar_url: newAvatarUrl };
+    setProfile(updatedProfile);
+    setShowModal(false);
+
+    try {
+      await updateUserProfile(authId, { avatar_url: newAvatarUrl });
+    } catch {
+      alert('Error al actualizar avatar');
+    }
+  };
+
+  if (loading)
     return (
       <div className="page-container">
         <SidebarAdmin />
@@ -73,9 +81,8 @@ const ProfileAdminPage: React.FC = () => {
         </main>
       </div>
     );
-  }
 
-  if (!profile) {
+  if (!profile)
     return (
       <div className="page-container">
         <SidebarAdmin />
@@ -86,7 +93,6 @@ const ProfileAdminPage: React.FC = () => {
         </main>
       </div>
     );
-  }
 
   return (
     <div className="page-container">
@@ -99,9 +105,10 @@ const ProfileAdminPage: React.FC = () => {
             <div className="profile-header">
               <div className="profile-info">
                 <img
-                  src="https://i.pravatar.cc/120?img=5"
+                  src={profile.avatar_url || 'https://i.pravatar.cc/120?img=5'}
                   alt="Usuario"
                   className="profile-avatar"
+                  onClick={handleAvatarClick}
                 />
                 <div className="profile-texts">
                   <strong className="profile-name">{profile.name || '(Sin nombre)'}</strong>
@@ -137,7 +144,6 @@ const ProfileAdminPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Campos tipo select */}
               <div className="grid-2">
                 <div>
                   <label className="input-label">Género</label>
@@ -213,6 +219,24 @@ const ProfileAdminPage: React.FC = () => {
           </div>
         </div>
       </main>
+
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h4>Actualizar foto de perfil</h4>
+            <input
+              type="text"
+              placeholder="URL de la nueva imagen"
+              value={newAvatarUrl}
+              onChange={(e) => setNewAvatarUrl(e.target.value)}
+            />
+            <div className="modal-actions">
+              <button onClick={() => setShowModal(false)}>Cancelar</button>
+              <button onClick={handleAvatarSave}>Guardar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

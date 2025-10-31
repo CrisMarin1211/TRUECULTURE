@@ -17,6 +17,24 @@ export interface ProductItem {
   isdraft?: boolean;
 }
 
+export const defaultProduct: ProductItem = {
+  image: '',
+  imagefile: null,
+  name: '',
+  description: '',
+  location: '',
+  address: '',
+  city: undefined,
+  price: 0,
+  totalstock: 0,
+  availablestock: 0,
+  unitssaled: 0,
+  popularity: undefined,
+  tags: undefined,
+  status: 'Activo',
+  isdraft: false,
+};
+
 export interface ProductProviderProps {
   children: React.ReactNode;
 }

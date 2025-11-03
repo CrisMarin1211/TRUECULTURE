@@ -18,6 +18,7 @@ import ListCommentsPage from '../pages/AdminPages/commentsPage';
 import CreateTicketPage from '../pages/AdminPages/ticketsPages/createPage';
 import ListTicketsPage from '../pages/AdminPages/ticketsPages/listPage';
 import AdminHomePage from '../pages/AdminPages/homePage';
+import AdminStatisticsPage from '../pages/AdminPages/analyticsPage';
 
 const AppRoutes = () => {
   return (
@@ -30,6 +31,8 @@ const AppRoutes = () => {
         <Route path="/my-profile" element={<ProfilePage />} />
 
         <Route path="/dashboard" element={<AdminHomePage />} />
+
+        <Route path="/analytics" element={<AdminStatisticsPage />} />
 
         <Route path="/create-product" element={<CreateProductPage />} />
         <Route path="/edit-product/:id" element={<CreateProductPage />} />

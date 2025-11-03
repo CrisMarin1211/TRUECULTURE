@@ -39,11 +39,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       if (error) console.error(error);
 
       if (data.session?.user) {
-
-        setUser(mapSupabaseUserToAppUser(data.session.user));
-      } else {
-        setUser(null);
-
         setUserAndPersist(data.session.user);
       } else {
         setUserAndPersist(null);
@@ -54,12 +49,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     getSession();
 
     const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
-        setUser(mapSupabaseUserToAppUser(session.user));
-      } else {
-        setUser(null);
-      }
-
       setUserAndPersist(session?.user ?? null);
     });
 
@@ -74,10 +63,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       password,
       options: { data: { full_name: name } },
     });
-    
-    if (error) throw error;
-    if (data.user) setUser(mapSupabaseUserToAppUser(data.user));
-    
+
     if (error) throw error;
 
     if (data.user) {
@@ -103,9 +89,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = async ({ email, password }: LoginCredentials): Promise<void> => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) throw error;
-
-    if (data.user) setUser(mapSupabaseUserToAppUser(data.user));
-
     if (data.user) setUserAndPersist(data.user);
   };
 
@@ -117,7 +100,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const logout = async (): Promise<void> => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
-    setUser(null);
     setUserAndPersist(null);
   };
 

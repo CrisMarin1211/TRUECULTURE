@@ -17,9 +17,12 @@ interface StatCardProps {
   percentage: number;
   color: string;
   chartType: 'bar' | 'line' | 'area';
+  icon?: React.ReactNode;
+  /** 🔹 Datos opcionales personalizados para la gráfica */
+  customData?: { name: string; value: number }[];
 }
 
-const mockData = [
+const defaultData = [
   { name: 'Lun', value: 10 },
   { name: 'Mar', value: 14 },
   { name: 'Mié', value: 12 },
@@ -29,7 +32,17 @@ const mockData = [
   { name: 'Dom', value: 17 },
 ];
 
-const StatCard: React.FC<StatCardProps> = ({ title, value, percentage, color, chartType }) => {
+const StatCard: React.FC<StatCardProps> = ({
+  title,
+  value,
+  percentage,
+  color,
+  chartType,
+  icon,
+  customData,
+}) => {
+  const data = customData || defaultData;
+
   return (
     <Card
       sx={{
@@ -41,38 +54,74 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, percentage, color, ch
       }}
     >
       <CardContent>
-        <Typography variant="subtitle2" sx={{ color: '#ccc', mb: 1 }}>
-          {title}
-        </Typography>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            marginBottom: '10px',
+          }}
+        >
+          {icon && (
+            <div
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                border: '2px solid #4F4F4F',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#99CB36',
+                fontSize: '20px',
+              }}
+            >
+              {icon}
+            </div>
+          )}
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: '#ccc',
+              fontWeight: 500,
+              fontSize: '0.95rem',
+            }}
+          >
+            {title}
+          </Typography>
+        </div>
+
         <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
           {value}
         </Typography>
+
         <Typography
           variant="body2"
           sx={{
             color: percentage >= 0 ? '#1177F1' : '#FF0099',
-            fontWeight: '500',
+            fontWeight: 500,
             mb: 1,
           }}
         >
-          {percentage > 0 ? `▲ ${percentage}%` : `▼ ${Math.abs(percentage)}%`}
+          {percentage > 0 ? ▲ ${percentage}% : ▼ ${Math.abs(percentage)}%}
         </Typography>
+
         <div style={{ width: '100%', height: 100 }}>
           <ResponsiveContainer>
             {chartType === 'bar' && (
-              <BarChart data={mockData}>
+              <BarChart data={data}>
                 <Bar dataKey="value" fill={color} radius={[6, 6, 0, 0]} />
                 <Tooltip contentStyle={{ background: '#222', color: '#fff' }} />
               </BarChart>
             )}
             {chartType === 'line' && (
-              <LineChart data={mockData}>
+              <LineChart data={data}>
                 <Line type="monotone" dataKey="value" stroke={color} strokeWidth={2} dot={false} />
                 <Tooltip contentStyle={{ background: '#222', color: '#fff' }} />
               </LineChart>
             )}
             {chartType === 'area' && (
-              <AreaChart data={mockData}>
+              <AreaChart data={data}>
                 <Area
                   type="monotone"
                   dataKey="value"

@@ -7,4 +7,5 @@ export interface TicketItem {
   payment_status: 'Pagado' | 'Pendiente' | 'Fallido';
   event_id: number;
   date: string;
+  organization?: string;
 }

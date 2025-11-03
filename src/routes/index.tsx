@@ -18,7 +18,7 @@ import ListCommentsPage from '../pages/AdminPages/commentsPage';
 import CreateTicketPage from '../pages/AdminPages/ticketsPages/createPage';
 import ListTicketsPage from '../pages/AdminPages/ticketsPages/listPage';
 import AdminHomePage from '../pages/AdminPages/homePage';
-import AdminStatisticsPage from '../pages/AdminPages/analyticsPage';
+import AdminStatisticsPage from '../pages/AdminPages/analyticPage';
 
 const AppRoutes = () => {
   return (

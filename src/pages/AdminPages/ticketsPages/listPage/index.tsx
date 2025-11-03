@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './style.css';
 import SidebarAdmin from '../../../../components/atomsUi/sideBarAdmin';
 import { useNavigate } from 'react-router-dom';
-import { getTickets } from '../../../../services/tickets';
+import { getTicketsByOrganization } from '../../../../services/tickets';
 import type { TicketItem } from '../../../../types/TicketType';
 import Loader from '../../../../components/loader';
+import { getUserProfileByEmail } from '../../../../services/users';
+import { supabase } from '../../../../lib/supabaseClient';
 
 const ListTicketsPage: React.FC = () => {
   const [tickets, setTickets] = useState<TicketItem[]>([]);
@@ -18,7 +20,16 @@ const ListTicketsPage: React.FC = () => {
     const fetchTickets = async () => {
       try {
         setLoading(true);
-        const data = await getTickets();
+
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (!user?.email) throw new Error('Usuario no autenticado');
+
+        const profile = await getUserProfileByEmail(user.email);
+        if (!profile?.organization) throw new Error('El usuario no tiene organización');
+
+        const data = await getTicketsByOrganization(profile.organization);
         setTickets(data);
       } catch (err) {
         console.error('Error cargando tickets:', err);
@@ -27,6 +38,7 @@ const ListTicketsPage: React.FC = () => {
         setLoading(false);
       }
     };
+
     fetchTickets();
   }, []);
 
@@ -106,7 +118,7 @@ const ListTicketsPage: React.FC = () => {
                       <td>{ticket.order_number}</td>
                       <td>{ticket.ticket_type}</td>
                       <td>{ticket.quantity}</td>
-                      <td className={`status ${ticket.payment_status.toLowerCase()}`}>
+                      <td className={status ${ticket.payment_status.toLowerCase()}}>
                         {ticket.payment_status}
                       </td>
                     </tr>

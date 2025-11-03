@@ -57,7 +57,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     };
   }, []);
 
-  const signup = async ({ email, password, name }: SignupCredentials): Promise<void> => {
+  const signup = async ({
+    email,
+    password,
+    name,
+    organization,
+  }: SignupCredentials): Promise<void> => {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -75,6 +80,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           email: data.user.email ?? email,
           name,
           nickname: '',
+          organization: organization || '',
           gender: '',
           country: '',
           language: '',

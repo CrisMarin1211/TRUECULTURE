@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import './style.css';
 import SidebarAdmin from '../../../components/atomsUi/sideBarAdmin';
 import CommentCard from '../../../components/commentCard';
-import { getComments } from '../../../services/comments';
+import { getCommentsByOrganization } from '../../../services/comments';
 import type { CommentItem } from '../../../types/CommentType';
 import Loader from '../../../components/loader';
+import { supabase } from '../../../lib/supabaseClient';
+import { getUserOrganizationByEmail } from '../../../services/users';
 
 const ListCommentsPage: React.FC = () => {
   const [comments, setComments] = useState<CommentItem[]>([]);
@@ -15,7 +17,24 @@ const ListCommentsPage: React.FC = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const data = await getComments();
+        setLoading(true);
+
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (!user?.email) {
+          console.error('No se pudo obtener el usuario actual');
+          return;
+        }
+
+        const organization = await getUserOrganizationByEmail(user.email);
+        if (!organization) {
+          console.error('No se encontró organización para este usuario');
+          return;
+        }
+
+        const data = await getCommentsByOrganization(organization);
         setComments(data);
       } catch (error) {
         console.error('Error al obtener comentarios:', error);
@@ -28,7 +47,6 @@ const ListCommentsPage: React.FC = () => {
 
   const filteredComments = comments.filter((c) => {
     const searchLower = search.toLowerCase();
-
     const comment = c.comment?.toLowerCase() ?? '';
     const author = c.author?.toLowerCase() ?? '';
     const relatedName = c.related_name?.toLowerCase() ?? '';
@@ -62,9 +80,6 @@ const ListCommentsPage: React.FC = () => {
           </div>
 
           <div className="row row-2">
-            <div className="actions-left">
-              {/* <button className="btn-outline">Visión General</button> */}
-            </div>
             <select
               className="filter-select"
               value={filterType}
@@ -78,6 +93,10 @@ const ListCommentsPage: React.FC = () => {
         </div>
 
         <div className="comments-container">
+          <div className="events-header">
+            <h3>Reseñas de tu Organización</h3>
+          </div>
+
           <div className="comments-grid">
             {filteredComments.length > 0 ? (
               filteredComments.map((c) => (

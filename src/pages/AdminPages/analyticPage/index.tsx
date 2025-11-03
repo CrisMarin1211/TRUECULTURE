@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './style.css';
 import Loader from '../../../components/loader';
 import SidebarAdmin from '../../../components/atomsUi/sideBarAdmin';
 import StatsGrid from '../../../components/statsGrid';

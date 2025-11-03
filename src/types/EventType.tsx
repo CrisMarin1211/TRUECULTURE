@@ -1,20 +1,41 @@
 export interface EventItem {
-  id: string;
+  id?: string;
   image: string;
-  imageFile?: File | null;
+  imagefile?: File | null;
   name: string;
   date: string;
   time: string;
   location: string;
+  address?: string;
+  city: 'Cali, Colombia' | 'Bogotá, Colombia';
   description: string;
   price: number;
-  totalSeats: number;
-  availableSeats: number;
+  totalseats: number;
+  availableseats: number;
   popularity: 'Alta' | 'Media' | 'Baja';
-  tags: string[];
-  expectedAttendance: number;
-  isDraft?: boolean;
+  tags: 'Musica' | 'Cultural' | 'Familiar' | 'Diversion' | 'Gastronomia';
+  expectedattendance: number;
+  isdraft?: boolean;
 }
+
+export const defaultEvent: EventItem = {
+  image: '',
+  imagefile: null,
+  name: '',
+  date: '',
+  time: '',
+  location: '',
+  address: '',
+  city: 'Cali, Colombia',
+  description: '',
+  price: 0,
+  totalseats: 0,
+  availableseats: 0,
+  popularity: 'Media',
+  tags: 'Musica',
+  expectedattendance: 0,
+  isdraft: false,
+};
 
 export interface EventProviderProps {
   children: React.ReactNode;

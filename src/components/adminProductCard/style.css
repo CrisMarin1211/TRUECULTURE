@@ -1,0 +1,134 @@
+.product-card.admin {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  padding: 1rem 1.2rem;
+  border: 1px solid #3b3b3b;
+  border-radius: 0.6rem;
+  background-color: #1f1f1f;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  gap: 0.8rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.product-card.admin:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.product-img-wrapper {
+  width: 100%;
+  height: 160px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+}
+
+.admin-product-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffcc00;
+  text-align: center;
+  margin: 0.4rem 0 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+  min-height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.product-info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1.3;
+  min-width: 80px;
+}
+
+.product-info-item .label {
+  font-size: 0.8rem;
+  color: #aaaaaa;
+}
+
+.product-info-item .value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 0.2rem;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #3a3a3a;
+  margin: 0.6rem 0;
+}
+
+.product-bottom {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.product-footer {
+  margin-top: 0.8rem;
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #99cb36;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition:
+    background 0.2s ease-in-out,
+    transform 0.1s ease;
+  width: 100%;
+}
+
+.btn-view:hover {
+  background-color: #86b12f;
+  transform: scale(1.03);
+}
+
+.status-activo {
+  color: #8fff70;
+}
+
+.status-no-activo {
+  color: #ff7f7f;
+}

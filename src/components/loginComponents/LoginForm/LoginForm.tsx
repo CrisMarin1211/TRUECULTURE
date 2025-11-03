@@ -1,16 +1,50 @@
 import './LoginForm.css';
-import InputField from '../InputField/InputField';
-import Button from '../Button/Button';
+import InputField from '../../atomsUi/inputField/inputField';
+import Button from '../../atomsUi/button/button';
 import GoogleIcon from '../../../assets/Marca/icon-google.png';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 
-const LoginForm = () => {
+interface LoginFormProps {
+  fromAdmin?: boolean;
+}
+
+const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const { login, loginWithGoogle } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login con:', { email, password });
+    try {
+      await login({ email, password });
+      alert('Inicio de sesión exitoso');
+
+      if (fromAdmin) {
+        navigate('/dashboard');
+      } else {
+        navigate('/DashboardClient');
+      }
+    } catch (error: any) {
+      console.error('Error en login:', error.message);
+      alert('Email o contraseña incorrectos');
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await loginWithGoogle();
+      if (fromAdmin) {
+        navigate('/dashboard');
+      } else {
+        navigate('/DashboardClient');
+      }
+    } catch (error: any) {
+      console.error('Error en login con Google:', error.message);
+      alert('No se pudo iniciar sesión con Google');
+    }
   };
 
   return (
@@ -38,7 +72,7 @@ const LoginForm = () => {
       <Button label="Iniciar Sesión" type="submit" />
 
       <p className="signup-text">
-        Don’t have an account? <a href="/register">Crear cuenta</a>
+        Don’t have an account? <a href="/signup">Crear cuenta</a>
       </p>
 
       <div className="divider">
@@ -47,9 +81,9 @@ const LoginForm = () => {
         <span className="line"></span>
       </div>
 
-      <button type="button" className="google-btn">
+      <button type="button" className="google-btn" onClick={handleGoogleLogin}>
         <img src={GoogleIcon} alt="Google" className="google-icon" />
-        Regístrate con Google
+        Inicia sesión con Google
       </button>
     </form>
   );

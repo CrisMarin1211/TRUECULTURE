@@ -1,23 +1,113 @@
+import { useState } from 'react';
+import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
+import AvatarLetter from '../atomsUi/avatarLetter';
+import SideBar from '../atomsUi/sideBar';
+import CurrentLocation from '../atomsUi/currentLocation';
+import theme from '../../styles/theme';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { Box } from '@mui/material';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
+
+const Overlay = styled('div')({
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  backgroundColor: theme.palette.black70.main,
+  zIndex: 1000,
+});
+
+const SidebarContainer = styled('div')({
+  position: 'fixed',
+  height: '100%',
+  backgroundColor: theme.palette.background.default,
+  zIndex: 1001,
+  paddingLeft: '1rem',
+  display: 'flex',
+});
+
+const HeaderContainer = styled('header')({
+  width: '100%',
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+  padding: 2,
+});
 
 const Header = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+  const navigate = useNavigate();
+
   return (
-    <header className="header">
-      <div className="header-left">
-        <img src="/icons/menu.png" alt="Menu" className="icon menu-icon" />
-      </div>
+    <>
+      <HeaderContainer>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ width: '100%', position: 'relative', height: '100px', padding: 3 }}
+        >
+          <MenuOutlinedIcon
+            onClick={toggleSidebar}
+            sx={{ cursor: 'pointer', width: 36, height: 36, marginTop: '-5px' }}
+          />
 
-      <div className="header-center">
-        <img src="/images/full-logo.png" alt="Logo" className="logo" />
-      </div>
+          <Box
+            sx={{
+              position: 'absolute',
+              left: '50%',
+              transform: 'translateX(-50%)',
+            }}
+          >
+            <Box
+              component="img"
+              src="/images/full-logo.png"
+              alt="Logo desktop"
+              sx={{ display: { xs: 'none', md: 'block' }, height: 60 }}
+            />
 
-      <div className="header-right">
-        <img src="/icons/cart.png" alt="Carrito" className="icon cart-icon" />
-        <div className="avatar-container">
-          <img src="/images/avatar.png" alt="Usuario" className="avatar" />
-        </div>
-      </div>
-    </header>
+            <Box
+              component="img"
+              src="/images/logo.png"
+              alt="Logo móvil"
+              sx={{ display: { xs: 'block', md: 'none' }, height: 50 }}
+            />
+          </Box>
+
+          <Stack direction="row" spacing={2} alignItems="center" justifyItems="center">
+            <ShoppingCartOutlinedIcon
+              sx={{ cursor: 'pointer', width: 36, height: 36 }}
+              onClick={() => navigate('/my-cart')}
+            />
+
+            <Box
+              sx={{ display: { xs: 'none', md: 'flex' }, cursor: 'pointer' }}
+              onClick={() => navigate('/my-profile')}
+            >
+              <AvatarLetter />
+            </Box>
+          </Stack>
+        </Stack>
+
+        <Stack direction="row" justifyContent="flex-end" sx={{ width: '100%', paddingInline: 3 }}>
+          <CurrentLocation />
+        </Stack>
+      </HeaderContainer>
+
+      {isSidebarOpen && (
+        <>
+          <Overlay onClick={toggleSidebar} />
+          <SidebarContainer>
+            <SideBar toggleSidebar={toggleSidebar} />
+          </SidebarContainer>
+        </>
+      )}
+    </>
   );
 };
 

@@ -3,18 +3,16 @@ import './style.css';
 type CouponCardProps = {
   title: string;
   description: string;
-  value: string;
   code: string;
 };
 
-const CouponCard = ({ title, description, value, code }: CouponCardProps) => {
+const CouponCard = ({ title, description, code }: CouponCardProps) => {
   return (
     <div className="coupon-card">
       <div className="coupon-info">
         <h3 className="coupon-title">{title}</h3>
         <p className="coupon-description">{description}</p>
         <span className="coupon-value">{code}</span>
-        <span className="coupon-value">{value}</span>
       </div>
       <button className="redeem-btn">Redimir Cupon</button>
     </div>

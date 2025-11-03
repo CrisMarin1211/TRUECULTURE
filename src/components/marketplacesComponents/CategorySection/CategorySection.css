@@ -1,0 +1,31 @@
+.category-section {
+  margin: 2rem 0;
+}
+
+.category-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.category-section-header h2 {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.view-more {
+  background: none;
+  border: none;
+  color: #8dd439;
+  /* verde de tu tema */
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.category-cards {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}

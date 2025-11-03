@@ -1,0 +1,121 @@
+.event-card.admin {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 1px solid #3b3b3b;
+  border-radius: 0.6rem;
+  background-color: #1f1f1f;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  gap: 0.7rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.event-card.admin:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.event-img-wrapper {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.event-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.admin-event-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffcc00;
+  text-align: center;
+  margin: 0.4rem 0 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
+.event-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.event-info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.event-info-item .label {
+  font-size: 0.8rem;
+  color: #aaaaaa;
+}
+
+.event-info-item .value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 0.2rem;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #3a3a3a;
+  margin: 0.6rem 0;
+}
+
+.event-bottom {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.event-bottom .event-info-item {
+  align-items: center;
+}
+
+.event-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.3rem;
+}
+
+.btn-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #99cb36;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition:
+    background 0.2s ease-in-out,
+    transform 0.1s ease;
+  width: 100%;
+}
+
+.btn-view:hover {
+  background-color: #86b12f;
+  transform: scale(1.03);
+}

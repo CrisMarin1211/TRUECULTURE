@@ -1,20 +1,39 @@
 export interface ProductItem {
-  id: string;
+  id?: number;
   image: string;
-  imageFile?: File | null;
+  imagefile?: File | null;
   name: string;
-  Stock: number;
-  Status: 'Activo' | 'No activo';
-  location: string;
-  description: string;
   price: number;
-  totalStock: number;
-  availableStock: number;
-  popularity: 'Alta demanda' | 'Media demanda' | 'Baja demanda';
-  tags: string[];
-  UnitsSaled: number;
-  isDraft?: boolean;
+  description: string;
+  location: string;
+  address?: string;
+  city?: 'Cali, Colombia' | 'Bogotá, Colombia';
+  totalstock: number;
+  availablestock: number;
+  unitssaled: number;
+  popularity?: 'Alta demanda' | 'Media demanda' | 'Baja demanda';
+  tags?: 'Afiches' | 'Pines' | 'Cultural' | 'Moda' | 'Gastronomía';
+  status: 'Activo' | 'No activo';
+  isdraft?: boolean;
 }
+
+export const defaultProduct: ProductItem = {
+  image: '',
+  imagefile: null,
+  name: '',
+  description: '',
+  location: '',
+  address: '',
+  city: undefined,
+  price: 0,
+  totalstock: 0,
+  availablestock: 0,
+  unitssaled: 0,
+  popularity: undefined,
+  tags: undefined,
+  status: 'Activo',
+  isdraft: false,
+};
 
 export interface ProductProviderProps {
   children: React.ReactNode;
@@ -22,9 +41,9 @@ export interface ProductProviderProps {
 
 export interface ProductContextType {
   products: ProductItem[];
-  addProduct: (Product: Omit<ProductItem, 'id'>) => void;
-  updateStock: (id: string, stockTaken: number) => void;
-  editProduct: (id: string, updates: Partial<ProductItem>) => void;
-  removeProduct: (id: string) => void;
-  saveProduct: (Product: Omit<ProductItem, 'id'>) => void;
+  addProduct: (product: Omit<ProductItem, 'id'>) => Promise<void>;
+  editProduct: (id: number, updates: Partial<ProductItem>) => Promise<void>;
+  removeProduct: (id: number) => Promise<void>;
+  updateStock: (id: number, stockTaken: number) => Promise<void>;
+  saveProduct: (product: Omit<ProductItem, 'id'>) => Promise<void>;
 }

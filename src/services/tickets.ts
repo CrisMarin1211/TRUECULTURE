@@ -27,3 +27,33 @@ export const deleteTicket = async (id: number): Promise<TicketItem[]> => {
   if (error) throw error;
   return data ?? [];
 };
+
+export const getTicketsByOrganization = async (organization: string): Promise<TicketItem[]> => {
+  const { data: events, error: eventsError } = await supabase
+    .from('events')
+    .select('id')
+    .eq('organization', organization);
+
+  if (eventsError) {
+    console.error('Error obteniendo eventos:', eventsError);
+    throw eventsError;
+  }
+
+  if (!events || events.length === 0) {
+    return [];
+  }
+
+  const eventIds = events.map((e) => e.id);
+
+  const { data: tickets, error: ticketsError } = await supabase
+    .from('tickets')
+    .select('*')
+    .in('event_id', eventIds);
+
+  if (ticketsError) {
+    console.error('Error obteniendo tickets:', ticketsError);
+    throw ticketsError;
+  }
+
+  return tickets ?? [];
+};

@@ -1,42 +1,77 @@
 import React, { useEffect, useState } from 'react';
 import StatCard from '../statCard';
 import './style.css';
+import { supabase } from '../../lib/supabaseClient';
+import { getUserProfileByEmail } from '../../services/users';
 import { getTotalEvents } from '../../services/events';
 import { getTotalProducts } from '../../services/products';
 
-const StatsGrid: React.FC = () => {
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import StorageIcon from '@mui/icons-material/Storage';
+import LabelIcon from '@mui/icons-material/Label';
+import StoreIcon from '@mui/icons-material/Store';
+
+interface StatsGridProps {
+  onLoaded?: () => void;
+}
+
+const StatsGrid: React.FC<StatsGridProps> = ({ onLoaded }) => {
   const [totalEvents, setTotalEvents] = useState<number>(0);
   const [totalProducts, setTotalProducts] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (!user?.email) throw new Error('No se pudo obtener el usuario');
+
+        const profile = await getUserProfileByEmail(user.email);
+        if (!profile?.organization) throw new Error('El usuario no tiene organización asignada');
+
+        const org = profile.organization;
+
         const [eventsCount, productsCount] = await Promise.all([
-          getTotalEvents(),
-          getTotalProducts(),
+          getTotalEvents(org),
+          getTotalProducts(org),
         ]);
-        console.log('Eventos Totales:', eventsCount);
-        console.log('Productos Totales:', productsCount);
+
         setTotalEvents(eventsCount);
         setTotalProducts(productsCount);
       } catch (err) {
         console.error('Error cargando estadísticas:', err);
       } finally {
-        setLoading(false);
+        onLoaded?.();
       }
     };
 
     fetchStats();
-  }, []);
+  }, [onLoaded]);
 
-  if (loading) {
-    return (
-      <div className="stats-grid">
-        <p className="loading-text">Cargando estadísticas...</p>
-      </div>
-    );
-  }
+  const mockDataSales = [
+    { name: 'Lun', value: 5 },
+    { name: 'Mar', value: 8 },
+    { name: 'Mié', value: 10 },
+    { name: 'Jue', value: 13 },
+    { name: 'Vie', value: 15 },
+    { name: 'Sáb', value: 18 },
+    { name: 'Dom', value: 20 },
+  ];
+
+  const mockDataTickets = [
+    { name: 'Lun', value: 2 },
+    { name: 'Mar', value: 5 },
+    { name: 'Mié', value: 7 },
+    { name: 'Jue', value: 10 },
+    { name: 'Vie', value: 11 },
+    { name: 'Sáb', value: 13 },
+    { name: 'Dom', value: 16 },
+  ];
+
+  const mockSalesValue = '$2,450,000';
+  const mockTicketsValue = 12;
 
   return (
     <div className="stats-grid">
@@ -48,24 +83,31 @@ const StatsGrid: React.FC = () => {
             percentage={5.3}
             color="#1177F1"
             chartType="area"
+            icon={<ShoppingCartIcon />}
           />
         </div>
+
         <div className="stat-col">
           <StatCard
-            title="Ventas Totales"
-            value="$2,450,000"
+            title="Total de Ventas"
+            value={mockSalesValue}
             percentage={12.8}
             color="#FF0099"
             chartType="line"
+            icon={<StorageIcon />}
+            customData={mockDataSales}
           />
         </div>
+
         <div className="stat-col">
           <StatCard
-            title="Entradas Vendidas"
-            value={835}
+            title="Total de Entradas Vendidas"
+            value={mockTicketsValue}
             percentage={-3.1}
             color="#1177F1"
             chartType="bar"
+            icon={<LabelIcon />}
+            customData={mockDataTickets}
           />
         </div>
       </div>
@@ -78,24 +120,7 @@ const StatsGrid: React.FC = () => {
             percentage={8.4}
             color="#FF0099"
             chartType="area"
-          />
-        </div>
-        <div className="stat-col">
-          <StatCard
-            title="Ventas Totales"
-            value="$2,450,000"
-            percentage={12.8}
-            color="#FF0099"
-            chartType="line"
-          />
-        </div>
-        <div className="stat-col">
-          <StatCard
-            title="Entradas Vendidas"
-            value={835}
-            percentage={-3.1}
-            color="#1177F1"
-            chartType="bar"
+            icon={<StoreIcon />}
           />
         </div>
       </div>

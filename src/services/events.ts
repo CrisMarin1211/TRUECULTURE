@@ -39,12 +39,26 @@ export const deleteEvent = async (id: string) => {
   return data;
 };
 
-export const getTotalEvents = async (): Promise<number> => {
+export const getTotalEvents = async (organization: string): Promise<number> => {
   const { count, error } = await supabase
     .from('events')
-    .select('*', { count: 'exact', head: true });
+    .select('*', { count: 'exact', head: true })
+    .eq('organization', organization);
+
+  if (error) {
+    console.error('Error al obtener total de eventos:', error);
+    return 0;
+  }
+
+  return count ?? 0;
+};
+
+export const getEventsByOrganization = async (organization?: string) => {
+  const { data, error } = await supabase
+    .from('events')
+    .select('*')
+    .eq('organization', organization);
 
   if (error) throw error;
-
-  return count || 0;
+  return data;
 };

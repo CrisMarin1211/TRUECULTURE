@@ -3,9 +3,11 @@ import './listPage.css';
 import AdminProductCard from '../../../../components/adminProductCard';
 import { useNavigate } from 'react-router-dom';
 import SidebarAdmin from '../../../../components/atomsUi/sideBarAdmin';
-import { getProducts } from '../../../../services/products';
+import { getProductsByOrganization } from '../../../../services/products';
 import type { ProductItem } from '../../../../types/ProductType';
 import Loader from '../../../../components/loader';
+import { supabase } from '../../../../lib/supabaseClient';
+import { getUserOrganizationByEmail } from '../../../../services/users';
 
 const ListProductPage: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
@@ -19,7 +21,24 @@ const ListProductPage: React.FC = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const data = await getProducts();
+
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (!user?.email) {
+          setError('No se pudo obtener el usuario actual');
+          return;
+        }
+
+        const organization = await getUserOrganizationByEmail(user.email);
+
+        if (!organization) {
+          setError('No se encontró organización para el usuario');
+          return;
+        }
+
+        const data = await getProductsByOrganization(organization);
         setProducts(data);
       } catch (err) {
         console.error('Error cargando productos:', err);
@@ -28,6 +47,7 @@ const ListProductPage: React.FC = () => {
         setLoading(false);
       }
     };
+
     fetchProducts();
   }, []);
 
@@ -39,7 +59,6 @@ const ListProductPage: React.FC = () => {
 
   const filteredProducts = products.filter((p) => {
     const searchLower = search.toLowerCase();
-
     const matchesSearch =
       p.name.toLowerCase().includes(searchLower) ||
       p.description.toLowerCase().includes(searchLower) ||
@@ -75,7 +94,6 @@ const ListProductPage: React.FC = () => {
               <button className="btn-pink" onClick={() => navigate('/create-product')}>
                 Nuevo Producto
               </button>
-              {/* <button className="btn-outline">Visión General</button> */}
             </div>
             <select
               className="filter-select"
@@ -93,7 +111,7 @@ const ListProductPage: React.FC = () => {
 
         <div className="products-container">
           <div className="products-header">
-            <h3>Todos los Productos</h3>
+            <h3>Productos de tu Organización</h3>
             <div className="status-bubbles">
               <div className="status-item">
                 <span className="bubble active"></span>

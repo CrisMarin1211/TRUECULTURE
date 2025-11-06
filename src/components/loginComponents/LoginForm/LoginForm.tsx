@@ -72,7 +72,13 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
       <Button label="Iniciar Sesión" type="submit" />
 
       <p className="signup-text">
-        Don’t have an account? <a href="/signup">Crear cuenta</a>
+        Don’t have an account?{' '}
+        <a
+          onClick={() => navigate('/signup', { state: { fromAdmin } })}
+          style={{ cursor: 'pointer' }}
+        >
+          Crear cuenta
+        </a>
       </p>
 
       <div className="divider">

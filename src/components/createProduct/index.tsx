@@ -3,6 +3,8 @@ import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addProduct, updateProduct, deleteProduct, getProducts } from '../../services/products';
 import { defaultProduct, type ProductItem } from '../../types/ProductType';
+import { supabase } from '../../lib/supabaseClient';
+import { getUserOrganizationByEmail } from '../../services/users';
 
 const CreateProduct: React.FC = () => {
   const navigate = useNavigate();
@@ -24,6 +26,30 @@ const CreateProduct: React.FC = () => {
     };
     loadProduct();
   }, [id]);
+
+  useEffect(() => {
+    const fetchOrganization = async () => {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (user?.email) {
+          const organization = await getUserOrganizationByEmail(user.email);
+          if (organization) {
+            setProduct((prev) => ({
+              ...prev,
+              organization,
+            }));
+          }
+        }
+      } catch (error) {
+        console.error('Error al obtener organización del usuario:', error);
+      }
+    };
+
+    fetchOrganization();
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,

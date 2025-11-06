@@ -16,6 +16,7 @@ export interface EventItem {
   tags: 'Musica' | 'Cultural' | 'Familiar' | 'Diversion' | 'Gastronomia';
   expectedattendance: number;
   isdraft?: boolean;
+  organization?: string;
 }
 
 export const defaultEvent: EventItem = {

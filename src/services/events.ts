@@ -2,6 +2,7 @@ import { supabase } from '../lib/supabaseClient';
 import type { EventItem } from '../types/EventType';
 
 export const addEvent = async (event: EventItem) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { id, ...cleanEvent } = event;
 
   const { data, error } = await supabase.from('events').insert([cleanEvent]).select('*');

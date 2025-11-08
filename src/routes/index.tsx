@@ -1,11 +1,12 @@
+/* eslint-disable prettier/prettier */
 import { Routes, Route } from 'react-router-dom';
 import HomePage from '../pages/homePage';
 import MyPurchasesPage from '../pages/ClientsPages/myPurchasesPage';
 import MyCartPage from '../pages/ClientsPages/myCartPage';
 import MyCouponsPage from '../pages/ClientsPages/myCouponsPage';
-import DashboardClient from '../pages/ClientsPages/DashboardCliente/DashboardClient';
+import DashboardClient from '../pages/ClientsPages/dashboardCliente/DashboardClient';
 import ProfilePage from '../pages/ClientsPages/profilePage';
-import LoginPage from '../pages/LoginPage/loginPage';
+import LoginPage from '../pages/loginPage/loginPage';
 import RegisterPage from '../pages/registerPage/registerPage';
 import CreateProductPage from '../pages/AdminPages/productsPages/createPage/createPage';
 import ListProductPage from '../pages/AdminPages/productsPages/listPage/listPage';
@@ -18,6 +19,7 @@ import ListCommentsPage from '../pages/AdminPages/commentsPage';
 import CreateTicketPage from '../pages/AdminPages/ticketsPages/createPage';
 import ListTicketsPage from '../pages/AdminPages/ticketsPages/listPage';
 import AdminHomePage from '../pages/AdminPages/homePage';
+import AdminAnalyticsPage from '../pages/AdminPages/analyticPage';
 
 const AppRoutes = () => {
   return (
@@ -51,6 +53,7 @@ const AppRoutes = () => {
         <Route path="/categories/:city/:tag" element={<Categories />} />
         <Route path="/settings" element={<ProfileAdminPage />} />
         <Route path="/list-comments" element={<ListCommentsPage />} />
+        <Route path="/analytics" element={<AdminAnalyticsPage />} />
       </Routes>
     </>
   );

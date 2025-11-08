@@ -50,3 +50,10 @@ export interface EventContextType {
   removeEvent: (id: string) => void;
   saveEvent: (event: Omit<EventItem, 'id'>) => void;
 }
+
+export interface UpcomingEvent {
+  id: number;
+  image: string;
+  name: string;
+  date: string;
+}

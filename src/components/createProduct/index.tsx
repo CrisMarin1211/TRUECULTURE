@@ -5,12 +5,19 @@ import { addProduct, updateProduct, deleteProduct, getProducts } from '../../ser
 import { defaultProduct, type ProductItem } from '../../types/ProductType';
 import { supabase } from '../../lib/supabaseClient';
 import { getUserOrganizationByEmail } from '../../services/users';
+import { getItemSummary } from '../../services/orderItems';
+import MetricsModal from '../metricsModal';
 
 const CreateProduct: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
   const [product, setProduct] = useState<ProductItem>({ ...defaultProduct });
+  const [openMetrics, setOpenMetrics] = useState(false);
+  const [salesData, setSalesData] = useState<{ orders: number; revenue: number }>({
+    orders: 0,
+    revenue: 0,
+  });
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -18,7 +25,11 @@ const CreateProduct: React.FC = () => {
         try {
           const data = await getProducts();
           const found = data.find((p) => String(p.id) === id);
-          if (found) setProduct(found);
+         if (found) {
+            setProduct(found);
+            const summary = await getItemSummary(found.name);
+            setSalesData(summary);
+          }
         } catch (err) {
           console.error('Error al cargar producto:', err);
         }

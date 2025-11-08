@@ -329,19 +329,21 @@ const CreateProduct: React.FC = () => {
           </select>
         </div>
       </div>
-
-      {/* <div className="row-6">
-        <div className="qr-box">
-          <img src="/images/qr.png" alt="QR" className="qr-img" />
-          <span>Escanea el código QR para pagar fácilmente</span>
-        </div>
-
-        <div className="placeholder-box">Contenido futuro</div>
+<div className="row-7">
+        {id && (
+          <button className="btn metrics-btn" onClick={() => setOpenMetrics(true)}>
+            Ver Métricas
+          </button>
+        )}
       </div>
 
-      <div className="row-7">
-        <button className="btn metrics-btn">Ver Métricas</button>
-      </div> */}
+      <MetricsModal
+        open={openMetrics}
+        onClose={() => setOpenMetrics(false)}
+        item={product}
+        type="product"
+        salesData={salesData}
+      />
     </div>
   );
 };

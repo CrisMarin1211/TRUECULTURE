@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { supabase } from '../lib/supabaseClient';
 import type { EventItem } from '../types/EventType';
 

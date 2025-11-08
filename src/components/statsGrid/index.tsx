@@ -6,10 +6,11 @@ import { getTotalProducts } from '../../services/products';
 import { getEventOrdersCount, getProductsOrdersCount, getTotalSales } from '../../services/orders';
 import ReviewCard from '../reviewCard';
 import { getReviewsSummary } from '../../services/comments';
-import { getEventActivity } from '../../services/orderItems';
+import { getEventActivity } from "../../services/orderItems"
 import ConsumerActivityCard from '../consumerActivityCard';
-import UpcomingEventsCard, { type UpcomingEvent } from '../upcomingEventsCard';
-import type { EventActivity } from '../../types/orderItemsType';
+import UpcomingEventsCard, { type UpcomingEvent } from "../upcomingEventsCard"
+import type { EventActivity } from '../../types/OrderItemsType';
+import {fetchOrganization} from "../../services/organization"
 
 const StatsGrid: React.FC = () => {
   const [totalEvents, setTotalEvents] = useState<number>(0);
@@ -27,6 +28,11 @@ const StatsGrid: React.FC = () => {
 
   useEffect(() => {
     const fetchStats = async () => {
+      const organization = await fetchOrganization();
+      if (!organization) {
+        console.error('No se pudo obtener la organización');
+        return;
+      }
       try {
         const [
           eventsCount,
@@ -38,8 +44,8 @@ const StatsGrid: React.FC = () => {
           upcoming,
           orderProductsCount,
         ] = await Promise.all([
-          getTotalEvents(),
-          getTotalProducts(),
+          getTotalEvents(organization),
+          getTotalProducts(organization),
           getTotalSales(),
           getEventOrdersCount(),
           getReviewsSummary(),

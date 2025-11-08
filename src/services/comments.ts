@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabaseClient';
-import type { CommentItem } from '../types/CommentType';
+import type { CommentItem, ReviewsSummary } from '../types/CommentType';
 
 export const addComment = async (
   comment: Omit<CommentItem, 'id' | 'created_at' | 'related_name'>,

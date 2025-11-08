@@ -129,3 +129,33 @@ export const getCommentsByOrganization = async (organization?: string): Promise<
 
   return mappedComments;
 };
+
+export const getReviewsSummary = async (): Promise<ReviewsSummary> => {
+  const { data, error } = await supabase.from('comments').select('rating');
+
+  if (error) {
+    console.error('Error al obtener ratings:', error);
+    return { averageRating: 0, reviewsCountByRating: [] };
+  }
+
+  if (!data || data.length === 0) {
+    return { averageRating: 0, reviewsCountByRating: [] };
+  }
+
+  const ratings = data
+    .map((r) => r.rating)
+    .filter((r): r is number => typeof r === 'number' && r >= 1 && r <= 5);
+
+  const averageRating =
+    ratings.length > 0 ? ratings.reduce((acc, r) => acc + r, 0) / ratings.length : 0;
+
+  const reviewsCountByRating = [5, 4, 3, 2, 1].map((rating) => ({
+    rating,
+    count: ratings.filter((r) => r === rating).length,
+  }));
+
+  return {
+    averageRating,
+    reviewsCountByRating,
+  };
+};

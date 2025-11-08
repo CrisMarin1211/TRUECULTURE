@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 

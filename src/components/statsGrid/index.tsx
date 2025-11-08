@@ -1,128 +1,138 @@
 import React, { useEffect, useState } from 'react';
 import StatCard from '../statCard';
 import './style.css';
-import { supabase } from '../../lib/supabaseClient';
-import { getUserProfileByEmail } from '../../services/users';
-import { getTotalEvents } from '../../services/events';
+import { getTotalEvents, getUpcomingEvents } from '../../services/events';
 import { getTotalProducts } from '../../services/products';
+import { getEventOrdersCount, getProductsOrdersCount, getTotalSales } from '../../services/orders';
+import ReviewCard from '../reviewCard';
+import { getReviewsSummary } from '../../services/comments';
+import { getEventActivity } from '../../services/orderItems';
+import ConsumerActivityCard from '../consumerActivityCard';
+import UpcomingEventsCard, { type UpcomingEvent } from '../upcomingEventsCard';
+import type { EventActivity } from '../../types/orderItemsType';
 
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import StorageIcon from '@mui/icons-material/Storage';
-import LabelIcon from '@mui/icons-material/Label';
-import StoreIcon from '@mui/icons-material/Store';
-
-interface StatsGridProps {
-  onLoaded?: () => void;
-}
-
-const StatsGrid: React.FC<StatsGridProps> = ({ onLoaded }) => {
+const StatsGrid: React.FC = () => {
   const [totalEvents, setTotalEvents] = useState<number>(0);
   const [totalProducts, setTotalProducts] = useState<number>(0);
+  const [totalOrderEvents, setTotalOrderEvents] = useState<number>(0);
+  const [totalOrderProducts, setTotalOrderProducts] = useState<number>(0);
+  const [totalSales, setTotalSales] = useState<string>('$0');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [averageRating, setAverageRating] = useState<number>(0);
+  const [upcomingEvents, setUpcomingEvents] = useState<UpcomingEvent[]>([]);
+  const [reviewsCountByRating, setReviewsCountByRating] = useState<
+    { rating: number; count: number }[]
+  >([]);
+  const [eventActivity, setEventActivity] = useState<EventActivity[]>([]);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-
-        if (!user?.email) throw new Error('No se pudo obtener el usuario');
-
-        const profile = await getUserProfileByEmail(user.email);
-        if (!profile?.organization) throw new Error('El usuario no tiene organización asignada');
-
-        const org = profile.organization;
-
-        const [eventsCount, productsCount] = await Promise.all([
-          getTotalEvents(org),
-          getTotalProducts(org),
+        const [
+          eventsCount,
+          productsCount,
+          total,
+          orderEventsCount,
+          reviewsSummary,
+          activity,
+          upcoming,
+          orderProductsCount,
+        ] = await Promise.all([
+          getTotalEvents(),
+          getTotalProducts(),
+          getTotalSales(),
+          getEventOrdersCount(),
+          getReviewsSummary(),
+          getEventActivity(),
+          getUpcomingEvents(),
+          getProductsOrdersCount(),
         ]);
 
+        setUpcomingEvents(upcoming);
         setTotalEvents(eventsCount);
         setTotalProducts(productsCount);
+        setTotalSales(total);
+        setTotalOrderEvents(orderEventsCount);
+        setAverageRating(reviewsSummary.averageRating);
+        setReviewsCountByRating(reviewsSummary.reviewsCountByRating);
+        setEventActivity(activity);
+        setTotalOrderProducts(orderProductsCount);
       } catch (err) {
         console.error('Error cargando estadísticas:', err);
       } finally {
-        onLoaded?.();
+        setLoading(false);
       }
     };
 
     fetchStats();
-  }, [onLoaded]);
+  }, []);
 
-  const mockDataSales = [
-    { name: 'Lun', value: 5 },
-    { name: 'Mar', value: 8 },
-    { name: 'Mié', value: 10 },
-    { name: 'Jue', value: 13 },
-    { name: 'Vie', value: 15 },
-    { name: 'Sáb', value: 18 },
-    { name: 'Dom', value: 20 },
-  ];
-
-  const mockDataTickets = [
-    { name: 'Lun', value: 2 },
-    { name: 'Mar', value: 5 },
-    { name: 'Mié', value: 7 },
-    { name: 'Jue', value: 10 },
-    { name: 'Vie', value: 11 },
-    { name: 'Sáb', value: 13 },
-    { name: 'Dom', value: 16 },
-  ];
-
-  const mockSalesValue = '$2,450,000';
-  const mockTicketsValue = 12;
+  if (loading) {
+    return (
+      <div className="stats-grid">
+        <p className="loading-text">Cargando estadísticas...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="stats-grid">
-      <div className="stats-row">
-        <div className="stat-col">
-          <StatCard
-            title="Eventos Totales"
-            value={totalEvents}
-            percentage={5.3}
-            color="#1177F1"
-            chartType="area"
-            icon={<ShoppingCartIcon />}
-          />
-        </div>
-
-        <div className="stat-col">
-          <StatCard
-            title="Total de Ventas"
-            value={mockSalesValue}
-            percentage={12.8}
-            color="#FF0099"
-            chartType="line"
-            icon={<StorageIcon />}
-            customData={mockDataSales}
-          />
-        </div>
-
-        <div className="stat-col">
-          <StatCard
-            title="Total de Entradas Vendidas"
-            value={mockTicketsValue}
-            percentage={-3.1}
-            color="#1177F1"
-            chartType="bar"
-            icon={<LabelIcon />}
-            customData={mockDataTickets}
-          />
-        </div>
+      <div className="stat-card">
+        <StatCard
+          title="Eventos Totales"
+          value={totalEvents}
+          percentage={5.3}
+          color="#1177F1"
+          chartType="area"
+        />
+      </div>
+      <div className="stat-card">
+        <StatCard
+          title="Ventas Totales"
+          value={totalSales}
+          percentage={12.8}
+          color="#FF0099"
+          chartType="line"
+        />
+      </div>
+      <div className="stat-card">
+        <StatCard
+          title="Entradas Vendidas"
+          value={totalOrderEvents}
+          percentage={-3.1}
+          color="#1177F1"
+          chartType="bar"
+        />
       </div>
 
-      <div className="stats-row">
-        <div className="stat-col">
-          <StatCard
-            title="Productos Totales"
-            value={totalProducts}
-            percentage={8.4}
-            color="#FF0099"
-            chartType="area"
-            icon={<StoreIcon />}
-          />
-        </div>
+      <div className="stat-card">
+        <StatCard
+          title="Productos Totales"
+          value={totalProducts}
+          percentage={8.4}
+          color="#FF0099"
+          chartType="area"
+        />
+      </div>
+      <div className="stat-card">
+        <StatCard
+          title="Productos Vendidos"
+          value={totalOrderProducts}
+          percentage={-1.1}
+          color="#1177F1"
+          chartType="line"
+        />
+      </div>
+      <div className="consumer-activity-card">
+        <ConsumerActivityCard data={eventActivity} />
+      </div>
+
+      <div className="upcoming-card">
+        <UpcomingEventsCard events={upcomingEvents} />
+      </div>
+
+      <div className="review-card">
+        <ReviewCard averageRating={averageRating} reviewsCountByRating={reviewsCountByRating} />
       </div>
     </div>
   );

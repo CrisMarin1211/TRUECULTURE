@@ -8,3 +8,8 @@ export interface CommentItem {
   created_at?: string;
   related_name?: string;
 }
+
+export interface ReviewsSummary {
+  averageRating: number;
+  reviewsCountByRating: { rating: number; count: number }[];
+}

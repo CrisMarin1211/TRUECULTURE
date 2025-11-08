@@ -64,3 +64,26 @@ export const getEventsByOrganization = async (organization?: string) => {
   if (error) throw error;
   return data;
 };
+
+export const getUpcomingEvents = async (limit: number = 5): Promise<UpcomingEvent[]> => {
+  const { data, error } = await supabase
+    .from('events')
+    .select('id, image, name, date')
+    .gte('date', new Date().toISOString())
+    .order('date', { ascending: true })
+    .limit(limit);
+
+  if (error) {
+    console.error('Error al obtener próximos eventos:', error);
+    return [];
+  }
+
+  return (
+    data?.map((e) => ({
+      id: e.id,
+      image: e.image,
+      name: e.name,
+      date: e.date,
+    })) || []
+  );
+};

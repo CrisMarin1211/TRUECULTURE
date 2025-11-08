@@ -24,7 +24,7 @@ const MetricsModal: React.FC<MetricsModalProps> = ({ open, onClose, item, type, 
 
   const ordersTotal = salesData.orders;
   const revenueTotal = salesData.revenue;
-  const revenueFormatted = $${revenueTotal.toLocaleString('es-CO')};
+  const revenueFormatted = `$${revenueTotal.toLocaleString('es-CO')}`;
 
   return (
     <div className="metrics-overlay" onClick={onClose}>

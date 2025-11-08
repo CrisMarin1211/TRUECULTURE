@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabaseClient';
-import type { EventActivity } from '../types/orderItemsType';
+import type { EventActivity } from '../types/OrderItemsType';
 
 export const getEventActivity = async (): Promise<EventActivity[]> => {
   const { data, error } = await supabase

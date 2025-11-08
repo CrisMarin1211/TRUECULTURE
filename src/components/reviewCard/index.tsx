@@ -40,7 +40,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
         y={y + height / 2 + 4}
         fill="#fff"
         fontSize={12}
-      >{${value} (${percent}%)}</text>
+      >{`${value} (${percent}%)`}</text>
     );
   };
 
@@ -97,7 +97,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
               />
               <Bar dataKey="count" radius={[0, 6, 6, 0]} fill="#1177F1">
                 {data.map((_, index) => (
-                  <Cell key={cell-${index}} fill="#1177F1" />
+                  <Cell key={`cell-${index}`} fill="#1177F1" />
                 ))}
                 <LabelList dataKey="count" content={renderLabel} />
               </Bar>

@@ -171,7 +171,7 @@ const SidebarAdmin: React.FC = () => {
         </div>
       )}
 
-      <LogOutButton redirectTo="/" />
+      <LogOutButton />
     </aside>
   );
 };

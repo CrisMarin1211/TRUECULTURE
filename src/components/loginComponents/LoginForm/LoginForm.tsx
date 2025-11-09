@@ -23,7 +23,7 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
       alert('Inicio de sesión exitoso');
 
       if (fromAdmin) {
-        navigate('/dashboard');
+        navigate('/DashboardAdmin');
       } else {
         navigate('/DashboardClient');
       }
@@ -37,7 +37,7 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
     try {
       await loginWithGoogle();
       if (fromAdmin) {
-        navigate('/dashboard');
+        navigate('/DashboardAdmin');
       } else {
         navigate('/DashboardClient');
       }
@@ -72,13 +72,7 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
       <Button label="Iniciar Sesión" type="submit" />
 
       <p className="signup-text">
-        Don’t have an account?{' '}
-        <a
-          onClick={() => navigate('/signup', { state: { fromAdmin } })}
-          style={{ cursor: 'pointer' }}
-        >
-          Crear cuenta
-        </a>
+        Don’t have an account? <a href="/signup">Crear cuenta</a>
       </p>
 
       <div className="divider">

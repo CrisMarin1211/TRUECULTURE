@@ -14,16 +14,17 @@ import CalendarMonthTwoToneIcon from '@mui/icons-material/CalendarMonthTwoTone';
 import BuyButton from './buttons/buyButton';
 import Review from './reviewComponent/review';
 import ShareButton from './buttons/shareButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ViewMoreProps } from '../../types/ViewMorType';
 import theme from '../../styles/theme';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContex';
+import { incrementViewCount } from '../../services/views';
 
 const ViewMore = ({ item, onClose }: ViewMoreProps) => {
   const [readMore, setReadMore] = useState(false);
   const toggleReadMore = () => setReadMore(!readMore);
-  const { addToCart } = useCart(); // usa la función del contexto
+  const { addToCart } = useCart();
   const navigate = useNavigate();
   const handleBuy = () => {
     addToCart({
@@ -35,6 +36,15 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
     });
     navigate('/my-cart');
   };
+
+  useEffect(() => {
+    console.log('Incrementing view count for item:', item);
+    if (item?.id) {
+      const table = 'date' in item ? 'events' : 'products';
+      incrementViewCount(table, Number(item.id));
+    }
+  }, [item?.id]);
+
   return (
     <Card
       sx={{

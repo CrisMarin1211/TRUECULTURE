@@ -26,7 +26,7 @@ const ProductTagsChart: React.FC<ProductTagsChartProps> = ({
     const numericValue = Number(value);
     return (
       <text x={x} y={y} fill="#fff" textAnchor="middle" dominantBaseline="central" fontSize={12}>
-        {${name}: ${isNaN(numericValue) ? 0 : numericValue.toFixed(0)}%}
+        {`${name}: ${isNaN(numericValue) ? 0 : numericValue.toFixed(0)}%`}
       </text>
     );
   };
@@ -60,11 +60,11 @@ const ProductTagsChart: React.FC<ProductTagsChartProps> = ({
                 label={renderLabel}
               >
                 {chartData.map((entry, index) => (
-                  <Cell key={cell-${index}} fill={COLORS[index % COLORS.length]} />
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
               <Tooltip
-                formatter={(value: number, name: string) => [${value.toFixed(1)}%, name]}
+                formatter={(value: number, name: string) => [`${value.toFixed(1)}%`, name]}
                 contentStyle={{ background: '#222', color: '#fff' }}
               />
             </PieChart>

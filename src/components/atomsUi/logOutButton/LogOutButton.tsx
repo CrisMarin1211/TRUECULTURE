@@ -4,18 +4,14 @@ import theme from '../../../styles/theme';
 import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
-interface LogOutButtonProps {
-  redirectTo?: string;
-}
-
-const LogOutButton: React.FC<LogOutButtonProps> = ({ redirectTo = '/login' }) => {
+const LogOutButton = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await logout();
-      navigate(redirectTo, { replace: true });
+      navigate('/', { replace: true });
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
     }

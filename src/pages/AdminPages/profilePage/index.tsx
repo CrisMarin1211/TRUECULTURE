@@ -4,6 +4,7 @@ import SidebarAdmin from '../../../components/atomsUi/sideBarAdmin';
 import { supabase } from '../../../lib/supabaseClient';
 import { getUserProfileByEmail, updateUserProfile } from '../../../services/users';
 import type { UserProfile } from '../../../types/UserType';
+import Loader from '../../../components/loader';
 
 const ProfileAdminPage: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -70,17 +71,7 @@ const ProfileAdminPage: React.FC = () => {
     }
   };
 
-  if (loading)
-    return (
-      <div className="page-container">
-        <SidebarAdmin />
-        <main className="main-content">
-          <div className="header-card">
-            <h4 className="title">Cargando perfil...</h4>
-          </div>
-        </main>
-      </div>
-    );
+  if (loading) return <Loader />;
 
   if (!profile)
     return (

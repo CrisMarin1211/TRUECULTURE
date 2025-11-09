@@ -16,6 +16,7 @@ export interface ProductItem {
   status: 'Activo' | 'No activo';
   isdraft?: boolean;
   organization?: string;
+  views?: number;
 }
 
 export const defaultProduct: ProductItem = {
@@ -47,4 +48,10 @@ export interface ProductContextType {
   removeProduct: (id: number) => Promise<void>;
   updateStock: (id: number, stockTaken: number) => Promise<void>;
   saveProduct: (product: Omit<ProductItem, 'id'>) => Promise<void>;
+}
+
+export interface ProductTagStats {
+  tag: string;
+  count: number;
+  percent: number;
 }

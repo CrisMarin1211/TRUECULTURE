@@ -55,8 +55,8 @@ const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
   const handleGoogleRegister = async () => {
     try {
       await loginWithGoogle();
-      if (fromAdmin) {
-        navigate('/dashboard');
+     if (fromAdmin) {
+        navigate('/DashboardAdmin');
       } else {
         navigate('/DashboardClient');
       }

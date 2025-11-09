@@ -3,14 +3,22 @@ import StatCard from '../statCard';
 import './style.css';
 import { getTotalEvents, getUpcomingEvents } from '../../services/events';
 import { getTotalProducts } from '../../services/products';
-import { getEventOrdersCount, getProductsOrdersCount, getTotalSales } from '../../services/orders';
+import {
+  getEventOrdersCount,
+  getProductsOrdersCount,
+  getProductsStatusList,
+  getTotalSalesByOrganization,
+} from '../../services/orderItems';
 import ReviewCard from '../reviewCard';
 import { getReviewsSummary } from '../../services/comments';
-import { getEventActivity } from "../../services/orderItems"
+import { getEventActivity } from '../../services/orderItems';
 import ConsumerActivityCard from '../consumerActivityCard';
-import UpcomingEventsCard, { type UpcomingEvent } from "../upcomingEventsCard"
+import UpcomingEventsCard, { type UpcomingEvent } from '../upcomingEventsCard';
 import type { EventActivity } from '../../types/OrderItemsType';
-import {fetchOrganization} from "../../services/organization"
+import { fetchOrganization } from '../../services/organization';
+import Loader from '../loader';
+import type { ProductStatus } from '../productsStatusCard';
+import ProductsStatusCard from '../productsStatusCard';
 
 const StatsGrid: React.FC = () => {
   const [totalEvents, setTotalEvents] = useState<number>(0);
@@ -21,10 +29,12 @@ const StatsGrid: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [averageRating, setAverageRating] = useState<number>(0);
   const [upcomingEvents, setUpcomingEvents] = useState<UpcomingEvent[]>([]);
+  const [productsStatus, setProductsStatus] = useState<ProductStatus[]>([]);
+  const [eventActivity, setEventActivity] = useState<EventActivity[]>([]);
+
   const [reviewsCountByRating, setReviewsCountByRating] = useState<
     { rating: number; count: number }[]
   >([]);
-  const [eventActivity, setEventActivity] = useState<EventActivity[]>([]);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -43,15 +53,17 @@ const StatsGrid: React.FC = () => {
           activity,
           upcoming,
           orderProductsCount,
+          productsStatusList,
         ] = await Promise.all([
           getTotalEvents(organization),
           getTotalProducts(organization),
-          getTotalSales(),
+          getTotalSalesByOrganization(),
           getEventOrdersCount(),
           getReviewsSummary(),
           getEventActivity(),
           getUpcomingEvents(),
           getProductsOrdersCount(),
+          getProductsStatusList(),
         ]);
 
         setUpcomingEvents(upcoming);
@@ -63,6 +75,7 @@ const StatsGrid: React.FC = () => {
         setReviewsCountByRating(reviewsSummary.reviewsCountByRating);
         setEventActivity(activity);
         setTotalOrderProducts(orderProductsCount);
+        setProductsStatus(productsStatusList);
       } catch (err) {
         console.error('Error cargando estadísticas:', err);
       } finally {
@@ -73,13 +86,7 @@ const StatsGrid: React.FC = () => {
     fetchStats();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="stats-grid">
-        <p className="loading-text">Cargando estadísticas...</p>
-      </div>
-    );
-  }
+  if (loading) return <Loader />;
 
   return (
     <div className="stats-grid">
@@ -129,6 +136,7 @@ const StatsGrid: React.FC = () => {
           chartType="line"
         />
       </div>
+
       <div className="consumer-activity-card">
         <ConsumerActivityCard data={eventActivity} />
       </div>
@@ -139,6 +147,10 @@ const StatsGrid: React.FC = () => {
 
       <div className="review-card">
         <ReviewCard averageRating={averageRating} reviewsCountByRating={reviewsCountByRating} />
+      </div>
+
+      <div className="products-status-card">
+        <ProductsStatusCard products={productsStatus} />
       </div>
     </div>
   );

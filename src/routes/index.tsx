@@ -20,6 +20,7 @@ import CreateTicketPage from '../pages/AdminPages/ticketsPages/createPage';
 import ListTicketsPage from '../pages/AdminPages/ticketsPages/listPage';
 import AdminHomePage from '../pages/AdminPages/homePage';
 import AdminAnalyticsPage from '../pages/AdminPages/analyticPage';
+import ListOrdersPage from '../pages/AdminPages/ordersPage';
 
 import PrivateRoute from './PrivateRoute';
 

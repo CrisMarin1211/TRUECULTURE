@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Loader from '../../../components/loader';
 import SidebarAdmin from '../../../components/atomsUi/sideBarAdmin';
-import StatsGrid from '../../../components/statsGrid';
+import StatsGrid2 from '../../../components/statsGrid2';
 
 const AdminAnalyticsPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@ const AdminAnalyticsPage: React.FC = () => {
     <div className="page-container">
       <SidebarAdmin />
       <main className="main-content">
-        <StatsGrid />
+        <StatsGrid2 />
       </main>
     </div>
   );

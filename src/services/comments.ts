@@ -161,10 +161,10 @@ export const getReviewsSummary = async (): Promise<ReviewsSummary> => {
     .or(
       [
         productIds.length > 0
-          ? and(related_type.eq.product,related_id.in.(${productIds.join(',')}))
+          ? `and(related_type.eq.product,related_id.in.(${productIds.join(',')}))`
           : '',
         eventIds.length > 0
-          ? and(related_type.eq.event,related_id.in.(${eventIds.join(',')}))
+          ? `and(related_type.eq.event,related_id.in.(${eventIds.join(',')}))`
           : '',
       ]
         .filter(Boolean)

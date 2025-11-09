@@ -59,7 +59,7 @@ export const getItemSummary = async (
     .single();
 
   if (productError || !product) {
-    console.warn(El producto ${itemName} no pertenece a la organización);
+    console.warn(`El producto ${itemName} no pertenece a la organización`);
     return { orders: 0, revenue: 0 };
   }
 

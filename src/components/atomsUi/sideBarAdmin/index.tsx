@@ -16,6 +16,7 @@ import { supabase } from '../../../lib/supabaseClient';
 import { getUserProfileByEmail } from '../../../services/users';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import { useAuth } from '../../../context/AuthContext';
 
 const SidebarAdmin: React.FC = () => {
   const navigate = useNavigate();
@@ -24,8 +25,18 @@ const SidebarAdmin: React.FC = () => {
   const [openOptions, setOpenOptions] = useState(true);
   const [openSupport, setOpenSupport] = useState(false);
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const { logout } = useAuth();
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
+  };
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -83,7 +94,7 @@ const SidebarAdmin: React.FC = () => {
         {openOptions && (
           <ul className="sidebar-menu">
             <li
-              className={isActive('/dashboardAdmin') ? 'active' : ''}
+              className={isActive('/dashboard') ? 'active' : ''}
               onClick={() => navigate('/dashboardAdmin')}
             >
               <DashboardIcon className="sidebar-icon" />
@@ -169,6 +180,10 @@ const SidebarAdmin: React.FC = () => {
           </div>
         </div>
       )}
+
+      <button className="sidebar-logout-btn" onClick={handleLogout}>
+        Cerrar sesión
+      </button>
     </aside>
   );
 };

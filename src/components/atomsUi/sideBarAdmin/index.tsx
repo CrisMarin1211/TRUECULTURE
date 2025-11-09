@@ -16,7 +16,7 @@ import { supabase } from '../../../lib/supabaseClient';
 import { getUserProfileByEmail } from '../../../services/users';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import { useAuth } from '../../../context/AuthContext';
+import LogOutButton from '../logOutButton/LogOutButton';
 
 const SidebarAdmin: React.FC = () => {
   const navigate = useNavigate();
@@ -25,18 +25,8 @@ const SidebarAdmin: React.FC = () => {
   const [openOptions, setOpenOptions] = useState(true);
   const [openSupport, setOpenSupport] = useState(false);
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const { logout } = useAuth();
 
   const isActive = (path: string) => location.pathname === path;
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate('/');
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error);
-    }
-  };
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -181,9 +171,7 @@ const SidebarAdmin: React.FC = () => {
         </div>
       )}
 
-      <button className="sidebar-logout-btn" onClick={handleLogout}>
-        Cerrar sesión
-      </button>
+      <LogOutButton redirectTo="/" />
     </aside>
   );
 };

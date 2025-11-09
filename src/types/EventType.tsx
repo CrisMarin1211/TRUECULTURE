@@ -16,6 +16,7 @@ export interface EventItem {
   tags: 'Musica' | 'Cultural' | 'Familiar' | 'Diversion' | 'Gastronomia';
   expectedattendance: number;
   isdraft?: boolean;
+  organization?: string;
 }
 
 export const defaultEvent: EventItem = {
@@ -48,4 +49,11 @@ export interface EventContextType {
   editEvent: (id: string, updates: Partial<EventItem>) => void;
   removeEvent: (id: string) => void;
   saveEvent: (event: Omit<EventItem, 'id'>) => void;
+}
+
+export interface UpcomingEvent {
+  id: number;
+  image: string;
+  name: string;
+  date: string;
 }

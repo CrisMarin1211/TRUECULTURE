@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import EventIcon from '@mui/icons-material/Event';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -8,8 +8,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import './style.css';
 import { Comment } from '@mui/icons-material';
+import Avatar from '@mui/material/Avatar';
+import './style.css';
+import type { UserProfile } from '../../../types/UserType';
+import { supabase } from '../../../lib/supabaseClient';
+import { getUserProfileByEmail } from '../../../services/users';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
 
 const SidebarAdmin: React.FC = () => {
   const navigate = useNavigate();
@@ -17,8 +22,24 @@ const SidebarAdmin: React.FC = () => {
 
   const [openOptions, setOpenOptions] = useState(true);
   const [openSupport, setOpenSupport] = useState(false);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
 
   const isActive = (path: string) => location.pathname === path;
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user?.email) {
+        const profileData = await getUserProfileByEmail(user.email);
+        setProfile(profileData);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   return (
     <aside className="sidebar">
@@ -95,6 +116,13 @@ const SidebarAdmin: React.FC = () => {
               <ConfirmationNumberIcon className="sidebar-icon" />
               <span>Gestionar reservas</span>
             </li>
+            <li
+              className={isActive('/analytics') ? 'active' : ''}
+              onClick={() => navigate('/analytics')}
+            >
+              <AnalyticsIcon className="sidebar-icon" />
+              <span>Analítica y Reportes</span>
+            </li>
           </ul>
         )}
       </div>
@@ -119,6 +147,20 @@ const SidebarAdmin: React.FC = () => {
           </ul>
         )}
       </div>
+
+      {profile && (
+        <div className="sidebar-user">
+          <Avatar
+            src={profile.avatar_url || 'https://i.pravatar.cc/120?img=5'}
+            alt={profile.name || 'Usuario'}
+            className="sidebar-user-avatar"
+          />
+          <div className="sidebar-user-info">
+            <strong className="sidebar-user-name">{profile.name || '(Sin nombre)'}</strong>
+            <span className="sidebar-user-email">{profile.email}</span>
+          </div>
+        </div>
+      )}
     </aside>
   );
 };

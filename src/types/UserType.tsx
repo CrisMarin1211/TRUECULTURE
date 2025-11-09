@@ -13,6 +13,7 @@ export interface SignupCredentials {
   email: string;
   password: string;
   name: string;
+  organization?: string;
 }
 
 export interface AuthProviderProps {

@@ -3,6 +3,10 @@ import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addEvent, deleteEvent, getEvents, updateEvent } from '../../services/events';
 import { defaultEvent, type EventItem } from '../../types/EventType';
+import { supabase } from '../../lib/supabaseClient';
+import { getUserOrganizationByEmail } from '../../services/users';
+import MetricsModal from '../metricsModal';
+import { getItemSummary } from '../../services/orderItems';
 
 const CreateEvent: React.FC = () => {
   const navigate = useNavigate();
@@ -12,16 +16,50 @@ const CreateEvent: React.FC = () => {
     ...defaultEvent,
   });
 
+  const [openMetrics, setOpenMetrics] = useState(false);
+  const [salesData, setSalesData] = useState<{ orders: number; revenue: number }>({
+    orders: 0,
+    revenue: 0,
+  });
+
   useEffect(() => {
     const fetchEvent = async () => {
       if (id) {
         const events = await getEvents();
         const found = events.find((e) => String(e.id) === id);
-        if (found) setEvent(found);
+        if (found) {
+          setEvent(found);
+          const summary = await getItemSummary(found.name);
+          setSalesData(summary);
+        }
       }
     };
     fetchEvent();
   }, [id]);
+
+  useEffect(() => {
+    const fetchOrganization = async () => {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (user?.email) {
+          const organization = await getUserOrganizationByEmail(user.email);
+          if (organization) {
+            setEvent((prev) => ({
+              ...prev,
+              organization,
+            }));
+          }
+        }
+      } catch (error) {
+        console.error('Error al obtener organización del usuario:', error);
+      }
+    };
+
+    fetchOrganization();
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -292,14 +330,21 @@ const CreateEvent: React.FC = () => {
         </div>
       </div>
 
-      {/* <div className="qr-box">
-        <img src="/images/qr.png" alt="QR" className="qr-img" />
-        <span>Escanea el código QR para acceder al evento</span>
+<div className="row-7">
+        {id && (
+          <button className="btn metrics-btn" onClick={() => setOpenMetrics(true)}>
+            Ver Métricas
+          </button>
+        )}
       </div>
 
-      <div className="row-7">
-        <button className="btn metrics-btn">Ver Métricas</button>
-      </div> */}
+      <MetricsModal
+        open={openMetrics}
+        onClose={() => setOpenMetrics(false)}
+        item={event}
+        type="event"
+        salesData={salesData}
+      />
     </div>
   );
 };

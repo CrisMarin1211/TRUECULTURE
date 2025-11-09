@@ -1,5 +1,6 @@
 import { supabase } from '../lib/supabaseClient';
 import type { CommentItem, ReviewsSummary } from '../types/CommentType';
+import { fetchOrganization } from './organization';
 
 export const addComment = async (
   comment: Omit<CommentItem, 'id' | 'created_at' | 'related_name'>,
@@ -131,19 +132,56 @@ export const getCommentsByOrganization = async (organization?: string): Promise<
 };
 
 export const getReviewsSummary = async (): Promise<ReviewsSummary> => {
-  const { data, error } = await supabase.from('comments').select('rating');
+  const organization = await fetchOrganization();
+  if (!organization) {
+    console.warn('No se encontró organización para el usuario');
+    return { averageRating: 0, reviewsCountByRating: [] };
+  }
+
+  const { data: products } = await supabase
+    .from('products')
+    .select('id')
+    .eq('organization', organization);
+
+  const { data: events } = await supabase
+    .from('events')
+    .select('id')
+    .eq('organization', organization);
+
+  const productIds = products?.map((p) => p.id) ?? [];
+  const eventIds = events?.map((e) => e.id) ?? [];
+
+  if (productIds.length === 0 && eventIds.length === 0) {
+    return { averageRating: 0, reviewsCountByRating: [] };
+  }
+
+  const { data: comments, error } = await supabase
+    .from('comments')
+    .select('rating, related_type, related_id')
+    .or(
+      [
+        productIds.length > 0
+          ? and(related_type.eq.product,related_id.in.(${productIds.join(',')}))
+          : '',
+        eventIds.length > 0
+          ? and(related_type.eq.event,related_id.in.(${eventIds.join(',')}))
+          : '',
+      ]
+        .filter(Boolean)
+        .join(','),
+    );
 
   if (error) {
-    console.error('Error al obtener ratings:', error);
+    console.error('Error al obtener ratings de la organización:', error);
     return { averageRating: 0, reviewsCountByRating: [] };
   }
 
-  if (!data || data.length === 0) {
+  if (!comments || comments.length === 0) {
     return { averageRating: 0, reviewsCountByRating: [] };
   }
 
-  const ratings = data
-    .map((r) => r.rating)
+  const ratings = comments
+    .map((c) => c.rating)
     .filter((r): r is number => typeof r === 'number' && r >= 1 && r <= 5);
 
   const averageRating =

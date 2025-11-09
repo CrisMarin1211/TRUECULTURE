@@ -1,5 +1,6 @@
 import { supabase } from '../lib/supabaseClient';
 import type { EventItem, UpcomingEvent } from '../types/EventType';
+import { fetchOrganization } from './organization';
 
 export const addEvent = async (event: EventItem) => {
   const { id, ...cleanEvent } = event;
@@ -64,9 +65,13 @@ export const getEventsByOrganization = async (organization?: string) => {
 };
 
 export const getUpcomingEvents = async (limit: number = 5): Promise<UpcomingEvent[]> => {
+  const organization = await fetchOrganization();
+  if (!organization) throw new Error('El usuario no tiene organización asociada');
+
   const { data, error } = await supabase
     .from('events')
     .select('id, image, name, date')
+    .eq('organization', organization)
     .gte('date', new Date().toISOString())
     .order('date', { ascending: true })
     .limit(limit);
@@ -76,6 +81,7 @@ export const getUpcomingEvents = async (limit: number = 5): Promise<UpcomingEven
     return [];
   }
 
+  console.log('Upcoming events data:', data);
   return (
     data?.map((e) => ({
       id: e.id,
@@ -84,4 +90,27 @@ export const getUpcomingEvents = async (limit: number = 5): Promise<UpcomingEven
       date: e.date,
     })) || []
   );
+};
+
+export const getTotalEventViews = async (): Promise<number> => {
+  const organization = await fetchOrganization();
+  if (!organization) {
+    console.error('No se pudo obtener la organización');
+    return 0;
+  }
+
+  const { data, error } = await supabase
+    .from('events')
+    .select('views')
+    .eq('organization', organization);
+
+  if (error) {
+    console.error('Error al obtener las vistas de eventos:', error);
+    return 0;
+  }
+
+  if (!data || data.length === 0) return 0;
+
+  const totalViews = data.reduce((sum, e) => sum + (e.views || 0), 0);
+  return totalViews;
 };

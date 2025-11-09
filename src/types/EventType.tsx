@@ -17,6 +17,7 @@ export interface EventItem {
   expectedattendance: number;
   isdraft?: boolean;
   organization?: string;
+  views?: number;
 }
 
 export const defaultEvent: EventItem = {

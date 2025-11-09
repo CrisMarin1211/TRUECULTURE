@@ -83,8 +83,8 @@ const SidebarAdmin: React.FC = () => {
         {openOptions && (
           <ul className="sidebar-menu">
             <li
-              className={isActive('/dashboard') ? 'active' : ''}
-              onClick={() => navigate('/dashboard')}
+              className={isActive('/dashboardAdmin') ? 'active' : ''}
+              onClick={() => navigate('/dashboardAdmin')}
             >
               <DashboardIcon className="sidebar-icon" />
               <span>Dashboard</span>

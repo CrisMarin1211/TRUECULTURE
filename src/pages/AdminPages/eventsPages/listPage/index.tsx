@@ -4,8 +4,10 @@ import AdminEventCard from '../../../../components/adminEventCard';
 import { useNavigate } from 'react-router-dom';
 import type { EventItem } from '../../../../types/EventType';
 import SidebarAdmin from '../../../../components/atomsUi/sideBarAdmin';
-import { getEvents } from '../../../../services/events';
 import Loader from '../../../../components/loader';
+import { supabase } from '../../../../lib/supabaseClient';
+import { getUserOrganizationByEmail } from '../../../../services/users';
+import { getEventsByOrganization } from '../../../../services/events';
 
 const ListEventPage: React.FC = () => {
   const [events, setEvents] = useState<EventItem[]>([]);
@@ -20,7 +22,24 @@ const ListEventPage: React.FC = () => {
     const fetchEvents = async () => {
       try {
         setLoading(true);
-        const data = await getEvents();
+
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (!user?.email) {
+          setError('No se pudo obtener el usuario actual');
+          return;
+        }
+
+        const organization = await getUserOrganizationByEmail(user.email);
+
+        if (!organization) {
+          setError('No se encontró organización para el usuario');
+          return;
+        }
+
+        const data = await getEventsByOrganization(organization);
         setEvents(data);
       } catch (err) {
         console.error('Error cargando eventos:', err);

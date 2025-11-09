@@ -6,8 +6,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 
-const RegisterForm = () => {
+interface RegisterFormProps {
+  fromAdmin?: boolean;
+}
+
+const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
   const [name, setName] = useState('');
+  const [organization, setOrganization] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [agree, setAgree] = useState(false);
@@ -28,9 +33,19 @@ const RegisterForm = () => {
     }
 
     try {
-      await signup({ email, password, name });
+      await signup({
+        email,
+        password,
+        name,
+        ...(fromAdmin && { organization }),
+      });
+
       alert('Registro exitoso. Revisa tu correo para confirmar la cuenta.');
-      navigate('/DashboardClient');
+      if (fromAdmin) {
+        navigate('/dashboard');
+      } else {
+        navigate('/DashboardClient');
+      }
     } catch (error: any) {
       console.error('Error en registro:', error.message);
       alert(error.message);
@@ -40,6 +55,11 @@ const RegisterForm = () => {
   const handleGoogleRegister = async () => {
     try {
       await loginWithGoogle();
+      if (fromAdmin) {
+        navigate('/dashboard');
+      } else {
+        navigate('/DashboardClient');
+      }
     } catch (error: any) {
       console.error('Error en registro con Google:', error.message);
       alert('No se pudo registrar con Google');
@@ -55,6 +75,16 @@ const RegisterForm = () => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+
+      {fromAdmin && (
+        <InputField
+          label="Organization*"
+          type="text"
+          placeholder="Enter organization name"
+          value={organization}
+          onChange={(e) => setOrganization(e.target.value)}
+        />
+      )}
 
       <InputField
         label="Email address*"
@@ -89,7 +119,13 @@ const RegisterForm = () => {
       </div>
 
       <p className="login-text">
-        ¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a>
+        ¿Ya tienes una cuenta?{' '}
+        <a
+          onClick={() => navigate('/login', { state: { fromAdmin } })}
+          style={{ cursor: 'pointer' }}
+        >
+          Inicia sesión
+        </a>
       </p>
 
       <div className="divider">

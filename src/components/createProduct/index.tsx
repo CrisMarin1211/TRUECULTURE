@@ -3,12 +3,21 @@ import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addProduct, updateProduct, deleteProduct, getProducts } from '../../services/products';
 import { defaultProduct, type ProductItem } from '../../types/ProductType';
+import { supabase } from '../../lib/supabaseClient';
+import { getUserOrganizationByEmail } from '../../services/users';
+import { getItemSummary } from '../../services/orderItems';
+import MetricsModal from '../metricsModal';
 
 const CreateProduct: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
   const [product, setProduct] = useState<ProductItem>({ ...defaultProduct });
+  const [openMetrics, setOpenMetrics] = useState(false);
+  const [salesData, setSalesData] = useState<{ orders: number; revenue: number }>({
+    orders: 0,
+    revenue: 0,
+  });
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -16,7 +25,11 @@ const CreateProduct: React.FC = () => {
         try {
           const data = await getProducts();
           const found = data.find((p) => String(p.id) === id);
-          if (found) setProduct(found);
+         if (found) {
+            setProduct(found);
+            const summary = await getItemSummary(found.name);
+            setSalesData(summary);
+          }
         } catch (err) {
           console.error('Error al cargar producto:', err);
         }
@@ -24,6 +37,30 @@ const CreateProduct: React.FC = () => {
     };
     loadProduct();
   }, [id]);
+
+  useEffect(() => {
+    const fetchOrganization = async () => {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (user?.email) {
+          const organization = await getUserOrganizationByEmail(user.email);
+          if (organization) {
+            setProduct((prev) => ({
+              ...prev,
+              organization,
+            }));
+          }
+        }
+      } catch (error) {
+        console.error('Error al obtener organización del usuario:', error);
+      }
+    };
+
+    fetchOrganization();
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -303,19 +340,21 @@ const CreateProduct: React.FC = () => {
           </select>
         </div>
       </div>
-
-      {/* <div className="row-6">
-        <div className="qr-box">
-          <img src="/images/qr.png" alt="QR" className="qr-img" />
-          <span>Escanea el código QR para pagar fácilmente</span>
-        </div>
-
-        <div className="placeholder-box">Contenido futuro</div>
+<div className="row-7">
+        {id && (
+          <button className="btn metrics-btn" onClick={() => setOpenMetrics(true)}>
+            Ver Métricas
+          </button>
+        )}
       </div>
 
-      <div className="row-7">
-        <button className="btn metrics-btn">Ver Métricas</button>
-      </div> */}
+      <MetricsModal
+        open={openMetrics}
+        onClose={() => setOpenMetrics(false)}
+        item={product}
+        type="product"
+        salesData={salesData}
+      />
     </div>
   );
 };

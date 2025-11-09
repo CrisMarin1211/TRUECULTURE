@@ -43,3 +43,18 @@ export const updateUserProfile = async (
 
   return data;
 };
+
+export const getUserOrganizationByEmail = async (email: string): Promise<string | null> => {
+  const { data, error } = await supabase
+    .from('users')
+    .select('organization')
+    .eq('email', email)
+    .single();
+
+  if (error) {
+    console.error('Error al obtener organización:', error);
+    return null;
+  }
+
+  return data.organization || null;
+};

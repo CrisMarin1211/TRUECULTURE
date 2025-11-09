@@ -15,6 +15,7 @@ export interface ProductItem {
   tags?: 'Afiches' | 'Pines' | 'Cultural' | 'Moda' | 'Gastronomía';
   status: 'Activo' | 'No activo';
   isdraft?: boolean;
+  organization?: string;
 }
 
 export const defaultProduct: ProductItem = {

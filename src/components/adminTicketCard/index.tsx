@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addTicket, updateTicket, deleteTicket, getTickets } from '../../services/tickets';
+import {
+  addTicket,
+  updateTicket,
+  deleteTicket,
+  getTicketsByOrganization,
+} from '../../services/tickets';
 import type { TicketItem } from '../../types/TicketType';
-import { getEvents } from '../../services/events';
+import { getEventsByOrganization } from '../../services/events';
+import { supabase } from '../../lib/supabaseClient';
+import { getUserProfileByEmail } from '../../services/users';
 
 const CreateTicket: React.FC = () => {
   const navigate = useNavigate();
@@ -17,6 +24,7 @@ const CreateTicket: React.FC = () => {
     payment_status: 'Pendiente',
     event_id: 0,
     date: new Date().toISOString().split('T')[0],
+    organization: '',
   });
 
   const [events, setEvents] = useState<{ id: number; name: string }[]>([]);
@@ -24,10 +32,24 @@ const CreateTicket: React.FC = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const eventData = await getEvents();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (!user?.email) throw new Error('No se pudo obtener el usuario');
+
+        const profile = await getUserProfileByEmail(user.email);
+        if (!profile?.organization) throw new Error('El usuario no tiene organización asignada');
+
+        setTicket((prev) => ({
+          ...prev,
+          organization: profile.organization,
+        }));
+
+        const eventData = await getEventsByOrganization(profile.organization);
         setEvents(eventData);
+
         if (id) {
-          const data = await getTickets();
+          const data = await getTicketsByOrganization(profile.organization);
           const found = data.find((t) => t.id === Number(id));
           if (found) setTicket(found);
         }
@@ -35,6 +57,7 @@ const CreateTicket: React.FC = () => {
         console.error('Error cargando datos:', err);
       }
     };
+
     loadData();
   }, [id]);
 
@@ -48,6 +71,11 @@ const CreateTicket: React.FC = () => {
 
   const handleSave = async () => {
     try {
+      if (!ticket.organization) {
+        console.error('No se encontró la organización del usuario');
+        return;
+      }
+
       if (id) {
         await updateTicket(Number(id), ticket);
       } else {

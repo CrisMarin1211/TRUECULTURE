@@ -192,6 +192,15 @@ const AppRoutes = () => {
         }
       />
 
+      <Route
+        path="/list-orders"
+        element={
+          <PrivateRoute>
+            <ListOrdersPage />
+          </PrivateRoute>
+        }
+      />
+
     </Routes>
   );
 };

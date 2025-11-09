@@ -26,14 +26,14 @@ import PrivateRoute from './PrivateRoute';
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Públicas */}
+
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<RegisterPage />} />
       <Route path="/Marketplacehome" element={<MarketplaceHome />} />
       <Route path="/categories/:city/:tag" element={<Categories />} />
 
-      {/* Cliente */}
+
       <Route
         path="/DashboardClient"
         element={
@@ -75,15 +75,15 @@ const AppRoutes = () => {
         }
       />
 
-      {/* Admin */}
       <Route
-        path="/dashboardAdmin"
+        path="/DashboardAdmin"
         element={
           <PrivateRoute>
             <AdminHomePage />
           </PrivateRoute>
         }
       />
+
       <Route
         path="/create-product"
         element={
@@ -92,6 +92,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/edit-product/:id"
         element={
@@ -100,6 +101,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/list-products"
         element={
@@ -108,6 +110,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/create-event"
         element={
@@ -116,6 +119,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/edit-event/:id"
         element={
@@ -124,6 +128,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/list-events"
         element={
@@ -132,6 +137,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/create-ticket"
         element={
@@ -140,6 +146,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/edit-ticket/:id"
         element={
@@ -148,6 +155,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/list-tickets"
         element={
@@ -156,6 +164,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/settings"
         element={
@@ -164,6 +173,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/list-comments"
         element={
@@ -172,6 +182,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/analytics"
         element={
@@ -180,6 +191,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+
     </Routes>
   );
 };

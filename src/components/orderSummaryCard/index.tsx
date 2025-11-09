@@ -69,7 +69,7 @@ const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
               </Typography>
 
               <Typography variant="body2" sx={{ color: '#ccc', mb: 1 }}>
-                {${item.value}/${item.total} pedidos (${percent}%)}
+                {`${item.value}/${item.total} pedidos (${percent}%)`}
               </Typography>
 
               <LinearProgress

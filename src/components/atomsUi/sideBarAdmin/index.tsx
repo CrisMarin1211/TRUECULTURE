@@ -15,6 +15,7 @@ import type { UserProfile } from '../../../types/UserType';
 import { supabase } from '../../../lib/supabaseClient';
 import { getUserProfileByEmail } from '../../../services/users';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 const SidebarAdmin: React.FC = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const SidebarAdmin: React.FC = () => {
 
       <div className="sidebar-actions">
         <button
-          className={`sidebar-action-btn ${isActive('/create-event') ? 'active' : ''}`}
+          className={sidebar-action-btn ${isActive('/create-event') ? 'active' : ''}}
           onClick={() => navigate('/create-event')}
         >
           <AddCircleIcon className="sidebar-action-icon" />
@@ -60,7 +61,7 @@ const SidebarAdmin: React.FC = () => {
         </button>
 
         <button
-          className={`sidebar-action-btn ${isActive('/create-product') ? 'active' : ''}`}
+          className={sidebar-action-btn ${isActive('/create-product') ? 'active' : ''}}
           onClick={() => navigate('/create-product')}
         >
           <AddCircleIcon className="sidebar-action-icon" />
@@ -82,8 +83,8 @@ const SidebarAdmin: React.FC = () => {
         {openOptions && (
           <ul className="sidebar-menu">
             <li
-              className={isActive('/dashboardAdmin') ? 'active' : ''}
-              onClick={() => navigate('/dashboardAdmin')}
+              className={isActive('/dashboard') ? 'active' : ''}
+              onClick={() => navigate('/dashboard')}
             >
               <DashboardIcon className="sidebar-icon" />
               <span>Dashboard</span>
@@ -115,6 +116,13 @@ const SidebarAdmin: React.FC = () => {
             >
               <ConfirmationNumberIcon className="sidebar-icon" />
               <span>Gestionar reservas</span>
+            </li>
+            <li
+              className={isActive('/list-orders') ? 'active' : ''}
+              onClick={() => navigate('/list-orders')}
+            >
+              <LocalShippingIcon className="sidebar-icon" />
+              <span>Gestionar ordenes</span>
             </li>
             <li
               className={isActive('/analytics') ? 'active' : ''}

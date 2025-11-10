@@ -6,6 +6,20 @@ type Profile = Database['public']['Tables']['profiles']['Row'];
 type ProfileUpdate = Database['public']['Tables']['profiles']['Update'];
 type Level = Database['public']['Tables']['levels']['Row'];
 
+export const createUserProfile = async (
+  profile: Omit<UserProfile, 'id' | 'created_at' | 'updated_at'>,
+): Promise<UserProfile | null> => {
+  const { data, error } = await supabase.from('users').insert([profile]).select().single();
+
+  if (error) {
+    console.error('Error al crear perfil de usuario:', error);
+    throw error;
+  }
+
+  return data;
+};
+
+
 export const getUserProfileByEmail = async (email: string): Promise<UserProfile | null> => {
   const { data, error } = await supabase.from('users').select('*').eq('email', email).single();
 

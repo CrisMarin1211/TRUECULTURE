@@ -1,18 +1,10 @@
 import { supabase } from '../lib/supabaseClient';
 import type { UserProfile } from '../types/UserType';
+import type { Database } from '../types/supabase';
 
-export const createUserProfile = async (
-  profile: Omit<UserProfile, 'id' | 'created_at' | 'updated_at'>,
-): Promise<UserProfile | null> => {
-  const { data, error } = await supabase.from('users').insert([profile]).select().single();
-
-  if (error) {
-    console.error('Error al crear perfil de usuario:', error);
-    throw error;
-  }
-
-  return data;
-};
+type Profile = Database['public']['Tables']['profiles']['Row'];
+type ProfileUpdate = Database['public']['Tables']['profiles']['Update'];
+type Level = Database['public']['Tables']['levels']['Row'];
 
 export const getUserProfileByEmail = async (email: string): Promise<UserProfile | null> => {
   const { data, error } = await supabase.from('users').select('*').eq('email', email).single();
@@ -25,23 +17,73 @@ export const getUserProfileByEmail = async (email: string): Promise<UserProfile 
   return data;
 };
 
-export const updateUserProfile = async (
-  authId: string,
-  updates: Partial<UserProfile>,
-): Promise<UserProfile | null> => {
+export const getUserProfile = async (userId: string): Promise<Profile | null> => {
   const { data, error } = await supabase
-    .from('users')
-    .update(updates)
-    .eq('auth_id', authId)
+    .from('profiles')
+    .select('*')
+    .eq('user_id', userId)
+    .single();
+
+  if (error) {
+    console.error('Error al obtener el perfil:', error);
+    return null;
+  }
+
+  return data;
+};
+
+export const updateUserProfile = async (
+  userId: string,
+  updates: ProfileUpdate
+): Promise<Profile | null> => {
+  const { data, error } = await supabase
+    .from('profiles')
+    .update({
+      ...updates,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('user_id', userId)
     .select()
     .single();
 
   if (error) {
-    console.error('Error al actualizar perfil:', error);
+    console.error('Error al actualizar el perfil:', error);
     throw error;
   }
 
   return data;
+};
+
+export const getLevels = async (): Promise<Level[]> => {
+  const { data, error } = await supabase
+    .from('levels')
+    .select('*')
+    .order('level_number', { ascending: true });
+
+  if (error) {
+    console.error('Error al obtener los niveles:', error);
+    return [];
+  }
+
+  return data;
+};
+
+export const uploadAvatar = async (userId: string, file: File): Promise<string | null> => {
+  const fileExt = file.name.split('.').pop();
+  const fileName = `${userId}-${Math.random()}.${fileExt}`;
+  const filePath = `avatars/${fileName}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from('avatars')
+    .upload(filePath, file);
+
+  if (uploadError) {
+    console.error('Error al subir el avatar:', uploadError);
+    throw uploadError;
+  }
+
+  const { data } = supabase.storage.from('avatars').getPublicUrl(filePath);
+  return data.publicUrl;
 };
 
 export const getUserOrganizationByEmail = async (email: string): Promise<string | null> => {

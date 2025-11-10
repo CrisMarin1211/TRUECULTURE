@@ -17,6 +17,7 @@ import { getUserProfileByEmail } from '../../../services/users';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import LogOutButton from '../logOutButton/LogOutButton';
+import type { User } from '@supabase/supabase-js';
 
 const SidebarAdmin: React.FC = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const SidebarAdmin: React.FC = () => {
   const [openOptions, setOpenOptions] = useState(true);
   const [openSupport, setOpenSupport] = useState(false);
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -34,13 +36,25 @@ const SidebarAdmin: React.FC = () => {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (user?.email) {
-        const profileData = await getUserProfileByEmail(user.email);
-        setProfile(profileData);
+      if (user) {
+        setUser(user);
+        if (user.email) {
+          const profileData = await getUserProfileByEmail(user.email);
+          setProfile(profileData);
+        }
       }
     };
 
     fetchProfile();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null);
+      if (session?.user?.email) {
+        getUserProfileByEmail(session.user.email).then(setProfile);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   return (
@@ -160,7 +174,7 @@ const SidebarAdmin: React.FC = () => {
       {profile && (
         <div className="sidebar-user">
           <Avatar
-            src={profile.avatar_url || 'https://i.pravatar.cc/120?img=5'}
+            src={user?.user_metadata?.avatar_url || user?.user_metadata?.picture || profile.avatar_url || 'https://i.pravatar.cc/120?img=5'}
             alt={profile.name || 'Usuario'}
             className="sidebar-user-avatar"
           />

@@ -10,7 +10,6 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import theme from '../../../styles/theme';
@@ -284,10 +283,7 @@ const CheckoutPage = () => {
                 <EmojiEventsIcon className="benefit-icon" />
                 <span className="benefit-text">Gana puntos y obtén descuentos</span>
               </div>
-              <div className="benefit-item">
-                <LocalShippingIcon className="benefit-icon" />
-                <span className="benefit-text">Envío rápido y seguro</span>
-              </div>
+              
             </div>
           </div>
         </div>

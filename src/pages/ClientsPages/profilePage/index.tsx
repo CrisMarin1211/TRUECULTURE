@@ -335,7 +335,7 @@ const ProfilePage = () => {
                     <Avatar
                 src={user?.user_metadata?.avatar_url || user?.user_metadata?.picture || profile.avatar_url || undefined}
                 {...stringAvatar(profile.name || profile.email || 'U')}
-                className="profile-avatar"
+                className="profile-avatar2"
               />
             </div>
 

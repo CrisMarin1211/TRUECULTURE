@@ -99,11 +99,11 @@ const FeaturedCard: React.FC<FeaturedCardProps> = ({ item, onViewMore }) => {
 
       <BottomContent sx={{ paddingInline: 2 }}>
         <StyledCardContent>
-          <Typography variant="subtitle2">Live Event</Typography>
           <Typography variant="subtitle1">$ {item.price}</Typography>
         </StyledCardContent>
 
         <StyledButton
+        type='button'
           variant="contained"
           onClick={() => onViewMore?.(item)}
           endIcon={<img src="/icons/arrow.svg" alt="icon" style={{ marginLeft: 8 }} />}

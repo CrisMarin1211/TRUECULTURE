@@ -27,7 +27,7 @@ const FirstRow = styled('div')({
   gap: '4px',
   fontFamily: theme.typography.subtitle1.fontFamily,
   fontSize: '13px',
-  color: theme.palette.grayMedium.main,
+  color: theme.palette.white.contrastText,
   lineHeight: '1.2',
 });
 

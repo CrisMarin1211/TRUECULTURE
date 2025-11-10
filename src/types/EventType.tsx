@@ -12,6 +12,7 @@ export interface EventItem {
   price: number;
   totalseats: number;
   availableseats: number;
+  has_seating?: boolean;
   popularity: 'Alta' | 'Media' | 'Baja';
   tags: 'Musica' | 'Cultural' | 'Familiar' | 'Diversion' | 'Gastronomia';
   expectedattendance: number;
@@ -33,6 +34,7 @@ export const defaultEvent: EventItem = {
   price: 0,
   totalseats: 0,
   availableseats: 0,
+  has_seating: false,
   popularity: 'Media',
   tags: 'Musica',
   expectedattendance: 0,

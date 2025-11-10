@@ -65,15 +65,20 @@ const CreateEvent: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const target = e.target;
-    const { name, value } = target;
+    const { name, value, type } = target;
+    const checked = (target as HTMLInputElement).checked;
 
     setEvent((prev) => ({
       ...prev,
-      [name]: ['price', 'totalseats', 'availableseats', 'expectedattendance'].includes(name)
-        ? Number(value)
-        : name === 'isdraft'
-          ? value === 'true'
-          : value,
+      [name]: type === 'checkbox'
+        ? checked
+        : ['price', 'totalseats', 'availableseats', 'expectedattendance'].includes(name)
+          ? Number(value)
+          : name === 'isdraft'
+            ? value === 'true'
+            : name === 'has_seating'
+              ? value === 'true'
+              : value,
     }));
   };
 
@@ -85,12 +90,14 @@ const CreateEvent: React.FC = () => {
       'location',
       'description',
       'price',
-      'totalseats',
-      'availableseats',
       'city',
       'tags',
       'popularity',
     ];
+
+    if (event.has_seating) {
+      requiredFields.push('totalseats', 'availableseats');
+    }
 
     const missingFields = requiredFields.filter(
       (field) => event[field as keyof EventItem] === '' || event[field as keyof EventItem] === 0,
@@ -101,12 +108,20 @@ const CreateEvent: React.FC = () => {
       return;
     }
 
+    // Si no tiene silletería, establecer asientos en 0
+    const eventToSave = {
+      ...event,
+      has_seating: event.has_seating ?? false,
+      totalseats: event.has_seating ? event.totalseats : 0,
+      availableseats: event.has_seating ? event.availableseats : 0,
+    };
+
     try {
       if (id) {
-        await updateEvent(id, event);
+        await updateEvent(id, eventToSave);
         alert('Evento actualizado correctamente');
       } else {
-        await addEvent(event);
+        await addEvent(eventToSave);
         alert('Evento creado correctamente');
         setEvent({
           ...defaultEvent,
@@ -228,29 +243,47 @@ const CreateEvent: React.FC = () => {
           />
         </div>
         <div>
-          <label className="input-label" htmlFor="totalseats">
-            Total Asientos
+          <label className="input-label" htmlFor="has_seating">
+            ¿Tiene Silletería?
           </label>
-          <input
-            id="totalseats"
-            type="number"
-            name="totalseats"
-            value={event.totalseats}
+          <select
+            id="has_seating"
+            name="has_seating"
+            value={String(event.has_seating ?? false)}
             onChange={handleChange}
-          />
+          >
+            <option value="false">No</option>
+            <option value="true">Sí</option>
+          </select>
         </div>
-        <div>
-          <label className="input-label" htmlFor="availableseats">
-            Asientos Disponibles
-          </label>
-          <input
-            id="availableseats"
-            type="number"
-            name="availableseats"
-            value={event.availableseats}
-            onChange={handleChange}
-          />
-        </div>
+        {event.has_seating && (
+          <>
+            <div>
+              <label className="input-label" htmlFor="totalseats">
+                Total Asientos
+              </label>
+              <input
+                id="totalseats"
+                type="number"
+                name="totalseats"
+                value={event.totalseats}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label className="input-label" htmlFor="availableseats">
+                Asientos Disponibles
+              </label>
+              <input
+                id="availableseats"
+                type="number"
+                name="availableseats"
+                value={event.availableseats}
+                onChange={handleChange}
+              />
+            </div>
+          </>
+        )}
         <div>
           <label className="input-label" htmlFor="popularity">
             Popularidad

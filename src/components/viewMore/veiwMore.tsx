@@ -14,37 +14,63 @@ import CalendarMonthTwoToneIcon from '@mui/icons-material/CalendarMonthTwoTone';
 import BuyButton from './buttons/buyButton';
 import Review from './reviewComponent/review';
 import ShareButton from './buttons/shareButton';
-import { useEffect, useState } from 'react';
+import SeatSelection from '../seatSelection';
+import { useState } from 'react';
 import type { ViewMoreProps } from '../../types/ViewMorType';
+import type { EventItem } from '../../types/EventType';
 import theme from '../../styles/theme';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContex';
-import { incrementViewCount } from '../../services/views';
 
 const ViewMore = ({ item, onClose }: ViewMoreProps) => {
   const [readMore, setReadMore] = useState(false);
+  const [seatModalOpen, setSeatModalOpen] = useState(false);
   const toggleReadMore = () => setReadMore(!readMore);
   const { addToCart } = useCart();
   const navigate = useNavigate();
+
   const handleBuy = () => {
+    // Si es un evento con silletería, abrir modal de selección
+    const isEvent = 'totalseats' in item;
+    const eventItem = isEvent ? (item as EventItem) : null;
+    const hasSeating = eventItem?.has_seating ?? false;
+    
+    if (isEvent && hasSeating && eventItem && eventItem.totalseats > 0) {
+      setSeatModalOpen(true);
+    } else {
+      addToCart({
+        id: item.id ?? '',
+        title: item.name ?? '',
+        image: item.image,
+        price: item.price,
+        quantity: 1,
+        type: isEvent ? 'event' : 'product',
+      });
+      navigate('/my-cart');
+    }
+  };
+
+  const handleSeatConfirm = (seats: string[]) => {
+    if (seats.length === 0) return;
+    
     addToCart({
-      id: item.id,
-      title: item.name,
+      id: item.id ?? '',
+      title: item.name ?? '',
       image: item.image,
       price: item.price,
-      quantity: 1,
+      quantity: seats.length,
+      seats: seats,
+      type: 'event',
     });
+    
+    setSeatModalOpen(false);
     navigate('/my-cart');
   };
 
-  useEffect(() => {
-    console.log('Incrementing view count for item:', item);
-    if (item?.id) {
-      const table = 'date' in item ? 'events' : 'products';
-      incrementViewCount(table, Number(item.id));
-    }
-  }, [item?.id]);
-
+  const isEvent = 'totalseats' in item;
+  const eventItem = isEvent ? (item as EventItem) : null;
+  const hasSeating = eventItem?.has_seating ?? false;
+  
   return (
     <Card
       sx={{
@@ -217,6 +243,19 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
           </Box>
         </Box>
       </Box>
+
+      {/* Seat Selection Modal - Solo mostrar si el evento tiene silletería */}
+      {isEvent && hasSeating && eventItem && (
+        <SeatSelection
+          open={seatModalOpen}
+          onClose={() => setSeatModalOpen(false)}
+          onConfirm={handleSeatConfirm}
+          eventId={Number(item.id)}
+          totalSeats={eventItem.totalseats}
+          availableSeats={eventItem.availableseats}
+          bookedSeats={[]}
+        />
+      )}
     </Card>
   );
 };

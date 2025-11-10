@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import theme from '../../../styles/theme';
 import { useContext } from 'react';
-import { CityContext } from '../../../context/cityContex';
-import type { City } from '../../../context/cityContex';
+
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { CityContext, type City } from '../../../context/cityContex';
 const CITIES: City[] = ['Cali, Colombia', 'Bogotá, Colombia'];
 
 const CurrentLocationContainer = styled('div')({
@@ -16,27 +16,34 @@ const CurrentLocationContainer = styled('div')({
 });
 
 const LocationGrid = styled('div')({
-  display: 'grid',
-  gridTemplateRows: 'auto auto',
-  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
   cursor: 'pointer',
 });
 
 const FirstRow = styled('div')({
-  gridColumn: 1,
-  gridRow: 1,
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4px',
   fontFamily: theme.typography.subtitle1.fontFamily,
   fontSize: '13px',
   color: theme.palette.grayMedium.main,
+  lineHeight: '1.2',
+});
+
+const ArrowIcon = styled(ArrowDropDownIcon)({
+  fontSize: '16px',
+  color: theme.palette.grayMedium.main,
+  display: 'inline-flex',
+  alignItems: 'center',
 });
 
 const SecondRow = styled('div')({
-  gridColumn: 1,
-  gridRow: 2,
   fontFamily: theme.typography.subtitle1.fontFamily,
   fontSize: '13px',
   color: theme.palette.white.main,
-  marginTop: '-22px',
+  marginTop: '6px',
+  lineHeight: '1.3',
 });
 
 const Dropdown = styled('div')({
@@ -73,7 +80,7 @@ const CurrentLocation = () => {
       <LocationGrid onClick={() => setIsOpen((prev) => !prev)}>
         <FirstRow>
           Ubicación Actual
-          <ArrowDropDownIcon />{' '}
+          <ArrowIcon />
         </FirstRow>
         <SecondRow>{city}</SecondRow>
       </LocationGrid>

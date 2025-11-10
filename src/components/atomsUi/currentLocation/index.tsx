@@ -4,7 +4,7 @@ import theme from '../../../styles/theme';
 import { useContext } from 'react';
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { CityContext, type City } from '../../../context/cityContex';
+import { CityContext, type City } from '../../../context/CityContext';
 const CITIES: City[] = ['Cali, Colombia', 'Bogotá, Colombia'];
 
 const CurrentLocationContainer = styled('div')({

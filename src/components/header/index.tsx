@@ -3,7 +3,6 @@ import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import AvatarLetter from '../atomsUi/avatarLetter';
 import SideBar from '../atomsUi/sideBar';
-import CurrentLocation from '../atomsUi/currentLocation';
 import theme from '../../styles/theme';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
@@ -91,7 +90,6 @@ const Header = () => {
                 marginRight: 1
               }}
             >
-              <CurrentLocation />
             </Box>
             
             <Box

@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEvent } from '../../../context/EventContext';
 import { useProduct } from '../../../context/ProductEvent';
-import { CityContext } from '../../../context/cityContex';
+import { CityContext } from '../../../context/CityContext';
 import { useContext, useState } from 'react';
 import CardClient from '../../../components/atomsUi/EventCard-Client/CardClient';
 import type { EventItem } from '../../../types/EventType';
@@ -9,6 +9,7 @@ import type { ProductItem } from '../../../types/ProductType';
 import Header from '../../../components/header';
 import { Dialog } from '@mui/material';
 import ViewMore from '../../../components/viewMore/veiwMore';
+import CurrentLocation from '../../../components/atomsUi/currentLocation';
 
 const Categories = () => {
   const { tag } = useParams<{ tag: string }>();
@@ -27,6 +28,7 @@ const Categories = () => {
   return (
     <>
       <Header />
+      <CurrentLocation />
       <section style={{ padding: '2rem 0' }}>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
           <h1

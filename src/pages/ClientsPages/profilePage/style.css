@@ -78,8 +78,8 @@ body {
 }
 
 .profile-avatar2 {
-  width: 200px !important;
-  height: 200px !important;
+  width: 300px !important;
+  height: 300px !important;
   font-size: 5rem !important;
   background-color: #4f4f4f !important;
   color: white !important;
@@ -89,7 +89,6 @@ body {
   font-size: 2rem;
   font-weight: bold;
   color: #ffffff;
-  margin: 1rem 0 0.5rem 0;
   text-align: center;
 }
 
@@ -97,7 +96,6 @@ body {
   font-size: 1.2rem;
   color: #cccccc;
   text-align: center;
-  margin: 0 0 1rem 0;
 }
 
 .divider {

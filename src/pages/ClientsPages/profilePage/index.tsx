@@ -354,6 +354,7 @@ const ProfilePage = () => {
                 }
                 {...stringAvatar(profile.name || profile.email || 'U')}
                 className="profile-avatar2"
+               
               />
             </div>
 

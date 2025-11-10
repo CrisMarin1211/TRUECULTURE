@@ -114,7 +114,7 @@ const HomePage = () => {
           <img src="/images/logo.png" alt="Logo" className="logo" />
           <div className="header-right">
             <Link to="/login" className="admin-link">
-              Iniciar sesión
+              Administrador
             </Link>
             <button onClick={goToSignUp} className="signup-btn">
               Registrarse

@@ -127,11 +127,11 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Fetch levels
+    
       const levelsData = await getLevels();
       setLevels(levelsData);
 
-      // Fetch profile
+     
       if (!user?.id) {
         return;
       }
@@ -237,14 +237,12 @@ const ProfilePage = () => {
 
     const codeToCheck = referralCodeInput.trim().toUpperCase();
     
-    // Validar formato (solo letras y números, 4-12 caracteres)
     if (!/^[A-Z0-9]{4,12}$/.test(codeToCheck)) {
       setSnackbarMessage('El código debe tener entre 4 y 12 caracteres (solo letras y números)');
       setSnackbarOpen(true);
       return;
     }
 
-    // Validar que sea diferente al código actual
     if (codeToCheck === profile?.referral_code?.toUpperCase()) {
       setSnackbarMessage('Debes ingresar un código diferente al actual');
       setSnackbarOpen(true);
@@ -253,7 +251,6 @@ const ProfilePage = () => {
 
     setCheckingCode(true);
     try {
-      // Verificar si el código ya está en uso por otro usuario
       const { data: existingProfile } = await supabase
         .from('profiles')
         .select('id')
@@ -268,7 +265,6 @@ const ProfilePage = () => {
         return;
       }
 
-      // Actualizar el código
       const { error } = await supabase
         .from('profiles')
         .update({ referral_code: codeToCheck })
@@ -276,7 +272,6 @@ const ProfilePage = () => {
 
       if (error) throw error;
 
-      // Actualizar el estado local
       if (profile) {
         setProfile({ ...profile, referral_code: codeToCheck });
       }
@@ -634,7 +629,6 @@ const ProfilePage = () => {
         </Alert>
       </Snackbar>
 
-      {/* Modal para editar código de referido */}
       <Modal
         open={isEditingReferralCode}
         onClose={handleCloseReferralCodeModal}
@@ -686,7 +680,6 @@ const ProfilePage = () => {
             </Typography>
           </Box>
 
-          {/* Current Referral Link */}
           <Typography sx={{ color: '#8692A6', fontSize: '13px', mb: 1 }}>
             Enlace de referido actual:
           </Typography>
@@ -694,7 +687,6 @@ const ProfilePage = () => {
             {profile?.referral_code ? `${window.location.origin}/signup?ref=${profile.referral_code}` : 'Sin código'}
           </Typography>
 
-          {/* Edit Link Input */}
           <Typography sx={{ color: '#8692A6', fontSize: '13px', mb: 1 }}>
             Editar código:
           </Typography>

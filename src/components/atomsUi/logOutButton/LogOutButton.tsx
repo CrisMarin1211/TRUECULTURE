@@ -1,17 +1,17 @@
 import { Button } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import theme from '../../../styles/theme';
-import { useAuth } from '../../../context/AuthContext';
+import { supabase } from '../../../lib/supabaseClient';
 import { useNavigate } from 'react-router-dom';
 
 const LogOutButton = () => {
-  const { logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await logout();
-      navigate('/', { replace: true });
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      navigate('/');
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
     }
@@ -28,12 +28,12 @@ const LogOutButton = () => {
         padding: 2,
         width: '90%',
         '&:hover': {
-          backgroundColor: theme.palette.pink.dark,
+          backgroundColor: theme.palette.pink.main,
+          opacity: 0.9,
         },
       }}
     >
-      <LogoutIcon sx={{ mr: 1 }} />
-      Cerrar sesión
+      <LogoutIcon /> Cerrar sesión
     </Button>
   );
 };

@@ -23,6 +23,8 @@ import AdminAnalyticsPage from '../pages/AdminPages/analyticPage';
 import ListOrdersPage from '../pages/AdminPages/ordersPage';
 
 import PrivateRoute from './PrivateRoute';
+import CheckoutPage from '../pages/ClientsPages/checkoutPage';
+import PurchaseSuccessPage from '../pages/ClientsPages/purchaseSuccessPage';
 
 const AppRoutes = () => {
   return (
@@ -64,6 +66,22 @@ const AppRoutes = () => {
         element={
           <PrivateRoute>
             <MyCouponsPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/checkout"
+        element={
+          <PrivateRoute>
+            <CheckoutPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/purchase-success/:orderId"
+        element={
+          <PrivateRoute>
+            <PurchaseSuccessPage />
           </PrivateRoute>
         }
       />

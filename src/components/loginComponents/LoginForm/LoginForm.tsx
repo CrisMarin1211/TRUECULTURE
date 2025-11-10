@@ -4,28 +4,25 @@ import Button from '../../atomsUi/button/button';
 import GoogleIcon from '../../../assets/Marca/icon-google.png';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../context/AuthContext';
+import { supabase } from '../../../lib/supabaseClient';
 
-interface LoginFormProps {
-  fromAdmin?: boolean;
-}
-
-const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
+const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { login, loginWithGoogle } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await login({ email, password });
-      alert('Inicio de sesión exitoso');
-
-      if (fromAdmin) {
-        navigate('/DashboardAdmin');
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      
+      // Verificar que la sesión se haya establecido correctamente
+      if (data.session && data.user) {
+        // Redirigir inmediatamente al dashboard - Supabase ya estableció la sesión
+        navigate('/DashboardClient', { replace: true });
       } else {
-        navigate('/DashboardClient');
+        throw new Error('No se pudo establecer la sesión');
       }
     } catch (error: any) {
       console.error('Error en login:', error.message);
@@ -35,12 +32,13 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
 
   const handleGoogleLogin = async () => {
     try {
-      await loginWithGoogle();
-      if (fromAdmin) {
-        navigate('/DashboardAdmin');
-      } else {
-        navigate('/DashboardClient');
-      }
+      const { error } = await supabase.auth.signInWithOAuth({ 
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/DashboardClient`
+        }
+      });
+      if (error) throw error;
     } catch (error: any) {
       console.error('Error en login con Google:', error.message);
       alert('No se pudo iniciar sesión con Google');

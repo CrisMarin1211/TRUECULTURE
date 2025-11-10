@@ -4,20 +4,14 @@ import Button from '../../atomsUi/button/button';
 import GoogleIcon from '../../../assets/Marca/icon-google.png';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../context/AuthContext';
+import { supabase } from '../../../lib/supabaseClient';
 
-interface RegisterFormProps {
-  fromAdmin?: boolean;
-}
-
-const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
+const RegisterForm = () => {
   const [name, setName] = useState('');
-  const [organization, setOrganization] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [agree, setAgree] = useState(false);
   const navigate = useNavigate();
-  const { signup, loginWithGoogle } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,19 +27,14 @@ const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
     }
 
     try {
-      await signup({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
-        name,
-        ...(fromAdmin && { organization }),
+        options: { data: { full_name: name } }
       });
-
+      if (error) throw error;
       alert('Registro exitoso. Revisa tu correo para confirmar la cuenta.');
-      if (fromAdmin) {
-        navigate('/dashboard');
-      } else {
-        navigate('/DashboardClient');
-      }
+      navigate('/DashboardClient');
     } catch (error: any) {
       console.error('Error en registro:', error.message);
       alert(error.message);
@@ -54,12 +43,8 @@ const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
 
   const handleGoogleRegister = async () => {
     try {
-      await loginWithGoogle();
-     if (fromAdmin) {
-        navigate('/DashboardAdmin');
-      } else {
-        navigate('/DashboardClient');
-      }
+      const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+      if (error) throw error;
     } catch (error: any) {
       console.error('Error en registro con Google:', error.message);
       alert('No se pudo registrar con Google');
@@ -75,16 +60,6 @@ const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-
-      {fromAdmin && (
-        <InputField
-          label="Organization*"
-          type="text"
-          placeholder="Enter organization name"
-          value={organization}
-          onChange={(e) => setOrganization(e.target.value)}
-        />
-      )}
 
       <InputField
         label="Email address*"
@@ -119,13 +94,7 @@ const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
       </div>
 
       <p className="login-text">
-        ¿Ya tienes una cuenta?{' '}
-        <a
-          onClick={() => navigate('/login', { state: { fromAdmin } })}
-          style={{ cursor: 'pointer' }}
-        >
-          Inicia sesión
-        </a>
+        ¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a>
       </p>
 
       <div className="divider">

@@ -4,10 +4,12 @@ import SidebarAdmin from '../../../components/atomsUi/sideBarAdmin';
 import { supabase } from '../../../lib/supabaseClient';
 import { getUserProfileByEmail, updateUserProfile } from '../../../services/users';
 import type { UserProfile } from '../../../types/UserType';
+import type { User } from '@supabase/supabase-js';
 import Loader from '../../../components/loader';
 
 const ProfileAdminPage: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -20,14 +22,26 @@ const ProfileAdminPage: React.FC = () => {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (user?.email) {
-        const profileData = await getUserProfileByEmail(user.email);
-        setProfile(profileData);
+      if (user) {
+        setUser(user);
+        if (user.email) {
+          const profileData = await getUserProfileByEmail(user.email);
+          setProfile(profileData);
+        }
       }
       setLoading(false);
     };
 
     fetchProfile();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null);
+      if (session?.user?.email) {
+        getUserProfileByEmail(session.user.email).then(setProfile);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const handleChange = (field: keyof UserProfile, value: string) => {
@@ -36,12 +50,12 @@ const ProfileAdminPage: React.FC = () => {
   };
 
   const handleSave = async () => {
-    const authId = localStorage.getItem('user_id');
-    if (!authId || !profile) return;
+    if (!user?.id || !profile) return;
 
     setSaving(true);
     try {
-      await updateUserProfile(authId, profile);
+      const { id, auth_id, created_at, updated_at, ...updateData } = profile;
+      await updateUserProfile(user.id, updateData);
       alert('Cambios guardados correctamente');
     } catch {
       alert('Error al guardar cambios');
@@ -51,21 +65,19 @@ const ProfileAdminPage: React.FC = () => {
   };
 
   const handleAvatarClick = () => {
-    setNewAvatarUrl(profile?.avatar_url || '');
+    setNewAvatarUrl(user?.user_metadata?.avatar_url || user?.user_metadata?.picture || profile?.avatar_url || '');
     setShowModal(true);
   };
 
   const handleAvatarSave = async () => {
-    if (!profile) return;
-    const authId = localStorage.getItem('user_id');
-    if (!authId) return;
+    if (!user?.id || !profile) return;
 
     const updatedProfile = { ...profile, avatar_url: newAvatarUrl };
     setProfile(updatedProfile);
     setShowModal(false);
 
     try {
-      await updateUserProfile(authId, { avatar_url: newAvatarUrl });
+      await updateUserProfile(user.id, { avatar_url: newAvatarUrl });
     } catch {
       alert('Error al actualizar avatar');
     }
@@ -96,7 +108,7 @@ const ProfileAdminPage: React.FC = () => {
             <div className="profile-header">
               <div className="profile-info">
                 <img
-                  src={profile.avatar_url || 'https://i.pravatar.cc/120?img=5'}
+                  src={user?.user_metadata?.avatar_url || user?.user_metadata?.picture || profile.avatar_url || 'https://i.pravatar.cc/120?img=5'}
                   alt="Usuario"
                   className="profile-avatar"
                   onClick={handleAvatarClick}

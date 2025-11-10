@@ -9,6 +9,8 @@ export interface CartItem {
   name?: string;
   location?: string;
   time?: string;
+  seats?: string[];
+  type?: 'product' | 'event'; // Tipo de item
 }
 
 export interface Purchase {
@@ -27,6 +29,7 @@ interface CartContextType {
   addToCart: (item: CartItem) => void;
   updateQuantity: (id: string | number, quantity: number) => void;
   removeFromCart: (id: string | number) => void;
+  updateCartItemSeats: (id: string | number, seats: string[]) => void;
   clearCart: () => void;
   finalizePurchase: () => boolean;
   subtotal: number;
@@ -40,6 +43,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [discount, setDiscount] = useState<number>(0);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
@@ -50,18 +54,26 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         console.error('Error al cargar carrito desde localStorage:', error);
       }
     }
+    setIsInitialized(true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-  }, [cartItems]);
+    if (isInitialized) {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+  }, [cartItems, isInitialized]);
 
   const addToCart = (item: CartItem) => {
     setCartItems((prev) => {
-      const existingItem = prev.find((i) => i.id === item.id);
+      // Si el item tiene asientos, no lo agrupamos con otros items
+      if (item.seats && item.seats.length > 0) {
+        return [...prev, item];
+      }
+      
+      const existingItem = prev.find((i) => i.id === item.id && !i.seats);
       if (existingItem) {
         return prev.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i,
+          i.id === item.id && !i.seats ? { ...i, quantity: i.quantity + item.quantity } : i,
         );
       }
       return [...prev, item];
@@ -79,6 +91,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const removeFromCart = (id: string | number) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const updateCartItemSeats = (id: string | number, seats: string[]) => {
+    setCartItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, seats, quantity: seats.length } : item))
+    );
   };
 
   const clearCart = () => {
@@ -115,6 +133,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     addToCart,
     updateQuantity,
     removeFromCart,
+    updateCartItemSeats,
     clearCart,
     finalizePurchase,
     subtotal,

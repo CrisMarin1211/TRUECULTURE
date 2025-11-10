@@ -14,6 +14,7 @@ const BuyButton = ({ item, onClick }: BuyButtonProps) => {
     <Button
       onClick={onClick}
       variant="contained"
+      type='button'
       sx={{
         display: 'flex',
         alignItems: 'center',

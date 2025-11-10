@@ -63,6 +63,7 @@ const ShareButton = ({ item }: ShareButtonProps) => {
       <Button
         onClick={handleShare}
         variant="contained"
+        type='button'
         sx={{
           backgroundColor: theme.palette.blue.main,
           color: '#fff',

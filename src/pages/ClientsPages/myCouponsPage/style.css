@@ -2,7 +2,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  
 }
 
 html,
@@ -15,21 +14,97 @@ body {
   font-family: 'Clash Display', sans-serif;
   background-color: #1a181b;
   color: white;
+  min-height: 100vh;
+}
+
+.coupon-tabs {
+  display: flex;
+  gap: 0;
+  margin: 2rem auto 0 auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+  border-bottom: 2px solid #2a2a2a;
+  justify-content: flex-start;
+  overflow-x: auto;
+}
+
+.coupon-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.coupon-tabs::-webkit-scrollbar-track {
+  background: #1a181b;
+}
+
+.coupon-tabs::-webkit-scrollbar-thumb {
+  background: #4f4f4f;
+  border-radius: 2px;
+}
+
+.tab-button {
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: #8692A6;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  font-family: 'Satoshi', sans-serif;
+  white-space: nowrap;
+  position: relative;
+}
+
+.tab-button:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.tab-button.active {
+  color: #99cb36;
+  border-bottom-color: #99cb36;
 }
 
 .coupons-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin: 2rem auto 0 auto;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 2rem;
+  margin: 2rem auto;
   max-width: 1200px;
-  padding: 0 1rem;
+  padding: 0 1rem 4rem 1rem;
+  align-items: start;
 }
 
+.loading-message,
+.empty-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #8692A6;
+  font-size: 1.2rem;
+  grid-column: 1 / -1;
+  font-family: 'Satoshi', sans-serif;
+}
 
 @media (max-width: 768px) {
   .coupons-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
+    padding: 0 1rem 2rem 1rem;
+  }
+
+  .coupon-tabs {
+    gap: 0;
+  }
+
+  .tab-button {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .loading-message,
+  .empty-message {
+    font-size: 1rem;
+    padding: 3rem 1rem;
   }
 }

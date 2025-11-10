@@ -1,34 +1,16 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
-import { EventProvider } from './context/EventContext.tsx';
-import { ProductProvider } from './context/ProductEvent.tsx';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import theme from './styles/theme.tsx';
-import { CityProvider } from './context/cityContex.tsx';
-import './index.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { AuthProvider } from './context/AuthContext.tsx';
-import { CartProvider } from './context/CartContex.tsx';
+import App from './App.tsx';
+import { AppProvider } from './context/AppProvider.tsx';
+import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AuthProvider>
-        <CityProvider>
-          <ProductProvider>
-            <EventProvider>
-              <CartProvider>
-                <App />
-              </CartProvider>
-            </EventProvider>
-          </ProductProvider>
-        </CityProvider>
-      </AuthProvider>
-    </ThemeProvider>
+    <AppProvider>
+      <App />
+    </AppProvider>
   </StrictMode>,
 );

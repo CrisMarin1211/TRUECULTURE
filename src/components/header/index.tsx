@@ -7,9 +7,10 @@ import CurrentLocation from '../atomsUi/currentLocation';
 import theme from '../../styles/theme';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import { Box } from '@mui/material';
+import { Box, Badge } from '@mui/material';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartContex';
 
 const Overlay = styled('div')({
   position: 'fixed',
@@ -42,6 +43,10 @@ const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
   const navigate = useNavigate();
+  const { cartItems } = useCart();
+  
+  // Calcular el total de artículos en el carrito
+  const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <>
@@ -80,10 +85,39 @@ const Header = () => {
           </Box>
 
           <Stack direction="row" spacing={2} alignItems="center" justifyItems="center">
-            <ShoppingCartOutlinedIcon
-              sx={{ cursor: 'pointer', width: 36, height: 36 }}
+            <Box
+              sx={{ 
+                display: { xs: 'none', sm: 'block' },
+                marginRight: 1
+              }}
+            >
+              <CurrentLocation />
+            </Box>
+            
+            <Box
+              sx={{ cursor: 'pointer', position: 'relative' }}
               onClick={() => navigate('/my-cart')}
-            />
+            >
+              <Badge
+                badgeContent={totalItems}
+                color="primary"
+                sx={{
+                  '& .MuiBadge-badge': {
+                    backgroundColor: '#99CB36',
+                    color: '#1a181b',
+                    fontWeight: 'bold',
+                    fontSize: '0.75rem',
+                    minWidth: '20px',
+                    height: '20px',
+                    padding: '0 6px',
+                  },
+                }}
+              >
+                <ShoppingCartOutlinedIcon
+                  sx={{ width: 36, height: 36 }}
+                />
+              </Badge>
+            </Box>
 
             <Box
               sx={{ display: { xs: 'none', md: 'flex' }, cursor: 'pointer' }}
@@ -92,10 +126,6 @@ const Header = () => {
               <AvatarLetter />
             </Box>
           </Stack>
-        </Stack>
-
-        <Stack direction="row" justifyContent="flex-end" sx={{ width: '100%', paddingInline: 3 }}>
-          <CurrentLocation />
         </Stack>
       </HeaderContainer>
 

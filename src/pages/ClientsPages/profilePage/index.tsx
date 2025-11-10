@@ -127,18 +127,18 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Fetch levels
+
       const levelsData = await getLevels();
       setLevels(levelsData);
 
-      // Fetch profile
+
       if (!user?.id) {
         return;
       }
 
       setLoading(true);
       const userProfile = await getUserProfile(user.id);
-      
+
       if (userProfile) {
         setProfile(userProfile);
         setFormData({
@@ -211,7 +211,7 @@ const ProfilePage = () => {
 
   const handleCopyReferralLink = () => {
     if (!profile?.referral_code) return;
-    
+
     const referralLink = `${window.location.origin}/signup?ref=${profile.referral_code}`;
     navigator.clipboard.writeText(referralLink);
     setSnackbarMessage('¡Enlace copiado al portapapeles!');
@@ -236,15 +236,14 @@ const ProfilePage = () => {
     if (!user?.id || !referralCodeInput.trim()) return;
 
     const codeToCheck = referralCodeInput.trim().toUpperCase();
-    
-    // Validar formato (solo letras y números, 4-12 caracteres)
+
+
     if (!/^[A-Z0-9]{4,12}$/.test(codeToCheck)) {
       setSnackbarMessage('El código debe tener entre 4 y 12 caracteres (solo letras y números)');
       setSnackbarOpen(true);
       return;
     }
 
-    // Validar que sea diferente al código actual
     if (codeToCheck === profile?.referral_code?.toUpperCase()) {
       setSnackbarMessage('Debes ingresar un código diferente al actual');
       setSnackbarOpen(true);
@@ -253,7 +252,6 @@ const ProfilePage = () => {
 
     setCheckingCode(true);
     try {
-      // Verificar si el código ya está en uso por otro usuario
       const { data: existingProfile } = await supabase
         .from('profiles')
         .select('id')
@@ -268,7 +266,6 @@ const ProfilePage = () => {
         return;
       }
 
-      // Actualizar el código
       const { error } = await supabase
         .from('profiles')
         .update({ referral_code: codeToCheck })
@@ -276,7 +273,6 @@ const ProfilePage = () => {
 
       if (error) throw error;
 
-      // Actualizar el estado local
       if (profile) {
         setProfile({ ...profile, referral_code: codeToCheck });
       }
@@ -323,14 +319,14 @@ const ProfilePage = () => {
             <div className="profile-left">
           <div className="card profile-card">
                 <div className="card-header">
-              <img 
-                src="/icons/edit.png" 
-                alt="edit" 
-                className="edit-icon" 
+              <img
+                src="/icons/edit.png"
+                alt="edit"
+                className="edit-icon"
                 onClick={handleEdit}
               />
                 </div>
-            
+
             <div className="profile-avatar-container">
                     <Avatar
                 src={user?.user_metadata?.avatar_url || user?.user_metadata?.picture || profile.avatar_url || undefined}
@@ -388,13 +384,13 @@ const ProfilePage = () => {
                   <span className="referral-code-display">
                     {profile.referral_code || 'Sin código'}
                   </span>
-                  <IconButton 
-                    size="small" 
+                  <IconButton
+                    size="small"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleEditReferralCode();
                     }}
-                    sx={{ 
+                    sx={{
                       color: theme.palette.pink.main,
                       padding: '4px',
                       '&:hover': { backgroundColor: 'rgba(255, 0, 153, 0.1)' }
@@ -451,16 +447,16 @@ const ProfilePage = () => {
               onChange={handleChange}
               name="name"
             />
-            
+
             <InputField
               label="Apodo"
               value={formData.nickname}
               onChange={handleChange}
               name="nickname"
             />
-            
+
             <FormControl fullWidth>
-              <label style={{ 
+              <label style={{
                 color: '#696F79',
                 fontFamily: 'Satoshi',
                 fontSize: '18.695px',
@@ -495,9 +491,9 @@ const ProfilePage = () => {
                 ))}
               </Select>
             </FormControl>
-            
+
             <FormControl fullWidth>
-              <label style={{ 
+              <label style={{
                 color: '#696F79',
                 fontFamily: 'Satoshi',
                 fontSize: '18.695px',
@@ -532,9 +528,9 @@ const ProfilePage = () => {
                 ))}
               </Select>
             </FormControl>
-            
+
             <FormControl fullWidth>
-              <label style={{ 
+              <label style={{
                 color: '#696F79',
                 fontFamily: 'Satoshi',
                 fontSize: '18.695px',
@@ -569,7 +565,7 @@ const ProfilePage = () => {
                 ))}
               </Select>
             </FormControl>
-            
+
             <InputField
               label="Organización"
               value={formData.organization}
@@ -669,8 +665,8 @@ const ProfilePage = () => {
           </Box>
 
           {/* Warning Banner */}
-          <Box 
-            sx={{ 
+          <Box
+            sx={{
               backgroundColor: '#FFB800',
               borderRadius: '8px',
               padding: '12px 16px',

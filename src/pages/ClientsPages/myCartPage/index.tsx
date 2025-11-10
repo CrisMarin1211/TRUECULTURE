@@ -12,15 +12,14 @@ const MyCartPage = () => {
   const { events } = useEvent();
   const [editingSeatItemId, setEditingSeatItemId] = useState<string | number | null>(null);
   const [seatModalOpen, setSeatModalOpen] = useState(false);
-  
-  // Obtener la información del evento desde el contexto
+
   const getEventInfo = (itemId: string | number) => {
     const event = events.find(e => String(e.id) === String(itemId));
     if (event && event.has_seating) {
-      return { 
-        eventId: Number(event.id), 
-        totalSeats: event.totalseats, 
-        availableSeats: event.availableseats 
+      return {
+        eventId: Number(event.id),
+        totalSeats: event.totalseats,
+        availableSeats: event.availableseats
       };
     }
     return null;
@@ -48,7 +47,7 @@ const MyCartPage = () => {
     setEditingSeatItemId(null);
   };
 
-  const editingItem = editingSeatItemId 
+  const editingItem = editingSeatItemId
     ? cartItems.find(item => item.id === editingSeatItemId)
     : null;
 
@@ -76,7 +75,7 @@ const MyCartPage = () => {
                   onQuantityChange={(q) => updateQuantity(product.id, q)}
                   onRemove={() => handleRemoveItem(product.id)}
                   onEditSeats={
-                    product.seats && product.seats.length > 0 
+                    product.seats && product.seats.length > 0
                       ? () => {
                           const event = events.find(e => String(e.id) === String(product.id));
                           if (event && event.has_seating) {

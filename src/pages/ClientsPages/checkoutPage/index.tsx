@@ -90,7 +90,7 @@ const CheckoutPage = () => {
           name: item.title,
           price: item.price,
           quantity: item.quantity,
-          seats: item.seats, // Incluir asientos si existen
+          seats: item.seats,
         })),
         coupon_code: selectedCoupon?.coupons.code,
         payment_status: 'paid',
@@ -283,7 +283,7 @@ const CheckoutPage = () => {
                 <EmojiEventsIcon className="benefit-icon" />
                 <span className="benefit-text">Gana puntos y obtén descuentos</span>
               </div>
-              
+
             </div>
           </div>
         </div>

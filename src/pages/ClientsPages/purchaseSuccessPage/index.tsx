@@ -48,7 +48,6 @@ const PurchaseSuccessPage = () => {
     return value.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
   };
 
-  // Verificar si la orden incluye eventos
   const hasEvents = order?.order_items.some(item => item.item_type === 'event');
 
   if (loading) {
@@ -93,12 +92,12 @@ const PurchaseSuccessPage = () => {
           {/* Order Details */}
           <div className="order-details-section">
             <h2 className="section-title">Detalles de la orden</h2>
-            
+
             <div className="detail-row">
               <span className="detail-label">Número de orden:</span>
               <span className="detail-value">{order.order_number}</span>
             </div>
-            
+
             <div className="detail-row">
               <span className="detail-label">Fecha:</span>
               <span className="detail-value">{formatDate(order.created_at)}</span>

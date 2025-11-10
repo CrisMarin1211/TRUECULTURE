@@ -10,7 +10,7 @@ export interface CartItem {
   location?: string;
   time?: string;
   seats?: string[];
-  type?: 'product' | 'event'; // Tipo de item
+  type?: 'product' | 'event';
 }
 
 export interface Purchase {
@@ -65,11 +65,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const addToCart = (item: CartItem) => {
     setCartItems((prev) => {
-      // Si el item tiene asientos, no lo agrupamos con otros items
       if (item.seats && item.seats.length > 0) {
         return [...prev, item];
       }
-      
+
       const existingItem = prev.find((i) => i.id === item.id && !i.seats);
       if (existingItem) {
         return prev.map((i) =>

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useEvent } from '../../../../context/EventContext';
 import CardClient from '../../../atomsUi/EventCard-Client/CardClient';
-import { CityContext } from '../../../../context/CityContext';
+import { CityContext } from '../../../../context/cityContex';
 import type { EventItem } from '../../../../types/EventType';
 import { Dialog, Typography, Box } from '@mui/material';
 import ViewMore from '../../../viewMore/veiwMore';

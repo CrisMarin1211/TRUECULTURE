@@ -9,7 +9,7 @@ import './style.css';
 
 import { useProduct } from '../../../../context/ProductEvent';
 import FeaturedCard from '../../../atomsUi/featuredCard/index';
-import { CityContext } from '../../../../context/CityContext';
+import { CityContext } from '../../../../context/cityContex';
 import { Dialog } from '@mui/material';
 import ViewMore from '../../../viewMore/veiwMore';
 

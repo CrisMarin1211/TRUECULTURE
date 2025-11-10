@@ -65,7 +65,7 @@
   color: #fff;
   border: 1px solid #4f4f4f;
   padding: 0.5rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   cursor: pointer;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -352,19 +352,18 @@
 
 .checkout-btn {
   width: 100%;
-  background: linear-gradient(135deg, #99cb36 0%, #7db028 100%);
+  background: #99cb36;
   color: #fff;
   border: none;
   padding: 1rem 2rem;
   font-size: 1.1rem;
   font-weight: 700;
-  border-radius: 0.5rem;
+  border-radius: 10rem;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 15px rgba(153, 203, 54, 0.3);
 }
 
 .checkout-btn:hover {

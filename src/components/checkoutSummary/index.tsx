@@ -6,7 +6,6 @@ import { supabase } from '../../lib/supabaseClient';
 import type { UserCouponWithDetails } from '../../services/coupons';
 import CloseIcon from '@mui/icons-material/Close';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import theme from '../../styles/theme';
@@ -137,10 +136,7 @@ const CheckoutSummary = () => {
             <EmojiEventsIcon className="benefit-icon" />
             <span className="benefit-text">Gana puntos y obtén descuentos con tu cuenta</span>
           </div>
-          <div className="benefit-item">
-            <LocalShippingIcon className="benefit-icon" />
-            <span className="benefit-text">Envío rápido y seguro</span>
-          </div>
+          
         </div>
       </div>
 

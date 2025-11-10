@@ -1,0 +1,212 @@
+.coupon-card {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-family: 'Satoshi', sans-serif;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.coupon-card.active {
+  border-color: #99cb36;
+  box-shadow: 0 4px 20px rgba(153, 203, 54, 0.2);
+}
+
+.coupon-card.used {
+  opacity: 0.6;
+  border-color: #4f4f4f;
+  filter: grayscale(80%);
+}
+
+.coupon-card.expired {
+  opacity: 0.6;
+  border-color: #ff4444;
+  filter: grayscale(60%);
+}
+
+/* Discount Badge (Left side) */
+.coupon-discount-badge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #99cb36 0%, #7db028 100%);
+  clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+  z-index: 2;
+}
+
+.coupon-card.used .coupon-discount-badge {
+  background: linear-gradient(135deg, #4f4f4f 0%, #3a3a3a 100%);
+}
+
+.coupon-card.expired .coupon-discount-badge {
+  background: linear-gradient(135deg, #ff4444 0%, #cc0033 100%);
+}
+
+.discount-value {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #121212;
+  line-height: 1;
+  font-family: 'Clash Display', sans-serif;
+}
+
+.discount-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #121212;
+  letter-spacing: 1px;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+}
+
+/* Content Section */
+.coupon-content {
+  margin-left: 85px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.coupon-header {
+  display: flex;
+  align-items: flex-start;
+}
+
+.coupon-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.coupon-code-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(255, 0, 153, 0.1) 0%, rgba(255, 0, 153, 0.05) 100%);
+  border: 1px dashed rgba(255, 0, 153, 0.3);
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.code-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #8692A6;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.coupon-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #2a2a2a;
+  margin-top: auto;
+}
+
+.coupon-status {
+  display: flex;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.active {
+  background-color: #99cb36;
+  color: #121212;
+  box-shadow: 0 2px 8px rgba(153, 203, 54, 0.3);
+}
+
+.status-badge.used {
+  background-color: #4f4f4f;
+  color: #ffffff;
+}
+
+.status-badge.expired {
+  background-color: #ff4444;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(255, 68, 68, 0.3);
+}
+
+.coupon-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.coupon-date {
+  font-size: 0.75rem;
+  color: #8692A6;
+  font-style: italic;
+}
+
+/* Perforated Edge Effect */
+.coupon-card.active::before {
+  content: '';
+  position: absolute;
+  left: 80px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 8px,
+    #2a2a2a 8px,
+    #2a2a2a 10px
+  );
+  z-index: 3;
+  opacity: 0.3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .coupon-card {
+    min-height: 180px;
+  }
+
+  .coupon-discount-badge {
+    width: 70px;
+  }
+
+  .discount-value {
+    font-size: 1.5rem;
+  }
+
+  .discount-label {
+    font-size: 0.6rem;
+  }
+
+  .coupon-content {
+    margin-left: 75px;
+    padding: 1.25rem;
+  }
+
+
+  .coupon-card.active::before {
+    left: 70px;
+  }
+}

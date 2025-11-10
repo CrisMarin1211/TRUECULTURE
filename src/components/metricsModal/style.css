@@ -1,0 +1,165 @@
+.metrics-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.metrics-modal {
+  background: #232323;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 900px;
+  max-height: 90vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(153, 203, 54, 0.3) transparent;
+  position: relative;
+}
+
+.metrics-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.metrics-modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.metrics-modal::-webkit-scrollbar-thumb {
+  background-color: rgba(153, 203, 54, 0.3);
+  border-radius: 3px;
+}
+
+.metrics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.metrics-title {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #99cb36;
+  cursor: pointer;
+}
+
+.metrics-body {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  flex: 1;
+  align-items: stretch;
+}
+
+.metrics-left,
+.metrics-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.metrics-left-card {
+  border: 1px solid #666;
+  border-radius: 6px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.metrics-left-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.metrics-image-wrapper {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.metrics-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 4px;
+  object-fit: cover;
+  display: block;
+}
+
+.metrics-name {
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  color: #fff;
+}
+
+.metrics-info-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  justify-content: flex-start;
+}
+
+.icon-bg {
+  width: 28px;
+  height: 28px;
+  background: rgba(153, 203, 54, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.metrics-desc {
+  text-align: left;
+  font-size: 0.85rem;
+  color: #ccc;
+  margin-top: 0.5rem;
+}
+
+.metrics-right {
+  gap: 1rem;
+  flex: 1;
+}
+
+.metrics-chart-card {
+  border: 1px solid #666;
+  border-radius: 6px;
+  padding: 0.75rem;
+  background: transparent;
+}
+
+.chart-title {
+  font-size: 0.85rem;
+  color: #ccc;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.chart-container {
+  height: 180px;
+  width: 100%;
+}

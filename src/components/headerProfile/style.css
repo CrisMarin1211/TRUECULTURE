@@ -1,0 +1,38 @@
+.header-profile {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.profile-avatar {
+  width: 60px !important;
+  height: 60px !important;
+  margin-right: 1rem;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+
+.profile-name {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.profile-role {
+  color: #ccc;
+  font-size: 0.85rem;
+  font-weight: 400;
+  margin: 0;
+  margin-top: 2px;
+}

@@ -1,0 +1,92 @@
+.comment-card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.comment-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.comment-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.comment-icon {
+  color: #ff0099;
+  font-size: 24px !important;
+}
+
+.comment-title {
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+}
+
+.comment-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.comment-text {
+  flex: 1;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.comment-avatar {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50%;
+  border: 2px solid #1177f1;
+  object-fit: cover;
+}
+
+.comment-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-user {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.comment-rating {
+  display: flex;
+  gap: 4px;
+}
+
+.heart-icon {
+  font-size: 18px !important;
+  color: #ccc !important;
+  transition:
+    color 0.25s ease,
+    transform 0.15s ease;
+  cursor: pointer;
+}
+
+.heart-icon.filled {
+  color: #1177f1 !important;
+}
+
+.heart-icon:hover {
+  transform: scale(1.1);
+  color: #ff66b2 !important;
+}

@@ -1,0 +1,46 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.stat-card,
+.review-card,
+.upcoming-card {
+  height: 100%;
+}
+
+.consumer-activity-card {
+  grid-column: 3 / 4;
+  grid-row: 2 / 4;
+  height: 100%;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.stat-card,
+.review-card,
+.upcoming-card,
+.consumer-activity-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.consumer-activity-card {
+  grid-column: 3 / 4;
+  grid-row: 2 / 4;
+}
+
+.stat-card,
+.review-card,
+.upcoming-card {
+  align-self: stretch;
+}

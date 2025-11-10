@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from 'react';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
+import AppRoutes from './routes';
+import { supabase } from './lib/supabaseClient';
+
+// Componente wrapper para manejar OAuth dentro del Router
+const OAuthHandler = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Verificar inmediatamente si hay un hash de OAuth y sesión activa
+    const checkOAuthCallback = async () => {
+      const hasOAuthHash = window.location.hash.includes('access_token');
+      
+      if (hasOAuthHash) {
+        try {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (session) {
+            // Limpiar el hash de la URL
+            window.history.replaceState(null, '', window.location.pathname);
+            // Redirigir al dashboard
+            navigate('/DashboardClient', { replace: true });
+          }
+        } catch (error) {
+          console.error('Error al verificar sesión OAuth:', error);
+        }
+      }
+    };
+
+    checkOAuthCallback();
+
+    // Escuchar cambios en el estado de autenticación
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      // Si el usuario se autentica y hay hash de OAuth en la URL, redirigir
+      if (event === 'SIGNED_IN' && session) {
+        const hasOAuthHash = window.location.hash.includes('access_token');
+        if (hasOAuthHash) {
+          // Limpiar el hash de la URL
+          window.history.replaceState(null, '', window.location.pathname);
+          // Redirigir al dashboard
+          navigate('/DashboardClient', { replace: true });
+        }
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [navigate]);
+
+  return null;
+};
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <BrowserRouter>
+        <OAuthHandler />
+        <AppRoutes />
+      </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

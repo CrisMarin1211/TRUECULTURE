@@ -16,6 +16,10 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
   const navigate = useNavigate();
   const { login, loginWithGoogle } = useAuth();
 
+  const handleGoToSignup = () => {
+    navigate('/signup', { state: { fromAdmin } });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -72,7 +76,10 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
       <Button label="Iniciar Sesión" type="submit" />
 
       <p className="signup-text">
-        Don’t have an account? <a href="/signup">Crear cuenta</a>
+        Don’t have an account?{' '}
+        <span className="link" onClick={handleGoToSignup}>
+          Crear cuenta
+        </span>
       </p>
 
       <div className="divider">

@@ -42,7 +42,7 @@ const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
 
       alert('Registro exitoso. Revisa tu correo para confirmar la cuenta.');
       if (fromAdmin) {
-        navigate('/dashboard');
+        navigate('/DashboardAdmin');
       } else {
         navigate('/DashboardClient');
       }

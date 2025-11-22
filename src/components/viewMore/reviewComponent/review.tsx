@@ -163,7 +163,7 @@ const Review = ({ relatedId, relatedType }: ReviewProps) => {
           rows={3}
           style={{
             width: '100%',
-            border: 1px solid ${theme.palette.pink.main},
+            border: `1px solid ${theme.palette.pink.main}`,
             borderRadius: '4px',
             padding: '6px 8px',
             fontSize: '14px',
@@ -178,7 +178,7 @@ const Review = ({ relatedId, relatedType }: ReviewProps) => {
           disabled={comment.trim().length === 0 || loading}
           onClick={handleSubmit}
           style={{
-            border: 1px solid ${theme.palette.pink.main},
+            border: `1px solid ${theme.palette.pink.main}`,
             borderRadius: '4px',
             background: 'transparent',
             color: theme.palette.pink.main,

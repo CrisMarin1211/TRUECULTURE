@@ -22,7 +22,7 @@ export const getEvents = async () => {
   return data || [];
 };
 
-export const updateEvent = async (id: string, event: EventItem) => {
+export const updateEvent = async (id: string, event: Partial<EventItem>) => {
   const { data, error } = await supabase
     .from('events')
     .update(event)

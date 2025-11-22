@@ -10,7 +10,7 @@ export interface CartItem {
   location?: string;
   time?: string;
   seats?: string[];
-  type?: 'product' | 'event'; // Tipo de item
+  type?: 'product' | 'event';
 }
 
 export interface Purchase {
@@ -40,36 +40,43 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const CartProvider = ({ children }: { children: ReactNode }) => {
+export const CartProvider = ({
+  children,
+  userId,
+}: {
+  children: ReactNode;
+  userId: string | null;
+}) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [discount, setDiscount] = useState<number>(0);
   const [isInitialized, setIsInitialized] = useState(false);
 
+  const storageKey = userId ? `cart_${userId}` : 'cart_guest';
+
   useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      try {
-        setCartItems(JSON.parse(savedCart));
-      } catch (error) {
-        console.error('Error al cargar carrito desde localStorage:', error);
+    setCartItems([]);
+    if (userId) {
+      const savedCart = localStorage.getItem(storageKey);
+      if (savedCart) {
+        try {
+          setCartItems(JSON.parse(savedCart));
+        } catch {
+          setCartItems([]);
+        }
       }
     }
     setIsInitialized(true);
-  }, []);
+  }, [userId, storageKey]);
 
   useEffect(() => {
     if (isInitialized) {
-      localStorage.setItem('cart', JSON.stringify(cartItems));
+      localStorage.setItem(storageKey, JSON.stringify(cartItems));
     }
-  }, [cartItems, isInitialized]);
+  }, [cartItems, isInitialized, storageKey]);
 
   const addToCart = (item: CartItem) => {
     setCartItems((prev) => {
-      // Si el item tiene asientos, no lo agrupamos con otros items
-      if (item.seats && item.seats.length > 0) {
-        return [...prev, item];
-      }
-      
+      if (item.seats && item.seats.length > 0) return [...prev, item];
       const existingItem = prev.find((i) => i.id === item.id && !i.seats);
       if (existingItem) {
         return prev.map((i) =>
@@ -85,7 +92,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       removeFromCart(id);
       return;
     }
-
     setCartItems((prev) => prev.map((item) => (item.id === id ? { ...item, quantity } : item)));
   };
 
@@ -95,19 +101,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const updateCartItemSeats = (id: string | number, seats: string[]) => {
     setCartItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, seats, quantity: seats.length } : item))
+      prev.map((item) => (item.id === id ? { ...item, seats, quantity: seats.length } : item)),
     );
   };
 
   const clearCart = () => {
     setCartItems([]);
     setDiscount(0);
-    localStorage.removeItem('cart');
+    localStorage.removeItem(storageKey);
   };
 
   const finalizePurchase = (): boolean => {
     if (cartItems.length === 0) return false;
-
     const existingPurchases = JSON.parse(localStorage.getItem('purchases') || '[]');
     const newPurchases: Purchase[] = cartItems.map((item) => ({
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -147,8 +152,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
 export const useCart = () => {
   const context = useContext(CartContext);
-  if (!context) {
-    throw new Error('useCart debe usarse dentro de un CartProvider');
-  }
+  if (!context) throw new Error('useCart debe usarse dentro de un CartProvider');
   return context;
 };

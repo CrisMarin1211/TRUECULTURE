@@ -15,7 +15,6 @@ export const EventProvider = ({ children }: EventProviderProps) => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getEvents();
-      console.log('🎭 Data de Supabase (events):', data);
       setEvents(data);
     };
     fetchData();

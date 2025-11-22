@@ -15,7 +15,6 @@ export const ProductProvider = ({ children }: ProductProviderProps) => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getProducts();
-      console.log('📦 Data de Supabase:', data);
       setProducts(data);
     };
     fetchData();

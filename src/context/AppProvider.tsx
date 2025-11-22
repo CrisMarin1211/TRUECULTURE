@@ -6,24 +6,27 @@ import { CityProvider } from './CityContext';
 import { ProductProvider } from './ProductEvent';
 import { EventProvider } from './EventContext';
 import { CartProvider } from './CartContex';
-import { AuthProvider } from './AuthContext'; // 👈 Asegúrate de importar esto
+import { AuthProvider, useAuth } from './AuthContext';
 
 interface AppProviderProps {
   children: ReactNode;
 }
 
+const CartWrapper = ({ children }: { children: ReactNode }) => {
+  const { user } = useAuth();
+  const userId = user?.id ?? null;
+  return <CartProvider userId={userId}>{children}</CartProvider>;
+};
+
 export const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* 👇 Aquí envolvemos todo con AuthProvider */}
       <AuthProvider>
         <CityProvider>
           <ProductProvider>
             <EventProvider>
-              <CartProvider>
-                {children}
-              </CartProvider>
+              <CartWrapper>{children}</CartWrapper>
             </EventProvider>
           </ProductProvider>
         </CityProvider>

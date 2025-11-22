@@ -197,3 +197,22 @@ export const getReviewsSummary = async (): Promise<ReviewsSummary> => {
     reviewsCountByRating,
   };
 };
+
+export const getCommentsByItem = async (
+  relatedId: string,
+  relatedType: 'product' | 'event',
+): Promise<CommentItem[]> => {
+  const { data: comments, error } = await supabase
+    .from('comments')
+    .select('*')
+    .eq('related_id', relatedId)
+    .eq('related_type', relatedType)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error al obtener comentarios del item:', error);
+    return [];
+  }
+
+  return comments ?? [];
+};

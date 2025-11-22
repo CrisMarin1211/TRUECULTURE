@@ -5,7 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import { stringAvatar } from '../../../utils/avatarHelper';
 import { supabase } from '../../../lib/supabaseClient';
 import type { User } from '@supabase/supabase-js';
-import { getUserProfile, updateUserProfile, getLevels } from '../../../services/users';
+import { updateUserProfile, getLevels, getUserProfileByEmail } from '../../../services/users';
 import InputField from '../../../components/atomsUi/inputField/inputField';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -42,7 +42,6 @@ const COUNTRIES = [
   'Venezuela',
   'Brasil',
 ];
-
 const selectStyles = {
   color: '#8692A6',
   backgroundColor: '#282A2F',
@@ -68,7 +67,6 @@ const selectStyles = {
     padding: '12px 14px',
   },
 };
-
 const menuItemStyles = {
   color: '#8692A6',
   fontFamily: 'Satoshi',
@@ -113,12 +111,16 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       setUser(user);
     };
     getUser();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user || null);
     });
 
@@ -127,34 +129,57 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-    
-      const levelsData = await getLevels();
-      setLevels(levelsData);
 
-     
-      if (!user?.id) {
-        return;
-      }
+      try {
+        if (!user?.email) return;
 
-      setLoading(true);
-      const userProfile = await getUserProfile(user.id);
-      
-      if (userProfile) {
-        setProfile(userProfile);
-        setFormData({
-          name: userProfile.name || '',
-          nickname: userProfile.nickname || '',
-          gender: userProfile.gender || '',
-          country: userProfile.country || '',
-          language: userProfile.language || '',
-          organization: userProfile.organization || '',
-        });
+        setLoading(true);
+
+        const userProfile = await getUserProfileByEmail(user.email);
+
+        if (userProfile) {
+          setProfile({
+            id: userProfile.id || 0,
+            user_id: userProfile.auth_id || '',
+            email: userProfile.email,
+            name: userProfile.name || null,
+            nickname: userProfile.nickname || null,
+            gender: userProfile.gender || null,
+            country: userProfile.country || null,
+            language: userProfile.language || null,
+            avatar_url: userProfile.avatar_url || null,
+            organization: userProfile.organization || null,
+            timezone: userProfile.timezone || null,
+            current_level: null,
+            points: null,
+            referral_code: null,
+            referred_by: null,
+            total_referrals: 0,
+            created_at: userProfile.created_at || null,
+            updated_at: userProfile.updated_at || null,
+          });
+
+          setFormData({
+            name: userProfile.name || '',
+            nickname: userProfile.nickname || '',
+            gender: userProfile.gender || '',
+            country: userProfile.country || '',
+            language: userProfile.language || '',
+            organization: userProfile.organization || '',
+          });
+        }
+
+        const levelsData = await getLevels();
+        setLevels(levelsData);
+      } catch (err) {
+        console.error('Error cargando perfil:', err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchData();
-  }, [user?.id]);
+  }, [user?.email]);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -211,7 +236,7 @@ const ProfilePage = () => {
 
   const handleCopyReferralLink = () => {
     if (!profile?.referral_code) return;
-    
+
     const referralLink = `${window.location.origin}/signup?ref=${profile.referral_code}`;
     navigator.clipboard.writeText(referralLink);
     setSnackbarMessage('¡Enlace copiado al portapapeles!');
@@ -236,7 +261,7 @@ const ProfilePage = () => {
     if (!user?.id || !referralCodeInput.trim()) return;
 
     const codeToCheck = referralCodeInput.trim().toUpperCase();
-    
+
     if (!/^[A-Z0-9]{4,12}$/.test(codeToCheck)) {
       setSnackbarMessage('El código debe tener entre 4 y 12 caracteres (solo letras y números)');
       setSnackbarOpen(true);
@@ -303,9 +328,7 @@ const ProfilePage = () => {
     return (
       <div className="profile-page">
         <Header />
-        <div style={{ color: 'white', padding: '1rem' }}>
-          No hay datos de perfil disponibles.
-        </div>
+        <div style={{ color: 'white', padding: '1rem' }}>No hay datos de perfil disponibles.</div>
       </div>
     );
   }
@@ -315,20 +338,20 @@ const ProfilePage = () => {
       <Header />
       <h1 className="profile-title">Perfil</h1>
       <div className="profile-content">
-            <div className="profile-left">
+        <div className="profile-left">
           <div className="card profile-card">
-                <div className="card-header">
-              <img 
-                src="/icons/edit.png" 
-                alt="edit" 
-                className="edit-icon" 
-                onClick={handleEdit}
-              />
-                </div>
-            
+            <div className="card-header">
+              <img src="/icons/edit.png" alt="edit" className="edit-icon" onClick={handleEdit} />
+            </div>
+
             <div className="profile-avatar-container">
-                    <Avatar
-                src={user?.user_metadata?.avatar_url || user?.user_metadata?.picture || profile.avatar_url || undefined}
+              <Avatar
+                src={
+                  user?.user_metadata?.avatar_url ||
+                  user?.user_metadata?.picture ||
+                  profile.avatar_url ||
+                  undefined
+                }
                 {...stringAvatar(profile.name || profile.email || 'U')}
                 className="profile-avatar2"
               />
@@ -337,24 +360,25 @@ const ProfilePage = () => {
             <h2 className="profile-name-text">{profile.name || 'Usuario'}</h2>
             <p className="profile-email-text">{profile.email || 'Sin correo'}</p>
           </div>
-                </div>
+        </div>
 
         <div className="profile-right">
           <div className="profile-badges-grid">
-            <button className="badge-card badge-card-full" onClick={() => {
-              setSnackbarMessage('Nivel actual y puntos');
-              setSnackbarOpen(true);
-            }}>
+            <button
+              className="badge-card badge-card-full"
+              onClick={() => {
+                setSnackbarMessage('Nivel actual y puntos');
+                setSnackbarOpen(true);
+              }}
+            >
               <img src="/images/trofeo.png" alt="trophy" className="badge-icon" />
               <div className="trophy-level-info">
                 {profile.current_level !== null && levels.length > 0 && (
                   <>
                     <span className="level-name">
-                      {levels.find(l => l.level_number === profile.current_level)?.name || 'N/A'}
+                      {levels.find((l) => l.level_number === profile.current_level)?.name || 'N/A'}
                     </span>
-                    <span className="level-points">
-                      {profile.points || 0} puntos
-                    </span>
+                    <span className="level-points">{profile.points || 0} puntos</span>
                   </>
                 )}
               </div>
@@ -363,17 +387,27 @@ const ProfilePage = () => {
               <img src="/images/image1.png" alt="badge" className="badge-icon" />
               <span className="badge-text">Mis Cupones</span>
             </button>
-            <button className="badge-card badge-card-center" onClick={() => navigate('/my-purchases')}>
+            <button
+              className="badge-card badge-card-center"
+              onClick={() => navigate('/my-purchases')}
+            >
               <span className="badge-text">Mis Compras</span>
             </button>
-            <button className="badge-card badge-card-reviews" onClick={() => {
-              setSnackbarMessage('Próximamente: verás tus reseñas aquí');
-              setSnackbarOpen(true);
-            }}>
+            <button
+              className="badge-card badge-card-reviews"
+              onClick={() => {
+                setSnackbarMessage('Próximamente: verás tus reseñas aquí');
+                setSnackbarOpen(true);
+              }}
+            >
               <img src="/images/image2.png" alt="badge" className="badge-icon" />
               <span className="badge-text">Mis Reseñas</span>
             </button>
-            <button className="badge-card badge-card-referral" onClick={handleCopyReferralLink}>
+            <div
+              className="badge-card badge-card-referral"
+              onClick={handleCopyReferralLink}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="referral-whole-content">
                 <span className="referral-label">
                   <ContentCopyIcon sx={{ fontSize: '16px', verticalAlign: 'middle', mr: 0.5 }} />
@@ -383,26 +417,26 @@ const ProfilePage = () => {
                   <span className="referral-code-display">
                     {profile.referral_code || 'Sin código'}
                   </span>
-                  <IconButton 
-                    size="small" 
+                  <IconButton
+                    size="small"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleEditReferralCode();
                     }}
-                    sx={{ 
+                    sx={{
                       color: theme.palette.pink.main,
                       padding: '4px',
-                      '&:hover': { backgroundColor: 'rgba(255, 0, 153, 0.1)' }
+                      '&:hover': { backgroundColor: 'rgba(255, 0, 153, 0.1)' },
                     }}
                   >
                     <EditIcon fontSize="small" />
                   </IconButton>
                 </div>
               </div>
-            </button>
+            </div>
           </div>
         </div>
-                </div>
+      </div>
 
       <Modal
         open={isEditing}
@@ -430,7 +464,9 @@ const ProfilePage = () => {
             outline: 'none',
           }}
         >
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+          <Box
+            sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}
+          >
             <Typography variant="h5" sx={{ color: 'white', fontWeight: 'bold' }}>
               Editar Perfil
             </Typography>
@@ -440,28 +476,25 @@ const ProfilePage = () => {
           </Box>
 
           <div className="profile-form">
-            <InputField
-              label="Nombre"
-              value={formData.name}
-              onChange={handleChange}
-              name="name"
-            />
-            
+            <InputField label="Nombre" value={formData.name} onChange={handleChange} name="name" />
+
             <InputField
               label="Apodo"
               value={formData.nickname}
               onChange={handleChange}
               name="nickname"
             />
-            
+
             <FormControl fullWidth>
-              <label style={{ 
-                color: '#696F79',
-                fontFamily: 'Satoshi',
-                fontSize: '18.695px',
-                fontWeight: 500,
-                marginBottom: '10px',
-              }}>
+              <label
+                style={{
+                  color: '#696F79',
+                  fontFamily: 'Satoshi',
+                  fontSize: '18.695px',
+                  fontWeight: 500,
+                  marginBottom: '10px',
+                }}
+              >
                 Género
               </label>
               <Select
@@ -490,15 +523,17 @@ const ProfilePage = () => {
                 ))}
               </Select>
             </FormControl>
-            
+
             <FormControl fullWidth>
-              <label style={{ 
-                color: '#696F79',
-                fontFamily: 'Satoshi',
-                fontSize: '18.695px',
-                fontWeight: 500,
-                marginBottom: '10px',
-              }}>
+              <label
+                style={{
+                  color: '#696F79',
+                  fontFamily: 'Satoshi',
+                  fontSize: '18.695px',
+                  fontWeight: 500,
+                  marginBottom: '10px',
+                }}
+              >
                 País
               </label>
               <Select
@@ -527,15 +562,17 @@ const ProfilePage = () => {
                 ))}
               </Select>
             </FormControl>
-            
+
             <FormControl fullWidth>
-              <label style={{ 
-                color: '#696F79',
-                fontFamily: 'Satoshi',
-                fontSize: '18.695px',
-                fontWeight: 500,
-                marginBottom: '10px',
-              }}>
+              <label
+                style={{
+                  color: '#696F79',
+                  fontFamily: 'Satoshi',
+                  fontSize: '18.695px',
+                  fontWeight: 500,
+                  marginBottom: '10px',
+                }}
+              >
                 Idioma
               </label>
               <Select
@@ -564,14 +601,14 @@ const ProfilePage = () => {
                 ))}
               </Select>
             </FormControl>
-            
+
             <InputField
               label="Organización"
               value={formData.organization}
               onChange={handleChange}
               name="organization"
             />
-                </div>
+          </div>
 
           <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end', mt: 3 }}>
             <Button
@@ -653,7 +690,9 @@ const ProfilePage = () => {
             outline: 'none',
           }}
         >
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+          <Box
+            sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}
+          >
             <Typography variant="h5" sx={{ color: 'white', fontWeight: 'bold' }}>
               Editar enlace de referido
             </Typography>
@@ -663,15 +702,15 @@ const ProfilePage = () => {
           </Box>
 
           {/* Warning Banner */}
-          <Box 
-            sx={{ 
+          <Box
+            sx={{
               backgroundColor: '#FFB800',
               borderRadius: '8px',
               padding: '12px 16px',
               display: 'flex',
               alignItems: 'center',
               gap: 1,
-              mb: 3
+              mb: 3,
             }}
           >
             <WarningIcon sx={{ color: '#FF8500', fontSize: '20px' }} />
@@ -683,13 +722,22 @@ const ProfilePage = () => {
           <Typography sx={{ color: '#8692A6', fontSize: '13px', mb: 1 }}>
             Enlace de referido actual:
           </Typography>
-          <Typography sx={{ color: '#FFFFFF', fontSize: '14px', fontFamily: 'monospace', mb: 3, wordBreak: 'break-all' }}>
-            {profile?.referral_code ? `${window.location.origin}/signup?ref=${profile.referral_code}` : 'Sin código'}
+          <Typography
+            sx={{
+              color: '#FFFFFF',
+              fontSize: '14px',
+              fontFamily: 'monospace',
+              mb: 3,
+              wordBreak: 'break-all',
+            }}
+          >
+            {profile?.referral_code
+              ? `${window.location.origin}/signup?ref=${profile.referral_code}`
+              : 'Sin código'}
           </Typography>
 
-          <Typography sx={{ color: '#8692A6', fontSize: '13px', mb: 1 }}>
-            Editar código:
-          </Typography>
+
+          <Typography sx={{ color: '#8692A6', fontSize: '13px', mb: 1 }}>Editar código:</Typography>
           <InputField
             label=""
             value={referralCodeInput}

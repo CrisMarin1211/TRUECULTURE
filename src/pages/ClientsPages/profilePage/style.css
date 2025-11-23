@@ -49,7 +49,6 @@ body {
   background-color: #232323;
   border: 1px solid #4f4f4f;
   border-radius: 0.8rem;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -57,6 +56,7 @@ body {
 
 .profile-card {
   padding: 3rem;
+  height: 100%;
   text-align: center;
 }
 
@@ -68,6 +68,7 @@ body {
 .edit-icon {
   width: 20px;
   height: 20px;
+  margin-top: -1rem;
   cursor: pointer;
 }
 
@@ -77,8 +78,8 @@ body {
 }
 
 .profile-avatar2 {
-  width: 300px !important;
-  height: 300px !important;
+  width: 200px !important;
+  height: 200px !important;
   font-size: 5rem !important;
   background-color: #4f4f4f !important;
   color: white !important;
@@ -92,7 +93,7 @@ body {
 }
 
 .profile-email-text {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #cccccc;
   text-align: center;
 }
@@ -147,8 +148,8 @@ body {
 
 .badge-card-full {
   grid-column: 1 / -1;
-  padding: 1rem;
-  min-height: 200px;
+    padding-inline: 2rem;
+    min-height: 150px;
 }
 
 .badge-card-full .badge-icon {
@@ -160,11 +161,20 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-left: auto;
+  margin-left: 80px;
+  text-align: center;
+}
+.trophy-level-info-texts{
+  display: contents;
+  box-sizing: border-box;
+  flex-direction: column;
+  gap: 0.1rem;
 }
 
 .level-name {
-  font-size: 1.5rem;
+  display: flex;
+  align-items: start;
+  font-size: 4rem;
   font-weight: bold;
   color: #ffffff;
 }
@@ -255,6 +265,7 @@ body {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+  
 
   .profile-badges-grid {
     grid-template-columns: 1fr;

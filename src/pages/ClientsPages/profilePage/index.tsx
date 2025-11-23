@@ -324,8 +324,10 @@ const ProfilePage = () => {
               />
             </div>
 
-            <h2 className="profile-name-text">{profile.name || 'Usuario'}</h2>
-            <p className="profile-email-text">{profile.email || 'Sin correo'}</p>
+            <div>
+              <h2 className="profile-name-text">{profile.name || 'Usuario'}</h2>
+              <p className="profile-email-text">{profile.email || 'Sin correo'}</p>
+            </div>
           </div>
         </div>
 
@@ -342,10 +344,13 @@ const ProfilePage = () => {
               <div className="trophy-level-info">
                 {profile.current_level !== null && levels.length > 0 && (
                   <>
-                    <span className="level-name">
+                  <div className='trophy-level-info-texts'>
+                     <span className="level-name">
                       {levels.find((l) => l.level_number === profile.current_level)?.name || 'N/A'}
                     </span>
                     <span className="level-points">{profile.points || 0} puntos</span>
+                  </div>
+                   
                   </>
                 )}
               </div>
@@ -441,7 +446,7 @@ const ProfilePage = () => {
           <div className="profile-form">
             <InputField label="Nombre" value={formData.name} onChange={handleChange} name="name" />
 
-            <FormControl fullWidth >
+            <FormControl fullWidth>
               <label
                 style={{
                   color: '#696F79',
@@ -449,7 +454,6 @@ const ProfilePage = () => {
                   fontSize: '18.695px',
                   fontWeight: 500,
                   marginBottom: '10px',
-                  
                 }}
               >
                 País

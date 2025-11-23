@@ -260,7 +260,6 @@ body {
   margin-top: 2rem;
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
   .profile-page {
     padding: 0rem 2rem;
@@ -275,13 +274,11 @@ body {
     margin-bottom: 1rem;
   }
 
-  /* Layout en una sola columna */
   .profile-content {
     grid-template-columns: 1fr;
     gap: 1.2rem;
   }
 
-  /* CARD DEL PERFIL */
   .profile-card {
     padding: 1.5rem 1rem;
   }
@@ -306,7 +303,6 @@ body {
     margin-top: -0.5rem;
   }
 
-  /* GRID DE BADGES */
   .profile-badges-grid {
     grid-template-columns: 1fr;
     grid-template-columns: repeat(2, 1fr);
@@ -314,7 +310,6 @@ body {
     height: 100%;
   }
 
-  /* TROFEO (primer card grande) */
   .badge-card-full {
     min-height: 120px;
     padding: 1.3rem;
@@ -348,7 +343,6 @@ body {
     font-size: 0.9rem;
   }
 
-  /* BADGES PEQUEÑOS */
   .badge-card {
     justify-content: flex-start;
     min-height: 60px;
@@ -365,7 +359,6 @@ body {
     text-align: start;
   }
 
-  /* CARD LINK DE REFERIDO */
   .referral-input-container {
     padding: 6px 10px;
   }
@@ -375,7 +368,6 @@ body {
   }
 }
 
-/* ========== TABLET ========== */
 @media (max-width: 1024px) {
   .profile-page {
     padding: 0rem 2rem;
@@ -387,13 +379,11 @@ body {
     margin-bottom: 1rem;
   }
 
-  /* Layout en una sola columna */
   .profile-content {
     grid-template-columns: 1fr;
     gap: 1.2rem;
   }
 
-  /* CARD DEL PERFIL */
   .profile-card {
     padding: 2rem 2rem;
   }
@@ -419,7 +409,6 @@ body {
     margin-top: -0.5rem;
   }
 
-  /* GRID DE BADGES */
   .profile-badges-grid {
     grid-template-columns: 1fr;
     grid-template-columns: repeat(2, 1fr);
@@ -427,7 +416,6 @@ body {
     height: 100%;
   }
 
-  /* TROFEO (primer card grande) */
   .badge-card-full {
     height: 150px;
     padding: 1.3rem;
@@ -461,7 +449,6 @@ body {
     font-size: 1rem;
   }
 
-  /* BADGES PEQUEÑOS */
   .badge-card {
     justify-content: flex-start;
     min-height: 150px;
@@ -478,7 +465,6 @@ body {
     text-align: start;
   }
 
-  /* CARD LINK DE REFERIDO */
   .referral-input-container {
     padding: 6px 10px;
   }
@@ -502,13 +488,11 @@ body {
     margin-bottom: 1rem;
   }
 
-  /* Layout en una sola columna */
   .profile-content {
     grid-template-columns: 1fr;
     gap: 1.2rem;
   }
 
-  /* CARD DEL PERFIL */
   .profile-card {
     padding: 1.5rem 1rem;
   }
@@ -533,7 +517,6 @@ body {
     margin-top: -0.5rem;
   }
 
-  /* GRID DE BADGES */
   .profile-badges-grid {
     grid-template-columns: 1fr;
     grid-template-columns: repeat(2, 1fr);
@@ -541,7 +524,6 @@ body {
     height: 100%;
   }
 
-  /* TROFEO (primer card grande) */
   .badge-card-full {
     min-height: 120px;
     padding: 1.3rem;
@@ -575,7 +557,6 @@ body {
     font-size: 0.9rem;
   }
 
-  /* BADGES PEQUEÑOS */
   .badge-card {
     justify-content: flex-start;
     min-height: 60px;
@@ -592,7 +573,6 @@ body {
     text-align: start;
   }
 
-  /* CARD LINK DE REFERIDO */
   .referral-input-container {
     padding: 6px 10px;
   }

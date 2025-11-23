@@ -93,7 +93,7 @@ const HomePage = () => {
             Administrador
           </Link>
           <button onClick={goToSignUp} className="signup-btn">
-            Sign Up
+            Registrarse
           </button>
         </div>
       </header>

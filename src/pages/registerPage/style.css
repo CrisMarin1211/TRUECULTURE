@@ -47,3 +47,23 @@
   pointer-events: none;
 
 }
+
+@media (max-width: 768px) {
+  .logofucsia {
+    display: none !important;
+  }
+  .phrase-register {
+  color: #8692A6;
+  font-family: Satoshi;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 32.717px;
+}
+.logocompleto {
+  width: 210px;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+}
+}

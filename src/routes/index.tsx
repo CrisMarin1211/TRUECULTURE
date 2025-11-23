@@ -220,6 +220,15 @@ const AppRoutes = () => {
         }
       />
 
+      <Route
+        path="/my-reviews"
+        element={
+          <PrivateRoute>
+            <MyReviewsPage />
+          </PrivateRoute>
+        }
+      />
+
     </Routes>
   );
 };

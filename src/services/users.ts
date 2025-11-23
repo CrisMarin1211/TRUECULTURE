@@ -134,3 +134,27 @@ export const getUserOrganizationByEmail = async (email: string): Promise<string 
 
   return data.organization || null;
 };
+
+export const updateUserByUserId = async (
+  userId: string,
+  updates: Partial<UserProfile>,
+): Promise<UserProfile | null> => {
+  const { data, error } = await supabase
+    .from('users')
+    .update({
+      ...updates,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('auth_id', userId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error('Error al actualizar UserProfile:', error);
+    throw error;
+  }
+
+  if (!data) return null;
+
+  return data;
+};

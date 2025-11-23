@@ -17,7 +17,6 @@
 .input {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #2d2d2d;
   border-radius: 8px;
   background-color: #1c1c1c;
   color: #8692A6;
@@ -30,7 +29,6 @@
   transition: all 0.2s ease-in-out;
   border-radius: 7.011px;
   border: 0.584px solid #8692A6;
-  background: #282A2F;
 }
 
 .input::placeholder {

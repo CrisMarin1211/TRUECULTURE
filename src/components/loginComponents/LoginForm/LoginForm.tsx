@@ -1,7 +1,6 @@
 import './LoginForm.css';
 import InputField from '../../atomsUi/inputField/inputField';
 import Button from '../../atomsUi/button/button';
-import GoogleIcon from '../../../assets/Marca/icon-google.png';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
@@ -14,7 +13,7 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { login, loginWithGoogle } = useAuth();
+  const { login } = useAuth(); // 👈 Google eliminado
 
   const handleGoToSignup = () => {
     navigate('/signup', { state: { fromAdmin } });
@@ -22,6 +21,7 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
       await login({ email, password });
       alert('Inicio de sesión exitoso');
@@ -34,20 +34,6 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
     } catch (error: any) {
       console.error('Error en login:', error.message);
       alert('Email o contraseña incorrectos');
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    try {
-      await loginWithGoogle();
-      if (fromAdmin) {
-        navigate('/DashboardAdmin');
-      } else {
-        navigate('/DashboardClient');
-      }
-    } catch (error: any) {
-      console.error('Error en login con Google:', error.message);
-      alert('No se pudo iniciar sesión con Google');
     }
   };
 
@@ -81,17 +67,6 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
           Crear cuenta
         </span>
       </p>
-
-      <div className="divider">
-        <span className="line"></span>
-        <span className="or">O</span>
-        <span className="line"></span>
-      </div>
-
-      <button type="button" className="google-btn" onClick={handleGoogleLogin}>
-        <img src={GoogleIcon} alt="Google" className="google-icon" />
-        Inicia sesión con Google
-      </button>
     </form>
   );
 };

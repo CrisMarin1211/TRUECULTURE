@@ -372,7 +372,7 @@ const ProfilePage = () => {
               setSnackbarOpen(true);
             }}>
               <img src="/images/image2.png" alt="badge" className="badge-icon" />
-              <span className="badge-text">Mis Reseñas</span>
+              <span className="badge-text">Mis comentarios</span>
             </button>
             <div className="badge-card badge-card-referral" onClick={handleCopyReferralLink}>
               <div className="referral-whole-content">

@@ -97,8 +97,9 @@ const MyPurchasesPage = () => {
   };
 
   return (
+    <div>
+     <Header />
     <div className="my-purchases-page">
-      <Header />
       <div className="purchases-container">
         <h1 className="purchases-title">Mis Compras</h1>
 
@@ -125,9 +126,9 @@ const MyPurchasesPage = () => {
                     <p className="order-date">{formatDate(order.created_at)}</p>
                   </div>
                   <div className="order-header-right">
-                    <div 
+                    <div
                       className="order-status"
-                      style={{ 
+                      style={{
                         backgroundColor: getStatusColor(order.payment_status),
                         color: '#fff',
                       }}
@@ -170,14 +171,14 @@ const MyPurchasesPage = () => {
 
                 {/* Action Buttons */}
                 <div className="order-actions">
-                  <button 
+                  <button
                     className="view-details-btn"
                     onClick={() => handleViewDetails(order.id)}
                   >
                     Ver detalles
                   </button>
                   {order.order_items.some(item => item.item_type === 'event') && (
-                    <button 
+                    <button
                       className="view-qr-btn"
                       onClick={() => handleViewQr(order)}
                     >
@@ -207,7 +208,7 @@ const MyPurchasesPage = () => {
               <CloseIcon />
             </IconButton>
           </div>
-          
+
           <div className="qr-modal-content">
             {selectedOrderForQr && (
               <>
@@ -227,6 +228,7 @@ const MyPurchasesPage = () => {
         </Box>
       </Modal>
     </div>
+  </div>
   );
 };
 

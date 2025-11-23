@@ -25,6 +25,7 @@ import ListOrdersPage from '../pages/AdminPages/ordersPage';
 import PrivateRoute from './PrivateRoute';
 import CheckoutPage from '../pages/ClientsPages/checkoutPage';
 import PurchaseSuccessPage from '../pages/ClientsPages/purchaseSuccessPage';
+import MyReviewsPage from '../pages/ClientsPages/myReviewPage';
 
 const AppRoutes = () => {
   return (

@@ -11,10 +11,17 @@ import Alert from '@mui/material/Alert';
 import theme from '../../styles/theme';
 import './style.css';
 
+interface CheckoutSummaryProps {
+  subtotal?: number;
+  discount?: number;
+  total?: number;
+  onApplyCoupon?: (code: string | null) => void;
+}
+
 const formatCurrency = (value: number) =>
   value.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
 
-const CheckoutSummary = () => {
+const CheckoutSummary = ({}: CheckoutSummaryProps) => {
   const [userCoupons, setUserCoupons] = useState<UserCouponWithDetails[]>([]);
   const [selectedCouponId, setSelectedCouponId] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
@@ -64,12 +71,10 @@ const CheckoutSummary = () => {
       return;
     }
 
-    // Guardar el cupón seleccionado en localStorage para la página de checkout
     if (selectedCouponId) {
       localStorage.setItem('selectedCouponId', selectedCouponId.toString());
     }
 
-    // Navegar a la página de checkout
     navigate('/checkout');
   };
 
@@ -106,8 +111,8 @@ const CheckoutSummary = () => {
 
         <div className="coupon-section">
           <label className="coupon-label">Cupón de descuento</label>
-          <button 
-            className="add-coupon-btn" 
+          <button
+            className="add-coupon-btn"
             onClick={() => setIsSidebarOpen(true)}
           >
             Añadir
@@ -136,7 +141,7 @@ const CheckoutSummary = () => {
             <EmojiEventsIcon className="benefit-icon" />
             <span className="benefit-text">Gana puntos y obtén descuentos con tu cuenta</span>
           </div>
-          
+
         </div>
       </div>
 
@@ -157,7 +162,7 @@ const CheckoutSummary = () => {
               <div className="coupon-empty">No tienes cupones disponibles</div>
             ) : (
               <div className="coupon-list">
-                <label 
+                <label
                   className="no-coupon-option"
                   onClick={() => handleSelectCoupon(null)}
                 >
@@ -174,10 +179,10 @@ const CheckoutSummary = () => {
                   const coupon = userCoupon.coupons;
                   const couponDiscount = calculateCouponDiscount(coupon, subtotal);
                   const isDisabled = couponDiscount === 0 && subtotal > 0;
-                  
+
                   return (
-                    <label 
-                      key={userCoupon.id} 
+                    <label
+                      key={userCoupon.id}
                       className={`coupon-option ${isDisabled ? 'disabled' : ''}`}
                       title={isDisabled ? 'No cumple con el monto mínimo de compra' : ''}
                       onClick={() => !isDisabled && handleSelectCoupon(userCoupon.id)}
@@ -194,7 +199,7 @@ const CheckoutSummary = () => {
                         <span className="coupon-code">{coupon.code}</span>
                         <span className="coupon-description">{coupon.description}</span>
                         <span className="coupon-discount">
-                          {coupon.type === 'percent' 
+                          {coupon.type === 'percent'
                             ? `${coupon.value}% descuento`
                             : `${formatCurrency(coupon.value)} descuento`
                           }

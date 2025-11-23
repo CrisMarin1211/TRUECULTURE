@@ -367,10 +367,7 @@ const ProfilePage = () => {
             </button>
             <button
               className="badge-card badge-card-reviews"
-              onClick={() => {
-                setSnackbarMessage('Próximamente: verás tus reseñas aquí');
-                setSnackbarOpen(true);
-              }}
+             onClick={() => navigate('/my-reviews')}
             >
               <img src="/images/image2.png" alt="badge" className="badge-icon" />
               <span className="badge-text">Mis comentarios</span>

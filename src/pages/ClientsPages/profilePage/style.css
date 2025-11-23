@@ -148,8 +148,8 @@ body {
 
 .badge-card-full {
   grid-column: 1 / -1;
-    padding-inline: 2rem;
-    min-height: 150px;
+  padding-inline: 2rem;
+  min-height: 150px;
 }
 
 .badge-card-full .badge-icon {
@@ -164,7 +164,7 @@ body {
   margin-left: 80px;
   text-align: center;
 }
-.trophy-level-info-texts{
+.trophy-level-info-texts {
   display: contents;
   box-sizing: border-box;
   flex-direction: column;
@@ -181,7 +181,7 @@ body {
 
 .level-points {
   font-size: 1rem;
-  color: #8692A6;
+  color: #8692a6;
 }
 
 .badge-card-reviews {
@@ -222,7 +222,7 @@ body {
 
 .referral-label {
   font-size: 0.9rem;
-  color: #8692A6;
+  color: #8692a6;
 }
 
 .referral-input-container {
@@ -260,14 +260,344 @@ body {
   margin-top: 2rem;
 }
 
+/* MOBILE */
 @media (max-width: 768px) {
+  .profile-page {
+    padding: 0rem 2rem;
+  }
+  .profile-content {
+    margin-bottom: 5rem;
+  }
+
+  .profile-title {
+    font-size: 1.6rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Layout en una sola columna */
   .profile-content {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.2rem;
   }
-  
 
+  /* CARD DEL PERFIL */
+  .profile-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .profile-avatar2 {
+    width: 140px !important;
+    height: 140px !important;
+    font-size: 3.5rem !important;
+  }
+
+  .profile-name-text {
+    font-size: 1.5rem;
+  }
+
+  .profile-email-text {
+    font-size: 0.9rem;
+  }
+
+  .edit-icon {
+    width: 18px;
+    height: 18px;
+    margin-top: -0.5rem;
+  }
+
+  /* GRID DE BADGES */
   .profile-badges-grid {
     grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    height: 100%;
+  }
+
+  /* TROFEO (primer card grande) */
+  .badge-card-full {
+    min-height: 120px;
+    padding: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+  }
+
+  .badge-card-full .badge-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .trophy-level-info {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .trophy-level-info-texts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .level-name {
+    font-size: 2.2rem;
+  }
+
+  .level-points {
+    font-size: 0.9rem;
+  }
+
+  /* BADGES PEQUEÑOS */
+  .badge-card {
+    justify-content: flex-start;
+    min-height: 60px;
+  }
+
+  .badge-icon {
+    width: 4px;
+    height: 40px;
+    flex: 0 0 45px;
+  }
+
+  .badge-text {
+    font-size: 0.95rem;
+    text-align: start;
+  }
+
+  /* CARD LINK DE REFERIDO */
+  .referral-input-container {
+    padding: 6px 10px;
+  }
+
+  .referral-code-display {
+    font-size: 0.85rem;
+  }
+}
+
+/* ========== TABLET ========== */
+@media (max-width: 1024px) {
+  .profile-page {
+    padding: 0rem 2rem;
+  }
+
+  .profile-title {
+    font-size: 1.6rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Layout en una sola columna */
+  .profile-content {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  /* CARD DEL PERFIL */
+  .profile-card {
+    padding: 2rem 2rem;
+  }
+
+  .profile-avatar2 {
+    width: 150px !important;
+    height: 150px !important;
+    font-size: 3.5rem !important;
+  }
+
+  .profile-name-text {
+    font-size: 3rem;
+  }
+
+  .profile-email-text {
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+
+  .edit-icon {
+    width: 25px;
+    height: 25px;
+    margin-top: -0.5rem;
+  }
+
+  /* GRID DE BADGES */
+  .profile-badges-grid {
+    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    height: 100%;
+  }
+
+  /* TROFEO (primer card grande) */
+  .badge-card-full {
+    height: 150px;
+    padding: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+  }
+
+  .badge-card-full .badge-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .trophy-level-info {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .trophy-level-info-texts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .level-name {
+    font-size: 3rem;
+  }
+
+  .level-points {
+    font-size: 1rem;
+  }
+
+  /* BADGES PEQUEÑOS */
+  .badge-card {
+    justify-content: flex-start;
+    min-height: 150px;
+  }
+
+  .badge-icon {
+    width: 50px;
+    height: 50px;
+    flex: 0 0 45px;
+  }
+
+  .badge-text {
+    font-size: 1.5rem;
+    text-align: start;
+  }
+
+  /* CARD LINK DE REFERIDO */
+  .referral-input-container {
+    padding: 6px 10px;
+  }
+
+  .referral-code-display {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-page {
+    padding: 0rem 2rem;
+  }
+  .profile-content {
+    margin-bottom: 5rem;
+  }
+
+  .profile-title {
+    font-size: 1.6rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Layout en una sola columna */
+  .profile-content {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  /* CARD DEL PERFIL */
+  .profile-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .profile-avatar2 {
+    width: 140px !important;
+    height: 140px !important;
+    font-size: 3.5rem !important;
+  }
+
+  .profile-name-text {
+    font-size: 1.5rem;
+  }
+
+  .profile-email-text {
+    font-size: 0.9rem;
+  }
+
+  .edit-icon {
+    width: 18px;
+    height: 18px;
+    margin-top: -0.5rem;
+  }
+
+  /* GRID DE BADGES */
+  .profile-badges-grid {
+    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    height: 100%;
+  }
+
+  /* TROFEO (primer card grande) */
+  .badge-card-full {
+    min-height: 120px;
+    padding: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+  }
+
+  .badge-card-full .badge-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .trophy-level-info {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .trophy-level-info-texts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .level-name {
+    font-size: 2.2rem;
+  }
+
+  .level-points {
+    font-size: 0.9rem;
+  }
+
+  /* BADGES PEQUEÑOS */
+  .badge-card {
+    justify-content: flex-start;
+    min-height: 60px;
+  }
+
+  .badge-icon {
+    width: 4px;
+    height: 40px;
+    flex: 0 0 45px;
+  }
+
+  .badge-text {
+    font-size: 0.95rem;
+    text-align: start;
+  }
+
+  /* CARD LINK DE REFERIDO */
+  .referral-input-container {
+    padding: 6px 10px;
+  }
+
+  .referral-code-display {
+    font-size: 0.85rem;
   }
 }

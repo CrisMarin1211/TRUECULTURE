@@ -152,7 +152,7 @@
   text-align: left;
 }
 
-input[type='text'] {
+/* input[type='text'] {
   width: 100%;
   border: 1px solid #fff;
   background: transparent;
@@ -161,7 +161,7 @@ input[type='text'] {
   border-radius: 0.4rem;
   font-size: 0.95rem;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
+} */
 
 input[type='text']:focus {
   outline: none;

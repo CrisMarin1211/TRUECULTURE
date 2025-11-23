@@ -97,11 +97,8 @@ const ProfilePage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    nickname: '',
-    gender: '',
     country: '',
     language: '',
-    organization: '',
   });
   const [saving, setSaving] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -144,11 +141,8 @@ const ProfilePage = () => {
         setProfile(userProfile);
         setFormData({
           name: userProfile.name || '',
-          nickname: userProfile.nickname || '',
-          gender: userProfile.gender || '',
           country: userProfile.country || '',
           language: userProfile.language || '',
-          organization: userProfile.organization || '',
         });
       }
       setLoading(false);
@@ -165,11 +159,8 @@ const ProfilePage = () => {
     if (profile) {
       setFormData({
         name: profile.name || '',
-        nickname: profile.nickname || '',
-        gender: profile.gender || '',
         country: profile.country || '',
         language: profile.language || '',
-        organization: profile.organization || '',
       });
     }
     setIsEditing(false);

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useProduct } from '../../../../context/ProductEvent';
 import CardClient from '../../../atomsUi/EventCard-Client/CardClient';
-import { CityContext } from '../../../../context/cityContex';
+import { CityContext } from '../../../../context/CityContext';
 import type { ProductItem } from '../../../../types/ProductType';
 import { Dialog, Typography, Box } from '@mui/material';
 import ViewMore from '../../../viewMore/veiwMore';

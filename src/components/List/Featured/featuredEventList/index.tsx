@@ -8,7 +8,7 @@ import './style.css';
 
 import { useEvent } from '../../../../context/EventContext';
 import FeaturedCard from '../../../atomsUi/featuredCard';
-import { CityContext } from '../../../../context/cityContex';
+import { CityContext } from '../../../../context/CityContext';
 import type { EventItem } from '../../../../types/EventType';
 import { Dialog } from '@mui/material';
 import ViewMore from '../../../viewMore/veiwMore';

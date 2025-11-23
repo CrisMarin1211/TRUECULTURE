@@ -54,29 +54,29 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       <InputField
-        label="Email address*"
+        label="Correo Electrónico*"
         type="email"
-        placeholder="Enter email address"
+        placeholder="Introduzca su correo electrónico"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
 
       <InputField
-        label="Password*"
+        label="Contraseña*"
         type="password"
-        placeholder="Enter password"
+        placeholder="Introduce la contraseña"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
 
       <p className="forgot-password">
-        <a href="/forgot-password">Forgot your password?</a>
+        <a href="/forgot-password">¿Olvidaste tu contraseña?</a>
       </p>
 
       <Button label="Iniciar Sesión" type="submit" />
 
       <p className="signup-text">
-        Don’t have an account?{' '}
+        ¿No tienes una cuenta?{' '}
         <span className="link" onClick={handleGoToSignup}>
           Crear cuenta
         </span>
@@ -84,7 +84,7 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
 
       <div className="divider">
         <span className="line"></span>
-        <span className="or">Or</span>
+        <span className="or">O</span>
         <span className="line"></span>
       </div>
 

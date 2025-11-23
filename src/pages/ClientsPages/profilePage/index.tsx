@@ -5,7 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import { stringAvatar } from '../../../utils/avatarHelper';
 import { supabase } from '../../../lib/supabaseClient';
 import type { User } from '@supabase/supabase-js';
-import { updateUserProfile, getLevels, getUserProfile } from '../../../services/users';
+import { getUserProfile, updateUserProfile, getLevels } from '../../../services/users';
 import InputField from '../../../components/atomsUi/inputField/inputField';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -41,6 +41,7 @@ const COUNTRIES = [
   'Venezuela',
   'Brasil',
 ];
+
 const selectStyles = {
   color: '#8692A6',
   backgroundColor: '#232323',
@@ -66,6 +67,7 @@ const selectStyles = {
     padding: '12px 14px',
   },
 };
+
 const menuItemStyles = {
   color: '#8692A6',
   fontFamily: 'Satoshi',
@@ -143,10 +145,11 @@ const ProfilePage = () => {
           language: userProfile.language || '',
         });
       }
+      setLoading(false);
     };
 
     fetchData();
-  }, [user?.email]);
+  }, [user?.id]);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -578,6 +581,7 @@ const ProfilePage = () => {
         </Alert>
       </Snackbar>
 
+      {/* Modal para editar código de referido */}
       <Modal
         open={isEditingReferralCode}
         onClose={handleCloseReferralCodeModal}

@@ -37,7 +37,7 @@ const CheckoutPage = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         const coupons = await getUserCoupons(user.id);
-        // Buscar el primer cupón seleccionado del carrito
+       
         const savedCoupon = localStorage.getItem('selectedCouponId');
         if (savedCoupon) {
           const coupon = coupons.find(c => c.id === parseInt(savedCoupon));
@@ -90,7 +90,7 @@ const CheckoutPage = () => {
           name: item.title,
           price: item.price,
           quantity: item.quantity,
-          seats: item.seats, // Incluir asientos si existen
+          seats: item.seats, 
         })),
         coupon_code: selectedCoupon?.coupons.code,
         payment_status: 'paid',
@@ -138,7 +138,7 @@ const CheckoutPage = () => {
         <div className="checkout-left">
           <h1 className="checkout-title">Completa tu compra</h1>
 
-          {/* Payment Methods */}
+        
           <div className="payment-section">
             <h2 className="section-title">Método de pago</h2>
             <div className="payment-methods">
@@ -207,7 +207,7 @@ const CheckoutPage = () => {
             </div>
           )}
 
-          {/* Transfer or QR Info */}
+       
           {paymentMethod === 'transfer' && (
             <div className="payment-info-section">
               <h2 className="section-title">Información de transferencia</h2>
@@ -237,7 +237,6 @@ const CheckoutPage = () => {
           )}
         </div>
 
-        {/* Checkout Summary */}
         <div className="checkout-right">
           <div className="checkout-summary-box">
             <h2 className="summary-title">Resumen de tu pedido</h2>

@@ -192,7 +192,6 @@ const MyPurchasesPage = () => {
         )}
       </div>
 
-      {/* QR Modal */}
       <Modal
         open={qrModalOpen}
         onClose={handleCloseQrModal}

@@ -29,7 +29,6 @@ type Profile = Database['public']['Tables']['profiles']['Row'];
 type Level = Database['public']['Tables']['levels']['Row'];
 
 const LANGUAGES = ['Español', 'Inglés'];
-const GENDERS = ['Masculino', 'Femenino', 'Prefiero no decir'];
 const COUNTRIES = [
   'Colombia',
   'Estados Unidos',
@@ -44,24 +43,24 @@ const COUNTRIES = [
 ];
 const selectStyles = {
   color: '#8692A6',
-  backgroundColor: '#282A2F',
+  backgroundColor: '#232323',
   fontFamily: 'Satoshi',
   fontSize: '18.695px',
   fontWeight: 500,
   borderRadius: '7.011px',
   '& .MuiOutlinedInput-notchedOutline': {
-    borderColor: '#8692A6',
+    borderColor: 'rgba(255, 255, 255, 0.8)',
     borderWidth: '0.584px',
   },
   '&:hover .MuiOutlinedInput-notchedOutline': {
     borderColor: '#3f3f3f',
   },
   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-    borderColor: '#8692A6',
+    borderColor: '#ffffffff',
     borderWidth: '0.584px',
   },
   '& .MuiSvgIcon-root': {
-    color: '#8692A6',
+    color: '#ffffffff',
   },
   '& .MuiSelect-select': {
     padding: '12px 14px',
@@ -96,11 +95,8 @@ const ProfilePage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    nickname: '',
-    gender: '',
     country: '',
     language: '',
-    organization: '',
   });
   const [saving, setSaving] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -129,51 +125,23 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        if (!user?.email) return;
+      const levelsData = await getLevels();
+      setLevels(levelsData);
 
-        setLoading(true);
+      if (!user?.id) {
+        return;
+      }
 
-        const userProfile = await getUserProfileByEmail(user.email);
+      setLoading(true);
+      const userProfile = await getUserProfile(user.id);
 
-        if (userProfile) {
-          setProfile({
-            id: userProfile.id || 0,
-            user_id: userProfile.auth_id || '',
-            email: userProfile.email,
-            name: userProfile.name || null,
-            nickname: userProfile.nickname || null,
-            gender: userProfile.gender || null,
-            country: userProfile.country || null,
-            language: userProfile.language || null,
-            avatar_url: userProfile.avatar_url || null,
-            organization: userProfile.organization || null,
-            timezone: userProfile.timezone || null,
-            current_level: null,
-            points: null,
-            referral_code: null,
-            referred_by: null,
-            total_referrals: 0,
-            created_at: userProfile.created_at || null,
-            updated_at: userProfile.updated_at || null,
-          });
-
-          setFormData({
-            name: userProfile.name || '',
-            nickname: userProfile.nickname || '',
-            gender: userProfile.gender || '',
-            country: userProfile.country || '',
-            language: userProfile.language || '',
-            organization: userProfile.organization || '',
-          });
-        }
-
-        const levelsData = await getLevels();
-        setLevels(levelsData);
-      } catch (err) {
-        console.error('Error cargando perfil:', err);
-      } finally {
-        setLoading(false);
+      if (userProfile) {
+        setProfile(userProfile);
+        setFormData({
+          name: userProfile.name || '',
+          country: userProfile.country || '',
+          language: userProfile.language || '',
+        });
       }
     };
 
@@ -188,11 +156,8 @@ const ProfilePage = () => {
     if (profile) {
       setFormData({
         name: profile.name || '',
-        nickname: profile.nickname || '',
-        gender: profile.gender || '',
         country: profile.country || '',
         language: profile.language || '',
-        organization: profile.organization || '',
       });
     }
     setIsEditing(false);
@@ -356,8 +321,10 @@ const ProfilePage = () => {
               />
             </div>
 
-            <h2 className="profile-name-text">{profile.name || 'Usuario'}</h2>
-            <p className="profile-email-text">{profile.email || 'Sin correo'}</p>
+            <div>
+              <h2 className="profile-name-text">{profile.name || 'Usuario'}</h2>
+              <p className="profile-email-text">{profile.email || 'Sin correo'}</p>
+            </div>
           </div>
         </div>
 
@@ -374,10 +341,13 @@ const ProfilePage = () => {
               <div className="trophy-level-info">
                 {profile.current_level !== null && levels.length > 0 && (
                   <>
-                    <span className="level-name">
+                  <div className='trophy-level-info-texts'>
+                     <span className="level-name">
                       {levels.find((l) => l.level_number === profile.current_level)?.name || 'N/A'}
                     </span>
                     <span className="level-points">{profile.points || 0} puntos</span>
+                  </div>
+
                   </>
                 )}
               </div>
@@ -400,13 +370,9 @@ const ProfilePage = () => {
               }}
             >
               <img src="/images/image2.png" alt="badge" className="badge-icon" />
-              <span className="badge-text">Mis Reseñas</span>
+              <span className="badge-text">Mis comentarios</span>
             </button>
-            <div
-              className="badge-card badge-card-referral"
-              onClick={handleCopyReferralLink}
-              style={{ cursor: 'pointer' }}
-            >
+            <div className="badge-card badge-card-referral" onClick={handleCopyReferralLink}>
               <div className="referral-whole-content">
                 <span className="referral-label">
                   <ContentCopyIcon sx={{ fontSize: '16px', verticalAlign: 'middle', mr: 0.5 }} />
@@ -476,52 +442,6 @@ const ProfilePage = () => {
 
           <div className="profile-form">
             <InputField label="Nombre" value={formData.name} onChange={handleChange} name="name" />
-
-            <InputField
-              label="Apodo"
-              value={formData.nickname}
-              onChange={handleChange}
-              name="nickname"
-            />
-
-            <FormControl fullWidth>
-              <label
-                style={{
-                  color: '#696F79',
-                  fontFamily: 'Satoshi',
-                  fontSize: '18.695px',
-                  fontWeight: 500,
-                  marginBottom: '10px',
-                }}
-              >
-                Género
-              </label>
-              <Select
-                value={formData.gender}
-                onChange={(e) => handleSelectChange('gender', e.target.value)}
-                displayEmpty
-                sx={selectStyles}
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      backgroundColor: '#232323',
-                      border: '1px solid #4f4f4f',
-                      borderRadius: '7.011px',
-                      boxShadow: 'none',
-                    },
-                  },
-                }}
-              >
-                <MenuItem value="" sx={menuItemStyles}>
-                  <em>Seleccionar género</em>
-                </MenuItem>
-                {GENDERS.map((gender) => (
-                  <MenuItem key={gender} value={gender} sx={menuItemStyles}>
-                    {gender}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
 
             <FormControl fullWidth>
               <label
@@ -600,13 +520,6 @@ const ProfilePage = () => {
                 ))}
               </Select>
             </FormControl>
-
-            <InputField
-              label="Organización"
-              value={formData.organization}
-              onChange={handleChange}
-              name="organization"
-            />
           </div>
 
           <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end', mt: 3 }}>

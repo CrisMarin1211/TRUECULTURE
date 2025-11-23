@@ -5,7 +5,13 @@ import Avatar from '@mui/material/Avatar';
 import { stringAvatar } from '../../../utils/avatarHelper';
 import { supabase } from '../../../lib/supabaseClient';
 import type { User } from '@supabase/supabase-js';
-import { getUserProfile, updateUserProfile, getLevels } from '../../../services/users';
+import {
+  getUserProfile,
+  updateUserProfile,
+  getLevels,
+  getUserProfileByUserId,
+  updateAvatarUser,
+} from '../../../services/users';
 import InputField from '../../../components/atomsUi/inputField/inputField';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -99,6 +105,7 @@ const ProfilePage = () => {
     name: '',
     country: '',
     language: '',
+    avatar: '',
   });
   const [saving, setSaving] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -136,6 +143,7 @@ const ProfilePage = () => {
 
       setLoading(true);
       const userProfile = await getUserProfile(user.id);
+      const avatarUrl = await getUserProfileByUserId(user.id);
 
       if (userProfile) {
         setProfile(userProfile);
@@ -143,6 +151,7 @@ const ProfilePage = () => {
           name: userProfile.name || '',
           country: userProfile.country || '',
           language: userProfile.language || '',
+          avatar: avatarUrl?.avatar_url || '',
         });
       }
       setLoading(false);
@@ -161,6 +170,7 @@ const ProfilePage = () => {
         name: profile.name || '',
         country: profile.country || '',
         language: profile.language || '',
+        avatar: profile.avatar_url || '',
       });
     }
     setIsEditing(false);
@@ -171,7 +181,12 @@ const ProfilePage = () => {
 
     setSaving(true);
     try {
-      const updatedProfile = await updateUserProfile(user.id, formData);
+      const { avatar, ...dataWithoutAvatar } = formData;
+
+      const updatedProfile = await updateUserProfile(user.id, dataWithoutAvatar);
+
+      await updateAvatarUser(user.id, avatar);
+
       if (updatedProfile) {
         setProfile(updatedProfile);
         setIsEditing(false);
@@ -314,6 +329,7 @@ const ProfilePage = () => {
             <div className="profile-avatar-container">
               <Avatar
                 src={
+                  formData.avatar ||
                   user?.user_metadata?.avatar_url ||
                   user?.user_metadata?.picture ||
                   profile.avatar_url ||
@@ -344,13 +360,13 @@ const ProfilePage = () => {
               <div className="trophy-level-info">
                 {profile.current_level !== null && levels.length > 0 && (
                   <>
-                  <div className='trophy-level-info-texts'>
-                     <span className="level-name">
-                      {levels.find((l) => l.level_number === profile.current_level)?.name || 'N/A'}
-                    </span>
-                    <span className="level-points">{profile.points || 0} puntos</span>
-                  </div>
-
+                    <div className="trophy-level-info-texts">
+                      <span className="level-name">
+                        {levels.find((l) => l.level_number === profile.current_level)?.name ||
+                          'N/A'}
+                      </span>
+                      <span className="level-points">{profile.points || 0} puntos</span>
+                    </div>
                   </>
                 )}
               </div>
@@ -360,14 +376,15 @@ const ProfilePage = () => {
               <span className="badge-text">Mis Cupones</span>
             </button>
             <button
-              className="badge-card badge-card-center"
+              className="badge-card"
               onClick={() => navigate('/my-purchases')}
             >
+              <img src="/images/image.png" alt="badge" className="badge-icon" />
               <span className="badge-text">Mis Compras</span>
             </button>
             <button
               className="badge-card badge-card-reviews"
-             onClick={() => navigate('/my-reviews')}
+              onClick={() => navigate('/my-reviews')}
             >
               <img src="/images/image2.png" alt="badge" className="badge-icon" />
               <span className="badge-text">Mis comentarios</span>
@@ -442,6 +459,13 @@ const ProfilePage = () => {
 
           <div className="profile-form">
             <InputField label="Nombre" value={formData.name} onChange={handleChange} name="name" />
+
+            <InputField
+              label="Avatar"
+              value={formData.avatar}
+              onChange={handleChange}
+              name="avatar"
+            />
 
             <FormControl fullWidth>
               <label
@@ -578,7 +602,6 @@ const ProfilePage = () => {
         </Alert>
       </Snackbar>
 
-      {/* Modal para editar código de referido */}
       <Modal
         open={isEditingReferralCode}
         onClose={handleCloseReferralCodeModal}
@@ -614,7 +637,6 @@ const ProfilePage = () => {
             </IconButton>
           </Box>
 
-          {/* Warning Banner */}
           <Box
             sx={{
               backgroundColor: '#FFB800',
@@ -632,7 +654,6 @@ const ProfilePage = () => {
             </Typography>
           </Box>
 
-          {/* Current Referral Link */}
           <Typography sx={{ color: '#8692A6', fontSize: '13px', mb: 1 }}>
             Enlace de referido actual:
           </Typography>
@@ -650,7 +671,6 @@ const ProfilePage = () => {
               : 'Sin código'}
           </Typography>
 
-          {/* Edit Link Input */}
           <Typography sx={{ color: '#8692A6', fontSize: '13px', mb: 1 }}>Editar código:</Typography>
           <InputField
             label=""

@@ -19,9 +19,19 @@ export const createUserProfile = async (
   return data;
 };
 
-
 export const getUserProfileByEmail = async (email: string): Promise<UserProfile | null> => {
   const { data, error } = await supabase.from('users').select('*').eq('email', email).single();
+
+  if (error) {
+    console.error('Error al obtener perfil:', error);
+    return null;
+  }
+
+  return data;
+};
+
+export const getUserProfileByUserId = async (userId: string): Promise<UserProfile | null> => {
+  const { data, error } = await supabase.from('users').select('*').eq('auth_id', userId).single();
 
   if (error) {
     console.error('Error al obtener perfil:', error);
@@ -48,7 +58,7 @@ export const getUserProfile = async (userId: string): Promise<Profile | null> =>
 
 export const updateUserProfile = async (
   userId: string,
-  updates: ProfileUpdate
+  updates: ProfileUpdate,
 ): Promise<Profile | null> => {
   const { data, error } = await supabase
     .from('profiles')
@@ -64,6 +74,18 @@ export const updateUserProfile = async (
     console.error('Error al actualizar el perfil:', error);
     throw error;
   }
+
+  return data;
+};
+
+export const updateAvatarUser = async (userId: string, avatarUrl: string) => {
+  const { data, error } = await supabase
+    .from('users')
+    .update({ avatar_url: avatarUrl })
+    .eq('auth_id', userId)
+    .single();
+
+  if (error) throw error;
 
   return data;
 };
@@ -87,9 +109,7 @@ export const uploadAvatar = async (userId: string, file: File): Promise<string |
   const fileName = `${userId}-${Math.random()}.${fileExt}`;
   const filePath = `avatars/${fileName}`;
 
-  const { error: uploadError } = await supabase.storage
-    .from('avatars')
-    .upload(filePath, file);
+  const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file);
 
   if (uploadError) {
     console.error('Error al subir el avatar:', uploadError);

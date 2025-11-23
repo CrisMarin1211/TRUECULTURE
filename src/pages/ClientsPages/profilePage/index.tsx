@@ -302,11 +302,13 @@ const ProfilePage = () => {
 
   if (!profile) {
     return (
-      <div className="profile-page">
+      <div>
         <Header />
+      <div className="profile-page">
         <div style={{ color: 'white', padding: '1rem' }}>
           No hay datos de perfil disponibles.
         </div>
+      </div>
       </div>
     );
   }

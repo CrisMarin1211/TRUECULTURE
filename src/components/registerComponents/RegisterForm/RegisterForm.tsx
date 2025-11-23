@@ -69,35 +69,35 @@ const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
   return (
     <form className="register-form" onSubmit={handleSubmit}>
       <InputField
-        label="Full Name*"
+        label="Nombre*"
         type="text"
-        placeholder="Enter your full name"
+        placeholder="Ingrese su nombre"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
 
       {fromAdmin && (
         <InputField
-          label="Organization*"
+          label="Organización*"
           type="text"
-          placeholder="Enter organization name"
+          placeholder="Ingrese el nombre de la organización"
           value={organization}
           onChange={(e) => setOrganization(e.target.value)}
         />
       )}
 
       <InputField
-        label="Email address*"
+        label="Correo Electrónico*"
         type="email"
-        placeholder="Enter email address"
+        placeholder="Introduzca su correo electrónico"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
 
       <InputField
-        label="Password*"
+        label="Contraseña*"
         type="password"
-        placeholder="Enter password"
+        placeholder="Introduce la contraseña"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
@@ -110,7 +110,7 @@ const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
           onChange={(e) => setAgree(e.target.checked)}
         />
         <label htmlFor="terms">
-          I agree to <a href="/terms">terms & conditions</a>
+          Estoy de acuerdo con <a href="/terms">Términos y condiciones</a>
         </label>
       </div>
 
@@ -130,7 +130,7 @@ const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
 
       <div className="divider">
         <span className="line"></span>
-        <span className="or">Or</span>
+        <span className="or">O</span>
         <span className="line"></span>
       </div>
 

@@ -5,7 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import { stringAvatar } from '../../../utils/avatarHelper';
 import { supabase } from '../../../lib/supabaseClient';
 import type { User } from '@supabase/supabase-js';
-import { updateUserProfile, getLevels, getUserProfileByEmail } from '../../../services/users';
+import { updateUserProfile, getLevels, getUserProfile } from '../../../services/users';
 import InputField from '../../../components/atomsUi/inputField/inputField';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';

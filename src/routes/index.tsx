@@ -5,7 +5,6 @@ import MyPurchasesPage from '../pages/ClientsPages/myPurchasesPage';
 import MyCartPage from '../pages/ClientsPages/myCartPage';
 import MyCouponsPage from '../pages/ClientsPages/myCouponsPage';
 import ProfilePage from '../pages/ClientsPages/profilePage';
-
 import CreateProductPage from '../pages/AdminPages/productsPages/createPage/createPage';
 import ListProductPage from '../pages/AdminPages/productsPages/listPage/listPage';
 import MarketplaceHome from '../pages/ClientsPages/MarketplaceHome/MarketplaceHome';
@@ -24,9 +23,9 @@ import PrivateRoute from './PrivateRoute';
 import CheckoutPage from '../pages/ClientsPages/checkoutPage';
 import PurchaseSuccessPage from '../pages/ClientsPages/purchaseSuccessPage';
 import MyReviewsPage from '../pages/ClientsPages/myReviewPage';
-import DashboardClient from '../pages/ClientsPages/DashboardCliente/DashboardClient';
-import LoginPage from '../pages/LoginPage/loginPage';
-import RegisterPage from '../pages/RegisterPage/registerPage';
+import DashboardClient from '../pages/ClientsPages/dashboardCliente/DashboardClient';
+import LoginPage from '../pages/loginPage/loginPage';
+import RegisterPage from '../pages/registerPage/registerPage';
 
 const AppRoutes = () => {
   return (

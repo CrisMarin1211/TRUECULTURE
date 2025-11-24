@@ -257,7 +257,6 @@ body {
     height: auto !important;
   }
 
-  /* 👉 Más padding arriba para subir contenido */
   .footer-content {
     position: absolute;
     left: 0;
@@ -269,16 +268,16 @@ body {
     align-items: flex-start;
     padding: 2.5rem 1.5rem 2rem;
     gap: 0.9rem;
+     margin-bottom: 10rem; /*aquui*/
   }
 
   .footer-left {
-    margin-bottom: 6rem;
+    margin-bottom: 10rem; /*aquui*/
   }
 
   .brand-name {
     width: 100%;
-    font-size: 1.1rem !important;
-    line-height: 1.15;
+    font-size: 5rem !important;
   }
 
   .headline {
@@ -296,7 +295,7 @@ body {
 
   .start-btn {
     width: min(280px, 90%);
-    font-size: 1rem;
+    font-size: 2rem;
     border-radius: 999px;
     display: block;
     margin: 1.2rem 0 0 0;  /* ya no centrado, se queda pegado al texto */
@@ -320,11 +319,11 @@ body {
   }
 
   .footer-content {
-    padding: 2.2rem 1.25rem 1.8rem;
+    padding: 2.2rem 1.25rem 1.8rem;;
   }
 
   .footer-left {
-    margin-bottom: 5rem;
+    margin-bottom: 10rem; /*aquui*/
   }
 
   .brand-name {
@@ -364,7 +363,7 @@ body {
   .brand-name {
     width: 100%;
     max-width: 100%;
-    font-size: 1.4rem;
+    font-size: 2rem;
   }
 
   .headline {
@@ -520,34 +519,37 @@ body {
 
   .brand-name {
     width: 100%;
-    font-size: 2rem !important;
+    font-size: 2.5rem !important;
     line-height: 1.1;
   }
 
   .headline {
     width: 100%;
-    font-size: 3rem !important;
+    font-size: 4rem !important;
     line-height: 1.05;
   }
 
   .subtext {
     width: 100%;
-    font-size: 1.2rem !important;
+    font-size: 1.5rem !important;
     margin-top: 0.25rem;
     line-height: 1.1;
   }
 
   .start-btn {
     width: min(260px, 90%);
-    font-size: 0.9rem;
+    font-size: 2rem;
     border-radius: 999px;
     display: block;
     margin: 1rem auto 0 auto;
-    padding: 0.4rem 0.8rem;
+    padding: 2rem;
   }
 
   .footer-right {
     display: none !important;
+  }
+  .footer-left{
+     margin-bottom: 10rem; /*aquui*/
   }
 
   .footer-img {

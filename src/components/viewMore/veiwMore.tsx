@@ -74,21 +74,31 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
     <Card
       sx={{
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: { xs: 'column', md: 'row' },
         backgroundColor: '#121212',
         color: '#fff',
         borderRadius: 0,
-        height: '80vh',
+        height: { xs: '100vh', md: '80vh' },
         overflow: 'hidden',
         position: 'relative',
       }}
     >
-      <Box sx={{ position: 'relative', flex: 1 }}>
+      <Box
+        sx={{
+          position: 'relative',
+          flex: 1,
+          minHeight: { xs: 220, sm: 260, md: 'auto' },
+        }}
+      >
         <CardMedia
           component="img"
           image={item.image}
           alt={item.name}
-          sx={{ height: '100%', objectFit: 'cover' }}
+          sx={{
+            height: '100%',
+            width: '100%',
+            objectFit: 'cover',
+          }}
         />
         <Box
           sx={{
@@ -104,12 +114,18 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
         </Box>
       </Box>
 
-      <Box sx={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+      <Box
+        sx={{
+          flex: 1,
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
         <CardContent
           sx={{
             height: '100%',
             overflowY: 'auto',
-            p: 3,
+            p: { xs: 2, md: 3 },
             '&::-webkit-scrollbar': { display: 'none' },
           }}
         >
@@ -127,19 +143,19 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
             <CloseTwoToneIcon />
           </IconButton>
 
-          <Typography variant="h4" sx={{ mt: 6 }} gutterBottom>
+          <Typography
+            variant="h4"
+            sx={{
+              mt: { xs: 4, md: 6 },
+              fontSize: { xs: '1.5rem', sm: '1.7rem', md: '2rem' },
+            }}
+            gutterBottom
+          >
             {item.name}
           </Typography>
 
           {'date' in item && 'time' in item && (
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyItems="center"
-              spacing={2}
-              mb={2}
-              sx={{ mt: 3 }}
-            >
+            <Stack direction="row" alignItems="center" spacing={2} mb={2} sx={{ mt: 3 }}>
               <Box
                 sx={{
                   width: 50,
@@ -158,13 +174,19 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
-                  alignContent: 'center',
                 }}
               >
-                <Typography variant="body1" sx={{ mb: '-3px' }}>
+                <Typography
+                  variant="body1"
+                  sx={{ mb: '-3px', fontSize: { xs: '0.9rem', md: '1rem' } }}
+                >
                   {item.date}
                 </Typography>
-                <Typography variant="body2" color="gray" sx={{ mt: 0, lineHeight: 1 }}>
+                <Typography
+                  variant="body2"
+                  color="gray"
+                  sx={{ mt: 0, lineHeight: 1, fontSize: { xs: '0.8rem', md: '0.9rem' } }}
+                >
                   {item.time}
                 </Typography>
               </Box>
@@ -186,20 +208,28 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
               <LocationOnTwoToneIcon sx={{ color: theme.palette.green.main }} />
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-              <Typography variant="body1" sx={{ mt: 0 }}>
+              <Typography variant="body1" sx={{ mt: 0, fontSize: { xs: '0.9rem', md: '1rem' } }}>
                 {item.location}
               </Typography>
-              <Typography variant="body2" color="gray" sx={{ mt: 0, lineHeight: 1 }}>
+              <Typography
+                variant="body2"
+                color="gray"
+                sx={{ mt: 0, lineHeight: 1, fontSize: { xs: '0.8rem', md: '0.9rem' } }}
+              >
                 {item.address}
               </Typography>
             </Box>
           </Stack>
 
           <Box mb={2}>
-            <Typography fontSize={'20px'} fontWeight={900}>
+            <Typography fontSize={{ xs: '1rem', md: '1.25rem' }} fontWeight={900}>
               Descripción
             </Typography>
-            <Typography variant="body2" color="white">
+            <Typography
+              variant="body2"
+              color="white"
+              sx={{ fontSize: { xs: '0.85rem', md: '0.95rem' } }}
+            >
               {readMore
                 ? item.description
                 : item.description.slice(0, 150) + (item.description.length > 150 ? '...' : '')}
@@ -207,7 +237,12 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
             {item.description.length > 150 && (
               <Button
                 onClick={toggleReadMore}
-                sx={{ color: theme.palette.green.main, mt: 1, textTransform: 'none' }}
+                sx={{
+                  color: theme.palette.green.main,
+                  mt: 1,
+                  textTransform: 'none',
+                  fontSize: { xs: '0.85rem', md: '0.95rem' },
+                }}
               >
                 {readMore ? 'Leer menos' : 'Leer más'}
               </Button>
@@ -215,7 +250,7 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
           </Box>
 
           <Box mb={10}>
-            <Typography fontSize={'20px'} fontWeight={900}>
+            <Typography fontSize={{ xs: '1rem', md: '1.25rem' }} fontWeight={900}>
               Reseñas
             </Typography>
             <Review relatedId={String(item.id)} relatedType={isEvent ? 'event' : 'product'} />
@@ -225,9 +260,9 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
         <Box
           sx={{
             position: 'absolute',
-            height: '60%',
+            height: { xs: '40%', md: '60%' },
             width: '100%',
-            top: 350,
+            bottom: 0,
             right: 0,
             background: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',
             display: 'flex',

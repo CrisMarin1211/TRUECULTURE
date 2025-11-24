@@ -57,7 +57,7 @@ const FeaturedProductList: React.FC = () => {
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
-          depth: 100,
+          depth: 200,
           modifier: 0.7,
           scale: 0.96,
           slideShadows: false,
@@ -78,8 +78,8 @@ const FeaturedProductList: React.FC = () => {
             spaceBetween: 2,
           },
           1024: {
-            slidesPerView: 3.2,
-            spaceBetween: 3,
+            slidesPerView: 2,
+            spaceBetween: 10,
           },
           1440: {
             slidesPerView: 3.6,

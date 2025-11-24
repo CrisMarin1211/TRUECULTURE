@@ -10,30 +10,50 @@ const MarketplaceHome: React.FC = () => {
   return (
     <>
       <Header />
+
+      <Box
+        sx={{
+          px: 2,
+          mt: 2,
+          display: 'flex',
+          justifyContent: { xs: 'flex-start', md: 'center' },
+          alignItems: 'center',
+        }}
+      >
+        <CurrentLocation />
+      </Box>
+
+      <Box
+        sx={{
+          mt: 5,
+          maxWidth: { md: 1000 },
+          mx: { md: 'auto' },
+        }}
+      >
         <Box
+          sx={{
+            mb: 10,
+            maxWidth: { md: 1000 },
+          }}
+        >
+          <FeaturedProductList />
+        </Box>
+
+        {TAGS.map((tag) => (
+          <Box
+            key={tag}
             sx={{
-              px: 2,
-              mt: 2,
-              display: 'flex',
-              justifyContent: { xs: 'flex-start', md: 'center' }, // móvil izquierda, desktop centrado
-              alignItems: 'center',
+              mb: 10,
+              maxWidth: { md: 1100 },
+              mx: { md: 'auto' },
             }}
           >
-            <CurrentLocation />
+            <ProductList tag={tag as any} />
           </Box>
-      
-        <Box sx={{ px: 2, mt: 5 }}>
-          <Box sx={{ mb: 10 }}>
-            <FeaturedProductList />
-          </Box>
-
-          {TAGS.map((tag) => (
-            <Box key={tag} sx={{ mb: 10 }}>
-              <ProductList tag={tag as any} />
-            </Box>
-          ))}
-        </Box>
+        ))}
+      </Box>
     </>
   );
 };
+
 export default MarketplaceHome;

@@ -5,16 +5,7 @@ import './style.css';
 const HomePage = () => {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-  const handleResize = () => {
-    setIsMobile(window.innerWidth <= 425);
-  };
 
-  handleResize();
-  window.addEventListener('resize', handleResize);
-
-  return () => window.removeEventListener('resize', handleResize);
-}, []);
 
 
 
@@ -84,22 +75,39 @@ const HomePage = () => {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    slides.forEach((s) => {
-      const img = new Image();
-      img.src = s.image;
-      (s.thumbs || []).forEach((t) => {
-        const tt = new Image();
-        tt.src = t;
-      });
+  const checkScreen = () => {
+    setIsMobile(window.innerWidth <= 480);
+  };
+
+  checkScreen();
+  window.addEventListener("resize", checkScreen);
+
+  return () => window.removeEventListener("resize", checkScreen);
+}, []);
+
+ useEffect(() => {
+  slides.forEach((s) => {
+    const img = new Image();
+    img.src = s.image;
+    (s.thumbs || []).forEach((t) => {
+      const tt = new Image();
+      tt.src = t;
     });
+  });
 
-    const id = setInterval(() => {
-      setCurrent((c) => (c + 1) % slides.length);
-    }, 2000);
+  const intervalTime = isMobile ? 2500 : 2000;
 
-    return () => clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const id = setInterval(() => {
+    setCurrent((c) => {
+      if (c === slides.length - 1) return c; 
+      return c + 1;
+    });
+  }, intervalTime);
+
+  return () => clearInterval(id);
+}, [isMobile, slides.length]);
+
+
 
   const backgroundStyle = {
     backgroundImage: `url(${slides[current].image})`,
@@ -124,9 +132,21 @@ const HomePage = () => {
           <span className="brand-name">TrueCulture</span>
           <span className="headline">{slides[current].headline}</span>
           <span className="subtext">{slides[current].subtext}</span>
-          <button onClick={handleStart} className="start-btn">
-  Comenzar
-</button>
+          <div className="dots-container">
+  {[0, 1, 2].map((i) => (
+    <span
+      key={i}
+      className={`dot ${current === i ? "active" : ""}`}
+    ></span>
+  ))}
+</div>
+
+         {current === slides.length - 1 && (
+  <button onClick={handleStart} className="start-btn">
+    Comenzar
+  </button>
+)}
+
 
         </div>
 

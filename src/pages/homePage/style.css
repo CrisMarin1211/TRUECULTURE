@@ -144,7 +144,6 @@ body {
 .brand-name {
   display: flex;
   width: 858px;
-  /* height: 95.733px; */
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
@@ -161,7 +160,6 @@ body {
 .headline {
   display: flex;
   width: 831px;
-  /* height: 161px; */
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
@@ -229,58 +227,87 @@ body {
   border-radius: 1rem;
 }
 
-@media (max-width: 768px) {
-  .header {
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    padding: 1rem 1.5rem;
+@media (max-width: 480px) {
+  .home-page {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow-x: hidden !important;
+  width: 100%;
+  max-width: 100%;
   }
 
   .header-right {
-    flex-shrink: 0;
-    gap: 0.5rem;
+    display: none !important;
   }
+
+  .header {
+  min-height: 80px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.logo {
+  width: 150px !important;
+  max-width: 200px !important;
+  height: auto !important;
+}
+
+
 
   .footer-content {
     flex-direction: column;
+    text-align: start;
     align-items: flex-start;
-    gap: 1rem;
-    padding: 1.5rem;
-  }
-
-  .footer-right {
-    display: flex;
-    gap: 0.5rem;
-    overflow-x: auto;
-    width: 100%;
-    padding-bottom: 0.5rem;
-  }
-
-  .footer-right::-webkit-scrollbar {
-    display: none;
-  }
-
-  .footer-img {
-    width: 100px;
-    height: 60px;
-    flex: 0 0 auto;
   }
 
   .brand-name {
-    font-size: 1.5rem;
+    font-size: 1.2rem !important;
   }
 
   .headline {
-    font-size: 2rem;
+    font-size: 2.2rem !important;
+    line-height: 1.1;
   }
 
   .subtext {
-    font-size: 1rem;
+    font-size: 0.9rem !important;
+    margin-top: 0.3rem;
+    line-height: 1.1
   }
 
   .start-btn {
-    width: 160px;
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
+    width: 90%;
+    justify-content: center;
   }
+
+  .footer-right {
+  display: none !important;
 }
+
+
+.dots-container {
+  display: flex;
+  gap: 8px;
+  margin-left: -2rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff50;
+}
+
+.dot.active {
+  background: #fff;
+}
+
+}
+
+

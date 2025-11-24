@@ -4,7 +4,7 @@ import ProductList from '../../../components/List/categories/productList/index';
 import { Box } from '@mui/material';
 import CurrentLocation from '../../../components/atomsUi/currentLocation';
 
-const TAGS = ['Afiches', 'Pines', 'Cultural', 'Moda', 'Gastronomía'];
+const TAGS = ['Afiches', 'Pines', 'Artesanías', 'Moda', 'Gastronomía'];
 
 const MarketplaceHome: React.FC = () => {
   return (

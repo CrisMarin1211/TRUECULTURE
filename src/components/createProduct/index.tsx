@@ -282,7 +282,7 @@ const CreateProduct: React.FC = () => {
             <option value="">Selecciona una categoría</option>
             <option value="Afiches">Afiches</option>
             <option value="Pines">Pines</option>
-            <option value="Cultural">Cultural</option>
+            <option value="Artesanías">Artesanías</option>
             <option value="Moda">Moda</option>
             <option value="Gastronomía">Gastronomía</option>
           </select>

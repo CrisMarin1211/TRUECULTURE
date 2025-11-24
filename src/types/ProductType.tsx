@@ -12,7 +12,7 @@ export interface ProductItem {
   availablestock: number;
   unitssaled: number;
   popularity?: 'Alta demanda' | 'Media demanda' | 'Baja demanda';
-  tags?: 'Afiches' | 'Pines' | 'Cultural' | 'Moda' | 'Gastronomía';
+  tags?: 'Afiches' | 'Pines' | 'Artesanías' | 'Moda' | 'Gastronomía';
   status: 'Activo' | 'No activo';
   isdraft?: boolean;
   organization?: string;

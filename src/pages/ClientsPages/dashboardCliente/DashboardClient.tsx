@@ -3,33 +3,33 @@ import FeaturedEventList from '../../../components/List/Featured/featuredEventLi
 import EventList from '../../../components/List/categories/eventList/EventList';
 import { Box } from '@mui/material';
 import CurrentLocation from '../../../components/atomsUi/currentLocation';
-import './dashboard.css'
+import './dashboard.css';
 
 const TAGS = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
 
 const DashboardClient: React.FC = () => {
   return (
     <>
-    <div>
-      <Header />
-    </div>
-    <div className="profile-page">
-      <div>
-        <CurrentLocation />
-        <Box sx={{ px: 2, mt: 5 }}>
-          <Box sx={{ mb: 10 }} className="featured-events-box">
-            <FeaturedEventList />
-          </Box>
+      <div className="profile-page">
+        <div>
+          <Header />
+        </div>
 
-          {TAGS.map((tag) => (
-            <Box key={tag} sx={{ mb: 10 }} className="event-category-box">
-              <EventList tag={tag as any} />
+        <div>
+          <CurrentLocation />
+          <Box sx={{ px: 2, mt: 5 }}>
+            <Box sx={{ mb: 10 }} className="featured-events-box">
+              <FeaturedEventList />
             </Box>
-          ))}
-        </Box>
-      </div>
-    </div>
 
+            {TAGS.map((tag) => (
+              <Box key={tag} sx={{ mb: 10 }} className="event-category-box">
+                <EventList tag={tag as any} />
+              </Box>
+            ))}
+          </Box>
+        </div>
+      </div>
     </>
   );
 };

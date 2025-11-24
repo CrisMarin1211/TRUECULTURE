@@ -50,7 +50,6 @@ const FeaturedProductList: React.FC = () => {
         effect="coverflow"
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={3}
         navigation={{
           nextEl: '.custom-next',
           prevEl: '.custom-prev',
@@ -58,29 +57,39 @@ const FeaturedProductList: React.FC = () => {
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
-          depth: 200,
-          modifier: 1,
-          scale: 1,
+          depth: 120,
+          modifier: 0.7,
+          scale: 0.95,
           slideShadows: false,
         }}
         initialSlide={featuredProducts.length > 0 ? Math.floor(featuredProducts.length / 2) : 0}
-        style={{ width: '80%' }}
+        style={{ width: '100%' }}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          480: {
+            slidesPerView: 1.2,
+            spaceBetween: 15,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 24,
+          },
+        }}
       >
         {featuredProducts.map((product) => (
-          <SwiperSlide
-            key={product.id}
-            style={{
-              width: '385px',
-              height: '450px',
-              transition: 'transform 0.3s',
-            }}
-          >
+          <SwiperSlide key={product.id} className="featured-slide">
             <FeaturedCard item={product} onViewMore={() => setSelectedProduct(product)} />
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* Botones custom para navegación */}
       <div className="custom-prev">
         <ArrowBackTwoToneIcon fontSize="medium" />
       </div>

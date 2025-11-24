@@ -46,53 +46,47 @@ const FeaturedEventList: React.FC = () => {
   return (
     <div style={{ position: 'relative' }}>
       <Swiper
-  modules={[Navigation, EffectCoverflow]}
-  effect="coverflow"
-  grabCursor={true}
-  centeredSlides={true}
-  navigation={{
-    nextEl: '.custom-next',
-    prevEl: '.custom-prev',
-  }}
-  coverflowEffect={{
-    rotate: 0,
-    stretch: 0,
-    depth: 120,
-    modifier: 0.7,
-    scale: 0.95,
-    slideShadows: false,
-  }}
-  initialSlide={featuredEvents.length > 0 ? Math.floor(featuredEvents.length / 2) : 0}
-  style={{ width: '100%' }}
-  breakpoints={{
-    0: {
-      slidesPerView: 1,
-      spaceBetween: 10,
-    },
-    480: {
-      slidesPerView: 1.2,
-      spaceBetween: 15,
-    },
-    768: {
-      slidesPerView: 2,
-      spaceBetween: 20,
-    },
-    1024: {
-      slidesPerView: 3,
-      spaceBetween: 24,
-    },
-  }}
->
-
-
+        modules={[Navigation, EffectCoverflow]}
+        effect="coverflow"
+        grabCursor={true}
+        centeredSlides={true}
+        navigation={{
+          nextEl: '.custom-next',
+          prevEl: '.custom-prev',
+        }}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 120,
+          modifier: 0.7,
+          scale: 0.95,
+          slideShadows: false,
+        }}
+        initialSlide={featuredEvents.length > 0 ? Math.floor(featuredEvents.length / 2) : 0}
+        style={{ width: '100%' }}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          480: {
+            slidesPerView: 1.2,
+            spaceBetween: 15,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 24,
+          },
+        }}
+      >
         {featuredEvents.map((event) => (
-         <SwiperSlide
-  key={event.id}
-  className="featured-slide"
->
-  <FeaturedCard item={event} onViewMore={() => setSelectedEvent(event)} />
-</SwiperSlide>
-
+          <SwiperSlide key={event.id} className="featured-slide">
+            <FeaturedCard item={event} onViewMore={() => setSelectedEvent(event)} />
+          </SwiperSlide>
         ))}
       </Swiper>
 

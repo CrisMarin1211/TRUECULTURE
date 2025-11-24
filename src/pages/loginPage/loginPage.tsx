@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import './loginPage.css';
 import LoginForm from '../../components/loginComponents/LoginForm/LoginForm';
 import LogoCompleto from '../../assets/Marca/Logocompleto.png';
-import Logoazul from '../../assets/Marca/logoazul.png';
+import Logoazul from '../../assets/Marca/Logoazul.png';
 
 const LoginPage = () => {
   const location = useLocation();

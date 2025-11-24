@@ -131,9 +131,10 @@ const LogoutContainer = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 
   [theme.breakpoints.down('sm')]: {
-    bottom: 30,
+    bottom: 300, // sube más el botón en móvil
   },
 }));
+
 
 const LogoStyles = styled('img')(({ theme }) => ({
   display: 'block',     

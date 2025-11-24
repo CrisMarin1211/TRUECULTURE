@@ -14,7 +14,7 @@ const DashboardClient: React.FC = () => {
         <div>
           <Header />
         </div>
-        <div className="profile-page">
+        
           <div>
             <CurrentLocation />
             <Box sx={{ px: 2, mt: 5 }}>
@@ -30,7 +30,7 @@ const DashboardClient: React.FC = () => {
             </Box>
           </div>
         </div>
-      </div>
+    
     </>
   );
 };

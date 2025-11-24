@@ -11,7 +11,7 @@ const MarketplaceHome: React.FC = () => {
     <>
       <Header />
       <CurrentLocation />
-      <div className="profile-page">
+      
         <Box sx={{ px: 2, mt: 5 }}>
           <Box sx={{ mb: 10 }}>
             <FeaturedProductList />
@@ -23,7 +23,6 @@ const MarketplaceHome: React.FC = () => {
             </Box>
           ))}
         </Box>
-      </div>
     </>
   );
 };

@@ -74,8 +74,8 @@ const FeaturedProductList: React.FC = () => {
             spaceBetween: 12,
           },
           768: {
-            slidesPerView: 2.3,
-            spaceBetween: 2,
+            slidesPerView: 2,
+            spaceBetween: 10,
           },
           1024: {
             slidesPerView: 2,

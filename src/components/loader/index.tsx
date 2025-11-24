@@ -9,15 +9,16 @@ const Loader = () => {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        backgroundColor: '#181818',
+        backgroundColor: '#1a181b',
       }}
     >
       <CircularProgress
         size={70}
         thickness={5}
         sx={{
-          color: '#dcbadb',
+          color: '#fb129eff',
           marginBottom: 2,
+           animationDuration: '0.8s',
         }}
       />
       <Typography variant="h6" sx={{ color: '#f8f8f8' }}>

@@ -4,9 +4,30 @@ import './style.css';
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 425);
+  };
+
+  handleResize();
+  window.addEventListener('resize', handleResize);
+
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
+
 
   const goToSignUp = () => navigate('/signup');
-  const goToLogin = () => navigate('/login');
+
+  const handleStart = () => {
+  if (isMobile) {
+    navigate('/pre-dashboard');
+  } else {
+    navigate('/login');
+  }
+};
+
 
   const slides = [
     {
@@ -103,9 +124,10 @@ const HomePage = () => {
           <span className="brand-name">TrueCulture</span>
           <span className="headline">{slides[current].headline}</span>
           <span className="subtext">{slides[current].subtext}</span>
-          <button onClick={goToLogin} className="start-btn">
-            Comenzar
-          </button>
+          <button onClick={handleStart} className="start-btn">
+  Comenzar
+</button>
+
         </div>
 
         <div className="footer-right">

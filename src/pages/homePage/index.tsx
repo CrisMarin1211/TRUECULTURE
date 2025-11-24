@@ -72,7 +72,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const checkScreen = () => {
-      setIsMobile(window.innerWidth <= 425);
+      setIsMobile(window.innerWidth <= 460);
     };
 
     checkScreen();

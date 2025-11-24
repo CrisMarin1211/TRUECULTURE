@@ -4,10 +4,8 @@ import HomePage from '../pages/homePage';
 import MyPurchasesPage from '../pages/ClientsPages/myPurchasesPage';
 import MyCartPage from '../pages/ClientsPages/myCartPage';
 import MyCouponsPage from '../pages/ClientsPages/myCouponsPage';
-import DashboardClient from '../pages/ClientsPages/dashboardCliente/DashboardClient';
 import ProfilePage from '../pages/ClientsPages/profilePage';
-import LoginPage from '../pages/loginPage/loginPage';
-import RegisterPage from '../pages/registerPage/registerPage';
+
 import CreateProductPage from '../pages/AdminPages/productsPages/createPage/createPage';
 import ListProductPage from '../pages/AdminPages/productsPages/listPage/listPage';
 import MarketplaceHome from '../pages/ClientsPages/MarketplaceHome/MarketplaceHome';
@@ -21,22 +19,24 @@ import ListTicketsPage from '../pages/AdminPages/ticketsPages/listPage';
 import AdminHomePage from '../pages/AdminPages/homePage';
 import AdminAnalyticsPage from '../pages/AdminPages/analyticPage';
 import ListOrdersPage from '../pages/AdminPages/ordersPage';
-
+import SecondStep from '../pages/homePage/secondStep/secondStep';
 import PrivateRoute from './PrivateRoute';
 import CheckoutPage from '../pages/ClientsPages/checkoutPage';
 import PurchaseSuccessPage from '../pages/ClientsPages/purchaseSuccessPage';
 import MyReviewsPage from '../pages/ClientsPages/myReviewPage';
+import DashboardClient from '../pages/ClientsPages/DashboardCliente/DashboardClient';
+import LoginPage from '../pages/LoginPage/loginPage';
+import RegisterPage from '../pages/RegisterPage/registerPage';
 
 const AppRoutes = () => {
   return (
     <Routes>
-
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<RegisterPage />} />
       <Route path="/Marketplacehome" element={<MarketplaceHome />} />
       <Route path="/categories/:city/:tag" element={<Categories />} />
-
+      <Route path="/pre-dashboard" element={<SecondStep/>} />
 
       <Route
         path="/DashboardClient"
@@ -229,7 +229,6 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
-
     </Routes>
   );
 };

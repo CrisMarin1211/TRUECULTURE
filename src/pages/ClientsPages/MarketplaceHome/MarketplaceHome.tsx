@@ -10,7 +10,17 @@ const MarketplaceHome: React.FC = () => {
   return (
     <>
       <Header />
-      <CurrentLocation />
+        <Box
+            sx={{
+              px: 2,
+              mt: 2,
+              display: 'flex',
+              justifyContent: { xs: 'flex-start', md: 'center' }, // móvil izquierda, desktop centrado
+              alignItems: 'center',
+            }}
+          >
+            <CurrentLocation />
+          </Box>
       
         <Box sx={{ px: 2, mt: 5 }}>
           <Box sx={{ mb: 10 }}>

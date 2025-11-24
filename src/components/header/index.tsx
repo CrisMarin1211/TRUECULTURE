@@ -60,12 +60,15 @@ const Header = () => {
             sx={{ cursor: 'pointer', width: 36, height: 36, marginTop: '-5px' }}
           />
 
+          {/* Logo clickable */}
           <Box
             sx={{
               position: 'absolute',
               left: '50%',
               transform: 'translateX(-50%)',
+              cursor: 'pointer',
             }}
+            onClick={() => navigate('/DashboardClient')}
           >
             <Box
               component="img"
@@ -82,13 +85,14 @@ const Header = () => {
             />
           </Box>
 
+          {/* resto igual */}
           <Stack direction="row" spacing={2} alignItems="center" justifyItems="center">
             <Box
               sx={{
                 display: { xs: 'none', sm: 'block' },
                 marginRight: 1,
               }}
-            ></Box>
+            />
 
             <Box
               sx={{ cursor: 'pointer', position: 'relative' }}
@@ -134,5 +138,6 @@ const Header = () => {
     </>
   );
 };
+
 
 export default Header;

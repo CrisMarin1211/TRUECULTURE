@@ -14,23 +14,35 @@ const DashboardClient: React.FC = () => {
         <div>
           <Header />
         </div>
-        
-          <div>
-            <CurrentLocation />
-            <Box sx={{ px: 2, mt: 5 }}>
-              <Box sx={{ mb: 10 }} className="featured-events-box">
-                <FeaturedEventList />
-              </Box>
 
-              {TAGS.map((tag) => (
-                <Box key={tag} sx={{ mb: 10 }} className="event-category-box">
-                  <EventList tag={tag as any} />
-                </Box>
-              ))}
+        <div>
+          <Box
+            sx={{
+              px: 2,
+              mt: 2,
+              display: 'flex',
+              justifyContent: { xs: 'flex-start', md: 'center' }, // móvil izquierda, desktop centrado
+              alignItems: 'center',
+            }}
+          >
+            <CurrentLocation />
+          </Box>
+
+          <Box sx={{ px: 2, mt: 5 }}>{/* resto del contenido */}</Box>
+
+          <Box sx={{ px: 2, mt: 5 }}>
+            <Box sx={{ mb: 10 }} className="featured-events-box">
+              <FeaturedEventList />
             </Box>
-          </div>
+
+            {TAGS.map((tag) => (
+              <Box key={tag} sx={{ mb: 10 }} className="event-category-box">
+                <EventList tag={tag as any} />
+              </Box>
+            ))}
+          </Box>
         </div>
-    
+      </div>
     </>
   );
 };

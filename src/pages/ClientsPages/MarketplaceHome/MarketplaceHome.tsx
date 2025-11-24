@@ -9,24 +9,20 @@ const TAGS = ['Afiches', 'Pines', 'Artesanías', 'Moda', 'Gastronomía'];
 const MarketplaceHome: React.FC = () => {
   return (
     <>
+      <Header />
+      <CurrentLocation />
       <div className="profile-page">
-        <div>
-          <Header />
-        </div>
-        <div>
-          <CurrentLocation />
-          <Box sx={{ px: 2, mt: 5 }}>
-            <Box sx={{ mb: 10 }}>
-              <FeaturedProductList />
-            </Box>
-
-            {TAGS.map((tag) => (
-              <Box key={tag} sx={{ mb: 10 }}>
-                <ProductList tag={tag as any} />
-              </Box>
-            ))}
+        <Box sx={{ px: 2, mt: 5 }}>
+          <Box sx={{ mb: 10 }}>
+            <FeaturedProductList />
           </Box>
-        </div>
+
+          {TAGS.map((tag) => (
+            <Box key={tag} sx={{ mb: 10 }}>
+              <ProductList tag={tag as any} />
+            </Box>
+          ))}
+        </Box>
       </div>
     </>
   );

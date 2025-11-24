@@ -150,6 +150,14 @@ const theme = createTheme({
         },
       },
     },
+
+    MuiRating: {
+      styleOverrides: {
+        iconEmpty: {
+          color: '#ffffffd2',
+        },
+      },
+    },
   },
 });
 

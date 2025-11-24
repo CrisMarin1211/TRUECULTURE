@@ -18,7 +18,7 @@ import ListTicketsPage from '../pages/AdminPages/ticketsPages/listPage';
 import AdminHomePage from '../pages/AdminPages/homePage';
 import AdminAnalyticsPage from '../pages/AdminPages/analyticPage';
 import ListOrdersPage from '../pages/AdminPages/ordersPage';
-import SecondStep from '../pages/homePage/secondStep/secondStep';
+import MobileStartPage from '../pages/homePage/MobileStartPage/MobileStartPage';
 import PrivateRoute from './PrivateRoute';
 import CheckoutPage from '../pages/ClientsPages/checkoutPage';
 import PurchaseSuccessPage from '../pages/ClientsPages/purchaseSuccessPage';
@@ -35,7 +35,7 @@ const AppRoutes = () => {
       <Route path="/signup" element={<RegisterPage />} />
       <Route path="/Marketplacehome" element={<MarketplaceHome />} />
       <Route path="/categories/:city/:tag" element={<Categories />} />
-      <Route path="/pre-dashboard" element={<SecondStep/>} />
+      <Route path="/mobileStartPage" element={<MobileStartPage/>} />
 
       <Route
         path="/DashboardClient"

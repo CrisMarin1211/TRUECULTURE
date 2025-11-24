@@ -280,9 +280,15 @@ body {
   }
 
   .start-btn {
-    width: 90%;
-    justify-content: center;
-  }
+  width: min(300px, 85%);
+  font-size: 1rem;
+  border-radius: 50px;
+  display: block;
+  margin: 1.2rem auto 0 auto; /* 💥 centra el botón siempre */
+}
+
+
+
 
   .footer-right {
   display: none !important;
@@ -292,7 +298,6 @@ body {
 .dots-container {
   display: flex;
   gap: 8px;
-  margin-left: -2rem;
   margin-top: 1rem;
   justify-content: center;
 }

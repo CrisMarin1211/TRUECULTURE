@@ -13,7 +13,7 @@ const HomePage = () => {
 
   const handleStart = () => {
   if (isMobile) {
-    navigate('/pre-dashboard');
+    navigate('/mobileStartPage');
   } else {
     navigate('/login');
   }

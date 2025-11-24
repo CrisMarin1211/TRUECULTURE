@@ -6,6 +6,7 @@ import type { EventItem } from '../../../../types/EventType';
 import { Dialog, Typography, Box } from '@mui/material';
 import ViewMore from '../../../viewMore/veiwMore';
 import { useNavigate } from 'react-router-dom';
+import './eventList.css';
 
 interface EventListProps {
   tag: EventItem['tags'];
@@ -58,7 +59,7 @@ const EventList: React.FC<EventListProps> = ({ tag }) => {
         </Typography>
       </Box>
 
-      <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', padding: '0 1rem' }}>
+      <div className="event-horizontal-scroll">
         {filtered.map((item: EventItem) => (
           <CardClient
             key={item.id}

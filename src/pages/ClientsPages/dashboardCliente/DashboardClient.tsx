@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import CurrentLocation from '../../../components/atomsUi/currentLocation';
 import './dashboard.css';
 
-const TAGS = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
+const TAGS = ['Música', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
 
 const DashboardClient: React.FC = () => {
   return (
@@ -17,7 +17,7 @@ const DashboardClient: React.FC = () => {
           px: 2,
           mt: 2,
           display: 'flex',
-          justifyContent: { xs: 'flex-start', md: 'center' }, // móvil izquierda, desktop centrado
+          justifyContent: { xs: 'flex-start', md: 'center' },
           alignItems: 'center',
         }}
       >

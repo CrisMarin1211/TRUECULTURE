@@ -65,19 +65,19 @@ const FeaturedEventList: React.FC = () => {
   initialSlide={featuredEvents.length > 0 ? Math.floor(featuredEvents.length / 2) : 0}
   style={{ width: '100%' }}
   breakpoints={{
-    0: {           
+    0: {
       slidesPerView: 1,
       spaceBetween: 10,
     },
-    480: {         
+    480: {
       slidesPerView: 1.2,
       spaceBetween: 15,
     },
-    768: {      
+    768: {
       slidesPerView: 2,
       spaceBetween: 20,
     },
-    1024: {       
+    1024: {
       slidesPerView: 3,
       spaceBetween: 10,
     },

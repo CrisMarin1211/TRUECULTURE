@@ -10,23 +10,26 @@ const TAGS = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
 const DashboardClient: React.FC = () => {
   return (
     <>
-    <div>
+    <div className="profile-page">
+<div>
       <Header />
     </div>
-      <div className="profile-page">
+      <div>
         <CurrentLocation />
         <Box sx={{ px: 2, mt: 5 }}>
-          <Box sx={{ mb: 10 }}>
+          <Box sx={{ mb: 10 }} className="featured-events-box">
             <FeaturedEventList />
           </Box>
 
           {TAGS.map((tag) => (
-            <Box key={tag} sx={{ mb: 10 }}>
+            <Box key={tag} sx={{ mb: 10 }} className="event-category-box">
               <EventList tag={tag as any} />
             </Box>
           ))}
         </Box>
       </div>
+    </div>
+    
     </>
   );
 };

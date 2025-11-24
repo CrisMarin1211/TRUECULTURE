@@ -13,14 +13,27 @@ interface FeaturedCardProps {
 }
 
 const StyledCard = styled(Card)({
-  width: 385,
-  height: 450,
   position: 'relative',
   backgroundColor: theme.palette.darkGray1.main,
   overflow: 'hidden',
   borderRadius: 16,
   border: `1px solid ${theme.palette.grayMedium.main}`,
+  width: '100%',
+  maxWidth: 385,
+  height: 450,
+
+  '@media (max-width: 480px)': {
+    maxWidth: 260,
+    height: 350,
+  },
+
+  '@media (min-width: 481px) and (max-width: 768px)': {
+    maxWidth: 300,
+    height: 380,
+  },
 });
+
+
 
 const ImageWrapper = styled('div')({
   position: 'absolute',
@@ -61,7 +74,13 @@ const BottomContent = styled('div')({
   gap: 8,
   zIndex: 3,
   color: theme.palette.white.main,
+
+  '@media (max-width:480px)': {
+    left: 16,
+    bottom: 12,
+  },
 });
+
 
 const StyledCardContent = styled(CardContent)({
   padding: 0,
@@ -76,6 +95,7 @@ const StyledButton = styled(Button)({
   textTransform: 'none',
 });
 
+
 const FeaturedCard: React.FC<FeaturedCardProps> = ({ item, onViewMore }) => {
   return (
     <StyledCard>
@@ -86,16 +106,31 @@ const FeaturedCard: React.FC<FeaturedCardProps> = ({ item, onViewMore }) => {
       </ImageWrapper>
 
       <OverlayTextContainer>
-        <Typography
-          variant="h5"
-          component="div"
-          fontWeight="bold"
-          paddingBlock={4}
-          paddingInline={2}
-        >
-          {item.name}
-        </Typography>
-      </OverlayTextContainer>
+  <Typography
+    variant="h5"
+    component="div"
+    fontWeight="bold"
+    paddingBlock={4}
+    paddingInline={2}
+    sx={{ 
+
+      '@media (max-width: 480px)': {
+        fontSize: '2rem',
+        paddingBlock: 1.5,
+        paddingInline: 1,
+      },
+
+      '@media (min-width: 481px) and (max-width: 768px)': {
+        fontSize: '2rem',
+        paddingBlock: 2,
+        paddingInline: 1.5,
+      },
+    }}
+  >
+    {item.name}
+  </Typography>
+</OverlayTextContainer>
+
 
       <BottomContent sx={{ paddingInline: 2 }}>
         <StyledCardContent>

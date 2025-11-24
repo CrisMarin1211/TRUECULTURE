@@ -12,13 +12,13 @@ interface ShareButtonProps {
 
 const ShareButton = ({ item }: ShareButtonProps) => {
   const handleShare = async () => {
+   const type = 'totalseats' in item ? 'event' : 'product';
+    const url = `${window.location.origin}/${type}/${item.id}`;
+
     const shareData = {
-      title: 'name' in item ? item.name : 'Producto/Event', // verifica si tiene name
-      text:
-        'name' in item && 'location' in item
-          ? `Mira esto: ${item.name} en ${item.location}`
-          : 'Mira este producto/evento',
-      url: window.location.href, // o un link específico a la publicación
+      title: item.name ?? 'Producto/Event',
+      text: `Mira esto: ${item.name}`,
+      url,
     };
 
     try {
@@ -26,8 +26,8 @@ const ShareButton = ({ item }: ShareButtonProps) => {
         await navigator.share(shareData);
         console.log('Contenido compartido con éxito');
       } else {
-        navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
-        alert('Link copiado al portapapeles');
+        await navigator.clipboard.writeText(url);
+        alert('Link copiado al portapapeles: ' + url);
       }
     } catch (err) {
       console.error('Error compartiendo:', err);
@@ -63,7 +63,7 @@ const ShareButton = ({ item }: ShareButtonProps) => {
       <Button
         onClick={handleShare}
         variant="contained"
-        type='button'
+        type="button"
         sx={{
           backgroundColor: theme.palette.blue.main,
           color: '#fff',

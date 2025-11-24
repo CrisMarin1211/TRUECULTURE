@@ -320,7 +320,7 @@ const CreateEvent: React.FC = () => {
           </label>
           <select id="tags" name="tags" value={event.tags} onChange={handleChange}>
             <option value="">Selecciona una categoría</option>
-            <option value="Musica">Música</option>
+            <option value="Música">Música</option>
             <option value="Cultural">Cultural</option>
             <option value="Familiar">Familiar</option>
             <option value="Diversion">Diversión</option>

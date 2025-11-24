@@ -1,31 +1,31 @@
 # TRUECULTURE
 
-TRUECULTURE es una plataforma web gamificada para fortalecer y visibilizar la cultura local. Los usuarios participan en eventos, comparten experiencias y recomiendan actividades, desbloqueando niveles, puntos y cupones automáticos. La plataforma incentiva la interacción social y digital, apoya a comercios y eventos culturales y crea una comunidad participativa y reconocida.
+TRUECULTURE is a gamified web platform designed to strengthen and showcase local culture. Users participate in events, share experiences, and recommend activities, unlocking levels, points, and automatic coupons. The platform encourages both social and digital interaction, supports local businesses and cultural events, and builds an active, recognized community.
 
 ---
 
-## 🚀 Objetivos y descripción
+## 🚀 Goals & Description
 
-- Promover la participación activa en la cultura local.
-- Gamificar la experiencia mediante puntos, niveles y recompensas.
-- Visibilizar y conectar eventos, actividades y comercios de la comunidad.
-- Fomentar colaboraciones entre usuarios y organizadores mediante incentivos.
+- Promote active participation in local culture.
+- Gamify the experience with points, levels, and rewards.
+- Showcase and connect community events, activities, and businesses.
+- Foster collaborations between users and organizers through incentives.
 
-TRUECULTURE crea una red donde cada interacción suma valor, promoviendo el desarrollo cultural y el reconocimiento de los espacios locales.
+TRUECULTURE creates a network where each interaction adds value, promoting cultural development and recognition of local venues.
 
 ---
 
-## 🧩 Instalación de dependencias
+## 🧩 Installing Dependencies
 
-Instala todas las dependencias con:
+Install all dependencies with:
 
 npm install
-
-o
+or
 yarn install
 
 
-## 📁Principales librerías:
+## 📁 Main Libraries
+
 - React
 - Vite
 - Supabase-js
@@ -39,203 +39,75 @@ yarn install
 
 ---
 
-## 🏗️ Scaffolding & estructura de carpetas
+## 🏗️ Scaffolding & Folder Structure
 
-- **public/**: Archivos estáticos (imágenes, favicon, etc.).
-- **src/**: Todo el código de la app: componentes, hooks y lógica principal.
-- **tsconfig.*.json**: Configuración para TypeScript.
-- **package.json**: Gestión de dependencias y scripts.
-- **package-lock.json**: Registro exacto de versiones instaladas.
-- **README.md**: Documentación principal del Frontend.
-- **README_SUPABASE.md**: Documentación backend y lógica de servicios.
-- **configs, lint, prettier**: Archivos de configuración y reglas de estilo.
-
----
-
-## 📦 Comandos útiles
-
-- `npm run dev`: Levanta el servidor local de desarrollo (Vite)
-- `npm run build`: Compila el proyecto para producción
-- `npm run preview`: Visualiza el build productivo de manera local
-- `npm run lint`: Verifica el estilo del código
-- `npm run format`: Formatea todos los archivos fuente
+- **public/**: Static files (images, favicon, etc.).
+- **src/**: All app code: components, hooks, and core logic.
+- **tsconfig.*.json**: TypeScript configuration.
+- **package.json**: Dependency and script management.
+- **package-lock.json**: Exact record of installed versions.
+- **README.md**: Main frontend documentation.
+- **README_SUPABASE.md**: Backend and service logic docs.
+- **configs, lint, prettier**: Configuration and style rules.
 
 ---
 
-## 🎯 Funcionalidades principales
+## 📦 Useful Commands
 
-- Sistema gamificado de puntos, niveles y cupones.
-- Reservas de asientos numerados para eventos.
-- Publicación de reseñas y compartidos en redes sociales.
-- Referidos y recompensas automáticos por invitar nuevos usuarios.
-- Panel de usuario con historial, progreso y recompensas.
-
----
-
-## ⚙️ Servicios Supabase y funciones automáticas
-
-### Funciones principales de la base de datos
-
-- `awardpoints`: Otorga puntos por acción, actualiza niveles y cupones al usuario.
-- `calculateuserlevel`: Calcula el nivel según los puntos acumulados.
-- `generatereferralcode`: Genera códigos únicos de referido por usuario.
-- `grantlevelcoupon`: Otorga cupones cuando el usuario sube de nivel.
-- `initializeeventseats`: Organiza los asientos de eventos numerados.
-- `processreferral`: Gestiona acciones de referido y premia a los usuarios.
-
-### Triggers y automatizaciones
-
-- Creación automática de código de referido y cupones de bienvenida al crear perfil.
-- Vinculación de perfil a autheticación y registro inicial del usuario.
-
-### Edge Functions (servicios HTTP)
-
-- `process-purchase`: Automatiza pedidos, reserva asientos y cupones.
-- `process-review`: Inserta reseñas y otorga puntos adicionales.
-- `process-share`: Premia a usuarios por compartir en redes sociales.
-- `process-referral`: Administra lógica de referidos y recompensas.
-
-- Todas las funciones y servicios REST están protegidos con autenticación JWT y políticas de acceso avanzadas.
+- `npm run dev`: Starts the local development server (Vite)
+- `npm run build`: Builds the project for production
+- `npm run preview`: Locally previews the production build
+- `npm run lint`: Checks code style
+- `npm run format`: Formats all source files
 
 ---
 
-## 🌍 Despliegue
+## 🎯 Main Features
 
-Puedes desplegar TRUECULTURE en Vercel, Netlify, VPS o cualquier plataforma Node.js con acceso externo a Supabase. Solo necesitas preparar el build productivo (`npm run build`), configurar tus variables de entorno y conectar el frontend con las credenciales de tu backend en Supabase.
+- Gamified system with points, levels, and coupons.
+- Numbered seat reservations for events.
+- Publication of reviews and social sharing.
+- Automatic referrals and rewards for inviting new users.
+- User dashboard with history, progress, and rewards.
 
 ---
 
-## 📚 Recursos y referencias
+## ⚙️ Supabase Services & Automated Functions
 
-- [Repositorio TRUECULTURE (GitHub)](https://github.com/CrisMarin1211/TRUECULTURE.git)
-- [Presentación visual y detalles (Behance)](https://www.behance.net/gallery/233288171/TRUECULTURE/modules/1338995987)
-- [(Versel)](https://www.behance.net/gallery/233288171/TRUECULTURE/modules/1338995987)
+### Main Database Functions
 
+- `awardpoints`: Grants points for actions, updates user levels and coupons.
+- `calculateuserlevel`: Calculates level based on accumulated points.
+- `generatereferralcode`: Generates unique referral codes per user.
+- `grantlevelcoupon`: Grants coupons as users level up.
+- `initializeeventseats`: Arranges numbered event seats.
+- `processreferral`: Manages referral actions and user rewards.
 
-¡TRUECULTURE te permite contribuir activamente a la cultura local, ganar recompensas y formar parte de una red colaborativa donde cada experiencia suma y se multiplica!
+### Triggers & Automation
 
+- Automatic creation of referral code and welcome coupons upon profile creation.
+- Profile linked to authentication and initial user registration.
 
+### Edge Functions (HTTP Services)
 
+- `process-purchase`: Automates orders, seat reservations, and coupons.
+- `process-review`: Inserts reviews and awards extra points.
+- `process-share`: Rewards users for social sharing.
+- `process-referral`: Handles referral logic and rewards.
 
+All REST functions and services are secured with JWT authentication and advanced access policies.
 
+---
 
+## 🌍 Deployment
 
+You can deploy TRUECULTURE on Vercel, Netlify, VPS, or any Node.js platform with external access to Supabase. Just prepare the production build (`npm run build`), configure your environment variables, and connect the frontend with your backend credentials in Supabase.
 
+---
 
+## 📚 Resources & References
 
+- [Visual presentation and details (Behance)](https://www.behance.net/gallery/233288171/TRUECULTURE/modules/1338995987)
+- [Versel](https://www.behance.net/gallery/233288171/TRUECULTURE/modules/1338995987)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+TRUECULTURE lets you actively contribute to local culture, earn rewards, and become part of a collaborative network where each experience adds value and multiplies!

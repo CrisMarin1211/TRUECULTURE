@@ -10,8 +10,10 @@ const TAGS = ['Musica', 'Cultural', 'Familiar', 'Diversion', 'Gastronomia'];
 const DashboardClient: React.FC = () => {
   return (
     <>
+    <div>
+      <Header />
+    </div>
       <div className="profile-page">
-        <Header />
         <CurrentLocation />
         <Box sx={{ px: 2, mt: 5 }}>
           <Box sx={{ mb: 10 }}>

@@ -297,20 +297,24 @@ const ProfilePage = () => {
 
   if (loading) {
     return (
-      <div className="profile-page">
+      <div>
         <Header />
+      <div className="profile-page">
         <div style={{ color: 'white', padding: '1rem', textAlign: 'center' }}>
           Cargando perfil...
         </div>
+      </div>
       </div>
     );
   }
 
   if (!profile) {
     return (
-      <div className="profile-page">
+      <div>
         <Header />
+      <div className="profile-page">
         <div style={{ color: 'white', padding: '1rem' }}>No hay datos de perfil disponibles.</div>
+      </div>
       </div>
     );
   }

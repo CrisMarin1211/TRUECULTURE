@@ -9,6 +9,7 @@ export interface UserCouponWithDetails extends UserCoupon {
 }
 
 export const getUserCoupons = async (userId: string, includeUsed: boolean = false): Promise<UserCouponWithDetails[]> => {
+  // Get the profile_id from the user_id
   const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .select('id')
@@ -28,6 +29,7 @@ export const getUserCoupons = async (userId: string, includeUsed: boolean = fals
     `)
     .eq('profile_id', profile.id);
 
+  // If not including used coupons, filter by is_used = false
   if (!includeUsed) {
     query = query.eq('is_used', false).is('used_at', null);
   }
@@ -52,20 +54,23 @@ export const calculateCouponDiscount = (
 ): number => {
   let discount = 0;
 
+  // Check minimum purchase amount
   if (coupon.min_purchase_amount && subtotal < coupon.min_purchase_amount) {
     return 0;
   }
 
+  // Calculate discount based on type
   if (coupon.type === 'percent') {
     discount = subtotal * (coupon.value / 100);
   } else if (coupon.type === 'fixed') {
     discount = coupon.value;
   }
 
+  // Apply max discount limit if exists
   if (coupon.max_discount_amount && discount > coupon.max_discount_amount) {
     discount = coupon.max_discount_amount;
   }
 
-  return Math.min(discount, subtotal); // Ensure discount doesn't exceed subtotal
+  return Math.min(discount, subtotal);
 };
 

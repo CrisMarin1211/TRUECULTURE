@@ -13,6 +13,7 @@ const MyCartPage = () => {
   const [editingSeatItemId, setEditingSeatItemId] = useState<string | number | null>(null);
   const [seatModalOpen, setSeatModalOpen] = useState(false);
 
+  // Obtener la información del evento desde el contexto
   const getEventInfo = (itemId: string | number) => {
     const event = events.find(e => String(e.id) === String(itemId));
     if (event && event.has_seating) {

@@ -79,7 +79,6 @@ const PurchaseSuccessPage = () => {
     <div className="purchase-success-page">
       <Header />
       <div className="success-container">
-        {/* Success Header */}
         <div className="success-header">
           <CheckCircleIcon className="success-icon" />
           <h1 className="success-title">¡Compra realizada exitosamente!</h1>
@@ -89,7 +88,6 @@ const PurchaseSuccessPage = () => {
         </div>
 
         <div className="success-content">
-          {/* Order Details */}
           <div className="order-details-section">
             <h2 className="section-title">Detalles de la orden</h2>
 
@@ -143,7 +141,6 @@ const PurchaseSuccessPage = () => {
             </div>
           </div>
 
-          {/* QR Code (only for events) */}
           {hasEvents && (
             <div className="ticket-section">
               <h2 className="section-title">Tu entrada</h2>
@@ -164,7 +161,6 @@ const PurchaseSuccessPage = () => {
           )}
         </div>
 
-        {/* Actions */}
         <div className="success-actions">
           <button onClick={() => navigate('/my-purchases')} className="view-orders-btn">
             Ver todas mis compras

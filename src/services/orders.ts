@@ -20,7 +20,7 @@ export interface CreateOrderParams {
     name: string;
     price: number;
     quantity: number;
-    seats?: string[];
+    seats?: string[]; // IDs de asientos seleccionados para eventos
   }>;
   coupon_code?: string;
   payment_status?: string;
@@ -38,6 +38,7 @@ export const createOrder = async (params: CreateOrderParams): Promise<OrderWithI
       return null;
     }
 
+    // La respuesta de process-purchase tiene esta estructura: { success, order, points_awarded }
     if (data && data.order) {
       return data.order as OrderWithItems;
     }
@@ -50,6 +51,7 @@ export const createOrder = async (params: CreateOrderParams): Promise<OrderWithI
 };
 
 export const getUserOrders = async (userId: string): Promise<OrderWithItems[]> => {
+  // Get the profile_id from the user_id
   const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .select('id')
@@ -61,6 +63,7 @@ export const getUserOrders = async (userId: string): Promise<OrderWithItems[]> =
     return [];
   }
 
+  // Get orders with items and profile info
   const { data, error } = await supabase
     .from('orders')
     .select(`

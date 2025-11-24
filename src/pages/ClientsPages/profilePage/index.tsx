@@ -127,11 +127,11 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-
+      // Fetch levels
       const levelsData = await getLevels();
       setLevels(levelsData);
 
-
+      // Fetch profile
       if (!user?.id) {
         return;
       }
@@ -237,7 +237,7 @@ const ProfilePage = () => {
 
     const codeToCheck = referralCodeInput.trim().toUpperCase();
 
-
+    // Validar formato (solo letras y números, 4-12 caracteres)
     if (!/^[A-Z0-9]{4,12}$/.test(codeToCheck)) {
       setSnackbarMessage('El código debe tener entre 4 y 12 caracteres (solo letras y números)');
       setSnackbarOpen(true);
@@ -632,7 +632,7 @@ const ProfilePage = () => {
         </Alert>
       </Snackbar>
 
-
+      {/* Modal para editar código de referido */}
       <Modal
         open={isEditingReferralCode}
         onClose={handleCloseReferralCodeModal}
@@ -684,7 +684,7 @@ const ProfilePage = () => {
             </Typography>
           </Box>
 
-
+          {/* Current Referral Link */}
           <Typography sx={{ color: '#8692A6', fontSize: '13px', mb: 1 }}>
             Enlace de referido actual:
           </Typography>

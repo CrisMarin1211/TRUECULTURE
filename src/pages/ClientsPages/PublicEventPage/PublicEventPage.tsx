@@ -1,10 +1,15 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import {supabase} from "../../../lib/supabaseClient";
-import ViewMore from "../../../components/viewMore/veiwMore";
-import type { EventItem } from "../../../types/EventType";
+import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import { supabase } from '../../../lib/supabaseClient';
+import ViewMore from '../../../components/viewMore/veiwMore';
+import type { EventItem } from '../../../types/EventType';
+
+async function isLoggedIn() {
+  const { data: { user } } = await supabase.auth.getUser();
+  return !!user;
+}
 
 const PublicViewMoreModal = () => {
   const { id } = useParams();
@@ -12,56 +17,70 @@ const PublicViewMoreModal = () => {
   const [event, setEvent] = useState<EventItem | null>(null);
   const [open, setOpen] = useState(true);
 
-  useEffect(() => {
-    const loadEvent = async () => {
-      const { data } = await supabase
-        .from("events")
-        .select("*")
-        .eq("id", id)
-        .single();
-
-      setEvent(data);
-    };
-
-    loadEvent();
-  }, [id]);
-
-  const handleClose = () => {
-    setOpen(false);
-    navigate("/DashboardClient");
+useEffect(() => {
+  const loadEvent = async () => {
+    const { data } = await supabase.from('events').select('*').eq('id', id).single();
+    setEvent(data);
   };
+  loadEvent();
+}, [id]);
+
+
+const handleClose = async () => {
+  setOpen(false);
+  if (await isLoggedIn()) {
+    navigate('/DashboardClient');
+  } else {
+    navigate('/login');
+  }
+};
+
+const handleBuy = async (handleBuyOriginal: () => void) => {
+  if (!(await isLoggedIn())) {
+    navigate('/login');
+    return;
+  }
+  // Si está logueado, sigue la compra normal de ViewMore.
+  handleBuyOriginal();
+};
+
+
 
   return (
     <Modal
-  open={open}
+      open={open}
+      onClose={handleClose}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        '& .MuiBackdrop-root': {
+          backgroundColor: 'rgba(0, 0, 0, 0.68)',
+        },
+      }}
+    >
+      <Box
+        sx={{
+          width: '65%',
+          height: '80vh',
+          bgcolor: '#12121295',
+          borderRadius: '12px',
+          overflow: 'hidden',
+          outline: 'none',
+        }}
+      >
+        {!event ? (
+          <h2 style={{ color: 'white', textAlign: 'center' }}>Cargando...</h2>
+        ) : (
+          <ViewMore
+  item={event}
   onClose={handleClose}
-  sx={{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    "& .MuiBackdrop-root": {
-       backgroundColor: "rgba(0, 0, 0, 0.68)",
-    },
-  }}
->
-  <Box
-    sx={{
-      width: "65%",
-      height: "80vh",
-      bgcolor: "#12121295",
-      borderRadius: "12px",
-      overflow: "hidden",
-      outline: "none",
-    }}
-  >
-    {!event ? (
-      <h2 style={{ color: "white", textAlign: "center" }}>Cargando...</h2>
-    ) : (
-      <ViewMore item={event} onClose={handleClose} />
-    )}
-  </Box>
-</Modal>
+  onPublicBuy={handleBuy}
+/>
 
+        )}
+      </Box>
+    </Modal>
   );
 };
 

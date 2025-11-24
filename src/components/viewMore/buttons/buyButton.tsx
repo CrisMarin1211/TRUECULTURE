@@ -6,15 +6,23 @@ import theme from '../../../styles/theme';
 
 interface BuyButtonProps {
   item: EventItem | ProductItem;
-  onClick?: () => void;
+  onClick: () => void;
+  beforeClick?: () => Promise<boolean> | boolean;
 }
 
-const BuyButton = ({ item, onClick }: BuyButtonProps) => {
+const BuyButton = ({ item, onClick, beforeClick }: BuyButtonProps) => {
+  const handleClick = async () => {
+    if (beforeClick) {
+      const ok = await beforeClick();
+      if (!ok) return; // corta si beforeClick dice que no siga
+    }
+    onClick();
+  };
   return (
     <Button
-      onClick={onClick}
+      onClick={handleClick}
       variant="contained"
-      type='button'
+      type="button"
       sx={{
         display: 'flex',
         alignItems: 'center',

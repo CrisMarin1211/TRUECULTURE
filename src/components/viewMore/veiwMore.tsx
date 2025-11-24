@@ -22,14 +22,14 @@ import theme from '../../styles/theme';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContex';
 
-const ViewMore = ({ item, onClose }: ViewMoreProps) => {
+const ViewMore = ({ item, onClose, onPublicBuy }: ViewMoreProps) => {
   const [readMore, setReadMore] = useState(false);
   const [seatModalOpen, setSeatModalOpen] = useState(false);
   const toggleReadMore = () => setReadMore(!readMore);
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
-  const handleBuy = () => {
+  const handleBuyOriginal = () => {
     const isEvent = 'totalseats' in item;
     const eventItem = isEvent ? (item as EventItem) : null;
     const hasSeating = eventItem?.has_seating ?? false;
@@ -47,6 +47,14 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
       });
       navigate('/my-cart');
     }
+  };
+
+  const handleBuy = () => {
+    if (onPublicBuy) {
+      onPublicBuy(handleBuyOriginal);
+      return;
+    }
+    handleBuyOriginal();
   };
 
   const handleSeatConfirm = (seats: string[]) => {

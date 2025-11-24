@@ -17,8 +17,6 @@ const MyCartPage = () => {
   const [seatModalOpen, setSeatModalOpen] = useState(false);
 
   useEffect(() => {
-    // Simula tiempo de carga del contexto (carrito + eventos)
-    // Si ya están cargados, el loader dura 300ms (queda más elegante)
     const timeout = setTimeout(() => setLoading(false), 300);
     return () => clearTimeout(timeout);
   }, [cartItems, events]);

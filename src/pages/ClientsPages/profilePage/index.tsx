@@ -300,9 +300,6 @@ const ProfilePage = () => {
     return (
       <div>
         <Loader />
-      <div>
-        <Header />
-      </div>
       </div>
     );
   }

@@ -40,10 +40,10 @@ const AppRoutes = () => {
       <Route path="/categories/:city/:tag" element={<Categories />} />
       <Route path="/mobileStartPage" element={<MobileStartPage/>} />
 
-      <Route path="/event/:id" element={<><DashboardClient /><PublicEventPage /></>} />
-      <Route path="/product/:id" element={<><MarketplaceHome /><PublicProductPage /></>
-  }
-/>
+<Route path="/event/:id" element={<PublicEventPage />} />
+<Route path="/product/:id" element={<PublicProductPage />} />
+
+
 
       <Route
         path="/DashboardClient"

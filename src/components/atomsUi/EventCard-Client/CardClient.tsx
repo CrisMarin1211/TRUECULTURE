@@ -23,7 +23,7 @@ const StyledCard = styled(Card)({
   flexDirection: 'column',
   border: `1px solid ${theme.palette.grayMedium.main}`,
 
-  width: '100%',
+    width: '100%',
   maxWidth: 385,
   height: 330,
 
@@ -32,11 +32,16 @@ const StyledCard = styled(Card)({
     height: 280,
   },
 
+  '@media (max-width: 360px)': {
+    maxWidth: 200,   // no tan extremo
+    height: 180,
+  },
+
   '@media (min-width: 481px) and (max-width: 768px)': {
     maxWidth: 300,
     height: 300,
   },
-});
+})
 
 
 const StyledImg = styled('img')({
@@ -47,6 +52,10 @@ const StyledImg = styled('img')({
 
   '@media (max-width: 480px)': {
     height: 140,
+  },
+
+  '@media (max-width: 360px)': {
+    height: 100,
   },
 
   '@media (min-width: 481px) and (max-width: 768px)': {
@@ -81,6 +90,10 @@ const Title = styled(Typography)({
     
   },
 
+  '@media (max-width: 360px)': {
+    fontSize: '0.7rem',
+  },
+
   '@media (min-width: 481px) and (max-width: 768px)': {
     fontSize: '1rem',
   },
@@ -106,6 +119,11 @@ const StyledButton = styled(Button)({
     paddingInline: 12,
     paddingBlock: 6,
   },
+'@media (max-width: 360px)': {
+    fontSize: '0.5rem',
+    paddingBlock: 2,
+  },
+  
 
   '@media (min-width: 481px) and (max-width: 768px)': {
     fontSize: '0.85rem',
@@ -130,9 +148,15 @@ const CardClient: React.FC<ClientCardProps> = ({ item, onViewMore }) => {
     '@media (max-width: 480px)': {
       fontSize: '0.8rem',
     },
+
+    '@media (max-width: 360px)': {
+    fontSize: '0.5rem',
+  },
+
     '@media (min-width: 481px) and (max-width: 768px)': {
       fontSize: '0.9rem',
     },
+
   }}
 >
   {item.location}
@@ -160,6 +184,11 @@ const CardClient: React.FC<ClientCardProps> = ({ item, onViewMore }) => {
       '@media (max-width: 480px)': {
         fontSize: '0.75rem',
       },
+
+      '@media (max-width: 360px)': {
+    fontSize: '0.4rem',
+  },
+
       '@media (min-width: 481px) and (max-width: 768px)': {
         fontSize: '0.85rem',
       },
@@ -181,6 +210,10 @@ const CardClient: React.FC<ClientCardProps> = ({ item, onViewMore }) => {
     '@media (max-width: 480px)': {
       fontSize: '0.8rem',
     },
+
+    '@media (max-width: 360px)': {
+    fontSize: '0.6rem',
+  },
     '@media (min-width: 481px) and (max-width: 768px)': {
       fontSize: '0.9rem',
     },

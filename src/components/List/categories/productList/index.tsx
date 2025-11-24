@@ -6,6 +6,7 @@ import type { ProductItem } from '../../../../types/ProductType';
 import { Dialog, Typography, Box } from '@mui/material';
 import ViewMore from '../../../viewMore/veiwMore';
 import { useNavigate } from 'react-router-dom';
+import '../eventList/eventList.css'
 
 interface ProductListProps {
   tag: ProductItem['tags'];
@@ -59,7 +60,7 @@ const ProductList: React.FC<ProductListProps> = ({ tag }) => {
         </Typography>
       </Box>
 
-      <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', padding: '0 1rem' }}>
+      <div className="event-horizontal-scroll">
         {filtered.map((item: ProductItem) => (
           <CardClient
             key={item.id}

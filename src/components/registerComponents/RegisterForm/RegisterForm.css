@@ -29,6 +29,9 @@
 
 .register-btn-wrapper button {
   background-color: #175CD3;
+  align-items: center;
+  justify-content: center; 
+  display: flex
   ;
   border: none;
   border-radius: 100px;
@@ -75,3 +78,25 @@
   color: #4285f4;
   text-decoration: underline;
 }
+
+@media (max-width: 400px) {
+  .register-form {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .terms {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-family: Satoshi, sans-serif;
+  font-size: 14px;
+  color: #9ba0a8;
+}
+.terms input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: #5871EB;
+  cursor: pointer;
+}
+} 

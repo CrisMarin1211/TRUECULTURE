@@ -65,3 +65,20 @@
   z-index: 1;
   pointer-events: none;
 }
+
+
+@media (max-width: 768px) {
+  .logoazul {
+    display: none !important;
+  }
+.phrase {
+  color: #8692A6;
+  font-family: Satoshi;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 32.717px;
+  margin-top: 10px;
+  padding: 10px;
+}
+}

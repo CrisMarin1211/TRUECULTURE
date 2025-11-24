@@ -30,11 +30,10 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
   const navigate = useNavigate();
 
   const handleBuy = () => {
-    // Si es un evento con silletería, abrir modal de selección
     const isEvent = 'totalseats' in item;
     const eventItem = isEvent ? (item as EventItem) : null;
     const hasSeating = eventItem?.has_seating ?? false;
-    
+
     if (isEvent && hasSeating && eventItem && eventItem.totalseats > 0) {
       setSeatModalOpen(true);
     } else {
@@ -52,7 +51,7 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
 
   const handleSeatConfirm = (seats: string[]) => {
     if (seats.length === 0) return;
-    
+
     addToCart({
       id: item.id ?? '',
       title: item.name ?? '',
@@ -62,7 +61,7 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
       seats: seats,
       type: 'event',
     });
-    
+
     setSeatModalOpen(false);
     navigate('/my-cart');
   };
@@ -70,7 +69,7 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
   const isEvent = 'totalseats' in item;
   const eventItem = isEvent ? (item as EventItem) : null;
   const hasSeating = eventItem?.has_seating ?? false;
-  
+
   return (
     <Card
       sx={{
@@ -219,7 +218,7 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
             <Typography fontSize={'20px'} fontWeight={900}>
               Reseñas
             </Typography>
-            <Review />
+            <Review relatedId={String(item.id)} relatedType={isEvent ? 'event' : 'product'} />
           </Box>
         </CardContent>
 
@@ -244,7 +243,6 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
         </Box>
       </Box>
 
-      {/* Seat Selection Modal - Solo mostrar si el evento tiene silletería */}
       {isEvent && hasSeating && eventItem && (
         <SeatSelection
           open={seatModalOpen}

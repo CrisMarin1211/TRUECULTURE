@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
-import AvatarLetter from '../atomsUi/avatarLetter';
 import SideBar from '../atomsUi/sideBar';
 import theme from '../../styles/theme';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -10,6 +9,7 @@ import { Box, Badge } from '@mui/material';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContex';
+import AvatarUser from '../atomsUi/avatarUser';
 
 const Overlay = styled('div')({
   position: 'fixed',
@@ -43,8 +43,7 @@ const Header = () => {
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
   const navigate = useNavigate();
   const { cartItems } = useCart();
-  
-  // Calcular el total de artículos en el carrito
+
   const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
@@ -85,13 +84,12 @@ const Header = () => {
 
           <Stack direction="row" spacing={2} alignItems="center" justifyItems="center">
             <Box
-              sx={{ 
+              sx={{
                 display: { xs: 'none', sm: 'block' },
-                marginRight: 1
+                marginRight: 1,
               }}
-            >
-            </Box>
-            
+            ></Box>
+
             <Box
               sx={{ cursor: 'pointer', position: 'relative' }}
               onClick={() => navigate('/my-cart')}
@@ -111,9 +109,7 @@ const Header = () => {
                   },
                 }}
               >
-                <ShoppingCartOutlinedIcon
-                  sx={{ width: 36, height: 36 }}
-                />
+                <ShoppingCartOutlinedIcon sx={{ width: 36, height: 36 }} />
               </Badge>
             </Box>
 
@@ -121,7 +117,7 @@ const Header = () => {
               sx={{ display: { xs: 'none', md: 'flex' }, cursor: 'pointer' }}
               onClick={() => navigate('/my-profile')}
             >
-              <AvatarLetter />
+              <AvatarUser />
             </Box>
           </Stack>
         </Stack>

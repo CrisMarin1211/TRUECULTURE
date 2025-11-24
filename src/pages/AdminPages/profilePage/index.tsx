@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import './style.css';
 import SidebarAdmin from '../../../components/atomsUi/sideBarAdmin';
 import { supabase } from '../../../lib/supabaseClient';
-import { getUserProfileByEmail, updateUserProfile } from '../../../services/users';
+import {
+  getUserProfileByEmail,
+  updateAvatarUser,
+  updateUserByUserId,
+} from '../../../services/users';
 import type { UserProfile } from '../../../types/UserType';
 import type { User } from '@supabase/supabase-js';
 import Loader from '../../../components/loader';
@@ -34,7 +38,9 @@ const ProfileAdminPage: React.FC = () => {
 
     fetchProfile();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user || null);
       if (session?.user?.email) {
         getUserProfileByEmail(session.user.email).then(setProfile);
@@ -55,7 +61,7 @@ const ProfileAdminPage: React.FC = () => {
     setSaving(true);
     try {
       const { id, auth_id, created_at, updated_at, ...updateData } = profile;
-      await updateUserProfile(user.id, updateData);
+      await updateUserByUserId(user.id, updateData);
       alert('Cambios guardados correctamente');
     } catch {
       alert('Error al guardar cambios');
@@ -65,7 +71,9 @@ const ProfileAdminPage: React.FC = () => {
   };
 
   const handleAvatarClick = () => {
-    setNewAvatarUrl(user?.user_metadata?.avatar_url || user?.user_metadata?.picture || profile?.avatar_url || '');
+    setNewAvatarUrl(
+      user?.user_metadata?.avatar_url || user?.user_metadata?.picture || profile?.avatar_url || '',
+    );
     setShowModal(true);
   };
 
@@ -77,7 +85,7 @@ const ProfileAdminPage: React.FC = () => {
     setShowModal(false);
 
     try {
-      await updateUserProfile(user.id, { avatar_url: newAvatarUrl });
+      await updateAvatarUser(user.id, newAvatarUrl);
     } catch {
       alert('Error al actualizar avatar');
     }
@@ -108,7 +116,12 @@ const ProfileAdminPage: React.FC = () => {
             <div className="profile-header">
               <div className="profile-info">
                 <img
-                  src={user?.user_metadata?.avatar_url || user?.user_metadata?.picture || profile.avatar_url || 'https://i.pravatar.cc/120?img=5'}
+                  src={
+                    user?.user_metadata?.avatar_url ||
+                    user?.user_metadata?.picture ||
+                    profile.avatar_url ||
+                    'https://i.pravatar.cc/120?img=5'
+                  }
                   alt="Usuario"
                   className="profile-avatar"
                   onClick={handleAvatarClick}

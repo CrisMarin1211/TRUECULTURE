@@ -4,7 +4,7 @@ import { Navigation, EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import './style.css';
+import './featured.css';
 
 import { useEvent } from '../../../../context/EventContext';
 import FeaturedCard from '../../../atomsUi/featuredCard';
@@ -46,37 +46,52 @@ const FeaturedEventList: React.FC = () => {
   return (
     <div style={{ position: 'relative' }}>
       <Swiper
-        modules={[Navigation, EffectCoverflow]}
-        effect="coverflow"
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={3}
-        navigation={{
-          nextEl: '.custom-next',
-          prevEl: '.custom-prev',
-        }}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 200,
-          modifier: 1,
-          scale: 1,
-          slideShadows: false,
-        }}
-        initialSlide={featuredEvents.length > 0 ? Math.floor(featuredEvents.length / 2) : 0}
-        style={{ width: '80%' }}
-      >
+  modules={[Navigation, EffectCoverflow]}
+  effect="coverflow"
+  grabCursor={true}
+  centeredSlides={true}
+  navigation={{
+    nextEl: '.custom-next',
+    prevEl: '.custom-prev',
+  }}
+  coverflowEffect={{
+    rotate: 0,
+    stretch: 0,
+    depth: 200,
+    modifier: 1,
+    scale: 1,
+    slideShadows: false,
+  }}
+  initialSlide={featuredEvents.length > 0 ? Math.floor(featuredEvents.length / 2) : 0}
+  style={{ width: '100%' }}
+  breakpoints={{
+    0: {           
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+    480: {         
+      slidesPerView: 1.2,
+      spaceBetween: 15,
+    },
+    768: {      
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    1024: {       
+      slidesPerView: 3,
+      spaceBetween: 10,
+    },
+  }}
+>
+
         {featuredEvents.map((event) => (
-          <SwiperSlide
-            key={event.id}
-            style={{
-              width: '385px',
-              height: '450px',
-              transition: 'transform 0.3s',
-            }}
-          >
-            <FeaturedCard item={event} onViewMore={() => setSelectedEvent(event)} />
-          </SwiperSlide>
+         <SwiperSlide
+  key={event.id}
+  className="featured-slide"
+>
+  <FeaturedCard item={event} onViewMore={() => setSelectedEvent(event)} />
+</SwiperSlide>
+
         ))}
       </Swiper>
 

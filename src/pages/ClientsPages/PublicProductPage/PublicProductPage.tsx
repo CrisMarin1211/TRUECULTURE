@@ -6,6 +6,13 @@ import { supabase } from '../../../lib/supabaseClient';
 import ViewMore from '../../../components/viewMore/veiwMore';
 import type { ProductItem } from '../../../types/ProductType';
 
+async function isLoggedIn() {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return !!user;
+}
+
 const PublicProductViewMoreModal = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -15,16 +22,26 @@ const PublicProductViewMoreModal = () => {
   useEffect(() => {
     const loadProduct = async () => {
       const { data } = await supabase.from('products').select('*').eq('id', id).single();
-
       setProduct(data);
     };
-
     loadProduct();
   }, [id]);
 
-  const handleClose = () => {
+  const handleClose = async () => {
     setOpen(false);
-    navigate('/login');
+    if (await isLoggedIn()) {
+      navigate('/DashboardClient');
+    } else {
+      navigate('/login');
+    }
+  };
+
+  const handleBuy = async (handleBuyOriginal: () => void) => {
+    if (!(await isLoggedIn())) {
+      navigate('/login');
+      return;
+    }
+    handleBuyOriginal();
   };
 
   return (
@@ -53,7 +70,7 @@ const PublicProductViewMoreModal = () => {
         {!product ? (
           <h2 style={{ color: 'white', textAlign: 'center' }}>Cargando...</h2>
         ) : (
-          <ViewMore item={product} onClose={handleClose} />
+          <ViewMore item={product} onClose={handleClose} onPublicBuy={handleBuy} />
         )}
       </Box>
     </Modal>

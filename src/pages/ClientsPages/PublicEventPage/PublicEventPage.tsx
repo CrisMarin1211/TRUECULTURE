@@ -7,7 +7,9 @@ import ViewMore from '../../../components/viewMore/veiwMore';
 import type { EventItem } from '../../../types/EventType';
 
 async function isLoggedIn() {
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   return !!user;
 }
 
@@ -17,34 +19,30 @@ const PublicViewMoreModal = () => {
   const [event, setEvent] = useState<EventItem | null>(null);
   const [open, setOpen] = useState(true);
 
-useEffect(() => {
-  const loadEvent = async () => {
-    const { data } = await supabase.from('events').select('*').eq('id', id).single();
-    setEvent(data);
+  useEffect(() => {
+    const loadEvent = async () => {
+      const { data } = await supabase.from('events').select('*').eq('id', id).single();
+      setEvent(data);
+    };
+    loadEvent();
+  }, [id]);
+
+  const handleClose = async () => {
+    setOpen(false);
+    if (await isLoggedIn()) {
+      navigate('/DashboardClient');
+    } else {
+      navigate('/login');
+    }
   };
-  loadEvent();
-}, [id]);
 
-
-const handleClose = async () => {
-  setOpen(false);
-  if (await isLoggedIn()) {
-    navigate('/DashboardClient');
-  } else {
-    navigate('/login');
-  }
-};
-
-const handleBuy = async (handleBuyOriginal: () => void) => {
-  if (!(await isLoggedIn())) {
-    navigate('/login');
-    return;
-  }
-  // Si está logueado, sigue la compra normal de ViewMore.
-  handleBuyOriginal();
-};
-
-
+  const handleBuy = async (handleBuyOriginal: () => void) => {
+    if (!(await isLoggedIn())) {
+      navigate('/login');
+      return;
+    }
+    handleBuyOriginal();
+  };
 
   return (
     <Modal
@@ -72,12 +70,7 @@ const handleBuy = async (handleBuyOriginal: () => void) => {
         {!event ? (
           <h2 style={{ color: 'white', textAlign: 'center' }}>Cargando...</h2>
         ) : (
-          <ViewMore
-  item={event}
-  onClose={handleClose}
-  onPublicBuy={handleBuy}
-/>
-
+          <ViewMore item={event} onClose={handleClose} onPublicBuy={handleBuy} />
         )}
       </Box>
     </Modal>

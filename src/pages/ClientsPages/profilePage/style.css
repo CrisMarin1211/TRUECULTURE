@@ -581,3 +581,63 @@ body {
     font-size: 0.85rem;
   }
 }
+
+@media (max-width: 376px) {
+  .profile-page {
+    padding: 1rem;
+  }
+
+  .profile-title {
+    font-size: 1.3rem;
+  }
+
+  .profile-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .profile-avatar2 {
+    width: 100px !important;
+    height: 100px !important;
+    font-size: 2.6rem !important;
+  }
+
+  .profile-name-text {
+    font-size: 1.2rem;
+  }
+
+  .profile-email-text {
+    font-size: 0.85rem;
+  }
+
+  .badge-card-full {
+    min-height: 100px;
+    padding: 0.9rem;
+    gap: 1.2rem;
+  }
+
+  .badge-icon {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+  }
+
+  .badge-text {
+    font-size: 0.85rem;
+  }
+
+  .level-name {
+    font-size: 1.6rem;
+  }
+
+  .level-points {
+    font-size: 0.8rem;
+  }
+
+  .referral-input-container {
+    padding: 5px 8px;
+  }
+
+  .referral-code-display {
+    font-size: 0.8rem;
+  }
+}

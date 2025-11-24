@@ -6,19 +6,15 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
 
-
-
-
   const goToSignUp = () => navigate('/signup');
 
   const handleStart = () => {
-  if (isMobile) {
-    navigate('/mobileStartPage');
-  } else {
-    navigate('/login');
-  }
-};
-
+    if (isMobile) {
+      navigate('/mobileStartPage');
+    } else {
+      navigate('/login');
+    }
+  };
 
   const slides = [
     {
@@ -75,39 +71,37 @@ const HomePage = () => {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-  const checkScreen = () => {
-    setIsMobile(window.innerWidth <= 480);
-  };
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
 
-  checkScreen();
-  window.addEventListener("resize", checkScreen);
+    checkScreen();
+    window.addEventListener('resize', checkScreen);
 
-  return () => window.removeEventListener("resize", checkScreen);
-}, []);
+    return () => window.removeEventListener('resize', checkScreen);
+  }, []);
 
- useEffect(() => {
-  slides.forEach((s) => {
-    const img = new Image();
-    img.src = s.image;
-    (s.thumbs || []).forEach((t) => {
-      const tt = new Image();
-      tt.src = t;
+  useEffect(() => {
+    slides.forEach((s) => {
+      const img = new Image();
+      img.src = s.image;
+      (s.thumbs || []).forEach((t) => {
+        const tt = new Image();
+        tt.src = t;
+      });
     });
-  });
 
-  const intervalTime = isMobile ? 2500 : 2000;
+    const intervalTime = isMobile ? 2500 : 2000;
 
-  const id = setInterval(() => {
-    setCurrent((c) => {
-      if (c === slides.length - 1) return c; 
-      return c + 1;
-    });
-  }, intervalTime);
+    const id = setInterval(() => {
+      setCurrent((c) => {
+        if (c === slides.length - 1) return c;
+        return c + 1;
+      });
+    }, intervalTime);
 
-  return () => clearInterval(id);
-}, [isMobile, slides.length]);
-
-
+    return () => clearInterval(id);
+  }, [isMobile, slides.length]);
 
   const backgroundStyle = {
     backgroundImage: `url(${slides[current].image})`,
@@ -133,21 +127,22 @@ const HomePage = () => {
           <span className="headline">{slides[current].headline}</span>
           <span className="subtext">{slides[current].subtext}</span>
           <div className="dots-container">
-  {[0, 1, 2].map((i) => (
-    <span
-      key={i}
-      className={`dot ${current === i ? "active" : ""}`}
-    ></span>
-  ))}
-</div>
+            {[0, 1, 2].map((i) => (
+              <span key={i} className={`dot ${current === i ? 'active' : ''}`}></span>
+            ))}
+          </div>
 
-         {current === slides.length - 1 && (
-  <button onClick={handleStart} className="start-btn">
-    Comenzar
-  </button>
-)}
+          {!isMobile && (
+            <button onClick={handleStart} className="start-btn">
+              Comenzar
+            </button>
+          )}
 
-
+          {isMobile && current === slides.length - 1 && (
+            <button onClick={handleStart} className="start-btn">
+              Comenzar
+            </button>
+          )}
         </div>
 
         <div className="footer-right">

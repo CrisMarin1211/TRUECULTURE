@@ -125,7 +125,6 @@ const CheckoutPage = () => {
     return (
       <div className="checkout-page">
         <Loader />
-        <Header />
       </div>
     );
   }

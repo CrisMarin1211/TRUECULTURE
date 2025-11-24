@@ -6,6 +6,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import './style.css';
 import type { OrderWithItems } from '../../../services/orders';
+import Loader from '../../../components/loader/index';
 
 const PurchaseSuccessPage = () => {
   const { orderId } = useParams<{ orderId: string }>();
@@ -50,13 +51,10 @@ const PurchaseSuccessPage = () => {
 
   const hasEvents = order?.order_items.some(item => item.item_type === 'event');
 
-  if (loading) {
+   if (loading) {
     return (
-      <div className="purchase-success-page">
-        <Header />
-        <div className="success-loading">
-          <p>Cargando detalles de tu compra...</p>
-        </div>
+      <div className="loader-container">
+        <Loader />
       </div>
     );
   }

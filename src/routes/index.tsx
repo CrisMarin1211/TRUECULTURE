@@ -26,6 +26,9 @@ import MyReviewsPage from '../pages/ClientsPages/myReviewPage';
 import DashboardClient from '../pages/ClientsPages/dashboardCliente/DashboardClient';
 import LoginPage from '../pages/loginPage/loginPage';
 import RegisterPage from '../pages/registerPage/registerPage';
+import PublicEventPage from '../pages/ClientsPages/PublicEventPage/PublicEventPage';
+import PublicProductPage from '../pages/ClientsPages/PublicProductPage/PublicProductPage';
+
 
 const AppRoutes = () => {
   return (
@@ -37,12 +40,15 @@ const AppRoutes = () => {
       <Route path="/categories/:city/:tag" element={<Categories />} />
       <Route path="/pre-dashboard" element={<SecondStep/>} />
 
+      <Route path="/event/:id" element={<><DashboardClient /><PublicEventPage /></>} />
+      <Route path="/product/:id" element={<><MarketplaceHome /><PublicProductPage /></>
+  }
+/>
+
       <Route
         path="/DashboardClient"
         element={
-          <PrivateRoute>
             <DashboardClient />
-          </PrivateRoute>
         }
       />
       <Route

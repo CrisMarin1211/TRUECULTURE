@@ -23,9 +23,9 @@ import PrivateRoute from './PrivateRoute';
 import CheckoutPage from '../pages/ClientsPages/checkoutPage';
 import PurchaseSuccessPage from '../pages/ClientsPages/purchaseSuccessPage';
 import MyReviewsPage from '../pages/ClientsPages/myReviewPage';
-import DashboardClient from '../pages/ClientsPages/dashboardCliente/DashboardClient';
-import LoginPage from '../pages/loginPage/loginPage';
-import RegisterPage from '../pages/registerPage/registerPage';
+import LoginPage from '../pages/LoginPage/loginPage';
+import RegisterPage from '../pages/RegisterPage/registerPage';
+import DashboardClient from '../pages/ClientsPages/DashboardCliente/DashboardClient';
 
 const AppRoutes = () => {
   return (

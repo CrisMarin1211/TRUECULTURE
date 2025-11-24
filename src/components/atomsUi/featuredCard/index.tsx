@@ -112,7 +112,7 @@ const FeaturedCard: React.FC<FeaturedCardProps> = ({ item, onViewMore }) => {
     fontWeight="bold"
     paddingBlock={4}
     paddingInline={2}
-    sx={{ // desktop por defecto
+    sx={{ 
 
       '@media (max-width: 480px)': {
         fontSize: '2rem',

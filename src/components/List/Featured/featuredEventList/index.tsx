@@ -57,9 +57,9 @@ const FeaturedEventList: React.FC = () => {
   coverflowEffect={{
     rotate: 0,
     stretch: 0,
-    depth: 120,   // menos profundidad
-    modifier: 0.7, // menos intensidad
-    scale: 0.95,  // un pelín más pequeños
+    depth: 120,   
+    modifier: 0.7, 
+    scale: 0.95,  
     slideShadows: false,
   }}
   initialSlide={featuredEvents.length > 0 ? Math.floor(featuredEvents.length / 2) : 0}

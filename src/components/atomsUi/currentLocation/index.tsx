@@ -13,6 +13,7 @@ const CurrentLocationContainer = styled('div')({
   marginTop: 3,
   color: theme.palette.white.main,
   position: 'relative',
+  paddingRight: '30px',
 });
 
 const LocationGrid = styled('div')({

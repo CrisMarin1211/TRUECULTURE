@@ -227,14 +227,16 @@ body {
   border-radius: 1rem;
 }
 
-@media (max-width: 480px) {
+/* 1) Celulares muy pequeños: hasta 425px */
+@media (max-width: 425px) {
   .home-page {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     overflow-x: hidden !important;
-  width: 100%;
-  max-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    padding-top: 80px;
   }
 
   .header-right {
@@ -242,77 +244,301 @@ body {
   }
 
   .header {
-  min-height: 80px;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    min-height: 70px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem 1rem;
+  }
 
-
-.logo {
-  width: 150px !important;
-  max-width: 200px !important;
-  height: auto !important;
-}
-
-
+  .logo {
+    width: 120px !important;
+    max-width: 150px !important;
+    height: auto !important;
+  }
 
   .footer-content {
     flex-direction: column;
     text-align: start;
     align-items: flex-start;
+    padding: 1.2rem 1rem;
+    gap: 0.4rem;
   }
 
   .brand-name {
-    font-size: 1.2rem !important;
+    width: 100%;
+    font-size: 1rem !important;
+    line-height: 1.1;
   }
 
   .headline {
-    font-size: 2.2rem !important;
+    width: 100%;
+    font-size: 1.8rem !important;
+    line-height: 1.05;
+  }
+
+  .subtext {
+    width: 100%;
+    font-size: 0.8rem !important;
+    margin-top: 0.25rem;
+    line-height: 1.1;
+  }
+
+  .start-btn {
+    width: min(260px, 90%);
+    font-size: 0.9rem;
+    border-radius: 999px;
+    display: block;
+    margin: 1rem auto 0 auto;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .footer-right {
+    display: none !important;
+  }
+
+  .dots-container {
+    display: flex;
+    gap: 6px;
+    margin-top: 0.8rem;
+    justify-content: center;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffffff50;
+  }
+
+  .dot.active {
+    background: #fff;
+  }
+}
+
+/* 2) Móviles medianos: 426px – 768px */
+@media (min-width: 426px) and (max-width: 768px) {
+  .home-page {
+    padding-top: 90px;
+    background-position: center;
+  }
+
+  .footer-content {
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .brand-name {
+    width: 100%;
+    max-width: 100%;
+    font-size: 1.4rem;
+  }
+
+  .headline {
+    width: 100%;
+    max-width: 100%;
+    font-size: 2.4rem;
     line-height: 1.1;
   }
 
   .subtext {
-    font-size: 0.9rem !important;
-    margin-top: 0.3rem;
-    line-height: 1.1
+    width: 100%;
+    max-width: 100%;
+    font-size: 1rem;
   }
 
   .start-btn {
-  width: min(300px, 85%);
-  font-size: 1rem;
-  border-radius: 50px;
-  display: block;
-  margin: 1.2rem auto 0 auto;
-}
-
-
-
+    width: 100%;
+    max-width: 320px;
+  }
 
   .footer-right {
-  display: none !important;
+    display: none;
+  }
 }
 
 
-.dots-container {
-  display: flex;
-  gap: 8px;
-  margin-top: 1rem;
-  justify-content: center;
-}
+@media (min-width: 769px) and (max-width: 1024px) {
 
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ffffff50;
-}
+  .header {
+    padding: 1.5rem;
+  }
 
-.dot.active {
-  background: #fff;
-}
+  .logo {
+    height: 60px;
+  }
 
+  .admin-link {
+    font-size: 16px;
+  }
+
+  .signup-btn {
+    width: 130px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .footer-content {
+    padding: 1.5rem 2rem;
+    gap: 1rem;
+  }
+
+  .brand-name {
+    max-width: 100%;
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+
+  .headline {
+    max-width: 100%;
+    font-size: 3rem;
+    line-height: 1.1;
+  }
+
+  .subtext {
+    max-width: 100%;
+    font-size: 1.1rem;
+  }
+
+  .footer-right {
+    gap: 0.5rem;
+  }
+
+  .footer-img {
+    width: 100px;
+    height: 70px;
+  }
+}
+@media (min-width: 1025px) and (max-width: 1440px) {
+
+  .header {
+    padding: 1.5rem 3rem;
+  }
+
+  .logo {
+    height: 70px;
+  }
+
+  .brand-name {
+    width: 100%;
+    max-width: 700px;
+    font-size: 2rem;
+  }
+
+  .headline {
+    width: 100%;
+    max-width: 700px;
+    font-size: 3.5rem;
+    line-height: 1.1;
+  }
+
+  .subtext {
+    width: 100%;
+    max-width: 520px;
+    font-size: 1.1rem;
+  }
+
+  .footer-img {
+    width: 130px;
+    height: 85px;
+  }
+}
+/* Celulares muy pequeños (ej: 320px) */@media (max-width: 690px) {
+
+  .home-page {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow-x: hidden !important;
+    width: 100%;
+    max-width: 100%;
+    padding-top: 80px; /* deja espacio para el header */
+  }
+
+  .header-right {
+    display: none !important;
+  }
+
+  .header {
+    min-height: 70px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem 1rem;
+  }
+
+  .logo {
+    width: 120px !important;
+    max-width: 150px !important;
+    height: auto !important;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: start;
+    align-items: flex-start;
+    padding: 1.2rem 1rem;
+    gap: 0.4rem;
+  }
+
+  .brand-name {
+    width: 100%;
+    font-size: 1rem !important;
+    line-height: 1.1;
+  }
+
+  .headline {
+    width: 100%;
+    font-size: 1.8rem !important;
+    line-height: 1.05;
+  }
+
+  .subtext {
+    width: 100%;
+    font-size: 0.8rem !important;
+    margin-top: 0.25rem;
+    line-height: 1.1;
+  }
+
+  .start-btn {
+    width: min(260px, 90%);
+    font-size: 0.9rem;
+    border-radius: 999px;
+    display: block;
+    margin: 1rem auto 0 auto;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .footer-right {
+    display: none !important;
+  }
+
+  .footer-img {
+    width: 90px;
+    height: 60px;
+  }
+
+  .dots-container {
+    display: flex;
+    gap: 6px;
+    margin-top: 0.8rem;
+    justify-content: center;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffffff50;
+  }
+
+  .dot.active {
+    background: #fff;
+  }
 }
 
 

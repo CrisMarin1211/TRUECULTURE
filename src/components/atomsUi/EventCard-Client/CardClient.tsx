@@ -15,8 +15,6 @@ interface ClientCardProps {
 }
 
 const StyledCard = styled(Card)({
-  width: '385px',
-  height: '330px',
   position: 'relative',
   backgroundColor: theme.palette.darkGray1.main,
   overflow: 'hidden',
@@ -24,14 +22,38 @@ const StyledCard = styled(Card)({
   display: 'flex',
   flexDirection: 'column',
   border: `1px solid ${theme.palette.grayMedium.main}`,
+
+  width: '100%',
+  maxWidth: 385,
+  height: 330,
+
+  '@media (max-width: 480px)': {
+    maxWidth: 260,
+    height: 280,
+  },
+
+  '@media (min-width: 481px) and (max-width: 768px)': {
+    maxWidth: 300,
+    height: 300,
+  },
 });
+
 
 const StyledImg = styled('img')({
   width: '100%',
-  height: '180px',
+  height: 180,
   objectFit: 'cover',
   flexShrink: 0,
+
+  '@media (max-width: 480px)': {
+    height: 140,
+  },
+
+  '@media (min-width: 481px) and (max-width: 768px)': {
+    height: 160,
+  },
 });
+
 
 const StyledCardContent = styled(CardContent)({
   flex: 1,
@@ -44,14 +66,26 @@ const StyledCardContent = styled(CardContent)({
 const Info = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  gap: 4,
+  gap: 5,       
   overflow: 'hidden',
 });
+
 const Title = styled(Typography)({
   whiteSpace: 'nowrap',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
+  fontSize: '1.5rem',
+
+  '@media (max-width: 480px)': {
+    fontSize: '0.9rem',
+    
+  },
+
+  '@media (min-width: 481px) and (max-width: 768px)': {
+    fontSize: '1rem',
+  },
 });
+
 const Footer = styled('div')({
   display: 'flex',
   justifyContent: 'space-between',
@@ -63,7 +97,23 @@ const StyledButton = styled(Button)({
   textTransform: 'none',
   borderRadius: 999,
   backgroundColor: theme.palette.green.main,
+  fontSize: '0.9rem',
+  paddingInline: 16,
+  paddingBlock: 8,
+
+  '@media (max-width: 480px)': {
+    fontSize: '0.75rem',
+    paddingInline: 12,
+    paddingBlock: 6,
+  },
+
+  '@media (min-width: 481px) and (max-width: 768px)': {
+    fontSize: '0.85rem',
+    paddingInline: 14,
+    paddingBlock: 7,
+  },
 });
+
 
 const CardClient: React.FC<ClientCardProps> = ({ item, onViewMore }) => {
   return (
@@ -71,19 +121,74 @@ const CardClient: React.FC<ClientCardProps> = ({ item, onViewMore }) => {
       <StyledImg src={item.image} alt={item.name} />
       <StyledCardContent>
         <Info>
-          <Typography variant="subtitle1">{item.location}</Typography>
-          <Title variant="h6">{item.name}</Title>
-          {'date' in item && item.date && (
-            <Typography variant="subtitle2" fontWeight={900}>
-              {item.date}
-            </Typography>
-          )}
+          <Typography
+  variant="subtitle1"
+  sx={{
+    fontSize: '0.95rem',
+    lineHeight: 1.1,
+    marginBottom: 0,
+    '@media (max-width: 480px)': {
+      fontSize: '0.8rem',
+    },
+    '@media (min-width: 481px) and (max-width: 768px)': {
+      fontSize: '0.9rem',
+    },
+  }}
+>
+  {item.location}
+</Typography>
+
+<Title
+  variant="h6"
+  sx={{
+    lineHeight: 1.1,
+    marginTop: 0,
+    marginBottom: 0,
+  }}
+>
+  {item.name}
+</Title>
+
+{'date' in item && item.date && (
+  <Typography
+    variant="subtitle2"
+    fontWeight={900}
+    sx={{
+      fontSize: '0.9rem',
+      lineHeight: 1.1,
+      marginTop: 0,
+      '@media (max-width: 480px)': {
+        fontSize: '0.75rem',
+      },
+      '@media (min-width: 481px) and (max-width: 768px)': {
+        fontSize: '0.85rem',
+      },
+    }}
+  >
+    {item.date}
+  </Typography>
+)}
+
         </Info>
 
         <Footer>
-          <Typography variant="body2" color="white" fontWeight={400}>
-            ${item.price}
-          </Typography>
+          <Typography
+  variant="body2"
+  color="white"
+  fontWeight={400}
+  sx={{
+    fontSize: '0.95rem',
+    '@media (max-width: 480px)': {
+      fontSize: '0.8rem',
+    },
+    '@media (min-width: 481px) and (max-width: 768px)': {
+      fontSize: '0.9rem',
+    },
+  }}
+>
+  ${item.price}
+</Typography>
+
           {onViewMore && (
             <CardActions>
               <StyledButton variant="contained" onClick={() => onViewMore(item)}>

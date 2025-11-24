@@ -260,7 +260,7 @@ const ViewMore = ({ item, onClose }: ViewMoreProps) => {
         <Box
           sx={{
             position: 'absolute',
-            height: { xs: '40%', md: '60%' },
+            height: { xs: '30%', md: '15%' },
             width: '100%',
             bottom: 0,
             right: 0,

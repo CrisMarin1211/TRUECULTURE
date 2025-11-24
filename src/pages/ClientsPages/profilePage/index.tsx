@@ -302,32 +302,32 @@ const ProfilePage = () => {
 
   if (!profile) {
     return (
-      <div>
-        <Header />
       <div className="profile-page">
+        <Header />
         <div style={{ color: 'white', padding: '1rem' }}>
           No hay datos de perfil disponibles.
         </div>
-      </div>
       </div>
     );
   }
 
   return (
-    <div className="profile-page">
-      <Header />
-      <h1 className="profile-title">Perfil</h1>
-      <div className="profile-content">
-            <div className="profile-left">
-          <div className="card profile-card">
-                <div className="card-header">
-              <img
-                src="/icons/edit.png"
-                alt="edit"
-                className="edit-icon"
-                onClick={handleEdit}
-              />
-                </div>
+    <>
+      <div>  <Header /> </div>
+      <div className="profile-page">
+        <h1 className="profile-title">Perfil</h1>
+
+        <div className="profile-content">
+          <div className="profile-left">
+            <div className="card profile-card">
+              <div className="card-header">
+                <img
+                  src="/icons/edit.png"
+                  alt="edit"
+                  className="edit-icon"
+                  onClick={handleEdit}
+                />
+              </div>
 
             <div className="profile-avatar-container">
                     <Avatar
@@ -632,7 +632,7 @@ const ProfilePage = () => {
         </Alert>
       </Snackbar>
 
-      {/* Modal para editar código de referido */}
+
       <Modal
         open={isEditingReferralCode}
         onClose={handleCloseReferralCodeModal}
@@ -666,7 +666,7 @@ const ProfilePage = () => {
             </IconButton>
           </Box>
 
-          {/* Warning Banner */}
+
           <Box
             sx={{
               backgroundColor: '#FFB800',
@@ -684,7 +684,7 @@ const ProfilePage = () => {
             </Typography>
           </Box>
 
-          {/* Current Referral Link */}
+
           <Typography sx={{ color: '#8692A6', fontSize: '13px', mb: 1 }}>
             Enlace de referido actual:
           </Typography>
@@ -692,7 +692,6 @@ const ProfilePage = () => {
             {profile?.referral_code ? `${window.location.origin}/signup?ref=${profile.referral_code}` : 'Sin código'}
           </Typography>
 
-          {/* Edit Link Input */}
           <Typography sx={{ color: '#8692A6', fontSize: '13px', mb: 1 }}>
             Editar código:
           </Typography>
@@ -740,6 +739,7 @@ const ProfilePage = () => {
         </Box>
       </Modal>
     </div>
+    </>
   );
 };
 

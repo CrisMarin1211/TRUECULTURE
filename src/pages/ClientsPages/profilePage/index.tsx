@@ -30,6 +30,7 @@ import Alert from '@mui/material/Alert';
 import theme from '../../../styles/theme';
 import './style.css';
 import type { Database } from '../../../types/supabase';
+import Loader from '../../../components/loader';
 
 type Profile = Database['public']['Tables']['profiles']['Row'];
 type Level = Database['public']['Tables']['levels']['Row'];
@@ -298,11 +299,9 @@ const ProfilePage = () => {
   if (loading) {
     return (
       <div>
+        <Loader />
+      <div>
         <Header />
-      <div className="profile-page">
-        <div style={{ color: 'white', padding: '1rem', textAlign: 'center' }}>
-          Cargando perfil...
-        </div>
       </div>
       </div>
     );

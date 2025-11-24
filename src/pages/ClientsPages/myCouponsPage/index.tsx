@@ -6,6 +6,8 @@ import { getAllUserCoupons } from '../../../services/coupons';
 import { supabase } from '../../../lib/supabaseClient';
 import './style.css';
 import type { UserCouponWithDetails } from '../../../services/coupons';
+import Loader from '../../../components/loader/index';
+
 
 const MyCouponsPage = () => {
   const [coupons, setCoupons] = useState<UserCouponWithDetails[]>([]);
@@ -26,9 +28,17 @@ const MyCouponsPage = () => {
     fetchCoupons();
   }, []);
 
+   if (loading) {
+    return (
+      <div className="loader-container">
+        <Loader />
+      </div>
+    );
+  }
+
   const categorizeCoupons = () => {
     const now = new Date();
-    
+
     return {
       active: coupons.filter(coupon => {
         if (coupon.is_used || coupon.used_at) return false;
@@ -52,19 +62,19 @@ const MyCouponsPage = () => {
     <div className="my-coupons-page">
       <Header />
       <ColoredText text="Mis cupones" color="#FF0099" />
-      
+
       {loading ? (
-        <div className="loading-message">Cargando cupones...</div>
+        <div className="loader-container"> <Loader /> </div>
       ) : (
         <>
           <div className="coupon-tabs">
-            <button 
+            <button
               className={`tab-button ${activeTab === 'active' ? 'active' : ''}`}
               onClick={() => setActiveTab('active')}
             >
               Disponibles ({active.length})
             </button>
-            <button 
+            <button
               className={`tab-button ${activeTab === 'used' ? 'active' : ''}`}
               onClick={() => setActiveTab('used')}
             >
@@ -82,7 +92,7 @@ const MyCouponsPage = () => {
               getFilteredCoupons().map((userCoupon) => {
                 const coupon = userCoupon.coupons;
                 const isUsed = userCoupon.is_used || !!userCoupon.used_at;
-                
+
                 return (
                   <CouponCard
                     key={userCoupon.id}

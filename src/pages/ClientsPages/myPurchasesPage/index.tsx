@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../../components/header';
 import './style.css';
 import { supabase } from '../../../lib/supabaseClient';
-import { CircularProgress } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -12,6 +11,7 @@ import QrCodeIcon from '@mui/icons-material/QrCode';
 import { QRCodeSVG } from 'qrcode.react';
 import { getUserOrders } from '../../../services/orders';
 import type { OrderWithItems } from '../../../services/orders';
+import Loader from '../../../components/loader';
 
 const MyPurchasesPage = () => {
   const navigate = useNavigate();
@@ -40,31 +40,21 @@ const MyPurchasesPage = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'paid':
-        return '#99cb36';
-      case 'pending':
-        return '#FFB800';
-      case 'failed':
-        return '#E31E24';
-      case 'refunded':
-        return '#8692A6';
-      default:
-        return '#8692A6';
+      case 'paid': return '#99cb36';
+      case 'pending': return '#FFB800';
+      case 'failed': return '#E31E24';
+      case 'refunded': return '#8692A6';
+      default: return '#8692A6';
     }
   };
 
   const getStatusLabel = (status: string) => {
     switch (status) {
-      case 'paid':
-        return 'Pagado';
-      case 'pending':
-        return 'Pendiente';
-      case 'failed':
-        return 'Fallido';
-      case 'refunded':
-        return 'Reembolsado';
-      default:
-        return status;
+      case 'paid': return 'Pagado';
+      case 'pending': return 'Pendiente';
+      case 'failed': return 'Fallido';
+      case 'refunded': return 'Reembolsado';
+      default: return status;
     }
   };
 
@@ -82,9 +72,7 @@ const MyPurchasesPage = () => {
     return value.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
   };
 
-  const handleViewDetails = (orderId: number) => {
-    navigate(`/purchase-success/${orderId}`);
-  };
+  const handleViewDetails = (orderId: number) => navigate(`/purchase-success/${orderId}`);
 
   const handleViewQr = (order: OrderWithItems) => {
     setSelectedOrderForQr(order);
@@ -96,138 +84,146 @@ const MyPurchasesPage = () => {
     setSelectedOrderForQr(null);
   };
 
+  if (loading) {
+    return (
+      <div className="loader-overlay">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div>
-     <Header />
-    <div className="my-purchases-page">
-      <div className="purchases-container">
-        <h1 className="purchases-title">Mis Compras</h1>
+      <Header />
 
-        {loading ? (
-          <div className="purchases-loading">
-            <CircularProgress sx={{ color: '#99cb36' }} />
-            <p>Cargando compras...</p>
-          </div>
-        ) : error ? (
-          <div className="purchases-error">
-            <p>{error}</p>
-          </div>
-        ) : orders.length === 0 ? (
-          <div className="purchases-empty">
-            <p>No tienes compras aún 🛒</p>
-          </div>
-        ) : (
-          <div className="orders-list">
-            {orders.map((order) => (
-              <div key={order.id} className="order-card">
-                <div className="order-header">
-                  <div className="order-info">
-                    <h3 className="order-number">Orden #{order.order_number}</h3>
-                    <p className="order-date">{formatDate(order.created_at)}</p>
-                  </div>
-                  <div className="order-header-right">
-                    <div
-                      className="order-status"
-                      style={{
-                        backgroundColor: getStatusColor(order.payment_status),
-                        color: '#fff',
-                      }}
-                    >
-                      {getStatusLabel(order.payment_status)}
+      <div className="my-purchases-page">
+        <div className="purchases-container">
+          <h1 className="purchases-title">Mis Compras</h1>
+
+          {error ? (
+            <div className="purchases-error">
+              <p>{error}</p>
+            </div>
+          ) : orders.length === 0 ? (
+            <div className="purchases-empty">
+              <p>No tienes compras aún 🛒</p>
+            </div>
+          ) : (
+            <div className="orders-list">
+              {orders.map((order) => (
+                <div key={order.id} className="order-card">
+                  <div className="order-header">
+                    <div className="order-info">
+                      <h3 className="order-number">Orden #{order.order_number}</h3>
+                      <p className="order-date">{formatDate(order.created_at)}</p>
                     </div>
-                  </div>
-                </div>
 
-                <div className="order-items">
-                  {order.order_items && order.order_items.map((item) => (
-                    <div key={item.id} className="order-item">
-                      <div className="order-item-info">
-                        <p className="order-item-name">{item.item_name}</p>
-                        <p className="order-item-details">
-                          Cantidad: {item.quantity} × {formatCurrency(item.unit_price)}
-                        </p>
+                    <div className="order-header-right">
+                      <div
+                        className="order-status"
+                        style={{
+                          backgroundColor: getStatusColor(order.payment_status),
+                          color: '#fff',
+                        }}
+                      >
+                        {getStatusLabel(order.payment_status)}
                       </div>
-                      <p className="order-item-total">{formatCurrency(item.total_price)}</p>
                     </div>
-                  ))}
-                </div>
-
-                <div className="order-summary">
-                  <div className="order-summary-row">
-                    <span>Subtotal:</span>
-                    <span>{formatCurrency(order.subtotal)}</span>
                   </div>
-                  {order.discount > 0 && (
-                    <div className="order-summary-row discount">
-                      <span>Descuento:</span>
-                      <span>- {formatCurrency(order.discount)}</span>
+
+                  <div className="order-items">
+                    {order.order_items?.map((item) => (
+                      <div key={item.id} className="order-item">
+                        <div className="order-item-info">
+                          <p className="order-item-name">{item.item_name}</p>
+                          <p className="order-item-details">
+                            Cantidad: {item.quantity} × {formatCurrency(item.unit_price)}
+                          </p>
+                        </div>
+                        <p className="order-item-total">{formatCurrency(item.total_price)}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="order-summary">
+                    <div className="order-summary-row">
+                      <span>Subtotal:</span>
+                      <span>{formatCurrency(order.subtotal)}</span>
                     </div>
-                  )}
-                  <div className="order-summary-row total">
-                    <span>Total:</span>
-                    <span>{formatCurrency(order.total)}</span>
-                  </div>
-                </div>
 
-                {/* Action Buttons */}
-                <div className="order-actions">
-                  <button
-                    className="view-details-btn"
-                    onClick={() => handleViewDetails(order.id)}
-                  >
-                    Ver detalles
-                  </button>
-                  {order.order_items.some(item => item.item_type === 'event') && (
+                    {order.discount > 0 && (
+                      <div className="order-summary-row discount">
+                        <span>Descuento:</span>
+                        <span>- {formatCurrency(order.discount)}</span>
+                      </div>
+                    )}
+
+                    <div className="order-summary-row total">
+                      <span>Total:</span>
+                      <span>{formatCurrency(order.total)}</span>
+                    </div>
+                  </div>
+
+                  <div className="order-actions">
                     <button
-                      className="view-qr-btn"
-                      onClick={() => handleViewQr(order)}
+                      className="view-details-btn"
+                      onClick={() => handleViewDetails(order.id)}
                     >
-                      <QrCodeIcon />
-                      Ver QR
+                      Ver detalles
                     </button>
-                  )}
+
+                    {order.order_items.some(item => item.item_type === 'event') && (
+                      <button
+                        className="view-qr-btn"
+                        onClick={() => handleViewQr(order)}
+                      >
+                        <QrCodeIcon />
+                        Ver QR
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
+
+        <Modal
+          open={qrModalOpen}
+          onClose={handleCloseQrModal}
+          BackdropProps={{
+            sx: { backgroundColor: 'rgba(0, 0, 0, 0.9)' }
+          }}
+        >
+          <Box className="qr-modal">
+            <div className="qr-modal-header">
+              <h2 className="qr-modal-title">Tu código QR</h2>
+              <IconButton onClick={handleCloseQrModal} sx={{ color: '#FFFFFF' }}>
+                <CloseIcon />
+              </IconButton>
+            </div>
+
+            <div className="qr-modal-content">
+              {selectedOrderForQr && (
+                <>
+                  <QRCodeSVG
+                    value={selectedOrderForQr.order_number}
+                    size={250}
+                    level="H"
+                    includeMargin={true}
+                    fgColor="#000000"
+                    bgColor="#FFFFFF"
+                  />
+                  <p className="qr-modal-label">Muestra este código QR en la entrada del evento</p>
+                  <p className="qr-modal-order-number">Orden: {selectedOrderForQr.order_number}</p>
+                </>
+              )}
+            </div>
+          </Box>
+        </Modal>
       </div>
 
-      <Modal
-        open={qrModalOpen}
-        onClose={handleCloseQrModal}
-        BackdropProps={{
-          sx: { backgroundColor: 'rgba(0, 0, 0, 0.9)' }
-        }}
-      >
-        <Box className="qr-modal">
-          <div className="qr-modal-header">
-            <h2 className="qr-modal-title">Tu código QR</h2>
-            <IconButton onClick={handleCloseQrModal} sx={{ color: '#FFFFFF' }}>
-              <CloseIcon />
-            </IconButton>
-          </div>
-
-          <div className="qr-modal-content">
-            {selectedOrderForQr && (
-              <>
-                <QRCodeSVG
-                  value={selectedOrderForQr.order_number}
-                  size={250}
-                  level="H"
-                  includeMargin={true}
-                  fgColor="#000000"
-                  bgColor="#FFFFFF"
-                />
-                <p className="qr-modal-label">Muestra este código QR en la entrada del evento</p>
-                <p className="qr-modal-order-number">Orden: {selectedOrderForQr.order_number}</p>
-              </>
-            )}
-          </div>
-        </Box>
-      </Modal>
     </div>
-  </div>
   );
 };
 

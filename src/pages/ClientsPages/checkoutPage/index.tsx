@@ -14,6 +14,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import theme from '../../../styles/theme';
 import './style.css';
+import Loader from '../../../components/loader';
 
 const formatCurrency = (value: number) =>
   value.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
@@ -123,10 +124,8 @@ const CheckoutPage = () => {
   if (loading) {
     return (
       <div className="checkout-page">
+        <Loader />
         <Header />
-        <div style={{ color: 'white', textAlign: 'center', padding: '2rem' }}>
-          Cargando...
-        </div>
       </div>
     );
   }

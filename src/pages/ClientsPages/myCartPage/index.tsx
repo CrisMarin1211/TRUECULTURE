@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../../../components/header';
 import './style.css';
 import ProductCard from '../../../components/productCard';
@@ -6,14 +6,23 @@ import CheckoutSummary from '../../../components/checkoutSummary';
 import SeatSelection from '../../../components/seatSelection';
 import { useCart } from '../../../context/CartContex';
 import { useEvent } from '../../../context/EventContext';
+import Loader from '../../../components/loader';
 
 const MyCartPage = () => {
   const { cartItems, updateQuantity, removeFromCart, updateCartItemSeats } = useCart();
   const { events } = useEvent();
+
+  const [loading, setLoading] = useState(true);
   const [editingSeatItemId, setEditingSeatItemId] = useState<string | number | null>(null);
   const [seatModalOpen, setSeatModalOpen] = useState(false);
 
-  // Obtener la información del evento desde el contexto
+  useEffect(() => {
+    // Simula tiempo de carga del contexto (carrito + eventos)
+    // Si ya están cargados, el loader dura 300ms (queda más elegante)
+    const timeout = setTimeout(() => setLoading(false), 300);
+    return () => clearTimeout(timeout);
+  }, [cartItems, events]);
+
   const getEventInfo = (itemId: string | number) => {
     const event = events.find(e => String(e.id) === String(itemId));
     if (event && event.has_seating) {
@@ -56,12 +65,22 @@ const MyCartPage = () => {
 
   return (
     <>
+      {loading && (
+        <div className="loader-overlay">
+          <Loader />
+        </div>
+      )}
+
       <Header />
+
       <div className="my-cart-page">
         <div className="cart-header">
           <h1 className="cart-title">Carrito</h1>
-          <p className="cart-subtitle">Los productos de la cesta de la compra no están reservados</p>
+          <p className="cart-subtitle">
+            Los productos de la cesta de la compra no están reservados
+          </p>
         </div>
+
         <div className="cart-content">
           <div className="products-column">
             {cartItems.length ? (
@@ -93,6 +112,7 @@ const MyCartPage = () => {
               </div>
             )}
           </div>
+
           <div className="checkout-column">
             <CheckoutSummary />
           </div>

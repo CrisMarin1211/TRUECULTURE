@@ -2,7 +2,7 @@ import './RegisterForm.css';
 import InputField from '../../atomsUi/inputField/inputField';
 import Button from '../../atomsUi/button/button';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 
 interface RegisterFormProps {
@@ -15,8 +15,9 @@ const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [agree, setAgree] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
-  const { signup } = useAuth(); // 👈 ya no usamos loginWithGoogle
+  const { signup } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,8 +41,10 @@ const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
       });
 
       alert('Registro exitoso. Revisa tu correo para confirmar la cuenta.');
-
-      if (fromAdmin) {
+      const from = location.state?.from;
+      if (from) {
+        navigate(from);
+      } else if (fromAdmin) {
         navigate('/DashboardAdmin');
       } else {
         navigate('/DashboardClient');
@@ -107,7 +110,7 @@ const RegisterForm = ({ fromAdmin = false }: RegisterFormProps) => {
       <p className="login-text">
         ¿Ya tienes una cuenta?{' '}
         <a
-          onClick={() => navigate('/login', { state: { fromAdmin } })}
+          onClick={() => navigate('/login', { state: { from: location.state?.from, fromAdmin } })}
           style={{ cursor: 'pointer' }}
         >
           Inicia sesión

@@ -2,7 +2,7 @@ import './LoginForm.css';
 import InputField from '../../atomsUi/inputField/inputField';
 import Button from '../../atomsUi/button/button';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 
 interface LoginFormProps {
@@ -12,12 +12,14 @@ interface LoginFormProps {
 const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const location = useLocation();
   const navigate = useNavigate();
-  const { login } = useAuth(); // 👈 Google eliminado
+  const { login } = useAuth(); 
 
   const handleGoToSignup = () => {
-    navigate('/signup', { state: { fromAdmin } });
-  };
+  navigate('/signup', { state: { from: location.state?.from, fromAdmin } });
+};
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,6 +28,10 @@ const LoginForm = ({ fromAdmin = false }: LoginFormProps) => {
       await login({ email, password });
       alert('Inicio de sesión exitoso');
 
+       const from = location.state?.from;
+      if (from) {
+        navigate(from);
+      } else
       if (fromAdmin) {
         navigate('/DashboardAdmin');
       } else {

@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import { supabase } from '../../../lib/supabaseClient';
 import ViewMore from '../../../components/viewMore/veiwMore';
 import type { EventItem } from '../../../types/EventType';
+import { useLocation } from "react-router-dom";
 
 async function isLoggedIn() {
   const {
@@ -18,6 +19,7 @@ const PublicViewMoreModal = () => {
   const navigate = useNavigate();
   const [event, setEvent] = useState<EventItem | null>(null);
   const [open, setOpen] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     const loadEvent = async () => {
@@ -33,12 +35,14 @@ const PublicViewMoreModal = () => {
       navigate('/DashboardClient');
     } else {
       navigate('/login');
+
     }
   };
 
   const handleBuy = async (handleBuyOriginal: () => void) => {
     if (!(await isLoggedIn())) {
-      navigate('/login');
+      navigate('/login', { state: { from: location.pathname } });
+
       return;
     }
     handleBuyOriginal();

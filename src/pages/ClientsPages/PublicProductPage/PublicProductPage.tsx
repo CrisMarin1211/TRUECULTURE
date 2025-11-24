@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import { supabase } from '../../../lib/supabaseClient';
 import ViewMore from '../../../components/viewMore/veiwMore';
 import type { ProductItem } from '../../../types/ProductType';
+import { useLocation } from "react-router-dom";
 
 async function isLoggedIn() {
   const {
@@ -18,6 +19,7 @@ const PublicProductViewMoreModal = () => {
   const navigate = useNavigate();
   const [product, setProduct] = useState<ProductItem | null>(null);
   const [open, setOpen] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -33,12 +35,14 @@ const PublicProductViewMoreModal = () => {
       navigate('/DashboardClient');
     } else {
       navigate('/login');
+
     }
   };
 
   const handleBuy = async (handleBuyOriginal: () => void) => {
     if (!(await isLoggedIn())) {
-      navigate('/login');
+      navigate('/login', { state: { from: location.pathname } });
+
       return;
     }
     handleBuyOriginal();

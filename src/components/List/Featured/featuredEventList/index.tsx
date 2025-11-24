@@ -57,9 +57,9 @@ const FeaturedEventList: React.FC = () => {
   coverflowEffect={{
     rotate: 0,
     stretch: 0,
-    depth: 200,
-    modifier: 1,
-    scale: 1,
+    depth: 120,   // menos profundidad
+    modifier: 0.7, // menos intensidad
+    scale: 0.95,  // un pelín más pequeños
     slideShadows: false,
   }}
   initialSlide={featuredEvents.length > 0 ? Math.floor(featuredEvents.length / 2) : 0}
@@ -70,19 +70,20 @@ const FeaturedEventList: React.FC = () => {
       spaceBetween: 10,
     },
     480: {         
-      slidesPerView: 1.2,
+      slidesPerView: 1,
       spaceBetween: 15,
     },
-    768: {      
+    768: {       
       slidesPerView: 2,
       spaceBetween: 20,
     },
-    1024: {       
+    1024: {     
       slidesPerView: 3,
-      spaceBetween: 10,
+      spaceBetween: 24,
     },
   }}
 >
+
 
         {featuredEvents.map((event) => (
          <SwiperSlide
